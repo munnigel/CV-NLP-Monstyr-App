@@ -2,3 +2,6 @@
 
 Team 7 (RubyDuckies)- Design Workbook
 Public access link : https://docs.google.com/document/d/1YMKmIOjpvpO_nUn9TZ1Golm0piNVRxc6CtTDen5pzHQ/edit?usp=sharing
+
+Google Site containing our Team’s video here:
+https://sites.google.com/sutd.edu.sg/rubyduckies/home
