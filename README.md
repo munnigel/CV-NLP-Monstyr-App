@@ -31,7 +31,9 @@ $ rails --version
 
 # Procedures to run Ruby on Rails app
 
-While in the root directory,
+Ensure ruby and rails are installed
+
+While in the backend folder,
 
 ```
 $ rails s
@@ -39,7 +41,7 @@ $ rails s
 
 # Procedures to run Angular app
 
-Assuming node.js is installed
+Ensure node.js is installed
 
 While in the frontend folder,
 
