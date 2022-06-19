@@ -1,0 +1,188 @@
+<div class="nav-bar">
+  <div class="nav-bar-main-title">Monstyr x AI</div>
+  <div class="nav-bar-sub-title">AI-Powered Workflows</div>
+  <div class="tabs-container">
+    <button
+      [ngClass]="{ active: tabIndex == 0 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(0)"
+      id="overview-tab"
+    >
+      Overview
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex == 1 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(1)"
+    >
+      Live Posts
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex == 2 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(2)"
+    >
+      Pending Posts
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 3 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(3)"
+    >
+      Settings
+    </button>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="sub-container">
+    <div *ngIf="tabIndex === 1">
+      <div class="header-row">
+        <div class="page-header">Live Posts</div>
+        <div class="search-bar">
+          <textarea class="search-input" rows="1"></textarea>
+          <button class="search-btn">F</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-type" (click)="onFilter(1)">
+          <label class="filter-label">Title</label>
+          <img
+            src="../../assets/pictures/arrowhead.png"
+            height="5px"
+            width="auto"
+            class="filter-sort"
+          />
+        </div>
+        <div class="filter-type">
+          <label class="filter-label">Category</label>
+          <img
+            src="../../assets/pictures/arrowhead.png"
+            height="5px"
+            width="auto"
+            class="filter-sort"
+          />
+        </div>
+        <div class="filter-type">
+          <label class="filter-label">Discount</label>
+          <img
+            src="../../assets/pictures/arrowhead.png"
+            height="5px"
+            width="auto"
+            class="filter-sort"
+          />
+        </div>
+        <div class="filter-type">
+          <label class="filter-label">Validity Date</label>
+          <img
+            src="../../assets/pictures/arrowhead.png"
+            height="5px"
+            width="auto"
+            class="filter-sort"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row row-cols-4">
+          <ng-container *ngFor="let product of productList">
+            <div class="col">
+              <div class="item-container">
+                <div class="item-img">
+                  <img
+                    [src]="product.imgUrl"
+                    alt="image"
+                    style="
+                      object-fit: contain;
+                      width: 99%;
+                      height: 99%;
+                      border-radius: 5px;
+                    "
+                  />
+                </div>
+                <div class="item-details">
+                  <div class="item-title">{{ product.title }}</div>
+                  <div class="item-description">{{ product.description }}</div>
+                  <div class="item-tag">tag</div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="tabIndex === 2">
+      <div class="header-row carousel-fade">
+        <div class="page-header">Pending Posts</div>
+        <div class="search-bar">
+          <textarea class="search-input" rows="1"></textarea>
+          <button class="search-btn">F</button>
+        </div>
+      </div>
+      <div class="pending-posts-container main-item-container">
+        <ng-container *ngFor="let product of pendingProductList">
+          <div class="pending-posts-item">
+            <div class="pending-posts-img">
+              <img
+                [src]="product.imgUrl"
+                alt="img"
+                style="
+                  object-fit: contain;
+                  width: 99%;
+                  height: 99%;
+                  border-radius: 10px;
+                "
+              />
+            </div>
+            <div class="pending-posts-details">
+              <textarea style="resize: none" rows="4"></textarea>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div *ngIf="tabIndex === 3">
+      <div class="header-row">
+        <div class="page-header">Settings</div>
+      </div>
+      <div class="setting-page-container">
+        <img alt="logo" class="user-icon" />
+        <div class="setting-input-container">
+          <form>
+            <div class="row mb-3 setting-page-field">
+              <label class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label class="col-sm-2 col-form-label">Role</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"
+                >Email</label
+              >
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"
+                >Password</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword3"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="main-login-container">
+  <div class="main-login-header">Monstyr x AI</div>
+  <div class="sub-login-header">AI-Powered Workflows</div>
+  <div class="login-form">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" placeholder="Enter email here" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter password here"
+      />
+    </div>
+    <div class="col-12">
+      <button
+        type="submit"
+        id="login-button"
+        class="btn btn-primary"
+        (click)="onLogin()"
+      >
+        Sign in
+      </button>
+    </div>
+    <div class="col-12 forget-password-container">
+      <button type="submit" class="btn btn-primary btn-forget-password">
+        Forget password
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,320 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: ComicSans;
+  src: url(./assets/fonts/Ldfcomicsanslight-6dZo.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: ComicSans;
+  src: url(./assets/fonts/Ldfcomicsansbold-zgma.ttf);
+  font-weight: 400;
+}
+
+* {
+  font-family: ComicSans;
+  font-weight: 200;
+}
+
+.main-login-container {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-login-header {
+  font-weight: 400;
+  font-size: 50px;
+  padding-top: 30px;
+}
+
+.login-form {
+  margin-top: 30px;
+  width: 400px;
+}
+
+.form-control {
+  font-weight: 200;
+}
+
+.col-12 {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn-primary {
+  font-weight: 200;
+}
+
+.forget-password-container {
+  margin-top: 10px;
+}
+
+.btn-forget-password {
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 15px;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  border-right: 2px solid black;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+}
+
+.nav-bar-main-title {
+  font-weight: 400;
+  font-size: 20px;
+  padding-top: 20px;
+}
+
+.nav-bar-sub-title {
+  font-size: 10px;
+}
+
+.tabs-container {
+  margin-top: 50px;
+  width: 100%;
+}
+
+button {
+  border: none;
+}
+
+.nav-bar-btn {
+  text-align: start;
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  background-color: white;
+}
+
+.nav-bar-btn:hover {
+  background-color: rgba(197, 197, 197, 0.534);
+}
+
+.active {
+  border-left: 5px solid blue;
+}
+
+.main-container {
+  margin-left: 200px;
+  height: 100%;
+  overflow: auto;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+}
+
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: width 2s, height 4s;
+}
+
+.page-header {
+  padding: 30px 50px;
+  font-size: 30px;
+}
+
+.search-bar {
+  margin: 30px 20px;
+  border-radius: 17px;
+  border: 1px solid black;
+  min-width: 200px;
+  height: 34px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.search-input {
+  resize: none;
+  border: none;
+  height: 30px;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.search-btn {
+  padding: 0px;
+  background-color: white;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.filter-type {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0px 5px;
+}
+
+.filter-type:hover {
+  background-color: rgba(219, 219, 219, 0.527);
+}
+
+.filter-sort {
+  padding-left: 5px;
+  vertical-align: center;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.item-container {
+  margin: 10px;
+}
+
+.item-img {
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-details {
+  width: 200px;
+  border: 1px solid black;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+}
+
+.pending-posts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pending-posts-item {
+  margin: 20px;
+  height: 150px;
+  width: 700px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pending-posts-details textarea {
+  width: 500px;
+  height: 150px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.pending-posts-img {
+  width: 150px;
+  height: 150px;
+}
+
+.main-item-container {
+  padding: 0px 30px;
+}
+
+.item-page-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.item-page-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  margin-left: 30px;
+}
+
+.page-item {
+  resize: none;
+  border-radius: 15px;
+  padding: 0px 10px;
+  margin: 10px;
+}
+
+.item-page-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  margin-right: 30px;
+  align-items: center;
+}
+
+.product-img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.item-page-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.item-page-btn:first-child {
+  margin-right: 10px;
+}
+.item-page-btn:last-child {
+  margin-left: 10px;
+}
+
+.item-page-btn {
+  border-radius: 30px;
+}
+
+.setting-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.setting-input-container {
+  width: 400px;
+}
+
+.setting-page-field {
+  margin-top: 30px;
+}
