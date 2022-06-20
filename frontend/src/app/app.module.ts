@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,8 +10,13 @@ import { DataService } from './data-service.service';
 import { EditItemComponent } from './edit-item/edit-item.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomePageComponent, EditItemComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomePageComponent,
+    EditItemComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [
     {
       provide: APP_INITIALIZER,

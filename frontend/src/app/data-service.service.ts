@@ -1,4 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { API_URL } from './env';
 import { PendingProduct } from './pending-product.model';
 import { Product } from './product.model';
 
@@ -8,10 +11,12 @@ import { Product } from './product.model';
 export class DataService implements OnInit {
   private productList: Product[];
   private pendingProductList: PendingProduct[];
-  constructor() {}
+  res: any;
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.updateProductList();
+  async ngOnInit() {
+    console.log('getting');
+    await this.updateProductList();
     this.updatePendingProductList();
   }
 
@@ -23,7 +28,18 @@ export class DataService implements OnInit {
     return this.pendingProductList;
   }
 
-  updateProductList() {
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'mime-Type': 'application/json',
+      'content-type': 'application/json',
+    }),
+  };
+
+  async updateProductList() {
+    this.res = await lastValueFrom(
+      this.http.get(`${API_URL}/posts.json`, this.httpOptions)
+    );
+    console.log(this.res[0].title);
     this.productList = [
       new Product(
         '../../assets/pictures/image1.png',
