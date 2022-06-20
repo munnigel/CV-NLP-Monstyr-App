@@ -7,6 +7,8 @@ Google Site containing our Team’s video here:
 https://sites.google.com/sutd.edu.sg/rubyduckies/home
 
 # Installation Procedures for Local macOS Development
+- Version of Ruby : 2.7.6
+- Version of Rails : 7.0.3
 
 Assuming homebrew is installed:
 
@@ -28,10 +30,19 @@ $ sudo gem install rails
 $ ruby --version
 $ rails --version
 ```
+# Installation Procedures for Local Windows OS:
+- Version of Ruby : 2.7.6
+- Version of Rails : 7.0.3
+
+Use RubyInstaller 
 
 # Procedures to run Ruby on Rails app
 
-While in the root directory,
+Ensure ruby and rails are installed
+- Version of Ruby : 2.7.6
+- Version of Rails : 7.0.3
+
+While in the backend folder,
 
 ```
 $ rails s
@@ -39,7 +50,7 @@ $ rails s
 
 # Procedures to run Angular app
 
-Assuming node.js is installed
+Ensure node.js is installed
 
 While in the frontend folder,
 
