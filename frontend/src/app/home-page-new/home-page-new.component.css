@@ -1,0 +1,40 @@
+.page-container {
+  display: flex;
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  background: #e7e7e7;
+}
+
+.active {
+  border-left: 5px solid #462483;
+}
+
+.list-items {
+  padding-top: 100px;
+}
+
+.list-item {
+  display: flex;
+  font-size: 20px;
+  padding: 20px;
+  color: #000;
+}
+
+.list-item.selected {
+  margin-left: 10px;
+  color: grey;
+}
+
+.list-item:hover {
+  margin-left: 10px;
+  color: grey;
+}
+
+.page-content-container {
+  padding: 50px;
+}

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pending_post %>
+
+<div>
+  <%= link_to "Edit this pending post", edit_pending_post_path(@pending_post) %> |
+  <%= link_to "Back to pending posts", pending_posts_path %>
+
+  <%= button_to "Destroy this pending post", @pending_post, method: :delete %>
+</div>

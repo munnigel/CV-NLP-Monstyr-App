@@ -1,0 +1,73 @@
+<div class="header-row">
+  <div class="page-header">Live Posts</div>
+  <div class="search-bar">
+    <textarea class="search-input" rows="1"></textarea>
+    <button class="search-btn">F</button>
+  </div>
+</div>
+<div class="filter-row">
+  <div class="filter-type" (click)="onFilter(1)">
+    <label class="filter-label">Title</label>
+    <img
+      src="../../assets/pictures/arrowhead.png"
+      height="5px"
+      width="auto"
+      class="filter-sort"
+    />
+  </div>
+  <div class="filter-type">
+    <label class="filter-label">Category</label>
+    <img
+      src="../../assets/pictures/arrowhead.png"
+      height="5px"
+      width="auto"
+      class="filter-sort"
+    />
+  </div>
+  <div class="filter-type">
+    <label class="filter-label">Discount</label>
+    <img
+      src="../../assets/pictures/arrowhead.png"
+      height="5px"
+      width="auto"
+      class="filter-sort"
+    />
+  </div>
+  <div class="filter-type">
+    <label class="filter-label">Validity Date</label>
+    <img
+      src="../../assets/pictures/arrowhead.png"
+      height="5px"
+      width="auto"
+      class="filter-sort"
+    />
+  </div>
+</div>
+<div class="container">
+  <div class="row row-cols-4">
+    <ng-container *ngFor="let product of productList">
+      <div class="col">
+        <div class="item-container">
+          <div class="item-img">
+            <img
+              [src]="product.imgUrl"
+              alt="image"
+              style="
+                object-fit: contain;
+                width: 99%;
+                height: 99%;
+                border-radius: 5px;
+              "
+            />
+          </div>
+          <div class="item-details">
+            <div class="item-title">Title: {{ product.title }}</div>
+            <div class="item-description">Description: {{ product.description }}</div>
+            <div class="item-tag">Category: {{product.category}}</div>
+            <div class="item-tag">Promotion Date: {{product.promotionDate}}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

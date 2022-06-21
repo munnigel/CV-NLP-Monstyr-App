@@ -1,0 +1,37 @@
+<%= form_with(model: pending_post) do |form| %>
+  <% if pending_post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pending_post.errors.count, "error") %> prohibited this pending_post from being saved:</h2>
+
+      <ul>
+        <% pending_post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :score, style: "display: block" %>
+    <%= form.text_field :score %>
+  </div>
+
+  <div>
+    <%= form.label :img, style: "display: block" %>
+    <%= form.text_field :img %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

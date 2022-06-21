@@ -1,0 +1,15 @@
+.nav-nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-bar-btn {
+  text-align: center;
+  padding: 30px 10px;
+  background-color: rgb(201, 212, 208);
+  flex-grow: 1;
+}
+
+.nav-bar-btn:hover {
+  background-color: rgba(197, 197, 197, 0.534);
+}

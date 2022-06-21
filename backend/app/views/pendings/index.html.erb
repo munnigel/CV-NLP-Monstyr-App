@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Pendings</h1>
+
+<div id="pendings">
+  <% @pendings.each do |pending| %>
+    <%= render pending %>
+    <p>
+      <%= link_to "Show this pending", pending %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pending", new_pending_path %>

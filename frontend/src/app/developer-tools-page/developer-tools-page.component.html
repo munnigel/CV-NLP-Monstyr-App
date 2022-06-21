@@ -1,0 +1,78 @@
+<div class="nav-nav-bar">
+  <a
+    [ngClass]="{ hello: onTopIndex === 0 }"
+    class="nav-bar-btn"
+    (click)="onTopClick(0)"
+  >
+    Select Post
+  </a>
+  <a
+    [ngClass]="{ hello: onTopIndex === 1 }"
+    class="nav-bar-btn"
+    (click)="onTopClick(1)"
+  >
+    OCR
+  </a>
+  <a
+    [ngClass]="{ hello: onTopIndex === 2 }"
+    class="nav-bar-btn"
+    (click)="onTopClick(2)"
+  >
+    Object Detection
+  </a>
+  <a
+    [ngClass]="{ hello: onTopIndex === 3 }"
+    class="nav-bar-btn"
+    (click)="onTopClick(3)"
+  >
+    NER
+  </a>
+  <a
+    [ngClass]="{ hello: onTopIndex === 4 }"
+    class="nav-bar-btn"
+    (click)="onTopClick(4)"
+  >
+    Keyword Extraction
+  </a>
+</div>
+<div *ngIf="onTopIndex === 0">
+  <div class="upload">
+    <div class="text-center">
+      <input class="form-control" type="file" (change)="onChange($event)" />
+    </div>
+
+    <!-- Shareable short link of  uoloaded file -->
+    <div class="container text-center jumbotron" *ngIf="shortLink">
+      <h2>Visit Here</h2>
+      <a href="{{ shortLink }}">{{ shortLink }}</a>
+    </div>
+
+    <!--Flag variable is used here-->
+    <div class="container" *ngIf="loading">
+      <h3>Loading ...</h3>
+    </div>
+    <img src="../../assets/pictures/upload.png" alt="upload" class="cloud" />
+    <h3 class="uploads" (click)="onUpload()">Click here to upload</h3>
+    <img [src]="shortLink" *ngIf="shortLink" />
+  </div>
+</div>
+<div *ngIf="onTopIndex === 1">
+  <div class="populate">
+    <p>fdsfdsfds</p>
+  </div>
+</div>
+<div *ngIf="onTopIndex === 2">
+  <div class="populate">
+    <p>eqweqw</p>
+  </div>
+</div>
+<div *ngIf="onTopIndex === 3">
+  <div class="populate">
+    <p>fgfb</p>
+  </div>
+</div>
+<div *ngIf="onTopIndex === 4">
+  <div class="populate">
+    <p>fdsofasd</p>
+  </div>
+</div>

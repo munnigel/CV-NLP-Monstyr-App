@@ -1,0 +1,157 @@
+<div class="nav-bar">
+  <img src="../../assets/pictures/mon.gif" alt="Cutie" class="imgg" />
+  <div class="nav-bar-main-title">Monstyr x AI</div>
+  <div class="nav-bar-sub-title">AI-Powered Workflows</div>
+  <div class="tabs-container">
+    <button
+      [ngClass]="{ active: tabIndex === 0 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(0)"
+      id="overview-tab"
+    >
+      Overview
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 1 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(1)"
+    >
+      Live Posts
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 2 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(2)"
+    >
+      Pending Posts
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 3 }"
+      class="nav-bar-btn"
+      (click)="onTabClick(3)"
+    >
+      Developer Tools
+    </button>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="sub-container">
+    <div *ngIf="tabIndex === 1"></div>
+    <div *ngIf="tabIndex === 2"></div>
+    <!-- <div *ngIf="tabIndex === 3">
+      <div class="header-row">
+        <div class="page-header">Settings</div>
+      </div>
+      <div class="setting-page-container">
+        <img alt="logo" class="user-icon" />
+        <div class="setting-input-container">
+          <form>
+            <div class="row mb-3 setting-page-field">
+              <label class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label class="col-sm-2 col-form-label">Role</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"
+                >Email</label
+              >
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" />
+              </div>
+            </div>
+            <div class="row mb-3 setting-page-field">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"
+                >Password</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword3"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div> -->
+    <div *ngIf="tabIndex === 3">
+      <div class="top-nav-bar">
+        <a
+          [ngClass]="{ hello: onTopIndex === 0 }"
+          class="top-bar-btn"
+          (click)="onTopClick(0)"
+        >
+          Select Post
+        </a>
+        <a
+          [ngClass]="{ hello: onTopIndex === 1 }"
+          class="top-bar-btn"
+          (click)="onTopClick(1)"
+        >
+          OCR
+        </a>
+        <a
+          [ngClass]="{ hello: onTopIndex === 2 }"
+          class="top-bar-btn"
+          (click)="onTopClick(2)"
+        >
+          Object Detection
+        </a>
+        <a
+          [ngClass]="{ hello: onTopIndex === 3 }"
+          class="top-bar-btn"
+          (click)="onTopClick(3)"
+        >
+          NER
+        </a>
+        <a
+          [ngClass]="{ hello: onTopIndex === 4 }"
+          class="top-bar-btn"
+          (click)="onTopClick(4)"
+        >
+          Keyword Extraction
+        </a>
+      </div>
+
+      <div *ngIf="onTopIndex === 0">
+        <div class="upload">
+          <img
+            src="../../assets/pictures/upload.png"
+            alt="upload"
+            class="cloud"
+          />
+          <h3 class="uploads">Click here to upload picture</h3>
+        </div>
+      </div>
+      <div *ngIf="onTopIndex === 1">
+        <div class="populate">
+          <p>fdsfdsfds</p>
+        </div>
+      </div>
+      <div *ngIf="onTopIndex === 2">
+        <div class="populate">
+          <p>eqweqw</p>
+        </div>
+      </div>
+      <div *ngIf="onTopIndex === 3">
+        <div class="populate">
+          <p>fgfb</p>
+        </div>
+      </div>
+      <div *ngIf="onTopIndex === 4">
+        <div class="populate">
+          <p>fdsofasd</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

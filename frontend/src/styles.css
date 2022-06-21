@@ -1,0 +1,487 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: ComicSans;
+  src: url(./assets/fonts/Ldfcomicsanslight-6dZo.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: ComicSans;
+  src: url(./assets/fonts/Ldfcomicsansbold-zgma.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 200;
+}
+
+.main-login-container {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.imgg {
+  width: 150px;
+  height: 150px;
+}
+
+.main-login-header {
+  font-weight: 400;
+  font-size: 50px;
+  padding-top: 30px;
+}
+
+.login-form {
+  margin-top: 30px;
+  width: 400px;
+}
+
+.form-control {
+  font-weight: 200;
+}
+
+.col-12 {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn-primary {
+  font-weight: 200;
+}
+
+.forget-password-container {
+  margin-top: 10px;
+}
+
+.btn-forget-password {
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 15px;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  border-right: 2px solid black;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+  background-color: rgb(201, 212, 208);
+}
+
+.nav-bar-main-title {
+  font-weight: 400;
+  font-size: 20px;
+  padding-top: 20px;
+}
+
+.nav-bar-sub-title {
+  font-size: 10px;
+}
+
+.tabs-container {
+  margin-top: 50px;
+  width: 100%;
+}
+
+button {
+  border: none;
+}
+
+.nav-bar-btn {
+  text-align: start;
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  background-color: rgb(201, 212, 208);
+}
+
+.nav-bar-btn:hover {
+  background-color: rgba(197, 197, 197, 0.534);
+}
+
+
+
+.main-container {
+  margin-left: 200px;
+  height: 100%;
+  overflow: auto;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: width 2s, height 4s;
+}
+
+.page-header {
+  padding: 30px 50px;
+  font-size: 30px;
+}
+
+.search-bar {
+  margin: 30px 20px;
+  border-radius: 17px;
+  border: 1px solid black;
+  min-width: 200px;
+  height: 34px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.search-input {
+  resize: none;
+  border: none;
+  height: 30px;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.search-btn {
+  padding: 0px;
+  background-color: white;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.filter-type {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0px 5px;
+}
+
+.filter-type:hover {
+  background-color: rgba(219, 219, 219, 0.527);
+}
+
+.filter-sort {
+  padding-left: 5px;
+  vertical-align: center;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.col {
+  width: 30%;
+  padding: 6px;
+}
+
+.item-container {
+  margin: 10px;
+  width: 350px;
+}
+
+.item-container:hover {
+  box-shadow: 0 1px 10px rgb(97, 80, 80);
+}
+
+.item-container:hover:after {
+  width: 100%;
+}
+
+.item-img {
+  width: 350px;
+  height: 300px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-details {
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.item-title {
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.pending-posts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pending-posts-item {
+  margin: 20px;
+  height: 150px;
+  width: 700px;
+  display: flex;
+  /* justify-content: space-evenly; */
+  align-items: left;
+  cursor: pointer;
+}
+
+.pending-posts-item:hover {
+  box-shadow: 0 1px 10px rgb(97, 80, 80);
+  width: 710px;
+}
+
+.pending-posts-item:hover:after {
+  width: 100%;
+}
+
+.pending-posts-details {
+  width: 700px;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.pending-posts-img {
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+  border: 1px solid rgb(78, 75, 75);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.main-item-container {
+  padding: 0px 30px;
+}
+
+.item-page-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.item-page-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  margin-left: 30px;
+}
+
+.page-item {
+  resize: none;
+  border-radius: 15px;
+  padding: 0px 10px;
+  margin: 10px;
+}
+
+.item-page-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  margin-right: 30px;
+  align-items: center;
+}
+
+.product-img {
+  width: 100px;
+  height: 100px;
+  /* border-left:  1px solid black; */
+  border-bottom: 1px solid black;
+  /* border-right:  1px solid black; */
+  border-radius: 10px;
+}
+
+.item-page-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.item-page-btn:first-child {
+  margin-right: 10px;
+}
+.item-page-btn:last-child {
+  margin-left: 10px;
+}
+
+.item-page-btn {
+  border-radius: 30px;
+}
+
+.setting-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.setting-input-container {
+  width: 400px;
+}
+
+.setting-page-field {
+  margin-top: 30px;
+}
+
+.top-nav-bar {
+  font-size: 20px;
+  position: relative;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  background-color: black;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.top-bar-btn {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+
+.top-bar-btn:after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 2px;
+  left: 0px;
+  bottom: -10px;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+
+.top-bar-btn:hover {
+  transform: scale(1);
+  color: #ea1b45;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.top-bar-btn:hover:after {
+  width: 100%;
+}
+
+.hello {
+  transform: scale(1);
+  color: #ea1b45;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.populate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.upload {
+  position: relative;
+  max-width: 450px;
+  height: 450px;
+  margin: auto;
+  display: flex;
+  overflow: visible;
+  transform: scale(0.9);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 1);
+  backdrop-filter: blur(9.8px);
+  -webkit-backdrop-filter: blur(9.8px);
+  border: 1px solid rgba(204, 204, 204, 0.63);
+  filter: drop-shadow(0px 5px 5px rgba(255, 201, 255, 0.2));
+  border-radius: 100px;
+}
+
+.uploads {
+  position: relative;
+  padding: 0px 10px;
+  font-size: 1rem;
+  color: rgb(20, 11, 11);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+
+.uploads:after {
+  content: "";
+  position: absolute;
+  background-color: rgb(161, 18, 18);
+  width: 0px;
+  height: 2px;
+  left: 0px;
+  bottom: -10px;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+
+.uploads:hover:after {
+  width: 100%;
+}
+.cloud {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

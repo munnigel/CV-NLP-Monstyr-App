@@ -1,0 +1,10 @@
+<h1>Editing pending post</h1>
+
+<%= render "form", pending_post: @pending_post %>
+
+<br>
+
+<div>
+  <%= link_to "Show this pending post", @pending_post %> |
+  <%= link_to "Back to pending posts", pending_posts_path %>
+</div>

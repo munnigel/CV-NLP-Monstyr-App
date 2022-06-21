@@ -1,0 +1,6 @@
+# folders that will be generated with "npm i"
+frontend/.angular
+frontend/node_modules
+frontend/dist
+
+# second .gitignore file can be found in /backend
