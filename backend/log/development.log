@@ -8243,3 +8243,27 @@ Processing by PendingPostsController#index as JSON
 Completed 200 OK in 33ms (Views: 24.4ms | ActiveRecord: 0.7ms | Allocations: 3340)
 
 
+Started GET "/pendings.json" for ::1 at 2022-06-22 04:50:10 +0800
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PendingsController#index as JSON
+  Parameters: {"pending"=>{}}
+  Rendering pendings/index.json.jbuilder
+  [1m[36mPending Load (0.7ms)[0m  [1m[34mSELECT "pendings".* FROM "pendings"[0m
+  ↳ app/views/pendings/index.json.jbuilder:1
+  Rendered collection of pendings/_pending.json.jbuilder [16 times] (Duration: 17.1ms | Allocations: 2345)
+  Rendered pendings/index.json.jbuilder (Duration: 86.6ms | Allocations: 10511)
+Completed 200 OK in 235ms (Views: 155.0ms | ActiveRecord: 3.3ms | Allocations: 15536)
+
+
+Started GET "/pending_posts.json" for ::1 at 2022-06-22 04:50:12 +0800
+Processing by PendingPostsController#index as JSON
+  Parameters: {"pending_post"=>{}}
+  Rendering pending_posts/index.json.jbuilder
+  [1m[36mPendingPost Load (0.8ms)[0m  [1m[34mSELECT "pending_posts".* FROM "pending_posts"[0m
+  ↳ app/views/pending_posts/index.json.jbuilder:1
+  Rendered collection of pending_posts/_pending_post.json.jbuilder [10 times] (Duration: 11.7ms | Allocations: 1432)
+  Rendered pending_posts/index.json.jbuilder (Duration: 68.0ms | Allocations: 6206)
+Completed 200 OK in 133ms (Views: 115.6ms | ActiveRecord: 3.3ms | Allocations: 7331)
+
+
