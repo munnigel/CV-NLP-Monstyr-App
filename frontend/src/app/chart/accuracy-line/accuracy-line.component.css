@@ -1,0 +1,12 @@
+#div-bar-chart {
+    display: block;
+    height: 100%;
+}
+
+.accuracy-line {
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 200px;
+    display: block;
+    justify-content: center;
+}

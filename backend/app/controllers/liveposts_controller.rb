@@ -1,10 +1,12 @@
 class LivepostsController < ApplicationController
   before_action :set_livepost, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /liveposts
   def index
     @liveposts = Livepost.all
     respond_to do |format|
+      format.html { render json: @liveposts}
       format.json {render json: @liveposts}
     end
   end
@@ -34,11 +36,23 @@ class LivepostsController < ApplicationController
   end
 
   # PATCH/PUT /liveposts/1
+  # def update
+  #   if @livepost.update(livepost_params)
+  #     redirect_to @livepost, notice: 'Livepost was successfully updated.'
+  #   else
+  #     render :edit
+  #   end
+  # end
+
   def update
-    if @livepost.update(livepost_params)
-      redirect_to @livepost, notice: 'Livepost was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @livepost.update(livepost_params)
+        format.html { redirect_to @livepost, notice: 'Document was successfully updated.' }
+        format.json { render json: @livepost, status: :ok}
+      else
+        format.html { render :edit }
+        format.json { render json: @livepost.errors, status: :unprocessable_entity }
+      end
     end
   end
 
