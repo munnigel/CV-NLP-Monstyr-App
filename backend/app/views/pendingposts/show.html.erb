@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @pendingpost.score %>
+</p>
+
+<p>
+  <strong>Imgurl:</strong>
+  <%= @pendingpost.imgUrl %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pendingpost.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @pendingpost.description %>
+</p>
+
+<%= link_to 'Edit', edit_pendingpost_path(@pendingpost) %> |
+<%= link_to 'Back', pendingposts_path %>

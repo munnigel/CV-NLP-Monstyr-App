@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
-import { HomePageNewComponent } from './home-page-new/home-page-new.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
 import { ProcessedPostPageComponent } from './processed-post-page/processed-post-page.component';
@@ -17,7 +16,7 @@ const routes: Routes = [
   { path: 'editLive/:id', component: EditProcessedPostComponent},
   {
     path: 'home',
-    component: HomePageNewComponent,
+    component: HomePageComponent,
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: OverviewPageComponent },

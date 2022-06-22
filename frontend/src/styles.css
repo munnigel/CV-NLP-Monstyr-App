@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @font-face {
   font-family: ComicSans;
   src: url(./assets/fonts/Ldfcomicsanslight-6dZo.ttf);
@@ -71,58 +73,6 @@
   font-size: 15px;
 }
 
-.nav-bar {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  border-right: 2px solid black;
-  width: 200px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-items: flex-start;
-  align-items: center;
-  background-color: rgb(201, 212, 208);
-}
-
-.nav-bar-main-title {
-  font-weight: 400;
-  font-size: 20px;
-  padding-top: 20px;
-}
-
-.nav-bar-sub-title {
-  font-size: 10px;
-}
-
-.tabs-container {
-  margin-top: 50px;
-  width: 100%;
-}
-
-button {
-  border: none;
-}
-
-.nav-bar-btn {
-  text-align: start;
-  display: block;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  cursor: pointer;
-  background-color: rgb(201, 212, 208);
-}
-
-.nav-bar-btn:hover {
-  background-color: rgba(197, 197, 197, 0.534);
-  color: #ea1b45;
-  font-weight: bold;
-}
-
-
-
 .main-container {
   margin-left: 200px;
   height: 100%;
@@ -133,114 +83,6 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.header-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  transition: width 2s, height 4s;
-}
-
-.page-header {
-  padding: 30px 50px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
-.search-bar {
-  margin: 30px 20px;
-  border-radius: 17px;
-  border: 1px solid black;
-  min-width: 200px;
-  height: 34px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 10px;
-}
-
-.search-input {
-  resize: none;
-  border: none;
-  height: 30px;
-  border-radius: 15px;
-  box-sizing: border-box;
-}
-
-.search-btn {
-  padding: 0px;
-  background-color: white;
-}
-
-.filter-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.filter-type {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 10px;
-  padding: 0px 5px;
-}
-
-.filter-type:hover {
-  background-color: rgba(219, 219, 219, 0.527);
-}
-
-.filter-sort {
-  padding-left: 5px;
-  vertical-align: center;
-}
-
-.container {
-  margin-top: 20px;
-}
-
-.col {
-  width: 30%;
-  padding: 6px;
-}
-
-.item-container {
-  margin: 10px;
-  width: 350px;
-}
-
-.item-container:hover {
-  box-shadow: 0 1px 10px rgb(97, 80, 80);
-}
-
-.item-container:hover:after {
-  width: 100%;
-}
-
-.item-img {
-  width: 350px;
-  height: 300px;
-  box-sizing: border-box;
-  border: 1px solid black;
-  display: flex;
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-}
-
-.item-details {
-  width: 350px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.item-title {
-  font-weight: 400;
-  font-size: 20px;
-  margin-bottom: 5px;
 }
 
 .pending-posts-container {
@@ -355,10 +197,12 @@ button {
   text-decoration: none;
   color: #333;
 }
+
 .popup .close:hover {
   color: #06D85F;
   cursor: pointer;
 }
+
 .popup .content {
   max-height: 30%;
   overflow: auto;
@@ -372,7 +216,7 @@ button {
   font-size: smaller;
   align-self: center;
   border-radius: 10px;
-  width:fit-content;
+  width: fit-content;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
@@ -396,11 +240,11 @@ button {
   align-items: center;
   align-content: center;
   height: fit-content;
-  font-size:large;
-  font-weight:500;
+  font-size: large;
+  font-weight: 500;
   align-self: center;
   border-radius: 10px;
-  width:fit-content;
+  width: fit-content;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
@@ -628,6 +472,7 @@ button {
 .uploads:hover:after {
   width: 100%;
 }
+
 .cloud {
   width: 150px;
   height: 150px;
@@ -635,14 +480,9 @@ button {
   border-radius: 50%;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
 
 a {
   text-decoration: none;
 }
-
-
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

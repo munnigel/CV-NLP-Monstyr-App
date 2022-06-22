@@ -13,15 +13,14 @@ export class ProcessedPostPageComponent implements OnInit {
 
   tabIndex: number;
   showItem: boolean;
-  productList: Product[];
+  liveProductList: Product[];
   pendingProductList: PendingProduct[];
   constructor(private dataSrv: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.tabIndex = 2;
     this.showItem = false;
-    this.productList = this.dataSrv.getProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
+    this.liveProductList = this.dataSrv.getLiveProductList();
   }
 
   onTabClick(index: number) {
@@ -36,7 +35,7 @@ export class ProcessedPostPageComponent implements OnInit {
 
   selectLivePost(index: number) {
     console.log(index);
-    console.log(this.productList[index])
-    this.router.navigate([`/editLive/${this.productList[index].id}`], {})
+    console.log(this.liveProductList[index])
+    this.router.navigate([`/editLive/${this.liveProductList[index].id}`], {})
   }
 }

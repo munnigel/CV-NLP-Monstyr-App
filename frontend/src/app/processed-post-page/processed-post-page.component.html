@@ -8,57 +8,33 @@
 <div class="filter-row">
   <div class="filter-type" (click)="onFilter(1)">
     <label class="filter-label">Title</label>
-    <img
-      src="../../assets/pictures/arrowhead.png"
-      height="5px"
-      width="auto"
-      class="filter-sort"
-    />
+    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
   </div>
   <div class="filter-type">
     <label class="filter-label">Category</label>
-    <img
-      src="../../assets/pictures/arrowhead.png"
-      height="5px"
-      width="auto"
-      class="filter-sort"
-    />
+    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
   </div>
   <div class="filter-type">
     <label class="filter-label">Discount</label>
-    <img
-      src="../../assets/pictures/arrowhead.png"
-      height="5px"
-      width="auto"
-      class="filter-sort"
-    />
+    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
   </div>
   <div class="filter-type">
     <label class="filter-label">Validity Date</label>
-    <img
-      src="../../assets/pictures/arrowhead.png"
-      height="5px"
-      width="auto"
-      class="filter-sort"
-    />
+    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
   </div>
 </div>
 <div class="container">
   <div class="row row-cols-4">
-    <ng-container *ngFor="let product of productList; let i = index">
-      <div (click)="selectLivePost(i)" class="col">
+    <ng-container *ngFor="let product of liveProductList; let i = index">
+      <div class="col" (click)="selectLivePost(i)">
         <div class="item-container">
           <div class="item-img">
-            <img
-              [src]="product.imgUrl"
-              alt="image"
-              style="
+            <img [src]="product.imgUrl" alt="image" style="
                 object-fit: contain;
                 width: 99%;
                 height: 99%;
                 border-radius: 5px;
-              "
-            />
+              " />
           </div>
           <div class="item-details">
             <div class="item-title">Title: {{ product.title }}</div>

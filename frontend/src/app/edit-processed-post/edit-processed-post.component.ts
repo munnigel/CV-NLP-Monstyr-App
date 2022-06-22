@@ -31,7 +31,7 @@ export class EditProcessedPostComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       // console.log(this.datasrv.getPendingProductList()[id]);
-      let productList = this.datasrv.getProductList()
+      let productList = this.datasrv.getLiveProductList()
       for (let product of productList) {
         if (product.id == this.id) {
           this.product = product;
@@ -62,7 +62,7 @@ export class EditProcessedPostComponent implements OnInit {
       }, 2000);
       return;
     } else {
-      let editedData = await this.datasrv.getProductList();
+      let editedData = await this.datasrv.getLiveProductList();
       this.product.title = this.editForm.value.title,
         this.product.description = this.editForm.value.description,
         this.product.category = this.editForm.value.category,

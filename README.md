@@ -27,6 +27,9 @@ $ rbenv local 2.7.6
 $ echo "gem: --no-document" > ~/.gemrc
 $ sudo gem install bundler
 $ sudo gem install rails
+```
+Close and open a new terminal, then execute the following commands:
+```
 $ ruby --version
 $ rails --version
 ```
@@ -51,6 +54,8 @@ $ rails s
 # Procedures to run Angular app
 
 Ensure node.js is installed
+Download NodeJS: https://nodejs.org/en/download/
+
 
 While in the frontend folder,
 
