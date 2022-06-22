@@ -1,0 +1,29 @@
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+google:
+  service: GCS
+  credentials: <%= Rails.root.join("service-account.json") %>
+  project: "rubyduckies"
+  bucket: "rubyduckies_cloudstorage"
+  public: true
+
+# amazon:
+#   service: S3
+#   # ...
+#   bucket: your_own_bucket-<%= Rails.env %>
+
+# google:
+#   service: GCS
+#   # ...
+#   bucket: your_own_bucket-<%= Rails.env %>
+
+# azure:
+#   service: AzureStorage
+#   # ...
+#   container: your_container_name-<%= Rails.env %>

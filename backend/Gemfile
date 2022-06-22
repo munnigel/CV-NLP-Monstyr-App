@@ -1,0 +1,51 @@
+source 'https://rubygems.org'
+
+ruby '2.6.6'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '5.2.8'
+
+#4.2.11
+
+# Use SCSS for stylesheets
+# gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Image analysis and transformations support for ActiveStorage
+gem "image_processing", ">= 1.2"
+
+# Use Unicorn as the app server
+# gem 'unicorn'
+
+gem 'themoviedb'
+
+gem "google-cloud-storage", "~> 1.11", require: false
+
+#Media file upload
+gem 'activestorage', '5.2.8'
+
+# Window support
+gem 'tzinfo'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  gem 'rspec-rails', '5.1.2'
+  gem 'guard-rspec'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '~>1.3.11'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  # gem 'web-console', '~> 2.0'
+end
+
+group :production do
+  gem 'pg', '~> 0.21' # for Heroku deployment
+  gem 'rails_12factor'
+end
