@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Imgurl:</strong>
+  <%= @livepost.imgUrl %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @livepost.title %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @livepost.category %>
+</p>
+
+<p>
+  <strong>Promotiondate:</strong>
+  <%= @livepost.promotionDate %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @livepost.description %>
+</p>
+
+<%= link_to 'Edit', edit_livepost_path(@livepost) %> |
+<%= link_to 'Back', liveposts_path %>

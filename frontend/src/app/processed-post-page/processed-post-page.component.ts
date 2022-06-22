@@ -12,15 +12,14 @@ export class ProcessedPostPageComponent implements OnInit {
 
   tabIndex: number;
   showItem: boolean;
-  productList: Product[];
+  liveProductList: Product[];
   pendingProductList: PendingProduct[];
-  constructor(private dataSrv: DataService) {}
+  constructor(private dataSrv: DataService) { }
 
   ngOnInit(): void {
     this.tabIndex = 2;
     this.showItem = false;
-    this.productList = this.dataSrv.getProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
+    this.liveProductList = this.dataSrv.getLiveProductList();
   }
 
   onTabClick(index: number) {
@@ -31,5 +30,5 @@ export class ProcessedPostPageComponent implements OnInit {
     this.showItem = true;
   }
 
-  onFilter(index: number) {}
+  onFilter(index: number) { }
 }

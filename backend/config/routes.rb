@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pendingposts
+  resources :liveposts
   resources :posts
   resources :posts
   resources :posts

@@ -1,4 +1,4 @@
-class Movie < ActiveRecord::Base
+class Movie < ActiveRecord
 
   def self.with_ratings(ratings_list)
     # if ratings_list is an array such as ['G', 'PG', 'R'], retrieve all

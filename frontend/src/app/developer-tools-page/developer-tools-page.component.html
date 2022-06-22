@@ -31,7 +31,7 @@
       </div>
       <div *ngIf="tabSelector === 'chooseLive'">
         <div class="posts-container">
-          <ng-container *ngFor="let product of productList">
+          <ng-container *ngFor="let product of liveProductList">
             <div class="post-container">
               <img class="post-img" [src]="product.imgUrl" />
               <div class="post-desc">

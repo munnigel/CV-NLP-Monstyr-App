@@ -9,21 +9,21 @@ import { Product } from './product.model';
   providedIn: 'root',
 })
 export class DataService implements OnInit {
-  private productList: Product[];
+  private liveProductList: Product[];
   private pendingProductList: PendingProduct[];
   res: any;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
     console.log('getting');
-    this.productList = [];
+    this.liveProductList = [];
     this.pendingProductList = [];
-    await this.updateProductList();
+    await this.updateLiveProductList();
     await this.updatePendingProductList();
   }
 
-  getProductList() {
-    return this.productList;
+  getLiveProductList() {
+    return this.liveProductList;
   }
 
   getPendingProductList() {
@@ -37,13 +37,13 @@ export class DataService implements OnInit {
     }),
   };
 
-  async updateProductList() {
+  async updateLiveProductList() {
     this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/pendings.json`, this.httpOptions)
+      this.http.get(`${API_URL}/liveposts.json`, this.httpOptions)
     );
     console.log(this.res);
     for (let i = 0; i < this.res.length; i++) {
-      this.productList.push(
+      this.liveProductList.push(
         new Product(
           this.res[i].imgUrl,
           this.res[i].title,
@@ -57,7 +57,7 @@ export class DataService implements OnInit {
 
   async updatePendingProductList() {
     this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/pending_posts.json`, this.httpOptions)
+      this.http.get(`${API_URL}/pendingposts.json`, this.httpOptions)
     );
     console.log(this.res);
     for (let i = 0; i < this.res.length; i++) {

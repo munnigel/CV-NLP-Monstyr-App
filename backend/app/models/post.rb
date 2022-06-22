@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ActiveRecord
   has_one_attached :postimages
 
 #   def self.upload_image()

@@ -21,7 +21,7 @@ export class DeveloperToolsPageComponent implements OnInit {
 
   tabSelector: string;
   tabSelectorList: string[];
-  productList: Product[];
+  liveProductList: Product[];
   pendingProductList: PendingProduct[];
 
   pageTitle: string;
@@ -60,7 +60,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.tabSelector = this.tabSelectorList[startTabIndex];
     this.pageTitle = this.pageTitleList[startTabIndex];
     this.value = (100 / 5) * (startTabIndex + 1);
-    this.productList = this.dataSrv.getProductList();
+    this.liveProductList = this.dataSrv.getLiveProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
     this.words = "this is jack's fav website".split(' ');
