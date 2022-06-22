@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +15,7 @@ import { ProcessedPostPageComponent } from './processed-post-page/processed-post
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
+import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { FileUploadService } from './file-upload.service';
     ProcessedPostPageComponent,
     DeveloperToolsPageComponent,
     SettingsPageComponent,
+    EditProcessedPostComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule,],
   providers: [
     FileUploadService,
     {
@@ -41,7 +43,7 @@ import { FileUploadService } from './file-upload.service';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 export function initDataService(config: DataService) {
   return () => config.ngOnInit();

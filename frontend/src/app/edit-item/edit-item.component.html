@@ -1,35 +1,62 @@
 <div class="header-row">
-  <div class="page-header">Item</div>
+  <div class="page-header">Pending post item: {{pendingProductList['title']}}</div>
 </div>
 <div class="item-page-container">
   <div class="item-page-left">
-    <textarea
-      class="page-item"
-      placeholder="Enter title here"
-      rows="2"
-    ></textarea>
-    <textarea
-      class="page-item"
-      placeholder="Enter Promotion Date here"
-      rows="2"
-    ></textarea>
-    <textarea
-      class="page-item"
-      placeholder="Enter Category here"
-      rows="2"
-    ></textarea>
+    <div class="item-cont">
+      <textarea
+        class="page-item-title"
+        placeholder="Enter title here"
+        rows="2">{{title}}</textarea>
+      <button type="button" class="special-btn" (click)="makeTitle()">Generate </button>
+    </div>
+
+    <div class="item-cont">
+      <textarea
+        class="page-item"
+        placeholder="Enter your description here"
+        rows="5">{{description}}</textarea>
+      <button type="button" class="special-btn" (click)="makeDescription()">Generate</button>
+    </div>
+
+    <div class="item-cont">
+      <textarea
+        class="page-item-category"
+        placeholder="Category "
+        rows="2">{{category}}</textarea>
+      <button type="button" class="special-btn" (click)="makeCategory()">Generate </button>
+    </div>
+
+    <div class="item-cont">
+      <textarea
+        class="page-item-date"
+        placeholder="Promotional Date"
+        rows="2">{{date}}</textarea>
+      <button type="button" class="special-btn" (click)="makeDate()">Generate </button>
+    </div>
+
+    <div class="cv-scan">
+      <button type="button" class="special-btn2" (click)="popup = true">Generate CV image</button>
+      <div class="overlay" *ngIf="popup">
+        <div class="popup">
+            <img src="../../assets/pictures/mon.gif" alt="CV image">
+            <a class="close" (click)="popup = false">&times;</a>
+        </div>
+      </div>  
+    </div>
+
   </div>
+
   <div class="item-page-right">
     <img alt="IMAGE" class="product-img" />
-    <textarea
-      class="page-item page-item-description"
-      placeholder="Enter description here"
-      rows="5"
-    ></textarea>
+    <div class="page-item-description">
+      <div class="text-align">
+        {{pendingProductList['description']}}
+      </div>
+    </div>
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button type="button" class="btn btn-primary item-page-btn">Next Post</button>
-  <button type="button" class="btn btn-primary item-page-btn">Save</button>
-  <button type="button" class="btn btn-primary item-page-btn">Discard</button>
+  <button type="button" class="btn btn-primary item-page-btn" (click)="onPending()">Back to Pending Page</button>
+  <button type="button" class="btn btn-primary item-page-btn" (click)="onProcessed()">Submit</button>
 </div>

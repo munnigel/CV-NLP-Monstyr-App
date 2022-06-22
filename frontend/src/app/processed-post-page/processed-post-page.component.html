@@ -45,8 +45,8 @@
 </div>
 <div class="container">
   <div class="row row-cols-4">
-    <ng-container *ngFor="let product of productList">
-      <div class="col">
+    <ng-container *ngFor="let product of productList; let i = index">
+      <div (click)="selectLivePost(i)" class="col">
         <div class="item-container">
           <div class="item-img">
             <img

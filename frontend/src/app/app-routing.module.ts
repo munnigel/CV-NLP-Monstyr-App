@@ -9,10 +9,12 @@ import { PendingPostPageComponent } from './pending-post-page/pending-post-page.
 import { ProcessedPostPageComponent } from './processed-post-page/processed-post-page.component';
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
 
 const routes: Routes = [
   { path: 'edit/:id', component: EditItemComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'editLive/:id', component: EditProcessedPostComponent},
   {
     path: 'home',
     component: HomePageNewComponent,

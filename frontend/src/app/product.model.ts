@@ -1,12 +1,13 @@
 export class Product {
   constructor(
-    public imgUrl: string,
     public title: string,
     public category: string,
     public promotionDate: string,
     public description: string,
+    public id?: number,
+    public imgUrl?: string,
     public titleSuggestion?: string[],
-    public descriptionSuggestion?:string[], 
-  ) {}
+    public descriptionSuggestion?: string[],
+  ) { }
 }
 

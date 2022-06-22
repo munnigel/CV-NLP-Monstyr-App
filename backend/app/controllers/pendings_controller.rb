@@ -1,5 +1,6 @@
 class PendingsController < ApplicationController
   before_action :set_pending, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
 
   # GET /pendings or /pendings.json
   def index
