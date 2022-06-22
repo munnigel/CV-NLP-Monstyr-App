@@ -1,0 +1,63 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :img_url %>
+    <%= f.text_field :img_url %>
+  </div>
+
+  <div class="field">
+    <% if @post.postimages.attached? %>
+        <%= image_tag @post.postimages %>
+    <% end %>
+
+    <%= f.label :postimages %>
+    <%= f.file_field :postimages %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :validity_start %><br>
+    <%= f.datetime_select :validity_start %>
+  </div>
+  <div class="field">
+    <%= f.label :validity_end %><br>
+    <%= f.datetime_select :validity_end %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.text_field :category %>
+  </div>
+  <div class="field">
+    <%= f.label :tag %><br>
+    <%= f.text_field :tag %>
+  </div>
+  <div class="field">
+    <%= f.label :ocr_img_url %><br>
+    <%= f.text_field :ocr_img_url %>
+  </div>
+  <div class="field">
+    <%= f.label "Upload ocr image" %><br>
+    <%= f.file_field :postimages %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
