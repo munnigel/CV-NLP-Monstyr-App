@@ -14,6 +14,27 @@ import { ProcessedPostPageComponent } from './processed-post-page/processed-post
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { OverviewDashboardComponent } from './overview-dashboard/overview-dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgChartsModule } from 'ng2-charts';
+// import { CardComponent } from './card/card.component';
+import { DashboardCardComponent } from './dashboard-card/dashboard-card.component';
+import { LatencyBarComponent } from './chart/latency-bar/latency-bar.component';
+import { AccuracyLineComponent } from './chart/accuracy-line/accuracy-line.component';
+import { CompletionPieComponent } from './chart/completion-pie/completion-pie.component';
+import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';   
+
 
 @NgModule({
   declarations: [
@@ -26,16 +47,38 @@ import { FileUploadService } from './file-upload.service';
     ProcessedPostPageComponent,
     DeveloperToolsPageComponent,
     SettingsPageComponent,
+    OverviewDashboardComponent,
+    // CardComponent,
+    DashboardCardComponent,
+    LatencyBarComponent,
+    AccuracyLineComponent,
+    CompletionPieComponent,
+    AcceptancePieComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, 
+            AppRoutingModule, 
+            HttpClientModule, 
+            BrowserAnimationsModule, 
+            MatGridListModule, 
+            MatCardModule, 
+            MatMenuModule, 
+            MatIconModule, 
+            MatButtonModule, 
+            LayoutModule, 
+            MatProgressSpinnerModule,
+            MatButtonToggleModule,
+            MatDividerModule,
+            NoopAnimationsModule,
+            MatDialogModule,
+            NgChartsModule],
   providers: [
     FileUploadService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initDataService,
-      deps: [DataService],
-      multi: true,
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initDataService,
+    //   deps: [DataService],
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent],
 })
