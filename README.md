@@ -54,6 +54,8 @@ $ rails s
 # Procedures to run Angular app
 
 Ensure node.js is installed
+Download NodeJS: https://nodejs.org/en/download/
+
 
 While in the frontend folder,
 
