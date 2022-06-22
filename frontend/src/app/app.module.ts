@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +14,7 @@ import { ProcessedPostPageComponent } from './processed-post-page/processed-post
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,10 @@ import { FileUploadService } from './file-upload.service';
     DeveloperToolsPageComponent,
     SettingsPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatProgressBarModule],
   providers: [
     FileUploadService,
+    // DataService,
     {
       provide: APP_INITIALIZER,
       useFactory: initDataService,

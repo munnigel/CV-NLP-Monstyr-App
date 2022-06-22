@@ -1,78 +1,138 @@
-<div class="nav-nav-bar">
-  <a
-    [ngClass]="{ hello: onTopIndex === 0 }"
-    class="nav-bar-btn"
-    (click)="onTopClick(0)"
-  >
-    Select Post
-  </a>
-  <a
-    [ngClass]="{ hello: onTopIndex === 1 }"
-    class="nav-bar-btn"
-    (click)="onTopClick(1)"
-  >
-    OCR
-  </a>
-  <a
-    [ngClass]="{ hello: onTopIndex === 2 }"
-    class="nav-bar-btn"
-    (click)="onTopClick(2)"
-  >
-    Object Detection
-  </a>
-  <a
-    [ngClass]="{ hello: onTopIndex === 3 }"
-    class="nav-bar-btn"
-    (click)="onTopClick(3)"
-  >
-    NER
-  </a>
-  <a
-    [ngClass]="{ hello: onTopIndex === 4 }"
-    class="nav-bar-btn"
-    (click)="onTopClick(4)"
-  >
-    Keyword Extraction
-  </a>
-</div>
-<div *ngIf="onTopIndex === 0">
-  <div class="upload">
-    <div class="text-center">
-      <input class="form-control" type="file" (change)="onChange($event)" />
+<div style="width: 100%">
+  <div class="dev-page-header">
+    {{ pageTitle }}
+  </div>
+  <div class="progress-bar-container">
+    <mat-progress-bar [mode]="mode" [value]="value"></mat-progress-bar>
+    <div class="nav-nav-bar">
+      <div class="nav-bar-btn" (click)="onTopClick(0)">Select Post</div>
+      <div class="nav-bar-btn" (click)="onTopClick(1)">OCR</div>
+      <div class="nav-bar-btn" (click)="onTopClick(2)">OD</div>
+      <div class="nav-bar-btn" (click)="onTopClick(3)">NER</div>
+      <div class="nav-bar-btn" (click)="onTopClick(4)">Keyword Extraction</div>
     </div>
+  </div>
 
-    <!-- Shareable short link of  uoloaded file -->
-    <div class="container text-center jumbotron" *ngIf="shortLink">
-      <h2>Visit Here</h2>
-      <a href="{{ shortLink }}">{{ shortLink }}</a>
+  <div *ngIf="onTopIndex === 0" style="position: relative">
+    <button
+      *ngIf="tabSelector != 'selecting'"
+      class="btn btn-primary back-btn"
+      (click)="backToSelector()"
+    >
+      Back button
+    </button>
+    <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
+      <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)">
+        Choose Live
+      </button>
+      <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)">
+        Choose Pending
+      </button>
+      <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)">
+        Upload manually
+      </button>
     </div>
+    <div *ngIf="tabSelector === 'chooseLive'">
+      <div class="posts-container">
+        <ng-container *ngFor="let product of productList">
+          <div class="post-container">
+            <img class="post-img" [src]="product.imgUrl" />
+            <div class="post-desc">
+              <h3>Post Description</h3>
+              <h5>{{ product.title }}</h5>
+              <h5>{{ product.category }}</h5>
+              <h5>{{ product.promotionDate }}</h5>
+              <h5>{{ product.description }}</h5>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div *ngIf="tabSelector === 'choosePending'">
+      <div class="posts-container">
+        <ng-container *ngFor="let product of pendingProductList">
+          <div class="post-container">
+            <img class="post-img" [src]="product.img" />
+            <div class="post-desc">
+              <h3>Post Description</h3>
+              <h5>{{ product.title }}</h5>
+              <h5>{{ product.score }}</h5>
+              <h5>{{ product.description }}</h5>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div *ngIf="tabSelector === 'chooseFile'">
+      <div class="upload">
+        <div class="text-center">
+          <input class="form-control" type="file" (change)="onChange($event)" />
+        </div>
 
-    <!--Flag variable is used here-->
-    <div class="container" *ngIf="loading">
-      <h3>Loading ...</h3>
+        <!-- Shareable short link of  uoloaded file -->
+        <div class="container text-center jumbotron" *ngIf="shortLink">
+          <h2>Visit Here</h2>
+          <a href="{{ shortLink }}">{{ shortLink }}</a>
+        </div>
+
+        <!--Flag variable is used here-->
+        <div class="container" *ngIf="loading">
+          <h3>Loading ...</h3>
+        </div>
+        <img
+          src="../../assets/pictures/upload.png"
+          alt="upload"
+          class="cloud"
+        />
+        <h3 class="uploads" (click)="onUpload()">Click here to upload</h3>
+        <img [src]="shortLink" *ngIf="shortLink" />
+      </div>
     </div>
-    <img src="../../assets/pictures/upload.png" alt="upload" class="cloud" />
-    <h3 class="uploads" (click)="onUpload()">Click here to upload</h3>
-    <img [src]="shortLink" *ngIf="shortLink" />
   </div>
-</div>
-<div *ngIf="onTopIndex === 1">
-  <div class="populate">
-    <p>fdsfdsfds</p>
+  <div *ngIf="onTopIndex === 1">
+    <div class="ocr-page-container">
+      <div class="ocr-page-original">
+        <img class="img" src="../../assets/pictures/image3.jpg" />
+      </div>
+      <div class="ocr-page-processed">
+        <img class="img" src="../../assets/pictures/image3.jpg" />
+        <!-- <textarea class="processed-text">{{ trainedData }}</textarea> -->
+        <div class="processed-text">
+          <ng-container *ngFor="let word of words">
+            <div>{{ word }}</div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="ocr-page-details">
+        <div class="recognition-accuracy"></div>
+        <div class="wrong-correct">
+          <div class="wrong">
+            <div class="wrongword"></div>
+            <div class="wrongdigit"></div>
+          </div>
+          <div class="correct">
+            <div class="correctword"></div>
+            <div class="correctdigit"></div>
+          </div>
+        </div>
+        <div class="total"></div>
+        <button class="edit-ocr-details">Edit OCR details</button>
+      </div>
+    </div>
   </div>
-</div>
-<div *ngIf="onTopIndex === 2">
-  <div class="populate">
-    <p>eqweqw</p>
+  <div *ngIf="onTopIndex === 2">
+    <div class="populate">
+      <p>eqweqw</p>
+    </div>
   </div>
-</div>
-<div *ngIf="onTopIndex === 3">
-  <div class="populate">
-    <p>fgfb</p>
+  <div *ngIf="onTopIndex === 3">
+    <div class="populate">
+      <p>fgfb</p>
+    </div>
   </div>
-</div>
-<div *ngIf="onTopIndex === 4">
-  <div class="populate">
-    <p>fdsofasd</p>
+  <div *ngIf="onTopIndex === 4">
+    <div class="populate">
+      <p>fdsofasd</p>
+    </div>
   </div>
 </div>
