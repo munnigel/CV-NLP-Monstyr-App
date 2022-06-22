@@ -1,0 +1,47 @@
+<div class="header-row">
+    <div class="page-header">Edit live item</div>
+</div>
+<div class="item-page-container">
+    <div class="item-page-left2">
+
+
+        <form [formGroup]="editForm">
+            <div class="item-cont">
+                <p>Title</p>
+                <textarea class="page-item-title" placeholder="Enter title here" formControlName="title"
+                    rows="2"></textarea>
+
+            </div>
+
+            <div class="item-cont">
+                <p>Description</p>
+                <textarea class="page-item" placeholder="Enter your description here" formControlName="description"
+                    rows="5"></textarea>
+
+
+            </div>
+            <div class="item-cont">
+                <p>Category</p>
+                <textarea class="page-item-category" placeholder="Category " formControlName="category"
+                    rows="2"></textarea>
+
+
+            </div>
+
+            <div class="item-cont">
+                <p>Date</p>
+                <textarea class="page-item-date" placeholder="Promotional Date" formControlName="date"
+                    rows="2"></textarea>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="item-page-right">
+        <img alt="IMAGE" class="product-img" />
+    </div>
+</div>
+<div class="item-page-btn-container">
+    <button type="button" class="btn btn-primary item-page-btn" (click)="onLive()">Back to Pending Page</button>
+    <button type="button" class="btn btn-primary item-page-btn" (click)="onSubmit()">Submit</button>
+</div>

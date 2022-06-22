@@ -1,10 +1,13 @@
 class PendingpostsController < ApplicationController
   before_action :set_pendingpost, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /pendingposts
   def index
     @pendingposts = Pendingpost.all
     respond_to do |format|
+      format.html {render json: @pendingposts}
       format.json {render json: @pendingposts}
     end
   end
