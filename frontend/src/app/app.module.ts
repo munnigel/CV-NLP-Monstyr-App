@@ -29,20 +29,27 @@ import { MatCardModule } from '@angular/material/card';
     DeveloperToolsPageComponent,
     SettingsPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatProgressBarModule, MatCardModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
+    MatCardModule,
+  ],
   providers: [
     FileUploadService,
-    // DataService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initDataService,
-      deps: [DataService],
-      multi: true,
-    },
+    DataService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initDataService,
+    //   deps: [DataService],
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 export function initDataService(config: DataService) {
   return () => config.ngOnInit();
