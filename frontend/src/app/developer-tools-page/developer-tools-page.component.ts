@@ -32,10 +32,13 @@ export class DeveloperToolsPageComponent implements OnInit {
   trainedData: string;
   words: string[];
 
+  OCRoutput: string[];
+  NERoutput: string[];
+
   constructor(
     private fileUploadService: FileUploadService,
     private dataSrv: DataService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.pageTitleList = [
@@ -51,8 +54,9 @@ export class DeveloperToolsPageComponent implements OnInit {
       'choosePending',
       'chooseFile',
     ];
-    this.onTopIndex = 0;
+
     let startTabIndex = 0;
+    this.onTopIndex = startTabIndex;
     this.tabSelector = this.tabSelectorList[startTabIndex];
     this.pageTitle = this.pageTitleList[startTabIndex];
     this.value = (100 / 5) * (startTabIndex + 1);
