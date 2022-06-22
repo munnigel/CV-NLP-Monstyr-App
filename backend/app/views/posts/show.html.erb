@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Img url:</strong>
+  <%= @post.img_url %>
+</p>
+
+<p>
+  <img src=<%= @post.img_url %> alt=<%= @post.title %> style="width:300px" %>
+</p>
+
+<p>
+  <% if @post.postimages.attached? %>
+    <img src="<%= (url_for(@post.postimages))%>" alt=<%= @post.title %> style="width:300px" %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Validity start:</strong>
+  <%= @post.validity_start %>
+</p>
+
+<p>
+  <strong>Validity end:</strong>
+  <%= @post.validity_end %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @post.category %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @post.tag %>
+</p>
+
+<p>
+  <strong>Ocr img url:</strong>
+  <%= @post.ocr_img_url %>
+</p>
+
+<p>
+  <img src=<%= @post.ocr_img_url %> alt=<%= @post.title %> style="width:300px" %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

@@ -1,7 +1,8 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +34,8 @@ import { DashboardCardComponent } from './dashboard-card/dashboard-card.componen
 import { LatencyBarComponent } from './chart/latency-bar/latency-bar.component';
 import { AccuracyLineComponent } from './chart/accuracy-line/accuracy-line.component';
 import { CompletionPieComponent } from './chart/completion-pie/completion-pie.component';
-import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';   
+import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';
+import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';   
 
 
 @NgModule({
@@ -54,10 +56,13 @@ import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.co
     AccuracyLineComponent,
     CompletionPieComponent,
     AcceptancePieComponent,
+    EditProcessedPostComponent
   ],
   imports: [BrowserModule, 
             AppRoutingModule, 
             HttpClientModule, 
+            FormsModule,
+            ReactiveFormsModule,
             BrowserAnimationsModule, 
             MatGridListModule, 
             MatCardModule, 
@@ -70,19 +75,20 @@ import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.co
             MatDividerModule,
             NoopAnimationsModule,
             MatDialogModule,
+            MatProgressBarModule,
             NgChartsModule],
   providers: [
     FileUploadService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initDataService,
-    //   deps: [DataService],
-    //   multi: true,
-    // },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initDataService,
+      deps: [DataService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 export function initDataService(config: DataService) {
   return () => config.ngOnInit();

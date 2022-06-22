@@ -12,16 +12,13 @@ import { Router } from '@angular/router';
 export class PendingPostPageComponent implements OnInit {
   tabIndex: number;
   showItem: boolean;
-  productList: Product[];
   pendingProductList: PendingProduct[];
-  constructor(private dataSrv: DataService, private router: Router) {}
+  constructor(private dataSrv: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.tabIndex = 2;
     this.showItem = false;
-    this.productList = this.dataSrv.getProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
-    console.log(this.productList);
     console.log(this.pendingProductList);
   }
 
@@ -33,7 +30,7 @@ export class PendingPostPageComponent implements OnInit {
     this.showItem = true;
   }
 
-  onFilter(index: number) {}
+  onFilter(index: number) { }
 
   selectPost(index: number) {
     console.log(index);

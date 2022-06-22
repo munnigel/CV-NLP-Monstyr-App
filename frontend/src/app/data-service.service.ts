@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { API_URL } from './env';
+import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
 import { PendingProduct } from './pending-product.model';
 import { Product } from './product.model';
 
@@ -9,21 +10,21 @@ import { Product } from './product.model';
   providedIn: 'root',
 })
 export class DataService implements OnInit {
-  private productList: Product[];
+  private liveProductList: Product[];
   private pendingProductList: PendingProduct[];
   res: any;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
     console.log('getting');
-    this.productList = [];
+    this.liveProductList = [];
     this.pendingProductList = [];
-    await this.updateProductList();
+    await this.updateLiveProductList();
     await this.updatePendingProductList();
   }
 
-  getProductList() {
-    return this.productList;
+  getLiveProductList() {
+    return this.liveProductList;
   }
 
   getPendingProductList() {
@@ -32,39 +33,42 @@ export class DataService implements OnInit {
 
   private httpOptions = {
     headers: new HttpHeaders({
-      'mime-Type': 'application/json',
-      'content-type': 'application/json',
+      "Accept": "application/json",
+      'Content-Type': 'application/json',
     }),
   };
 
-  async updateProductList() {
+  async updateLiveProductList() {
     this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/pendings.json`, this.httpOptions)
+      this.http.get(`${API_URL}/liveposts.json`, this.httpOptions)
     );
     console.log(this.res);
     for (let i = 0; i < this.res.length; i++) {
-      this.productList.push(
+      this.liveProductList.push(
         new Product(
-          this.res[i].imgUrl,
           this.res[i].title,
           this.res[i].category,
           this.res[i].promotionDate,
-          this.res[i].description
+          this.res[i].description,
+          this.res[i].id,
+          this.res[i].imgUrl,
         )
       );
     }
   }
 
+
+
   async updatePendingProductList() {
     this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/pending_posts.json`, this.httpOptions)
+      this.http.get(`${API_URL}/pendingposts.json`, this.httpOptions)
     );
     console.log(this.res);
     for (let i = 0; i < this.res.length; i++) {
       this.pendingProductList.push(
         new PendingProduct(
           this.res[i].score,
-          this.res[i].img,
+          this.res[i].imgUrl,
           this.res[i].title,
           this.res[i].description
         )
@@ -78,5 +82,11 @@ export class DataService implements OnInit {
     //   new PendingProduct(4, '../../assets/pictures/image4.jpg', 'description4'),
     //   new PendingProduct(5, '../../assets/pictures/image5.jpg', 'description5'),
     // ];
+  }
+
+  updateLivePost(product: Product): Observable<Product> {
+    console.log(product)
+    let temp = new Product(product.title, product.category, product.promotionDate, product.description)
+    return this.http.put<Product>(`${API_URL}/liveposts/${product.id}`, temp, this.httpOptions);
   }
 }
