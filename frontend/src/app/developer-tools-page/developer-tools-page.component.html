@@ -16,35 +16,23 @@
       </div>
     </div>
 
-    <div *ngIf="onTopIndex === 0" style="position: relative">
-      <button
-        *ngIf="tabSelector != 'selecting'"
-        class="btn btn-primary back-btn"
-        (click)="backToSelector()"
-      >
+    <div *ngIf="onTopIndex === 0" style="position: relative" id="select-post-container">
+      <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary back-btn" (click)="backToSelector()"
+        id="back-btn">
         Back button
       </button>
       <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
-        <button
-          class="btn btn-primary selector-btn"
-          (click)="onFunctionClick(0)"
-        >
+        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)" id="choose-live-btn">
           Choose Live
         </button>
-        <button
-          class="btn btn-primary selector-btn"
-          (click)="onFunctionClick(1)"
-        >
+        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)" id="choose-pending-btn">
           Choose Pending
         </button>
-        <button
-          class="btn btn-primary selector-btn"
-          (click)="onFunctionClick(2)"
-        >
+        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)" id="choose-manually-btn">
           Upload manually
         </button>
       </div>
-      <div *ngIf="tabSelector === 'chooseLive'">
+      <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
         <div class="posts-container">
           <ng-container *ngFor="let product of liveProductList">
             <div class="post-container">
@@ -60,7 +48,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="tabSelector === 'choosePending'">
+      <div *ngIf="tabSelector === 'choosePending'" id="choose-pending-container">
         <div class="posts-container">
           <ng-container *ngFor="let product of pendingProductList">
             <div class="post-container">
@@ -75,14 +63,10 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="tabSelector === 'chooseFile'">
+      <div *ngIf="tabSelector === 'chooseFile'" id="choose-manually-container">
         <div class="upload">
           <div class="text-center">
-            <input
-              class="form-control"
-              type="file"
-              (change)="onChange($event)"
-            />
+            <input class="form-control" type="file" (change)="onChange($event)" />
           </div>
 
           <!-- Shareable short link of  uploaded file -->
@@ -95,11 +79,7 @@
           <div class="container" *ngIf="loading">
             <h3>Loading ...</h3>
           </div>
-          <img
-            src="../../assets/pictures/upload.png"
-            alt="upload"
-            class="cloud"
-          />
+          <img src="../../assets/pictures/upload.png" alt="upload" class="cloud" />
           <h3 class="uploads" (click)="onUpload()">Click here to upload</h3>
           <img [src]="shortLink" *ngIf="shortLink" />
         </div>
@@ -147,34 +127,24 @@
             <div class="title">Total</div>
             <div class="digit">10</div>
           </div>
-          <Button class="od-page-details-edit-name btn btn-primary ocr-btn"
-            >Edit OCR details</Button
-          >
+          <Button class="od-page-details-edit-name btn btn-primary ocr-btn">Edit OCR details</Button>
         </div>
       </div>
     </div>
     <div *ngIf="onTopIndex === 2">
       <div class="od-page-container">
         <div class="od-page-original">
-          <img
-            class="od-img-original"
-            src="../../assets/pictures/Untitled design-10.png"
-          />
+          <img class="od-img-original" src="../../assets/pictures/Untitled design-10.png" />
         </div>
         <div class="od-page-cropped">
-          <img
-            class="od-img-cropped"
-            src="../../assets/pictures/Untitled design-11.png"
-          />
+          <img class="od-img-cropped" src="../../assets/pictures/Untitled design-11.png" />
         </div>
         <div class="od-page-details">
           <div class="od-page-details-name">
             <p class="title">Object Detected</p>
             <p class="object-name">Nike Shoe</p>
           </div>
-          <Button class="od-page-details-edit-name btn btn-primary"
-            >Edit Object Name</Button
-          >
+          <Button class="od-page-details-edit-name btn btn-primary">Edit Object Name</Button>
         </div>
       </div>
     </div>
@@ -208,9 +178,7 @@
             </div>
           </div>
 
-          <Button class="od-page-details-edit-name btn btn-primary ner-btn"
-            >Edit Object Name</Button
-          >
+          <Button class="od-page-details-edit-name btn btn-primary ner-btn">Edit Object Name</Button>
         </div>
       </div>
     </div>
@@ -236,9 +204,7 @@
             <mat-card-title>Validity Period</mat-card-title>
             <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
           </mat-card>
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn"
-            >Edit Keywords</Button
-          >
+          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Edit Keywords</Button>
         </div>
         <div class="updated-keywords">
           <div class="title">Updated Keywords</div>
@@ -254,9 +220,7 @@
             <mat-card-title>Validity Period</mat-card-title>
             <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
           </mat-card>
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn"
-            >Next</Button
-          >
+          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Next</Button>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { PendingProduct } from '../pending-product.model';
-import { Product } from '../product.model';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pending-post-page',
@@ -13,13 +13,14 @@ export class PendingPostPageComponent implements OnInit {
   tabIndex: number;
   showItem: boolean;
   pendingProductList: PendingProduct[];
-  constructor(private dataSrv: DataService, private router: Router) { }
+  constructor(private dataSrv: DataService, private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.tabIndex = 2;
     this.showItem = false;
     this.pendingProductList = this.dataSrv.getPendingProductList();
     console.log(this.pendingProductList);
+    this.titleService.setTitle('Pending-posts')
   }
 
   onTabClick(index: number) {
