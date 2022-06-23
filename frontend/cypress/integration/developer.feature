@@ -37,3 +37,104 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         Given I am on the "choose-manually" sub-tab
         When I click on the "back" button
         Then I should be on the "select-post" sub-tab
+
+    Scenario: Viewing OCR data from select post nav tab
+        Given I am on the "Dev-tools" tab
+        When I click on the "ocr" nav-tab
+        Then I should be on the "ocr" nav-tab
+
+    Scenario: Viewing OD data from select post nav tab
+        Given I am on the "Dev-tools" tab
+        When I click on the "od" nav-tab
+        Then I should be on the "od" nav-tab
+
+    Scenario: Viewing NER data from select post nav tab
+        Given I am on the "Dev-tools" tab
+        When I click on the "ner" nav-tab
+        Then I should be on the "ner" nav-tab
+
+    Scenario: Viewing keyword extraction data from select post nav tab
+        Given I am on the "Dev-tools" tab
+        When I click on the "keyword" nav-tab
+        Then I should be on the "keyword" nav-tab
+
+# Scenario: Viewing OCR data from ocr nav tab
+#     Given I am on the "ocr" nav-tab
+#     When I click on the "select-post" nav-tab
+#     Then I should be on the "select-post" nav-tab
+
+# Scenario: Viewing OD data from ocr nav tab
+#     Given I am on the "ocr" nav-tab
+#     When I click on the "od" nav-tab
+#     Then I should be on the "od" nav-tab
+
+# Scenario: Viewing NER data from ocr nav tab
+#     Given I am on the "ocr" nav-tab
+#     When I click on the "ner" nav-tab
+#     Then I should be on the "ner" nav-tab
+
+# Scenario: Viewing keyword extraction data from ocr nav tab
+#     Given I am on the "ocr" nav-tab
+#     When I click on the "keyword" nav-tab
+#     Then I should be on the "keyword" nav-tab
+
+# Scenario: Viewing OCR data from od nav tab
+#     Given I am on the "od" nav-tab
+#     When I click on the "ocr" nav-tab
+#     Then I should be on the "ocr" nav-tab
+
+# Scenario: Viewing OD data from od nav tab
+#     Given I am on the "od" nav-tab
+#     When I click on the "select-post" nav-tab
+#     Then I should be on the "select-post" nav-tab
+
+# Scenario: Viewing NER data from od nav tab
+#     Given I am on the "od" nav-tab
+#     When I click on the "ner" nav-tab
+#     Then I should be on the "ner" nav-tab
+
+# Scenario: Viewing keyword extraction data from d nav tab
+#     Given I am on the "od" nav-tab
+#     When I click on the "keyword" nav-tab
+#     Then I should be on the "keyword" nav-tab
+
+# Scenario: Viewing OCR data from ner nav tab
+#     Given I am on the "ner" nav-tab
+#     When I click on the "ocr" nav-tab
+#     Then I should be on the "ocr" nav-tab
+
+# Scenario: Viewing OD data from ner nav tab
+#     Given I am on the "ner" nav-tab
+#     When I click on the "od" nav-tab
+#     Then I should be on the "od" nav-tab
+
+# Scenario: Viewing NER data from ner nav tab
+#     Given I am on the "ner" nav-tab
+#     When I click on the "select-post" nav-tab
+#     Then I should be on the "select-post" nav-tab
+
+# Scenario: Viewing keyword extraction data from ner nav tab
+#     Given I am on the "ner" nav-tab
+#     When I click on the "keyword" nav-tab
+#     Then I should be on the "keyword" nav-tab
+
+# Scenario: Viewing OCR data from keyword nav tab
+#     Given I am on the "keyword" nav-tab
+#     When I click on the "ocr" nav-tab
+#     Then I should be on the "ocr" nav-tab
+
+# Scenario: Viewing OD data from keyword nav tab
+#     Given I am on the "keyword" nav-tab
+#     When I click on the "od" nav-tab
+#     Then I should be on the "od" nav-tab
+
+# Scenario: Viewing NER data from keyword nav tab
+#     Given I am on the "keyword" nav-tab
+#     When I click on the "ner" nav-tab
+#     Then I should be on the "ner" nav-tab
+
+# Scenario: Viewing keyword extraction data from keyword nav tab
+#     Given I am on the "keyword" nav-tab
+#     When I click on the "select-post" nav-tab
+#     Then I should be on the "select-post" nav-tab
+

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API_URL } from './env';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,14 @@ export class FileUploadService {
   // API url
   baseApiUrl = 'https://file.io';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      "Authorization": localStorage.getItem("token"),
+      "Accept": "application/json",
+    }),
+  };
 
   // Returns an observable
   upload(file): Observable<any> {
@@ -21,6 +29,7 @@ export class FileUploadService {
 
     // Make http post request over api
     // with formData as req
-    return this.http.post(this.baseApiUrl, formData);
+    return this.http.post(`${API_URL}/posts`, formData);
   }
+
 }
