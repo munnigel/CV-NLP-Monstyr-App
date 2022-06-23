@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { DataService } from '../data-service.service';
+import { API_URL } from '../env';
 import { FileUploadService } from '../file-upload.service';
 import { PendingProduct } from '../pending-product.model';
 import { Product } from '../product.model';
@@ -37,7 +39,7 @@ export class DeveloperToolsPageComponent implements OnInit {
 
   constructor(
     private fileUploadService: FileUploadService,
-    private dataSrv: DataService
+    private dataSrv: DataService,
   ) { }
 
   ngOnInit(): void {
