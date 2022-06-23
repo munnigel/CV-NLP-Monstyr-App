@@ -9,13 +9,13 @@ Scenario: Navigating to pending post tab
 Scenario: Edit first post details in pending post tab
     Given that I am in the Pending Post tab
     When I click on the first Pending Post entry
-    Then I should be redirected to the correct url
+    Then I should be redirected to the first edit url
 
 
 Scenario: Edit last post details in pending post tab
     Given that I am in the Pending Post tab
     When I click on the last Pending Post entry
-    Then I should be redirected to the correct url
+    Then I should be redirected to the last edit url
 
 Scenario: Going back to pending page from edit page
     Given that I am in the edit post tab
@@ -25,4 +25,4 @@ Scenario: Going back to pending page from edit page
 Scenario: Going to live page after submitting on edit page
     Given that I am in the edit post tab
     When I click on the 'Submit' button
-    Then I should be redirected to the correct url
+    Then I should be redirected to the live url

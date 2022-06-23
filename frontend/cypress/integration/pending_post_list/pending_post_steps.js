@@ -10,7 +10,7 @@ When("I click on 'Pending Posts' tab", () => {
 });
 
 Then("I should be redirected to the correct url", () => {
-    assert(cy.url(), 'http://localhost:4200/home/pending')
+    cy.url().should('eq', 'http://localhost:4200/home/pending')
 });
 
 
@@ -22,8 +22,8 @@ When("I click on the first Pending Post entry", () => {
     cy.get(".pending-posts-item:first").click()
 })
 
-Then("I should be redirected to the correct url", () => {
-    assert(cy.url(), "http://localhost:4200/edit/0")
+Then("I should be redirected to the first edit url", () => {
+    cy.url().should('eq', 'http://localhost:4200/edit/0')
 })
 
 
@@ -35,8 +35,8 @@ When("I click on the last Pending Post entry", () => {
     cy.get(".pending-posts-item:last").click()
 })
 
-Then("I should be redirected to the correct url", () => {
-    assert(cy.url(), "http://localhost:4200/edit/9")
+Then("I should be redirected to the last edit url", () => {
+    cy.url().should('eq', 'http://localhost:4200/edit/89')
 })
 
 
@@ -52,7 +52,7 @@ When("I click on the 'Back to Pending Page' button", () => {
 })
 
 Then("I should be redirected to the correct url", () => {
-    assert(cy.url(), "http://localhost:4200/home/pending")
+    cy.url().should('eq', 'http://localhost:4200/home/pending')
 })
 
 
@@ -67,8 +67,8 @@ When("I click on the 'Submit' button", () => {
     cy.get('#go-to-live').click()
 })
 
-Then("I should be redirected to the correct url", () => {
-    assert(cy.url(), "http://localhost:4200/home/processed")
+Then("I should be redirected to the live url", () => {
+    cy.url().should('eq', 'http://localhost:4200/home/processed')
 })
 
 
