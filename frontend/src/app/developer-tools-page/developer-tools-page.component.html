@@ -51,11 +51,11 @@
         <div class="posts-container">
           <ng-container *ngFor="let product of pendingProductList">
             <div class="post-container">
-              <img class="post-img" [src]="product.img" />
+              <img class="post-img" [src]="product.imgUrl" />
               <div class="post-desc">
                 <h3>Post Description</h3>
                 <h5>{{ product.title }}</h5>
-                <h5>{{ product.score }}</h5>
+                <h5>{{ product.category }}</h5>
                 <h5>{{ product.description }}</h5>
               </div>
             </div>

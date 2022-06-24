@@ -1,8 +1,10 @@
 export class PendingProduct {
   constructor(
-    public score: string,
-    public img: string,
+    public category: string,
+    public imgUrl: string,
     public title: string,
-    public description: string
-  ) {}
+    public description: string,
+    public promotionDate: string,
+    public id?: number,
+  ) { }
 }

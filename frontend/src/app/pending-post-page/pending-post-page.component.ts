@@ -19,7 +19,6 @@ export class PendingPostPageComponent implements OnInit {
     this.tabIndex = 2;
     this.showItem = false;
     this.pendingProductList = this.dataSrv.getPendingProductList();
-    console.log(this.pendingProductList);
   }
 
   onTabClick(index: number) {
@@ -34,6 +33,7 @@ export class PendingPostPageComponent implements OnInit {
 
   selectPost(index: number) {
     console.log(index);
-    this.router.navigate([`/edit/${index}`], {});
+    console.log(this.pendingProductList[index])
+    this.router.navigate([`/edit/${this.pendingProductList[index].id}`], {});
   }
 }

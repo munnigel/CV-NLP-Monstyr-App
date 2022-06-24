@@ -13,7 +13,7 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
 const routes: Routes = [
   { path: 'edit/:id', component: EditItemComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'editLive/:id', component: EditProcessedPostComponent},
+  { path: 'editLive/:id', component: EditProcessedPostComponent },
   {
     path: 'home',
     component: HomePageComponent,
@@ -33,4 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
