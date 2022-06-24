@@ -27,28 +27,47 @@ class PendingpostsController < ApplicationController
 
   # POST /pendingposts
   def create
-    @pendingpost = Pendingpost.new(pendingpost_params)
+    respond_to do |format|
 
-    if @pendingpost.save
-      redirect_to @pendingpost, notice: 'Pendingpost was successfully created.'
-    else
-      render :new
+      @pendingpost = Pendingpost.new(pendingpost_params)
+      format.html { redirect_to @pendingpost, notice: 'Document was successfully updated.' }
+      format.json { render json: @pendingpost, status: :ok}
+      @pendingpost.save
     end
+
+    # if @pendingpost.save
+    #   redirect_to @pendingpost, notice: 'Pendingpost was successfully created.'
+    # else
+    #   render :new
+    # end
   end
 
   # PATCH/PUT /pendingposts/1
+  # def update
+  #   if @pendingpost.update(pendingpost_params)
+  #     redirect_to @pendingpost, notice: 'Pendingpost was successfully updated.'
+  #   else
+  #     render :edit
+  #   end
+  # end
   def update
-    if @pendingpost.update(pendingpost_params)
-      redirect_to @pendingpost, notice: 'Pendingpost was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @pendingpost.update(pendingpost_params)
+        format.html { redirect_to @pendingpost, notice: 'Document was successfully updated.' }
+        format.json { render json: @pendingpost, status: :ok}
+      else
+        format.html { render :edit }
+        format.json { render json: @pendingpost.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /pendingposts/1
   def destroy
+    @pendingpost = Pendingpost.find(params[:id])
     @pendingpost.destroy
-    redirect_to pendingposts_url, notice: 'Pendingpost was successfully destroyed.'
+    
+
   end
 
   private

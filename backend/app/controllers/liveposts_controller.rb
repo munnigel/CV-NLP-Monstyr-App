@@ -26,13 +26,19 @@ class LivepostsController < ApplicationController
 
   # POST /liveposts
   def create
-    @livepost = Livepost.new(livepost_params)
-
-    if @livepost.save
-      redirect_to @livepost, notice: 'Livepost was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      @livepost = Livepost.new(livepost_params)
+      format.html { redirect_to @livepost, notice: 'Document was successfully updated.' }
+      format.json { render json: @livepost, status: :ok}
+      @livepost.save
     end
+
+      # if @livepost.save
+      #   redirect_to @livepost, notice: 'Livepost was successfully created.'
+      # else
+      #   render :new
+   
+      # end
   end
 
   # PATCH/PUT /liveposts/1
