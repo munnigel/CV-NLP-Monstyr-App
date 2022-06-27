@@ -37,9 +37,47 @@ body {
   padding: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
+
+.h2 {
+  position: relative;
+  font-size: 4vw;
+  color: #252839;
+  -webkit-text-stroke: 0.2vw #383d52;
+}
+
+.h2::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  width: 103%;
+  left: 0;
+  height: 105%;
+  color: #06d85f;
+  -webkit-text-stroke: 0vw #383d52;
+  border-right: 3px solid #06d85f;
+  overflow: hidden;
+  animation: animation 4s cubic-bezier(0.6, 0.02, 0.37, 1.02) infinite;
+}
+
+
+@keyframes animation {
+
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+
+  70%,
+  90% {
+    width: 103%;
+  }
+}
+
+
 
 .imgg {
   width: 150px;
