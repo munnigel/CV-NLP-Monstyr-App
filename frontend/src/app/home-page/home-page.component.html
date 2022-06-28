@@ -4,50 +4,30 @@
     <div class="nav-bar-main-title">Monstyr x AI</div>
     <div class="nav-bar-sub-title">AI-Powered Workflows</div>
     <div class="tabs-container">
-      <div class="tab-container" (click)="onTabClick(0)">
+      <div class="tab-container" id="overview-tab" (click)="onTabClick(0)">
         <img class="icon" src="../../assets/pictures/Untitled design-6.png" />
         <button class="nav-bar-btn">Overview</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 0"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+        <img class="icon" *ngIf="tabIndex == 0" src="../../assets/pictures/Untitled design-5.png" />
       </div>
-      <div class="tab-container" id="live_post_tab_btn" (click)="onTabClick(1)">
+      <div class="tab-container" id="live-posts-tab" (click)="onTabClick(1)">
         <img class="icon" src="../../assets/pictures/Untitled design-7.png" />
         <button class="nav-bar-btn">Live Posts</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 1"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+        <img class="icon" *ngIf="tabIndex == 1" src="../../assets/pictures/Untitled design-5.png" />
       </div>
-      <div class="tab-container" id="pending_post_tab_btn" (click)="onTabClick(2)">
+      <div class="tab-container" id="pending-posts-tab" (click)="onTabClick(2)">
         <img class="icon" src="../../assets/pictures/Untitled design-9.png" />
         <button class="nav-bar-btn">Pending Posts</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 2"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+        <img class="icon" *ngIf="tabIndex == 2" src="../../assets/pictures/Untitled design-5.png" />
       </div>
-      <div class="tab-container" (click)="onTabClick(3)">
+      <div class="tab-container" id="developer-tools-tab" (click)="onTabClick(3)">
         <img class="icon" src="../../assets/pictures/Untitled design-4.png" />
         <button class="nav-bar-btn">Developer Tools</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 3"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+        <img class="icon" *ngIf="tabIndex == 3" src="../../assets/pictures/Untitled design-5.png" />
       </div>
-      <div class="tab-container" (click)="onTabClick(4)">
+      <div class="tab-container" id="settings-tab" (click)="onTabClick(4)">
         <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
         <button class="nav-bar-btn">Settings</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 4"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+        <img class="icon" *ngIf="tabIndex == 4" src="../../assets/pictures/Untitled design-5.png" />
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { Title } from '@angular/platform-browser';
 import { DataService } from '../data-service.service';
 import { API_URL } from '../env';
 import { FileUploadService } from '../file-upload.service';
@@ -40,6 +41,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   constructor(
     private fileUploadService: FileUploadService,
     private dataSrv: DataService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
@@ -66,6 +68,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
     this.words = "this is jack's fav website".split(' ');
+    this.titleService.setTitle('Dev-tools')
   }
 
   onTopClick(index: number) {

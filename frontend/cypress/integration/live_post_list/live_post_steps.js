@@ -6,7 +6,7 @@ Given("that I am logged in and on the overview page", () => {
 })
 
 When("I click on 'Live Posts' tab", () => {
-    cy.get("#live_post_tab_btn").click()
+    cy.get("#live-posts-tab").click()
 });
 
 Then("I should be redirected to the correct url", () => {
@@ -34,7 +34,7 @@ When("I click on the last Live Post entry", () => {
 });
 
 Then("I should be redirected to the last live edit url", () => {
-    cy.url().should('eq', 'http://localhost:4200/editLive/90')
+    cy.url().should('eq', 'http://localhost:4200/editLive/100')
 });
 
 

@@ -6,32 +6,35 @@
     <div class="progress-bar-container">
       <mat-progress-bar [mode]="mode" [value]="value"></mat-progress-bar>
       <div class="nav-nav-bar">
-        <div class="nav-bar-btn" (click)="onTopClick(0)">Select Post</div>
-        <div class="nav-bar-btn" (click)="onTopClick(1)">OCR</div>
-        <div class="nav-bar-btn" (click)="onTopClick(2)">OD</div>
-        <div class="nav-bar-btn" (click)="onTopClick(3)">NER</div>
-        <div class="nav-bar-btn" (click)="onTopClick(4)">
+        <div class="nav-bar-btn" (click)="onTopClick(0)" id="select-post-nav-btn">Select Post</div>
+        <div class="nav-bar-btn" (click)="onTopClick(1)" id="ocr-nav-btn">OCR</div>
+        <div class="nav-bar-btn" (click)="onTopClick(2)" id="od-nav-btn">OD</div>
+        <div class="nav-bar-btn" (click)="onTopClick(3)" id="ner-nav-btn">NER</div>
+        <div class="nav-bar-btn" (click)="onTopClick(4)" id="keyword-nav-btn">
           Keyword Extraction
         </div>
       </div>
     </div>
 
-    <div *ngIf="onTopIndex === 0" style="position: relative">
-      <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary back-btn" (click)="backToSelector()">
-        Back
-      </button>
-      <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
-        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)">
-          Choose Live
+    <div *ngIf="onTopIndex === 0" style="position: relative" id="select-post-nav-container">
+      <div id="select-post-container">
+        <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary back-btn" (click)="backToSelector()"
+          id="back-btn">
+          Back
         </button>
-        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)">
-          Choose Pending
-        </button>
-        <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)">
-          Upload manually
-        </button>
+        <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
+          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)" id="choose-live-btn">
+            Choose Live
+          </button>
+          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)" id="choose-pending-btn">
+            Choose Pending
+          </button>
+          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)" id="choose-manually-btn">
+            Upload manually
+          </button>
+        </div>
       </div>
-      <div *ngIf="tabSelector === 'chooseLive'">
+      <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
         <div class="posts-container">
           <ng-container *ngFor="let product of liveProductList">
             <div class="post-container">
@@ -47,7 +50,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="tabSelector === 'choosePending'">
+      <div *ngIf="tabSelector === 'choosePending'" id="choose-pending-container">
         <div class="posts-container">
           <ng-container *ngFor="let product of pendingProductList">
             <div class="post-container">
@@ -62,7 +65,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="tabSelector === 'chooseFile'">
+      <div *ngIf="tabSelector === 'chooseFile'" id="choose-manually-container">
         <div class="upload">
           <div class="text-center">
             <input class="form-control" type="file" (change)="onChange($event)" />
@@ -84,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 1">
+    <div *ngIf="onTopIndex === 1" id="ocr-nav-container">
       <div class="ocr-page-container">
         <div class="ocr-page-original">
           <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
@@ -130,7 +133,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 2">
+    <div *ngIf="onTopIndex === 2" id="od-nav-container">
       <div class="od-page-container">
         <div class="od-page-original">
           <img class="od-img-original" src="../../assets/pictures/Untitled design-10.png" />
@@ -147,7 +150,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 3">
+    <div *ngIf="onTopIndex === 3" id="ner-nav-container">
       <div class="ocr-page-container ner-page-container">
         <div class="ocr-page-original ner-page">
           <div class="title">OCR output</div>
@@ -181,7 +184,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 4">
+    <div *ngIf="onTopIndex === 4" id="keyword-nav-container">
       <div class="keyword-page-container">
         <div class="ocr-page-processed ner-page">
           <div class="title">NER categories</div>

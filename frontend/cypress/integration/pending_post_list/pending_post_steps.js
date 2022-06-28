@@ -6,7 +6,7 @@ Given("that I am logged in and on the overview page", () => {
 });
 
 When("I click on 'Pending Posts' tab", () => {
-    cy.get("#pending_post_tab_btn").click()
+    cy.get("#pending-posts-tab").click()
 });
 
 Then("I should be redirected to the correct url", () => {
@@ -36,7 +36,7 @@ When("I click on the last Pending Post entry", () => {
 })
 
 Then("I should be redirected to the last edit url", () => {
-    cy.url().should('eq', 'http://localhost:4200/edit/89')
+    cy.url().should('eq', 'http://localhost:4200/edit/99')
 })
 
 

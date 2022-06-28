@@ -3,6 +3,7 @@ import { DataService } from '../data-service.service';
 import { PendingProduct } from '../pending-product.model';
 import { Product } from '../product.model';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-processed-post-page',
@@ -15,12 +16,13 @@ export class ProcessedPostPageComponent implements OnInit {
   showItem: boolean;
   liveProductList: Product[];
   pendingProductList: PendingProduct[];
-  constructor(private dataSrv: DataService, private router: Router) { }
+  constructor(private dataSrv: DataService, private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.tabIndex = 2;
     this.showItem = false;
     this.liveProductList = this.dataSrv.getLiveProductList();
+    this.titleService.setTitle('Live-posts')
   }
 
   onTabClick(index: number) {
