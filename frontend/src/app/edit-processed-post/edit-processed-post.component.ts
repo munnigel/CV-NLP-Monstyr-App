@@ -50,9 +50,7 @@ export class EditProcessedPostComponent implements OnInit {
   }
 
   onLive() {
-    if (this.router.url.includes('developertools'))
-      this.datasrv.setEditingStatus(false);
-    else this.router.navigate(['home/processed'], {});
+    this.router.navigate(['home/processed'], {});
   }
 
   async onSubmit() {
@@ -75,11 +73,7 @@ export class EditProcessedPostComponent implements OnInit {
       this.datasrv.updateLivePost(this.product).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
-        complete: () => {
-          if (this.router.url.includes('developertools'))
-            this.datasrv.setEditingStatus(false);
-          else this.router.navigate(['home/processed'], {});
-        },
+        complete: () => this.router.navigate(['home/processed'], {}),
       });
     }
   }

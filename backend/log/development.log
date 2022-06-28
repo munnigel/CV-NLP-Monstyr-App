@@ -43896,3 +43896,1012 @@ Processing by PendingpostsController#index as JSON
 Completed 200 OK in 4ms (Views: 3.9ms | ActiveRecord: 0.3ms)
 
 
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /home/wanglin/.rbenv/versions/2.6.6/lib/ruby/gems/2.6.0/gems/activesupport-5.2.8/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:27:28 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:27:28 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 11ms (Views: 9.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:32:10 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:32:10 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:32:24 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:32:25 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:47:41 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:47:41 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:50:04 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:50:05 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:52:21 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:52:22 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:56:03 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:56:03 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:56:07 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:56:07 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 15:57:52 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 15:57:53 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:11:36 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:11:36 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:12:21 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:12:21 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 11ms (Views: 10.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:14:10 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:14:10 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:15:17 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:15:17 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:16:34 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:16:34 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:21:58 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:21:59 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 16:23:41 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 16:23:41 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:00:28 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:00:29 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:01:38 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:01:38 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:02:26 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:02:26 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:02:28 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:02:28 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:02:44 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:02:44 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:04:20 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:04:20 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:04:31 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:04:32 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:04:38 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:04:38 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:05:05 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:05:05 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:05:30 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:05:30 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:11:37 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:11:37 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:13:40 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:13:40 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:15:58 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 25ms (Views: 24.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:15:58 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:16:41 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:16:42 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:19:59 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:19:59 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:25:16 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:25:16 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:36:25 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:36:26 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:44:05 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:44:06 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:47:24 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:47:25 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:49:35 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.1ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:49:36 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:50:02 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:50:03 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:52:57 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:52:58 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:55:08 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:55:08 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:55:37 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:55:38 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.3ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:56:26 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:56:26 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:56:57 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:56:58 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:57:21 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:57:22 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 22:57:30 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 22:57:30 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:03:27 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:03:27 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:06:02 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.4ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:06:02 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:06:06 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:06:07 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:08:08 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:08:08 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:25:55 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:25:56 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:26:28 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:26:28 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:26:32 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:26:32 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:27:29 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:27:29 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:29:41 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:29:42 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 6ms (Views: 5.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:29:56 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 11ms (Views: 6.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:29:57 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:32:48 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:32:49 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:33:06 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:33:06 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:33:14 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:33:14 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:33:56 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:33:57 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:34:11 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:34:11 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:36:10 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:36:11 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:39:59 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:40:00 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:43:03 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:43:03 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.3ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:46:46 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:46:46 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:48:52 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:48:52 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:51:27 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:51:28 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 17ms (Views: 16.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:51:35 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:51:35 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:52:50 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:52:50 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:54:23 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:54:23 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:54:36 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:54:36 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-28 23:57:23 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-28 23:57:24 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.2ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/liveposts.json" for 127.0.0.1 at 2022-06-29 00:00:29 +0800
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.2ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pendingposts.json" for 127.0.0.1 at 2022-06-29 00:00:29 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+
+
