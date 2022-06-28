@@ -13,7 +13,7 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
 const routes: Routes = [
   { path: 'edit/:id', component: EditItemComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'editLive/:id', component: EditProcessedPostComponent},
+  { path: 'editLive/:id', component: EditProcessedPostComponent },
   {
     path: 'home',
     component: HomePageComponent,
@@ -22,7 +22,12 @@ const routes: Routes = [
       { path: 'overview', component: OverviewPageComponent },
       { path: 'pending', component: PendingPostPageComponent },
       { path: 'processed', component: ProcessedPostPageComponent },
-      { path: 'developertools', component: DeveloperToolsPageComponent },
+      {
+        path: 'developertools', component: DeveloperToolsPageComponent, children: [
+          { path: 'edit-live/:id', component: EditProcessedPostComponent },
+          { path: 'edit/:id', component: EditItemComponent }
+        ]
+      },
       { path: 'settings', component: SettingsPageComponent },
     ],
   },
@@ -33,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

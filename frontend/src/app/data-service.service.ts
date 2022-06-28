@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { lastValueFrom, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { API_URL } from './env';
 import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
 import { PendingProduct } from './pending-product.model';
@@ -13,7 +13,8 @@ export class DataService implements OnInit {
   private liveProductList: Product[];
   private pendingProductList: PendingProduct[];
   res: any;
-  constructor(private http: HttpClient) { }
+  private checkEditing = new BehaviorSubject<boolean>(false);
+  constructor(private http: HttpClient) {}
 
   async ngOnInit() {
     console.log('getting');
@@ -21,6 +22,14 @@ export class DataService implements OnInit {
     this.pendingProductList = [];
     await this.updateLiveProductList();
     await this.updatePendingProductList();
+  }
+
+  setEditingStatus(newValue:boolean) {
+    this.checkEditing.next(newValue);
+  }
+
+  getEditingStatus() {
+    return this.checkEditing.asObservable();
   }
 
   getLiveProductList() {
@@ -33,7 +42,7 @@ export class DataService implements OnInit {
 
   private httpOptions = {
     headers: new HttpHeaders({
-      "Accept": "application/json",
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     }),
   };
@@ -51,13 +60,11 @@ export class DataService implements OnInit {
           this.res[i].promotionDate,
           this.res[i].description,
           this.res[i].id,
-          this.res[i].imgUrl,
+          this.res[i].imgUrl
         )
       );
     }
   }
-
-
 
   async updatePendingProductList() {
     this.res = await lastValueFrom(
@@ -85,8 +92,17 @@ export class DataService implements OnInit {
   }
 
   updateLivePost(product: Product): Observable<Product> {
-    console.log(product)
-    let temp = new Product(product.title, product.category, product.promotionDate, product.description)
-    return this.http.put<Product>(`${API_URL}/liveposts/${product.id}`, temp, this.httpOptions);
+    console.log(product);
+    let temp = new Product(
+      product.title,
+      product.category,
+      product.promotionDate,
+      product.description
+    );
+    return this.http.put<Product>(
+      `${API_URL}/liveposts/${product.id}`,
+      temp,
+      this.httpOptions
+    );
   }
 }

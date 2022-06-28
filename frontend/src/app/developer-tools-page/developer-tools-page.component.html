@@ -34,22 +34,28 @@
           </button>
         </div>
       </div>
-      <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
-        <div class="posts-container">
-          <ng-container *ngFor="let product of liveProductList">
-            <div class="post-container">
-              <img class="post-img" [src]="product.imgUrl" />
-              <div class="post-desc">
-                <h3>Post Description</h3>
-                <h5>{{ product.title }}</h5>
-                <h5>{{ product.category }}</h5>
-                <h5>{{ product.promotionDate }}</h5>
-                <h5>{{ product.description }}</h5>
+      <ng-container *ngIf="!editing">
+        <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
+          <div class="current-selector">{{currentSelector}}</div>
+          <div class="posts-container">
+            <ng-container *ngFor="let product of liveProductList; let i = index">
+              <div class="post-container" (click)="onSelectLivePost(i)">
+                <img class="post-img" [src]="product.imgUrl" />
+                <div class="post-desc">
+                  <h3>Post Description</h3>
+                  <h5>{{ product.title }}</h5>
+                  <h5>{{ product.category }}</h5>
+                  <h5>{{ product.promotionDate }}</h5>
+                  <h5>{{ product.description }}</h5>
+                </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-container *ngIf="editing">
+        <router-outlet></router-outlet>
+      </ng-container>
       <div *ngIf="tabSelector === 'choosePending'" id="choose-pending-container">
         <div class="posts-container">
           <ng-container *ngFor="let product of pendingProductList">

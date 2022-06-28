@@ -58,11 +58,14 @@
 .back-btn,
 .selector-btn {
   border: none;
-  margin-top: 20px;
   width: 300px;
   background-color: white;
   color: purple;
   box-shadow: 5px 5px 5px 1px rgba(128, 128, 128, 0.363);
+}
+
+.selector-btn {
+  margin-top: 20px;
 }
 
 .back-btn {
@@ -71,6 +74,10 @@
   left: 0px;
   margin-left: 50px;
   width: 150px;
+}
+
+.current-selector {
+  text-align: center;
 }
 
 .header-row {

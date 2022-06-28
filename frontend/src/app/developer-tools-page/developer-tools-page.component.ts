@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Title } from '@angular/platform-browser';
 import { DataService } from '../data-service.service';
-import { API_URL } from '../env';
 import { FileUploadService } from '../file-upload.service';
 import { PendingProduct } from '../pending-product.model';
 import { Product } from '../product.model';
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -38,11 +36,15 @@ export class DeveloperToolsPageComponent implements OnInit {
   OCRoutput: string[];
   NERoutput: string[];
 
+  editing: boolean;
+  currentSelector: string;
+
   constructor(
     private fileUploadService: FileUploadService,
     private dataSrv: DataService,
-    private titleService: Title
-  ) { }
+    private titleService: Title,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.pageTitleList = [
@@ -68,7 +70,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
     this.words = "this is jack's fav website".split(' ');
-    this.titleService.setTitle('Dev-tools')
+    this.titleService.setTitle('Dev-tools');
   }
 
   onTopClick(index: number) {
@@ -81,12 +83,30 @@ export class DeveloperToolsPageComponent implements OnInit {
   }
 
   onFunctionClick(index: number) {
+    let titleList = ['Live Posts', 'Pending Posts', 'Manual Upload'];
     this.tabSelector = this.tabSelectorList[index + 1];
+    this.currentSelector = titleList[index];
   }
 
   backToSelector() {
     this.tabSelector = this.tabSelectorList[0];
+    this.editing = false;
   }
+
+  onSelectLivePost(i: number) {
+    let chosenProduct = this.liveProductList[i];
+    this.dataSrv.setEditingStatus(true);
+    this.dataSrv.getEditingStatus().subscribe((value) => {
+      this.editing = value;
+    });
+
+    this.router.navigate([`home/developertools/edit-live/${chosenProduct.id}`]);
+  }
+
+  // updateEditStatus(editing: boolean) {
+  //   CustomEvent
+  //   console.log('switch back to page');
+  // };
 
   // On file Select
   onChange(event) {
