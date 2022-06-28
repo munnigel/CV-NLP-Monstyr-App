@@ -35,6 +35,7 @@ export class PendingPostPageComponent implements OnInit {
 
   selectPost(index: number) {
     console.log(index);
-    this.router.navigate([`/edit/${index}`], {});
+    console.log(this.pendingProductList[index])
+    this.router.navigate([`/edit/${this.pendingProductList[index].id}`], {});
   }
 }

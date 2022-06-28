@@ -37,9 +37,50 @@ body {
   padding: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
+
+
+
+
+.h2 {
+  position: relative;
+  font-size: 4vw;
+  color: #252839;
+  -webkit-text-stroke: 0.1vw #383d52;
+}
+
+.h2::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  width: 103%;
+  left: 0;
+  height: 105%;
+  color: #06d85f;
+  -webkit-text-stroke: 0vw #383d52;
+  border-right: 3px solid #06d85f;
+  overflow: hidden;
+  animation: animation 3s cubic-bezier(0.6, 0.02, 0.37, 1.02) infinite;
+}
+
+
+@keyframes animation {
+
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+
+  70%,
+  90% {
+    width: 103%;
+  }
+}
+
+
 
 .imgg {
   width: 150px;
@@ -67,7 +108,11 @@ body {
 }
 
 .btn-primary {
-  font-weight: 200;
+  background-color: rgb(214, 207, 207);
+  border-radius: 5px;
+  border: #252839;
+  color: black;
+  font-size: 17px;
 }
 
 .forget-password-container {
@@ -76,6 +121,8 @@ body {
 
 .btn-forget-password {
   background-color: white;
+  border-radius: 2px;
+  border: #252839;
   border: none;
   color: black;
   font-size: 15px;
@@ -93,12 +140,58 @@ body {
   justify-content: center;
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+.refresh {
+  margin: 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: rgb(72, 70, 70);
+  color: aliceblue;
+  transition: .5s;
+}
+
+
+.btns::before {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ffee10;
+}
+
+.btns:hover {
+  color: #ffee10;
+  box-shadow: 0 0 5px #ffee10;
+  text-shadow: 0 0 5px #ffee10;
+}
+
+
+
 .pending-posts-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(.75, .75, 2);
+  }
+
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
 
 .pending-posts-item {
   margin: 20px;
@@ -108,6 +201,11 @@ body {
   /* justify-content: space-evenly; */
   align-items: left;
   cursor: pointer;
+}
+
+.fade {
+  animation: fadeIn .7s both;
+  transform-origin: center bottom;
 }
 
 .pending-posts-item:hover {

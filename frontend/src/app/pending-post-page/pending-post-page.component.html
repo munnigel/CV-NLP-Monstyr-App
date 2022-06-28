@@ -3,13 +3,14 @@
   <div class="search-bar">
     <textarea class="search-input" rows="1"></textarea>
     <button class="search-btn">F</button>
+
   </div>
 </div>
 <div class="pending-posts-container main-item-container" id="pending-post-list-container">
   <ng-container *ngFor="let product of pendingProductList; let i = index">
-    <div (click)="selectPost(i)" class="pending-posts-item">
+    <div (click)="selectPost(i)" class="pending-posts-item fade">
       <div class="pending-posts-img">
-        <img [src]="product.img" alt="img" style="
+        <img [src]="product.imgUrl" alt="img" style="
             object-fit: contain;
             width: 99%;
             height: 99%;
@@ -17,10 +18,10 @@
           " />
       </div>
       <div class="pending-posts-details">
-        <div>Score: {{product.description}}</div>
-        <div>Title: {{product.description}}</div>
         <div>Description: {{product.description}}</div>
+        <div>Category: {{product.category}}</div>
       </div>
     </div>
   </ng-container>
+
 </div>
