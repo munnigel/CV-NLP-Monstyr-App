@@ -8,7 +8,7 @@
 </div>
 <div class="pending-posts-container main-item-container" id="pending-post-list-container">
   <ng-container *ngFor="let product of pendingProductList; let i = index">
-    <div (click)="selectPost(i)" class="pending-posts-item">
+    <div (click)="selectPost(i)" class="pending-posts-item fade">
       <div class="pending-posts-img">
         <img [src]="product.imgUrl" alt="img" style="
             object-fit: contain;

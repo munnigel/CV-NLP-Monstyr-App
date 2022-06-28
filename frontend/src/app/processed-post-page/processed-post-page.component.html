@@ -1,6 +1,6 @@
 <div class="header-row">
   <div class="page-header">Live Posts</div>
-  <button class="refresh" onClick="window.location.reload();">Refresh Page</button>
+  <button class="refresh btns" onClick="window.location.reload();">Refresh Page</button>
   <div class="search-bar">
     <textarea class="search-input" rows="1"></textarea>
     <button class="search-btn">F</button>
@@ -29,7 +29,7 @@
   <div class="row row-cols-4">
     <ng-container *ngFor="let product of liveProductList; let i = index">
       <div class="col" (click)="selectLivePost(i)">
-        <div class="item-container">
+        <div class="item-container fade">
           <div class="item-img">
             <img [src]="product.imgUrl" alt="image" style="
                 object-fit: contain;
