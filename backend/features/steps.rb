@@ -1,4 +1,8 @@
-Given('I am on the live post edit page') do
+Given('I am on the live post edit page') do |click|
+    visit('/live_posts/' + click) 
+
+    
+    end
     
   end
   
