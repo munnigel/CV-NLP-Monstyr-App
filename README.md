@@ -83,4 +83,6 @@ To run cucumber :
 ```
 $ bundle exec cucumber
 ```
+### Click here for more information on implementing Gherkin steps in Cucumber 
+
 [cucumber_steps](cucumber_steps.md)

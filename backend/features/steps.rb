@@ -1,5 +1,5 @@
 Given('I am on the live post edit page') do
-    pending # Write code here that turns the phrase above into concrete actions
+    
   end
   
   Given('I click a post to edit') do

@@ -16,7 +16,7 @@ Something that happens to the system that will cause something else to happen: a
 - Then is the outcome. 
 It’s the behaviour we expect from the system when this action happens in this context.
 
-# step definitions
+# step definitions: let cucumber automate Gherkin steps
 Writing step definitions for **Gherkin Scenarios** in features/edit_live.features to be translated into **ruby** in /backend/features/steps.rb
 
 ## Undefined
