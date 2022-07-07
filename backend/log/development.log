@@ -43963,3 +43963,41 @@ true by adding the following to your application.rb file:
 
   Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
  (called from <top (required)> at /Users/claudialai/final-project-rubyduckies/final-project-rubyduckies/backend/config/environment.rb:5)
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from <top (required)> at /Users/claudialai/final-project-rubyduckies/final-project-rubyduckies/backend/config/environment.rb:5)
+Started GET "/liveposts.json" for ::1 at 2022-07-08 03:27:54 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LivepostsController#index as JSON
+  Parameters: {"livepost"=>{}}
+  [1m[36mLivepost Load (0.3ms)[0m  [1m[34mSELECT "liveposts".* FROM "liveposts"[0m
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/pendingposts.json" for ::1 at 2022-07-08 03:27:54 +0800
+Processing by PendingpostsController#index as JSON
+  Parameters: {"pendingpost"=>{}}
+  [1m[36mPendingpost Load (0.1ms)[0m  [1m[34mSELECT "pendingposts".* FROM "pendingposts"[0m
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.4ms)
+
+
+Started PUT "/liveposts/1" for ::1 at 2022-07-08 04:27:35 +0800
+Processing by LivepostsController#update as JSON
+  Parameters: {"title"=>"NEW TITLW", "category"=>"This is the first category", "promotionDate"=>"This is the first date", "description"=>"This is the firscmabhbhb b b bm;csa;mc", "id"=>"1", "livepost"=>{"title"=>"NEW TITLW", "category"=>"This is the first category", "promotionDate"=>"This is the first date", "description"=>"This is the firscmabhbhb b b bm;csa;mc"}}
+  [1m[36mLivepost Load (2.3ms)[0m  [1m[34mSELECT  "liveposts".* FROM "liveposts" WHERE "liveposts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 38ms (Views: 0.6ms | ActiveRecord: 2.4ms)
+
+
