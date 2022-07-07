@@ -328,6 +328,7 @@ PLATFORMS
 DEPENDENCIES
   activestorage (= 5.2.8)
   byebug
+  cucumber
   cucumber-rails
   database_cleaner
   google-cloud-storage (~> 1.11)
