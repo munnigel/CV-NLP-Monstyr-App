@@ -16,7 +16,6 @@ import { DeveloperToolsPageComponent } from './developer-tools-page/developer-to
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverviewDashboardComponent } from './overview-dashboard/overview-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -73,10 +72,10 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     MatDividerModule,
-    NoopAnimationsModule,
     MatDialogModule,
     MatProgressBarModule,
     NgChartsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     FileUploadService,
@@ -90,7 +89,7 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 export function initDataService(config: DataService) {
   return () => config.ngOnInit();
