@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   def index

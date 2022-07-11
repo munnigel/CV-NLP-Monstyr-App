@@ -1,0 +1,2 @@
+class Pendingpost < ApplicationRecord
+end

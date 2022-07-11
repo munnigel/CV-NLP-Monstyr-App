@@ -1,0 +1,37 @@
+<%= form_with(model: pendingpost, local: true) do |form| %>
+  <% if pendingpost.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pendingpost.errors.count, "error") %> prohibited this pendingpost from being saved:</h2>
+
+      <ul>
+      <% pendingpost.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.text_field :score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :imgUrl %>
+    <%= form.text_field :imgUrl %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

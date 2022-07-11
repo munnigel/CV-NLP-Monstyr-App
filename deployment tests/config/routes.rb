@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :posts
   resources :photos
+  resources :pendingposts
+  resources :liveposts
   root "photos#index"
   get 'latest', to: 'posts#latest'
   get '/allphotosjson', to: 'photos#allphotosjson'

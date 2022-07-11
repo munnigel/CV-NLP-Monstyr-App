@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pendingposts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th>Imgurl</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pendingposts.each do |pendingpost| %>
+      <tr>
+        <td><%= pendingpost.score %></td>
+        <td><%= pendingpost.imgUrl %></td>
+        <td><%= pendingpost.title %></td>
+        <td><%= pendingpost.description %></td>
+        <td><%= link_to 'Show', pendingpost %></td>
+        <td><%= link_to 'Edit', edit_pendingpost_path(pendingpost) %></td>
+        <td><%= link_to 'Destroy', pendingpost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pendingpost', new_pendingpost_path %>

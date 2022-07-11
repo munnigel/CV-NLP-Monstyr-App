@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Liveposts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Imgurl</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Promotiondate</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @liveposts.each do |livepost| %>
+      <tr>
+        <td><%= livepost.imgUrl %></td>
+        <td><%= livepost.title %></td>
+        <td><%= livepost.category %></td>
+        <td><%= livepost.promotionDate %></td>
+        <td><%= livepost.description %></td>
+        <td><%= link_to 'Show', livepost %></td>
+        <td><%= link_to 'Edit', edit_livepost_path(livepost) %></td>
+        <td><%= link_to 'Destroy', livepost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Livepost', new_livepost_path %>

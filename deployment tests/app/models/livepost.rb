@@ -1,0 +1,3 @@
+class Livepost < ApplicationRecord
+    
+end

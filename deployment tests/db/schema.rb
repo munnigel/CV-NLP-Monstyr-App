@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_155517) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_172546) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_155517) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "liveposts", force: :cascade do |t|
+    t.string "imgUrl"
+    t.string "title"
+    t.string "category"
+    t.string "promotionDate"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pendingposts", force: :cascade do |t|
+    t.string "score"
+    t.string "imgUrl"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
