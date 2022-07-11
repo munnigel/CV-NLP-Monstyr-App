@@ -8,14 +8,15 @@ import { API_URL } from './env';
 })
 export class FileUploadService {
   // API url
-  baseApiUrl = 'https://file.io';
+  baseApiUrl =
+    'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/photos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private httpOptions = {
     headers: new HttpHeaders({
-      "Authorization": localStorage.getItem("token"),
-      "Accept": "application/json",
+      Authorization: localStorage.getItem('token'),
+      Accept: 'application/json',
     }),
   };
 
@@ -29,7 +30,6 @@ export class FileUploadService {
 
     // Make http post request over api
     // with formData as req
-    return this.http.post(`${API_URL}/posts`, formData);
+    return this.http.post(`${this.baseApiUrl}`, formData);
   }
-
 }
