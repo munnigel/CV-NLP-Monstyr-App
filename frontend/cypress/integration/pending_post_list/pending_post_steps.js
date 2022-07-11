@@ -20,11 +20,11 @@ Given("that I click on the 'Pending Post' tab", () => {
     cy.visit("http://localhost:4200/home/pending")
 })
 
-When("I click on the number {string} entry in the Pending Post page", (entry: string) => {
-    cy.get(".pending-posts-item:first").click()
+When("I click on the number {number} entry in the Pending Post page", (number) => {
+    cy.get(".pending-posts-item:nth-child(" + number + ")").click()
 })
 
-Then("I should be redirected to edit url of the number {string} entry in the Pending Post page", (entry: string) => {
+Then("I should be redirected to edit url of the number {entry} entry in the Pending Post page", (entry) => {
     cy.url().should('eq', 'http://localhost:4200/edit/' + entry)
 })
 
@@ -47,7 +47,7 @@ Then("I should be redirected to the correct url", () => {
 //Scenario: Going to live page after submitting on edit page
 
 
-Given("that I am on the edit url of the number {string} entry in the Pending Post page", (entry:string) => {
+Given("that I am on the edit url of the number {entry} entry in the Pending Post page", (entry) => {
     cy.visit("http://localhost:4200/edit/" + entry)
 })
 

@@ -1,54 +1,73 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 
-Given(/^I am on the home page$/, () => {
+// SELECT POST
+Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
     cy.visit("http://localhost:4200/home")
+    cy.title().should('eq', tabSelector)
 });
 
-Given(/^I am on the "(.*)" tab$/, (tabSelector) => {
-    cy.title().should('eq', tabSelector)
-})
-
-Given(/^I am on the "(.*)" sub-tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-container").should('exist')
-})
-
-Given(/^I am on the "(.*)" nav-tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-nav-container").should('exist')
-})
-
 When(/^I click on the "(.*)" tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-tab").click()
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.get("#" + tabSel + "-tab").click()
 })
 
-When(/^I click on the "(.*)" button$/, (buttonSelector) => {
-    cy.get("#" + buttonSelector + "-btn").click()
+Then(/^I should be on the "(.*)" page$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.title().should('eq', tabSel)
 })
 
-When(/^I click on the "(.*)" nav-tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-nav-btn").click()
-})
-
-
-Then(/^I should be on the "(.*)" tab$/, (tabSelector) => {
-    cy.title().should('eq', tabSelector)
-})
-
-Then(/^I should be on the "(.*)" sub-tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-container").should('exist')
-})
-
-Then(/^I should be able to see "(.*)" buttons$/, (selectors) => {
+And(/^I should be able to see "(.*)" button$/, (selectors) => {
     let selectorList = selectors.split(", ")
     for (let selector of selectorList) {
-        cy.get(".selecting-container").find("#" + selector + "-btn").should('exist')
+        let sel= selector.toLowerCase().replace(" ", "-")
+        cy.get(".selecting-container").find("#" + sel + "-btn").should('exist')
     }
 })
 
-Then(/^I should see a list of "(.*)" posts which I can select from$/, (tabSelector) => {
-    cy.get("#choose-" + tabSelector + "-container").find(".post-container").its('length').should('be.gt', 0)
+ 
+Given(/^the "(.*)" button is selected$/, (tabSelector) => {
+    let sel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.get("#" + sel + "-btn").click()
+})
+
+// Upload manually
+When(/^I click on the "(.*)" button$/, (selector) => {
+    let sel= selector.toLowerCase().replace(" ", "-")
+        cy.get(".selecting-container").find("#choose-file-btn").click()
+    })
+Then (/^I should be able to see a "(.*)" dialog$/, (selector) => {
+    let sel= selector.toLowerCase().replace(" ", "-")
+    cy.get(".selecting-container").find("#" + sel + "-dialog").should('exist')
+})
+
+Then(/^ I should be able to upload a file from my computer$/, () => {
+    const p = 'Picture.png'
+      //upload file with attachFile
+    cy.get('#file-upload').attachFile(p)
 })
 
 
-Then(/^I should be on the "(.*)" nav-tab$/, (tabSelector) => {
-    cy.get("#" + tabSelector + "-nav-container").should('exist')
+
+// # to find id and . to find class
+
+// choose live, choose pending 
+When(/^I click on one of the "(.*)" post$/, (selector) => {
+    let sel= selector.toLowerCase().replace(" ", "-")
+    cy.get('.select-post').select(0).click()
+})
+
+Then (/^I should be able to see "(.*)" in the "(.*)" section$/, (selectors1, selectors2) => {
+    
+    let sel1 = selectors1.split(", ")
+    let sel2 = selectors2.split(", ")
+    
+    for (let selector of selectorList1) {
+        let sel= selector.toLowerCase().replace(" ", "-")
+        cy.get("." + sel + "-container").find("#" + sel + "-btn").should('exist')
+    }
+    
+    for (let selector of selectorList2) {
+        let sel= selector.toLowerCase().replace(" ", "-")
+        cy.get("." + sel + "-container").find("#" + sel + "-btn").should('exist')
+    }
 })

@@ -8,14 +8,14 @@ Feature: Manual selection of image/description of a promotion to use to test oth
 
 ## SELECT POST
     Scenario: Option to select post from developer tools tab
-        Given I am logged in and on the "Overview" page as a developer
+        Given I am on the "Overview" page as a developer
         When I click on the "Developer Tools" tab
         Then I should be on the "Developer Tools" page
-        And I should be able to see "Choose Live", "Choose Pending", "Choose Manually" button
+        And I should be able to see "Choose Live, Choose Pending, Choose Manually" button
         
-## BACK BUTTON TEST => in Choose Live Tab
+#### BACK BUTTON TEST => in Choose Live Tab
     Scenario: Able to return to select post options using back button from choose-live tab
-        Given I am on the "Choose Live" button
+        Given the "Choose Live" button is selected
         When I click on the "Back" button
         Then I should be on the "Select Post" section 
 
@@ -23,7 +23,7 @@ Feature: Manual selection of image/description of a promotion to use to test oth
     Scenario: Selecting a post from the "Choose Live" option
         Given the "Choose Live" button is selected
         When I click on one of the "Live" post 
-        Then I should be able to see "Input Image" and "Processed Text" in the "OCR" section
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
         And I should be able to see "Processed Tags" in the "OD" section
         And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
 
@@ -31,13 +31,13 @@ Feature: Manual selection of image/description of a promotion to use to test oth
     Scenario: Selecting a post from the "Choose Pending" option
         Given the "Choose Pending" button is selected
         When I click on one of the "Pending" post 
-        Then I should be able to see "Input Image" and "Processed Text" in the "OCR" section
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
         And I should be able to see "Processed Tags" in the "OD" section
         And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
 
-## BACK BUTTON TEST => in Choose Pending Tab
+#### BACK BUTTON TEST => in Choose Pending Tab
     Scenario: Able to return to select post options using back button from choose-pending tab
-        Given I am on the "Choose Pending" button
+        Given the "Choose Pending" button is selected
         When I click on the "Back" button
         Then I should be on the "Select Post" section 
 
@@ -46,34 +46,15 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         Given the "Upload Manually" button is selected
         When I click on "Choose File" button
         Then I should be able to see a "Choose Files to Upload" dialog 
-        And I should be able to select a file from my computer
+        And I should be able to upload a file from my computer
         When I click on the "Click here to upload" button
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
+        And I should be able to see "Processed Tags" in the "OD" section
+        And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
 
-        Then ############TO COMPLETE
-
+        
 ## BACK BUTTON TEST => in Upload Manually Tab
     Scenario: Able to return to select post options using back button from choose-manually tab
-        Given I am on the "Upload Manually" button
+        Given the "Upload Manually" button is selected
         When I click on the "back" button
         Then I should be on the "Select Post" section
-
-#############
-    Scenario: Viewing OCR data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "ocr" nav-tab
-        Then I should be on the "ocr" nav-tab
-
-    Scenario: Viewing OD data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "od" nav-tab
-        Then I should be on the "od" nav-tab
-
-    Scenario: Viewing NER data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "ner" nav-tab
-        Then I should be on the "ner" nav-tab
-
-    Scenario: Viewing keyword extraction data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "keyword" nav-tab
-        Then I should be on the "keyword" nav-tab
