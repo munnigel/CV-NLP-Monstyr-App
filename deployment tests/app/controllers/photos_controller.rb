@@ -19,7 +19,7 @@ class PhotosController < ApplicationController
   end
 
   def show
-    render json: @photo
+    # render json: @photo
   end
 
   def new
@@ -44,6 +44,14 @@ class PhotosController < ApplicationController
       render :new
     end
   end
+
+  # def create
+  #   @user = get_current_user()
+  #   params[:user_id] = @user.id
+
+  #   @post = Post.create(post_params())
+  #   respond_to_post()
+  # end
 
   def update
     respond_to do |format|
