@@ -1,24 +1,30 @@
-<%# Our "base" layout should be a valid HTML document. %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RubyDuckies Backend</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <%= stylesheet_link_tag 'application', 'media' => 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <title>Rails-GCS Tests</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <!-- <%= stylesheet_link_tag 'application', media: 'all' %> -->
+    <!-- <%= javascript_include_tag 'application' %> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> -->
   </head>
+
   <body>
-    <%# These classes come from the Bootstrap CSS framework. %>
-    <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
-      <h1 class="title">RubyDuckies Backend</h1>
-    </nav>
-    <div class="container">
-      <%# Render "flash" messages in our application. This loads _flash.erb %>
-      <%= render 'layouts/flash' %>
-      <main id="main">
-        <%= yield %>
-      </main>
-    </div>
+    <header>
+      <nav class="navbar navbar-dark bg-primary">
+        <span class="navbar-brand mb-0 h1">Rails-GCS Tests</span>
+      </nav>
+    </header>
+    
+    <main> 
+      <%= yield %>
+    </main>
+    
   </body>
 </html>

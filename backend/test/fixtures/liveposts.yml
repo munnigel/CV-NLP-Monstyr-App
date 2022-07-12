@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  imgUrl: MyString
+  title: MyString
+  category: MyString
+  promotionDate: MyString
+  description: MyString
+
+two:
+  imgUrl: MyString
+  title: MyString
+  category: MyString
+  promotionDate: MyString
+  description: MyString
