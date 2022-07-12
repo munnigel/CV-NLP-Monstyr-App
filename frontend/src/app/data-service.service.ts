@@ -62,6 +62,7 @@ export class DataService implements OnInit {
       this.http.get(`${API_URL}/liveposts.json`, this.httpOptions)
     );
     console.log(this.res);
+    this.liveProductList = [];
     for (let i = 0; i < this.res.length; i++) {
       this.liveProductList.push(
         new Product(
@@ -81,6 +82,7 @@ export class DataService implements OnInit {
       this.http.get(`${API_URL}/pendingposts.json`, this.httpOptions)
     );
     console.log(this.res);
+    this.pendingProductList = [];
     for (let i = 0; i < this.res.length; i++) {
       this.pendingProductList.push(
         new PendingProduct(
