@@ -33,7 +33,7 @@ Given(/^the "(.*)" button is selected$/, (tabSelector) => {
 // Upload manually
 When(/^I click on the "(.*)" button$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
-        cy.get(".selecting-container").find("#choose-file-btn").click()
+        cy.get("#"+sel+"-btn").click()
     })
 Then (/^I should be able to see a "(.*)" dialog$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
@@ -51,23 +51,22 @@ Then(/^ I should be able to upload a file from my computer$/, () => {
 // # to find id and . to find class
 
 // choose live, choose pending 
+Given (/^that I click on the "(.*)" tab$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+        cy.get("#" + tabSel + "-tab").click()
+    })
 When(/^I click on one of the "(.*)" post$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
-    cy.get('.select-post').select(0).click()
+    cy.get('.post-container').first().click()
 })
 
 Then (/^I should be able to see "(.*)" in the "(.*)" section$/, (selectors1, selectors2) => {
     
     let sel1 = selectors1.split(", ")
-    let sel2 = selectors2.split(", ")
+    let sel2 = selectors2.toLowerCase()
     
-    for (let selector of selectorList1) {
+    for (let selector of sel1) {
         let sel= selector.toLowerCase().replace(" ", "-")
-        cy.get("." + sel + "-container").find("#" + sel + "-btn").should('exist')
-    }
-    
-    for (let selector of selectorList2) {
-        let sel= selector.toLowerCase().replace(" ", "-")
-        cy.get("." + sel + "-container").find("#" + sel + "-btn").should('exist')
+        cy.get("#" + sel2 + "-section-container").find("#" + sel + "-container").should('exist')
     }
 })

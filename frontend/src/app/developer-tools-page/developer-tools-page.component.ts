@@ -28,6 +28,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   ];
   currentTabSelector: string;
 
+
   // Process tabs in dev-tools page (select post, OCR, OD, NER, keyword extraction)
   onTopIndex: number;
 
@@ -146,7 +147,19 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.tabSelector = this.tabSelectorList[0];
     this.liveEditing = false;
     this.pendingEditing = false;
-    this.router.navigate(['home/developertools']);
+    this.router.navigateByUrl('/', {}).then(()=>
+    this.router.navigate(['home/developertools']));
+  }
+
+  backTo(currentTabSelector:string) {
+    if (currentTabSelector.includes('live'))
+    this.tabSelector = this.tabSelectorList[1];
+    else if (currentTabSelector.includes('pending'))
+    this.tabSelector = this.tabSelectorList[2];
+    this.liveEditing = false;
+    this.pendingEditing = false;
+    this.currentSelectedProduct = undefined;
+
   }
 
   onSelectLivePost(i: number) {
@@ -157,7 +170,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
-    }, 3000);
+    }, 500);
   }
 
   onSelectPendingPost(i: number) {
@@ -170,7 +183,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
-    }, 3000);
+    }, 500);
   }
 
   // updateEditStatus(editing: boolean) {

@@ -84,7 +84,7 @@
 
 
 
-.back-btn,
+
 .selector-btn {
   border: none;
   width: 300px;
@@ -97,12 +97,15 @@
   margin-top: 20px;
 }
 
+
 .back-btn {
+  display: inline-block;
+  border: none;
+  color: purple;
   position: absolute;
   top: 0px;
   left: 0px;
   margin-left: 50px;
-  width: 150px;
 }
 
 .current-selector {
@@ -337,7 +340,7 @@ p {
   margin: 0px;
 }
 
-#od-container, #ocr-container, #ner-container {
+#od-section-container, #ocr-section-container, #ner-section-container {
   text-align: center;
 }
 
