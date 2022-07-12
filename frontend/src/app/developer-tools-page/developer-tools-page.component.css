@@ -337,12 +337,19 @@ p {
   margin: 0px;
 }
 
+#od-container, #ocr-container, #ner-container {
+  text-align: center;
+}
+
+.banner {
+  width: 600px;
+  height: auto;
+}
+
 .od-page-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 100px;
-  background-color: grey;
 }
 
 .od-page-original,
