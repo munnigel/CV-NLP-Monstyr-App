@@ -342,6 +342,7 @@ p {
   justify-content: space-evenly;
   align-items: center;
   margin-top: 100px;
+  background-color: grey;
 }
 
 .od-page-original,
@@ -402,55 +403,12 @@ p {
 }
 
 .ner-page-container {
-  margin-top: 50px;
-}
-
-.ner-page {
-  height: 400px;
-}
-
-.ner-page .title {
-  font-size: 30px;
-}
-
-.ner-page-details {
-  width: 300px;
-  height: 260px;
-  background-color: rgb(212, 212, 212);
-  border-radius: 10px;
-  padding: 30px;
-}
-
-.ner-page-details-display {
-  background-color: white;
-  height: 150px;
-  width: 100%;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.ner-btn {
-  width: 100%;
-}
-
-.ner-disc {
-  margin-top: 10px;
-  font-size: 20px;
-}
-
-.ner-sub-disc {
-  margin-top: 10px;
-  display: flex;
-}
-
-.keyword-page-container {
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
 }
 
-.keywords-extracted,
+.ner-extracted,
 .updated-keywords {
   width: 350px;
   height: 600px;
@@ -462,8 +420,8 @@ p {
   flex-direction: column;
 }
 
-.keywords-extracted .title,
-.updated-keywords .title {
+.ner-extracted .title,
+.updated-ner .title {
   font-size: 40px;
   font-weight: 400;
   text-align: center;
@@ -480,7 +438,7 @@ p {
   padding: 20px;
 }
 
-.keyword-btn {
+.ner-btn {
   width: 100%;
   margin-top: auto
 }

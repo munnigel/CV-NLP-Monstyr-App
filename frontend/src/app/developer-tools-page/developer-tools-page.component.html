@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 1" id="ocr-nav-container">
+    
       <div class="ocr-page-container">
         <div class="ocr-page-original">
           <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
@@ -136,8 +136,8 @@
           <Button class="od-page-details-edit-name btn btn-primary ocr-btn">Edit OCR details</Button>
         </div>
       </div>
-    </div>
-    <div *ngIf="onTopIndex === 2" id="od-nav-container">
+    
+    
       <div class="od-page-container">
         <div class="od-page-original">
           <img class="od-img-original" src="../../assets/pictures/Untitled design-10.png" />
@@ -153,51 +153,10 @@
           <Button class="od-page-details-edit-name btn btn-primary">Edit Object Name</Button>
         </div>
       </div>
-    </div>
-    <div *ngIf="onTopIndex === 3" id="ner-nav-container">
-      <div class="ocr-page-container ner-page-container">
-        <div class="ocr-page-original ner-page">
-          <div class="title">OCR output</div>
-          <ng-container *ngFor="let output of OCRoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="ocr-page-processed ner-page">
-          <div class="title">NER categories</div>
-          <ng-container *ngFor="let output of NERoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="ner-page-details">
-          <div class="ner-page-details-display">
-            <p class="title">Disc</p>
-            <p class="ner-disc">Save 25%</p>
-            <div class="ner-sub-disc">
-              <div>
-                <div class="title">Brand</div>
-                <div class="ner-disc">nike</div>
-              </div>
-              <div style="margin-left: 20px">
-                <div class="title">Prod cat</div>
-                <div class="ner-disc">FOOTWEAR</div>
-              </div>
-            </div>
-          </div>
-
-          <Button class="od-page-details-edit-name btn btn-primary ner-btn">Edit Object Name</Button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="onTopIndex === 4" id="keyword-nav-container">
-      <div class="keyword-page-container">
-        <div class="ocr-page-processed ner-page">
-          <div class="title">NER categories</div>
-          <ng-container *ngFor="let output of NERoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="keywords-extracted">
-          <div class="title">Keywords Extracted</div>
+    
+      <div class="ner-page-container">
+        <div class="ner-extracted">
+          <div class="title">NER</div>
           <mat-card class="display-check">
             <mat-card-title>Brand</mat-card-title>
             <mat-card-subtitle>nike</mat-card-subtitle>
@@ -210,9 +169,8 @@
             <mat-card-title>Validity Period</mat-card-title>
             <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
           </mat-card>
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Edit Keywords</Button>
         </div>
-        <div class="updated-keywords">
+        <div class="updated-ner">
           <div class="title">Updated Keywords</div>
           <mat-card class="display-check">
             <mat-card-title>Brand</mat-card-title>
@@ -228,7 +186,7 @@
           </mat-card>
           <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Next</Button>
         </div>
-      </div>
+      
     </div></div>
   </div>
 </div>
