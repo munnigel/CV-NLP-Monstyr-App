@@ -124,8 +124,8 @@
       </div>
       <div *ngIf="currentSelectedProduct">
         <div id="ocr-container">
+          <img class="banner" src="../../assets/pictures/ocr-banner.png" />
           <div class="ocr-page-container">
-            <div class="page-tag">OCR</div>
             <div class="ocr-page-original">
               <img class="img" [src]="currentSelectedProduct.imgUrl" />
               <div class="processed-words">
@@ -146,6 +146,7 @@
           </div>
         </div>
         <div id="od-container">
+          <img class="banner" src="../../assets/pictures/od-banner.png" />
           <div class="od-page-container">
             <div class="od-page-original">
               <img
@@ -159,12 +160,11 @@
                 [src]="currentSelectedProduct.imgUrl"
               />
             </div>
-            <div class="page-tag">OD</div>
           </div>
         </div>
         <div id="ner-container">
+          <img class="banner" src="../../assets/pictures/ner-banner.png" />
           <div class="ner-page-container">
-            <div class="page-tag">NER</div>
             <div class="ner-extracted">
               <div class="title">NER Extracted</div>
               <mat-card class="display-check">
