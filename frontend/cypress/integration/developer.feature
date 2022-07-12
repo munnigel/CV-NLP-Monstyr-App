@@ -50,8 +50,8 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         Given that I click on the "Developer Tools" tab
         And the "Choose Manually" button is selected
         Then I should be able to see "Choose File" in the "Upload" section
-        And I should be able to upload a file from my computer
-        When I click on the "Click here to upload" button
+        And I upload a file from my computer
+        When I click on the "Create" button
         Then I should be able to see "Input Image, Processed Text" in the "OCR" section
         And I should be able to see "Processed Tags" in the "OD" section
         And I should be able to see "Extracted Keywords" in the "NER" section

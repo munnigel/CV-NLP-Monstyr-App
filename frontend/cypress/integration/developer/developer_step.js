@@ -40,11 +40,13 @@ Then (/^I should be able to see a "(.*)" dialog$/, (selector) => {
     cy.get(".selecting-container").find("#" + sel + "-dialog").should('exist')
 })
 
-Then(/^ I should be able to upload a file from my computer$/, () => {
+Then(/^I upload a file from my computer$/, () => {
     const p = 'Picture.png'
       //upload file with attachFile
-    cy.get('#file-upload').attachFile(p)
+    cy.get('#choose-file-container').attachFile('greenbox nike.jpg')
 })
+
+
 
 
 
