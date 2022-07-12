@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../env';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -27,7 +29,6 @@ export class DeveloperToolsPageComponent implements OnInit {
     'chooseFile',
   ];
   currentTabSelector: string;
-
 
   // Process tabs in dev-tools page (select post, OCR, OD, NER, keyword extraction)
   onTopIndex: number;
@@ -92,7 +93,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   ) {
     this.imageForm = this.fb.group({
       caption: [''],
-      avatar: [null],
+      image: [null],
     });
   }
 
@@ -147,19 +148,19 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.tabSelector = this.tabSelectorList[0];
     this.liveEditing = false;
     this.pendingEditing = false;
-    this.router.navigateByUrl('/', {}).then(()=>
-    this.router.navigate(['home/developertools']));
+    this.router
+      .navigateByUrl('/', {})
+      .then(() => this.router.navigate(['home/developertools']));
   }
 
-  backTo(currentTabSelector:string) {
+  backTo(currentTabSelector: string) {
     if (currentTabSelector.includes('live'))
-    this.tabSelector = this.tabSelectorList[1];
+      this.tabSelector = this.tabSelectorList[1];
     else if (currentTabSelector.includes('pending'))
-    this.tabSelector = this.tabSelectorList[2];
+      this.tabSelector = this.tabSelectorList[2];
     this.liveEditing = false;
     this.pendingEditing = false;
     this.currentSelectedProduct = undefined;
-
   }
 
   onSelectLivePost(i: number) {
@@ -194,17 +195,17 @@ export class DeveloperToolsPageComponent implements OnInit {
   uploadFile(event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.imageForm.patchValue({
-      avatar: file,
+      image: file,
     });
-    this.imageForm.get('avatar').updateValueAndValidity();
+    this.imageForm.get('image').updateValueAndValidity();
   }
-  submitForm() {
+  async submitForm() {
     var formData: any = new FormData();
-    formData.append('name', this.imageForm.get('name').value);
-    formData.append('avatar', this.imageForm.get('avatar').value);
-    this.http.post('http://localhost:3000/photos', formData).subscribe({
-      next: (response) => console.log(response),
-      error: (error) => console.log(error),
-    });
+    formData.append('caption', this.imageForm.get('caption').value);
+    formData.append('image', this.imageForm.get('image').value);
+    let res = await lastValueFrom(
+      this.http.post(`${API_URL}/photos`, formData)
+    );
+    console.log(res);
   }
 }
