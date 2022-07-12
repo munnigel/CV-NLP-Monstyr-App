@@ -34,13 +34,52 @@ body {
 
 .main-login-container {
   width: 100%;
-  padding: 50px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  background-color: hsla(200, 40%, 30%, .4);
+  /* background-image:
+    url('./assets/pictures/mon.gif'),
+    url('./assets/pictures/mon2.gif'),
+    url('./assets/pictures/mon3.gif');
+  background-repeat: repeat-x;
+  background-position:
+    0 0%,
+    0 50%,
+    0 100%;
+  background-size:
+    150px,
+    150px,
+    150px;
+  animation: 45s para infinite linear; */
 }
 
+@keyframes para {
+  100% {
+    background-position:
+      -2000px 0%,
+      2000px 50%,
+      -2000px 100%;
+  }
+}
+
+.mb-3 {
+  margin-bottom: 10px;
+}
+
+.mb-3:hover {
+  background-image:
+    url('./assets/pictures/mon3.gif');
+  background-repeat: repeat-x;
+  background-position:
+    0 0%;
+  background-size:
+    50px;
+  animation: 45s para infinite linear;
+}
 
 
 

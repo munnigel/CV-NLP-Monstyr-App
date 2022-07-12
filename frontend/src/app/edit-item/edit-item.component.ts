@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { PendingProduct } from '../pending-product.model';
+import { Product } from '../product.model';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -90,7 +91,7 @@ export class EditItemComponent implements OnInit {
       this.datasrv.deletePendingPost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
-        complete: () => this.router.navigate(['home/processed'], {})
+        complete: () => { this.datasrv.updateLiveProductList(), this.datasrv.updatePendingProductList(), this.router.navigate(['home/processed'], {}) }
       })
     }
   }
