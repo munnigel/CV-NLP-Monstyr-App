@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -13,8 +13,6 @@ import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-t
   styleUrls: ['./edit-processed-post.component.css'],
 })
 export class EditProcessedPostComponent implements OnInit {
-  @Output() editingEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   product: Product;
   editForm: FormGroup;
   error = false;
