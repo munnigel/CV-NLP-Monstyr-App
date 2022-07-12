@@ -2,7 +2,9 @@
   <div class="sub-dev-container">
     <div class="dev-page-header">
       {{ pageTitle }}
-      <div *ngIf="currentTabSelector" style="margin-left: 5px;">({{currentTabSelector}})</div>
+      <div *ngIf="currentTabSelector" style="margin-left: 5px">
+        ({{ currentTabSelector }})
+      </div>
     </div>
     <!-- <div class="progress-bar-container">
       <mat-progress-bar [mode]="barMode" [value]="barValue"></mat-progress-bar>
@@ -17,30 +19,55 @@
       </div>
     </div> -->
     <div class="loading-spinner" *ngIf="loadingTrainedData">
-      <mat-progress-spinner [mode]="spinnerMode" [value]="spinnerValue"></mat-progress-spinner>
+      <mat-progress-spinner
+        [mode]="spinnerMode"
+        [value]="spinnerValue"
+      ></mat-progress-spinner>
     </div>
     <div *ngIf="!loadingTrainedData">
-    <div *ngIf="!currentSelectedProduct" style="position: relative" id="select-post-nav-container">
-      <div id="select-post-container">
-        <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary back-btn" (click)="backToSelector()"
-          id="back-btn">
-          Back
-        </button>
-        <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
-          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)" id="choose-live-btn">
-            Choose Live
+      <div
+        *ngIf="!currentSelectedProduct"
+        style="position: relative"
+        id="select-post-nav-container"
+      >
+        <div id="select-post-container">
+          <button
+            *ngIf="tabSelector != 'selecting'"
+            class="btn btn-primary back-btn"
+            (click)="backToSelector()"
+            id="back-btn"
+          >
+            Back
           </button>
-          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)" id="choose-pending-btn">
-            Choose Pending
-          </button>
-          <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)" id="choose-manually-btn">
-            Upload manually
-          </button>
+          <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
+            <button
+              class="btn btn-primary selector-btn"
+              (click)="onFunctionClick(0)"
+              id="choose-live-btn"
+            >
+              Choose Live
+            </button>
+            <button
+              class="btn btn-primary selector-btn"
+              (click)="onFunctionClick(1)"
+              id="choose-pending-btn"
+            >
+              Choose Pending
+            </button>
+            <button
+              class="btn btn-primary selector-btn"
+              (click)="onFunctionClick(2)"
+              id="choose-manually-btn"
+            >
+              Upload manually
+            </button>
+          </div>
         </div>
-      </div>
         <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
           <div class="posts-container">
-            <ng-container *ngFor="let product of liveProductList; let i = index">
+            <ng-container
+              *ngFor="let product of liveProductList; let i = index"
+            >
               <div class="post-container" (click)="onSelectLivePost(i)">
                 <img class="post-img" [src]="product.imgUrl" />
                 <div class="post-desc">
@@ -54,129 +81,123 @@
             </ng-container>
           </div>
         </div>
-      <div *ngIf="tabSelector === 'choosePending'" id="choose-pending-container">
-        <div class="posts-container">
-          <ng-container *ngFor="let product of pendingProductList; let i = index">
-            <div class="post-container" (click)="onSelectPendingPost(i)">
-              <img class="post-img" [src]="product.imgUrl" />
-              <div class="post-desc">
-                <h3>Post Description</h3>
-                <h5>{{ product.title }}</h5>
-                <h5>{{ product.category }}</h5>
-                <h5>{{ product.description }}</h5>
+        <div
+          *ngIf="tabSelector === 'choosePending'"
+          id="choose-pending-container"
+        >
+          <div class="posts-container">
+            <ng-container
+              *ngFor="let product of pendingProductList; let i = index"
+            >
+              <div class="post-container" (click)="onSelectPendingPost(i)">
+                <img class="post-img" [src]="product.imgUrl" />
+                <div class="post-desc">
+                  <h3>Post Description</h3>
+                  <h5>{{ product.title }}</h5>
+                  <h5>{{ product.category }}</h5>
+                  <h5>{{ product.description }}</h5>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div
+          *ngIf="tabSelector === 'chooseFile'"
+          id="choose-manually-container"
+        >
+          <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
+            <div class="form-group">
+              <input type="file" (change)="uploadFile($event)" />
+            </div>
+            <div class="form-group input-group-lg">
+              <input
+                class="form-control"
+                placeholder="Name"
+                formControlName="caption"
+              />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-danger btn-block btn-lg">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="currentSelectedProduct">
+        <div id="ocr-container">
+          <div class="ocr-page-container">
+            <div class="page-tag">OCR</div>
+            <div class="ocr-page-original">
+              <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
+              <div class="processed-words">
+                <ng-container *ngFor="let word of words">
+                  <div class="processed-word">{{ word }}</div>
+                </ng-container>
               </div>
             </div>
-          </ng-container>
-        </div>
-      </div>
-      <div *ngIf="tabSelector === 'chooseFile'" id="choose-manually-container">
-        <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
-          <div class="form-group">
-              <input type="file" (change)="uploadFile($event)">
-          </div>
-          <div class="form-group input-group-lg">
-              <input class="form-control" placeholder="Name" formControlName="caption">
-          </div>
-          <div class="form-group">
-              <button class="btn btn-danger btn-block btn-lg">Create</button>
-          </div>
-      </form>
-      </div>
-    </div>
-    <div *ngIf="currentSelectedProduct">
-    <div  id="ocr-container">
-      <div class="ocr-page-container">
-        <div class="page-tag">OCR</div>
-        <div class="ocr-page-original">
-          <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
-          <div class="processed-words">
-            <ng-container *ngFor="let word of words">
-              <div class="processed-word">{{ word }}</div>
-            </ng-container>
+            <div class="ocr-page-processed">
+              <img class="img" src="../../assets/pictures/greenbox nike.jpg" />
+              <!-- <textarea class="processed-text">{{ trainedData }}</textarea> -->
+              <div class="processed-words">
+                <ng-container *ngFor="let word of words">
+                  <div class="processed-word">{{ word }}</div>
+                </ng-container>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="ocr-page-processed">
-          <img class="img" src="../../assets/pictures/greenbox nike.jpg" />
-          <!-- <textarea class="processed-text">{{ trainedData }}</textarea> -->
-          <div class="processed-words">
-            <ng-container *ngFor="let word of words">
-              <div class="processed-word">{{ word }}</div>
-            </ng-container>
+        <div id="od-container">
+          <div class="od-page-container">
+            <div class="od-page-original">
+              <img
+                class="od-img-original"
+                src="../../assets/pictures/Untitled design-10.png"
+              />
+            </div>
+            <div class="od-page-cropped">
+              <img
+                class="od-img-cropped"
+                src="../../assets/pictures/Untitled design-11.png"
+              />
+            </div>
+            <div class="page-tag">OD</div>
           </div>
         </div>
-  
-      </div>
-<<<<<<< HEAD
-    </div>
-    <div id="od-container">
-=======
-    
-    
->>>>>>> 85d5f4291e57c18618753e9ca456fc6769226ffd
-      <div class="od-page-container">
-        <div class="od-page-original">
-          <img class="od-img-original" src="../../assets/pictures/Untitled design-10.png" />
+        <div id="ner-container">
+          <div class="ner-page-container">
+            <div class="page-tag">NER</div>
+            <div class="ner-extracted">
+              <div class="title">NER Extracted</div>
+              <mat-card class="display-check">
+                <mat-card-title>Brand</mat-card-title>
+                <mat-card-subtitle>nike</mat-card-subtitle>
+                <mat-card-title>Product Category</mat-card-title>
+                <mat-card-subtitle>FOOTWEAR</mat-card-subtitle>
+                <mat-card-title>Discount</mat-card-title>
+                <mat-card-subtitle>SAVE 25%</mat-card-subtitle>
+                <mat-card-title>Location</mat-card-title>
+                <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
+                <mat-card-title>Validity Period</mat-card-title>
+                <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+              </mat-card>
+            </div>
+            <div class="updated-ner">
+              <div class="title">Updated Keywords</div>
+              <mat-card class="display-check">
+                <mat-card-title>Brand</mat-card-title>
+                <mat-card-subtitle>nike</mat-card-subtitle>
+                <mat-card-title>Product Category</mat-card-title>
+                <mat-card-subtitle>FOOTWEAR</mat-card-subtitle>
+                <mat-card-title>Discount</mat-card-title>
+                <mat-card-subtitle>SAVE 25%</mat-card-subtitle>
+                <mat-card-title>Location</mat-card-title>
+                <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
+                <mat-card-title>Validity Period</mat-card-title>
+                <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+              </mat-card>
+            </div>
+          </div>
         </div>
-        <div class="od-page-cropped">
-          <img class="od-img-cropped" src="../../assets/pictures/Untitled design-11.png" />
-        </div>
-        <div class="page-tag">OD</div>
-      </div>
-<<<<<<< HEAD
-    </div>
-    <div  id="ner-container">
-      <div class="ner-page-container">
-        <div class="page-tag">NER</div>
-        <div class="ner-extracted">
-          <div class="title">NER Extracted</div>
-=======
-    
-      <div class="ner-page-container">
-        <div class="ner-extracted">
-          <div class="title">NER</div>
->>>>>>> 85d5f4291e57c18618753e9ca456fc6769226ffd
-          <mat-card class="display-check">
-            <mat-card-title>Brand</mat-card-title>
-            <mat-card-subtitle>nike</mat-card-subtitle>
-            <mat-card-title>Product Category</mat-card-title>
-            <mat-card-subtitle>FOOTWEAR</mat-card-subtitle>
-            <mat-card-title>Discount</mat-card-title>
-            <mat-card-subtitle>SAVE 25%</mat-card-subtitle>
-            <mat-card-title>Location</mat-card-title>
-            <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
-            <mat-card-title>Validity Period</mat-card-title>
-            <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
-          </mat-card>
-<<<<<<< HEAD
-             </div>
-=======
-        </div>
->>>>>>> 85d5f4291e57c18618753e9ca456fc6769226ffd
-        <div class="updated-ner">
-          <div class="title">Updated Keywords</div>
-          <mat-card class="display-check">
-            <mat-card-title>Brand</mat-card-title>
-            <mat-card-subtitle>nike</mat-card-subtitle>
-            <mat-card-title>Product Category</mat-card-title>
-            <mat-card-subtitle>FOOTWEAR</mat-card-subtitle>
-            <mat-card-title>Discount</mat-card-title>
-            <mat-card-subtitle>SAVE 25%</mat-card-subtitle>
-            <mat-card-title>Location</mat-card-title>
-            <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
-            <mat-card-title>Validity Period</mat-card-title>
-            <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
-          </mat-card>
-<<<<<<< HEAD
-         </div>
       </div>
     </div>
-  </div>
-  </div>
-=======
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Next</Button>
-        </div>
-      
-    </div></div>
->>>>>>> 85d5f4291e57c18618753e9ca456fc6769226ffd
   </div>
 </div>
