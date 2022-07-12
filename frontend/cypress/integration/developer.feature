@@ -50,7 +50,7 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         When I click on the "Click here to upload" button
         Then I should be able to see "Input Image, Processed Text" in the "OCR" section
         And I should be able to see "Processed Tags" in the "OD" section
-        And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
+        And I should be able to see "Extracted Keywords" in the "NER" section
 
         
 ## BACK BUTTON TEST => in Upload Manually Tab

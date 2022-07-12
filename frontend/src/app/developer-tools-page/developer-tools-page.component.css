@@ -342,6 +342,7 @@ p {
   justify-content: space-evenly;
   align-items: center;
   margin-top: 100px;
+  background-color: grey;
 }
 
 .od-page-original,
@@ -478,7 +479,7 @@ p {
   padding: 20px;
 }
 
-.keyword-btn {
+.ner-btn {
   width: 100%;
   margin-top: auto
 }
