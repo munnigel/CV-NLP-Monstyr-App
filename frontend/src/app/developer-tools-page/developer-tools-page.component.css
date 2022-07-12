@@ -403,6 +403,10 @@ p {
 
 .ner-page-container {
   margin-top: 50px;
+  margin-bottom:50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .ner-page {
@@ -444,14 +448,8 @@ p {
   display: flex;
 }
 
-.keyword-page-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
-}
-
-.keywords-extracted,
-.updated-keywords {
+.ner-extracted,
+.updated-ner{
   width: 350px;
   height: 600px;
   background-color: rgb(212, 212, 212);
@@ -462,8 +460,8 @@ p {
   flex-direction: column;
 }
 
-.keywords-extracted .title,
-.updated-keywords .title {
+.ner-extracted .title,
+.updated-ner .title {
   font-size: 40px;
   font-weight: 400;
   text-align: center;
@@ -492,4 +490,10 @@ mat-card-title {
 
 mat-card-subtitle {
   font-size: 25px;
+}
+
+.page-tag {
+  height: 100%;
+  align-items: center;
+  font-size: 30px;
 }

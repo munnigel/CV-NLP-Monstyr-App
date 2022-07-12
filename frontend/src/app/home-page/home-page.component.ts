@@ -19,10 +19,10 @@ export class HomePageComponent implements OnInit {
       'settings',
     ];
     if (this.router.url.includes(this.tabList[0])) this.tabIndex = 0;
-    if (this.router.url.includes(this.tabList[1])) this.tabIndex = 1;
-    if (this.router.url.includes(this.tabList[2])) this.tabIndex = 2;
-    if (this.router.url.includes(this.tabList[3])) this.tabIndex = 3;
-    if (this.router.url.includes(this.tabList[4])) this.tabIndex = 4;
+    else if (this.router.url.includes(this.tabList[1])) this.tabIndex = 1;
+    else if (this.router.url.includes(this.tabList[2])) this.tabIndex = 2;
+    else if (this.router.url.includes(this.tabList[3])) this.tabIndex = 3;
+    else if (this.router.url.includes(this.tabList[4])) this.tabIndex = 4;
   }
 
   onTabClick(index: number) {

@@ -8,6 +8,8 @@ import { Product } from '../product.model';
 import { Router, RouterEvent } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -76,20 +78,34 @@ export class DeveloperToolsPageComponent implements OnInit {
   // Loading and waiting for trained data
   loadingTrainedData: boolean;
 
+  imageForm: FormGroup;
+
   constructor(
     private fileUploadService: FileUploadService,
     private dataSrv: DataService,
     private titleService: Title,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
+    this.imageForm = this.fb.group({
+      caption: [''],
+      avatar: [null],
+    });
+  }
 
   ngOnInit(): void {
     let startTabIndex = 0;
     this.onTopIndex = startTabIndex;
     this.tabSelector = this.tabSelectorList[startTabIndex];
     this.pageTitle = this.pageTitleList[startTabIndex];
-    this.barValue = (100 / 5) * (startTabIndex + 1);
+
+    // TODO: make progress bar dynamic according to which part of the page the user is at
+    // set to 100 so the whole bar is filled
+    // this.barValue = (100 / 5) * (startTabIndex + 1);
+
+    this.barValue = 100;
     this.liveProductList = this.dataSrv.getLiveProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
@@ -111,7 +127,7 @@ export class DeveloperToolsPageComponent implements OnInit {
       return;
     }
     this.onTopIndex = index;
-    this.barValue = (100 / 5) * (index + 1);
+    // this.barValue = (100 / 5) * (index + 1);
     this.pageTitle = this.pageTitleList[index];
     this.currentTabSelector = undefined;
     this.reset();
@@ -162,20 +178,20 @@ export class DeveloperToolsPageComponent implements OnInit {
   //   console.log('switch back to page');
   // };
 
-  // On file Select
-  onChange(event) {
-    this.file = event.target.files[0];
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.imageForm.patchValue({
+      avatar: file,
+    });
+    this.imageForm.get('avatar').updateValueAndValidity();
   }
-
-  // OnClick of button Upload
-  onUpload() {
-    this.loading = !this.loading;
-    this.fileUploadService.upload(this.file).subscribe((event: any) => {
-      if (typeof event === 'object') {
-        // Short link via api response
-        this.shortLink = event.link;
-        this.loading = false; // Flag variable
-      }
+  submitForm() {
+    var formData: any = new FormData();
+    formData.append('name', this.imageForm.get('name').value);
+    formData.append('avatar', this.imageForm.get('avatar').value);
+    this.http.post('http://localhost:3000/photos', formData).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
     });
   }
 }

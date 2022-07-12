@@ -4,7 +4,7 @@
       {{ pageTitle }}
       <div *ngIf="currentTabSelector" style="margin-left: 5px;">({{currentTabSelector}})</div>
     </div>
-    <div class="progress-bar-container">
+    <!-- <div class="progress-bar-container">
       <mat-progress-bar [mode]="barMode" [value]="barValue"></mat-progress-bar>
       <div class="nav-nav-bar">
         <div class="nav-bar-btn" [ngClass]="{'invalid': invalidAction}" (click)="onTopClick(0)" id="select-post-nav-btn">Select Post</div>
@@ -15,12 +15,12 @@
           Keyword Extraction
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="loading-spinner" *ngIf="loadingTrainedData">
       <mat-progress-spinner [mode]="spinnerMode" [value]="spinnerValue"></mat-progress-spinner>
     </div>
     <div *ngIf="!loadingTrainedData">
-    <div *ngIf="onTopIndex === 0" style="position: relative" id="select-post-nav-container">
+    <div *ngIf="!currentSelectedProduct" style="position: relative" id="select-post-nav-container">
       <div id="select-post-container">
         <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary back-btn" (click)="backToSelector()"
           id="back-btn">
@@ -70,29 +70,23 @@
         </div>
       </div>
       <div *ngIf="tabSelector === 'chooseFile'" id="choose-manually-container">
-        <div class="upload">
-          <div class="text-center">
-            <input class="form-control" type="file" (change)="onChange($event)" />
+        <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+              <input type="file" (change)="uploadFile($event)">
           </div>
-
-          <!-- Shareable short link of  uploaded file -->
-          <div class="container text-center jumbotron" *ngIf="shortLink">
-            <h2>Visit Here</h2>
-            <a href="{{ shortLink }}">{{ shortLink }}</a>
+          <div class="form-group input-group-lg">
+              <input class="form-control" placeholder="Name" formControlName="caption">
           </div>
-
-          <!--Flag variable is used here-->
-          <div class="container" *ngIf="loading">
-            <h3>Loading ...</h3>
+          <div class="form-group">
+              <button class="btn btn-danger btn-block btn-lg">Create</button>
           </div>
-          <img src="../../assets/pictures/upload.png" alt="upload" class="cloud" />
-          <h3 class="uploads" (click)="onUpload()">Click here to upload</h3>
-          <img [src]="shortLink" *ngIf="shortLink" />
-        </div>
+      </form>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 1" id="ocr-nav-container">
+    <div *ngIf="currentSelectedProduct">
+    <div  id="ocr-container">
       <div class="ocr-page-container">
+        <div class="page-tag">OCR</div>
         <div class="ocr-page-original">
           <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
           <div class="processed-words">
@@ -110,34 +104,10 @@
             </ng-container>
           </div>
         </div>
-        <div class="ocr-page-details">
-          <div class="recognition-accuracy">
-            <p class="title">Recognition Accuracy</p>
-            <p class="first-stats">70%</p>
-            <div class="recognition-accuracy-indicator">
-              <p class="direction-indicator">icon</p>
-              <p class="quantity-indicator">70.00%</p>
-            </div>
-          </div>
-          <div class="wrong-correct">
-            <div class="wrong">
-              <div class="uniform wrongword">Wrong</div>
-              <div class="wrongword digit">3</div>
-            </div>
-            <div class="correct">
-              <div class="uniform correctword">Correct</div>
-              <div class="correctword digit">7</div>
-            </div>
-          </div>
-          <div class="total">
-            <div class="title">Total</div>
-            <div class="digit">10</div>
-          </div>
-          <Button class="od-page-details-edit-name btn btn-primary ocr-btn">Edit OCR details</Button>
-        </div>
+  
       </div>
     </div>
-    <div *ngIf="onTopIndex === 2" id="od-nav-container">
+    <div id="od-container">
       <div class="od-page-container">
         <div class="od-page-original">
           <img class="od-img-original" src="../../assets/pictures/Untitled design-10.png" />
@@ -145,59 +115,14 @@
         <div class="od-page-cropped">
           <img class="od-img-cropped" src="../../assets/pictures/Untitled design-11.png" />
         </div>
-        <div class="od-page-details">
-          <div class="od-page-details-name">
-            <p class="title">Object Detected</p>
-            <p class="object-name">Nike Shoe</p>
-          </div>
-          <Button class="od-page-details-edit-name btn btn-primary">Edit Object Name</Button>
-        </div>
+        <div class="page-tag">OD</div>
       </div>
     </div>
-    <div *ngIf="onTopIndex === 3" id="ner-nav-container">
-      <div class="ocr-page-container ner-page-container">
-        <div class="ocr-page-original ner-page">
-          <div class="title">OCR output</div>
-          <ng-container *ngFor="let output of OCRoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="ocr-page-processed ner-page">
-          <div class="title">NER categories</div>
-          <ng-container *ngFor="let output of NERoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="ner-page-details">
-          <div class="ner-page-details-display">
-            <p class="title">Disc</p>
-            <p class="ner-disc">Save 25%</p>
-            <div class="ner-sub-disc">
-              <div>
-                <div class="title">Brand</div>
-                <div class="ner-disc">nike</div>
-              </div>
-              <div style="margin-left: 20px">
-                <div class="title">Prod cat</div>
-                <div class="ner-disc">FOOTWEAR</div>
-              </div>
-            </div>
-          </div>
-
-          <Button class="od-page-details-edit-name btn btn-primary ner-btn">Edit Object Name</Button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="onTopIndex === 4" id="keyword-nav-container">
-      <div class="keyword-page-container">
-        <div class="ocr-page-processed ner-page">
-          <div class="title">NER categories</div>
-          <ng-container *ngFor="let output of NERoutput">
-            <div>{{ output }}</div>
-          </ng-container>
-        </div>
-        <div class="keywords-extracted">
-          <div class="title">Keywords Extracted</div>
+    <div  id="ner-container">
+      <div class="ner-page-container">
+        <div class="page-tag">NER</div>
+        <div class="ner-extracted">
+          <div class="title">NER Extracted</div>
           <mat-card class="display-check">
             <mat-card-title>Brand</mat-card-title>
             <mat-card-subtitle>nike</mat-card-subtitle>
@@ -210,9 +135,8 @@
             <mat-card-title>Validity Period</mat-card-title>
             <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
           </mat-card>
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Edit Keywords</Button>
-        </div>
-        <div class="updated-keywords">
+             </div>
+        <div class="updated-ner">
           <div class="title">Updated Keywords</div>
           <mat-card class="display-check">
             <mat-card-title>Brand</mat-card-title>
@@ -226,9 +150,10 @@
             <mat-card-title>Validity Period</mat-card-title>
             <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
           </mat-card>
-          <Button class="od-page-details-edit-name btn btn-primary keyword-btn">Next</Button>
-        </div>
+         </div>
       </div>
-    </div></div>
+    </div>
+  </div>
+  </div>
   </div>
 </div>

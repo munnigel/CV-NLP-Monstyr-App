@@ -30,6 +30,6 @@ export class FileUploadService {
 
     // Make http post request over api
     // with formData as req
-    return this.http.post(`${this.baseApiUrl}`, formData);
+    return this.http.post(`${API_URL}/photos`, formData);
   }
 }
