@@ -18,7 +18,7 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         Given the "Choose Live" button is selected
         When I click on the "Back" button
         Then I should be able to see "Choose Live, Choose Pending, Choose Manually" button 
-        
+
 #### BACK BUTTON TEST => in Choose Pending Tab
     Scenario: Able to return to select post options using back button from choose-pending tab
         Given the "Choose Pending" button is selected
@@ -48,9 +48,8 @@ Feature: Manual selection of image/description of a promotion to use to test oth
 ## UPLOAD MANUALLY BUTTON
     Scenario: Able to upload files manually from local desktop
         Given that I click on the "Developer Tools" tab
-        And the "Upload Manually" button is selected
-        When I click on "Choose File" button
-        Then I should be able to see a "Choose Files to Upload" dialog 
+        And the "Choose Manually" button is selected
+        Then I should be able to see "Choose File" in the "Upload" section
         And I should be able to upload a file from my computer
         When I click on the "Click here to upload" button
         Then I should be able to see "Input Image, Processed Text" in the "OCR" section
@@ -60,6 +59,7 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         
 ## BACK BUTTON TEST => in Upload Manually Tab
     Scenario: Able to return to select post options using back button from choose-manually tab
-        Given the "Upload Manually" button is selected
+        Given that I click on the "Developer Tools" tab
+        And the "Choose Manually" button is selected
         When I click on the "back" button
         Then I should be able to see "Choose Live, Choose Pending, Choose Manually" button
