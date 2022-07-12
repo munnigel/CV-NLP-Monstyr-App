@@ -127,7 +127,7 @@
           <div class="ocr-page-container">
             <div class="page-tag">OCR</div>
             <div class="ocr-page-original">
-              <img class="img" src="../../assets/pictures/nikeshoes.jpg" />
+              <img class="img" [src]="currentSelectedProduct.imgUrl" />
               <div class="processed-words">
                 <ng-container *ngFor="let word of words">
                   <div class="processed-word">{{ word }}</div>
@@ -135,7 +135,7 @@
               </div>
             </div>
             <div class="ocr-page-processed">
-              <img class="img" src="../../assets/pictures/greenbox nike.jpg" />
+              <img class="img" [src]="currentSelectedProduct.imgUrl" />
               <!-- <textarea class="processed-text">{{ trainedData }}</textarea> -->
               <div class="processed-words">
                 <ng-container *ngFor="let word of words">
@@ -150,13 +150,13 @@
             <div class="od-page-original">
               <img
                 class="od-img-original"
-                src="../../assets/pictures/Untitled design-10.png"
+                [src]="currentSelectedProduct.imgUrl"
               />
             </div>
             <div class="od-page-cropped">
               <img
                 class="od-img-cropped"
-                src="../../assets/pictures/Untitled design-11.png"
+                [src]="currentSelectedProduct.imgUrl"
               />
             </div>
             <div class="page-tag">OD</div>
