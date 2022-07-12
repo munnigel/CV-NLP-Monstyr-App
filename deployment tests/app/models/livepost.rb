@@ -1,3 +1,2 @@
 class Livepost < ApplicationRecord
-    
 end

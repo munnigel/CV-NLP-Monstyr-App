@@ -48,8 +48,8 @@ ENV RAILS_ENV=production
 
 RUN bundle exec rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1 
 RUN bundle exec rake db:create
-# RUN bundle exec rake db:migrate
-# RUN bundle exec rake db:seed
+RUN bundle exec rake db:migrate
+RUN bundle exec rake db:seed
 
 EXPOSE 8080
 CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]

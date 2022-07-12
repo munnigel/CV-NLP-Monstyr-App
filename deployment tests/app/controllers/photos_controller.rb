@@ -31,8 +31,8 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new photo_params
-    image = params[:photo][:image]
-    caption = params[:photo][:caption]
+    image = params[:image]
+    caption = params[:caption]
 
     if @photo.save
       @photo.image.attach image if image
@@ -88,6 +88,6 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:caption, :image)
+    params.permit(:caption, :image)
   end
 end
