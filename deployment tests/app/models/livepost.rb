@@ -1,2 +1,0 @@
-class Livepost < ApplicationRecord
-end
