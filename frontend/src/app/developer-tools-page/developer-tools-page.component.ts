@@ -110,7 +110,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
     this.words = "this is jack's fav website".split(' ');
-    this.titleService.setTitle('Dev-tools');
+    this.titleService.setTitle('developer-tools');
   }
 
   reset() {
