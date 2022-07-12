@@ -1,7 +1,24 @@
-# RottenPotatoes demo app: getting started
+# README
 
-This app is associated with the free [online
-course](http://www.saas-class.org) and (non-free)
-[ebook](http://www.saasbook.info) Engineering Software as a Service.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-To start working on the Rails Intro homework, please follow [the instructions](instructions/README.md).
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
