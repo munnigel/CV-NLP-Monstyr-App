@@ -29,13 +29,13 @@ export class PendingPostPageComponent implements OnInit {
   }
 
   async nextPage() {
-    this.dataSrv.nextTab();
+    this.dataSrv.nextPendingTab();
     await this.dataSrv.updateAllProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
   }
 
   async prevPage() {
-    this.dataSrv.prevTab();
+    this.dataSrv.prevPendingTab();
     await this.dataSrv.updateAllProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
   }
