@@ -116,6 +116,6 @@ export class EditItemComponent implements OnInit {
     // this.promotionDate = '19/9/1999';
     // console.log('date activated');
     this.endDate = this.datasrv.datePost(this.id);
-    console.log(this.endDate);
+    console.log(this.id+"aaaa");
   }
 }

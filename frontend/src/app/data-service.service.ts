@@ -165,9 +165,10 @@ export class DataService implements OnInit {
   }
 
   async datePost(id: number): Promise<Observable<Product>> {
-    
-    this.dateExtracted = await this.http.post<Product>(`${AI_URL}/dateparse`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.", this.httpOptions);
+    console.log(id);
+    this.dateExtracted = await this.http.post<Product>(`${AI_URL}/getdates`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.", this.httpOptions);
     console.log(this.productList[id].content);
+
     return this.dateExtracted;
 
   }
