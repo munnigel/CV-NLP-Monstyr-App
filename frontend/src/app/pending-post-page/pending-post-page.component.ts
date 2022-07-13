@@ -23,6 +23,7 @@ export class PendingPostPageComponent implements OnInit {
     this.tabIndex = 2;
     this.showItem = false;
     this.pendingProductList = this.dataSrv.getPendingProductList();
+    console.log(this.pendingProductList[0]);
     console.log(this.pendingProductList);
     this.titleService.setTitle('Pending-posts');
   }

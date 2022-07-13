@@ -11,13 +11,26 @@ export class DataService implements OnInit {
   private productList: Product[];
   private liveProductList: Product[];
   private pendingProductList: Product[];
+  ODLatency: number;
+  OCRLatency: number;
+  NERDateLatency: number;
+  NERCategoriesLatency: number;
+  NERTitleLatency: number;
+
   constructor(private http: HttpClient) {}
 
   async ngOnInit() {
     console.log('getting');
     this.productList = [];
+    this.liveProductList = [];
+    this.pendingProductList = [];
     await this.updateAllProductList();
     console.log(API_URL);
+    this.ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
+    await lastValueFrom(this.http.get(`${API_URL}/ocrlatency`));
+    await lastValueFrom(this.http.get(`${API_URL}/nerdatelatency`));
+    await lastValueFrom(this.http.get(`${API_URL}/nercategorieslatency`));
+    await lastValueFrom(this.http.get(`${API_URL}/nertitlelatency`));
   }
 
   async setEditingStatus(id: number) {
@@ -56,10 +69,30 @@ export class DataService implements OnInit {
   };
 
   async updateAllProductList() {
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts.json`, this.httpOptions)
+    let res1: any = await lastValueFrom(
+      this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
     );
-    console.log(res);
+    // console.log('all products');
+    // console.log(res1);
+    this.createAndStoreProductList(this.productList, res1);
+    // console.log(this.productList);
+    let res2: any = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/live/1`, this.httpOptions)
+    );
+    // console.log('live products');
+    // console.log(res2);
+    this.createAndStoreProductList(this.liveProductList, res2);
+    // console.log(this.liveProductList);
+    let res3: any = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/pending/1`, this.httpOptions)
+    );
+    // console.log('pending products');
+    // console.log(res3);
+    this.createAndStoreProductList(this.pendingProductList, res3);
+    console.log(this.pendingProductList);
+  }
+
+  private createAndStoreProductList(list: Product[], res: any) {
     for (let i = 0; i < res.length; i++) {
       let temp = new Product(
         res[i].id,
@@ -90,10 +123,8 @@ export class DataService implements OnInit {
         res[i].ner_categories_latency,
         res[i].ner_title_latency
       );
-      if (temp.status == 'live') this.liveProductList.push(temp);
-      else if (temp.status == 'pending') this.pendingProductList.push(temp);
-      this.productList.push(temp);
-      console.log(this.productList);
+      // console.log(temp);
+      list.push(temp);
     }
   }
 
@@ -134,3 +165,6 @@ export class DataService implements OnInit {
 // "ner_date_latency":null,
 // "ner_categories_latency":null,
 // "ner_title_latency":null}
+
+// http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBIUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d64d370314689f266934d8600da6e615fb96f8e9/ESC_SDS%20Project%20UML%20Use%20Case%20Diagram%20-%20UML%20Class%20diagram.png
+// http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBQUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d60f20cd4da41f957efa6c4b9cd1061b9be4f84/ESC_SDS%20Project%20UML%20Use%20Case%20Diagram%20-%20UML%20Class%20diagram.png

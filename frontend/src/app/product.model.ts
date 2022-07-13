@@ -18,7 +18,7 @@ export class Product {
     public content?: string,
     public ODImage?: string[],
     public OCRImage?: string[],
-    public images?: string[],
+    public images?: string,
     public score?: number,
     public createdAt?: Date,
     public updatedAt?: Date,
