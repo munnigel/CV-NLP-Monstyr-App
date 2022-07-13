@@ -66,24 +66,26 @@
 
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'real_estate_transactions.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'))
+csv = CSV.parse(csv_text,:headers => true, :encoding => 'ISO-8859-1')
+
 csv.each do |row|
-  t = Transaction.new
-  t.street = row['street']
-  t.city = row['city']
-  t.zip = row['zip']
-  t.zip = row['zip']
-  t.state = row['state']
-  t.beds = row['beds']
-  t.sq_feet = row['sq_feet']
-  t.category = row['type']
-  t.sale_date = row['sale_date']
-  t.price = row['price']
-  t.lat = row['latitude']
-  t.lng = row['longitude']
+  t = Post.new
+  t.sp_id = row['sp_id']
+  t.pid = row['pid']
+  t.content = row['content']
+  t.gen_title = row['gen_title']
+  t.gen_start_date = row['gen_start_date']
+  t.gen_end_date = row['gen_end_date']
   t.save
-  puts "#{t.street}, #{t.city} saved"
+  puts "#{t.sp_id}, #{t.pid} saved"
 end
 
-puts "There are now #{Transaction.count} rows in the transactions table"
+
+# CSV.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'), headers: true).each do |row|
+#   t = Import.create(row.to_hash)
+#   puts "#{t.production}, #{t.episode} saved"
+# end
+
+
+# puts "There are now #{Import.count} rows in the imports table"
