@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :posts
-  resources :photos
+  resources :photos, :except => [:new]
   resources :pendingposts
   resources :liveposts
   root "photos#index"
