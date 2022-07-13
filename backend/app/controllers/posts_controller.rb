@@ -1,9 +1,18 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+  end
+
+  def allpostsjson
+    @posts = Post.all
+    respond_to do |format|
+      format.html { render json: @posts}
+      format.json {render json: @posts}
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -21,16 +30,18 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Post.new post_params
+    image = params[:image]
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      @post.image.attach image if image
+      @post.images = url_for(@post.image)
+      @post.save
+      # redirect_to posts_path, notice: "Post was successfully uploaded."
+      render json: @post
+    else
+      flash.now[:alert] = "Post could not be saved."
+      render :new
     end
   end
 
@@ -70,6 +81,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :image)
+      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency)
     end
 end
