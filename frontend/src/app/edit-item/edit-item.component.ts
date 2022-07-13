@@ -21,6 +21,7 @@ export class EditItemComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+  endDate: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,14 +45,24 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        title: [`${this.pendingProduct.genTitle}`, Validators.required],
-        content: [`${this.pendingProduct.genContent}`, Validators.required],
-        categories: [
-          `${this.pendingProduct.genCategories}`,
+        // title: [`${this.pendingProduct.genTitle}`, Validators.required],
+        // content: [`${this.pendingProduct.genContent}`, Validators.required],
+        // categories: [
+        //   `${this.pendingProduct.genCategories}`,
+        //   Validators.required,
+        // ],
+        // // startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
+        // // endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
+        // promotionDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
+        title: [`gfdfgd`, Validators.required],
+        description: [`hhhh`, Validators.required],
+        category: [
+          `hello`,
           Validators.required,
         ],
-        startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
-        endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
+        // startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
+        // endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
+        promotionDate: [`hi`, Validators.required],
       });
     });
 
@@ -86,19 +97,25 @@ export class EditItemComponent implements OnInit {
   }
 
   makeDescription() {
-    this.description = 'DESCRIPTION GENERATED WAAAA';
+    this.editForm.patchValue({'description': 'TAGS GENERATED WAAAA'})
+    // this.description = 'DESCRIPTION GENERATED WAAAA';
     console.log('description activated');
   }
   makeTitle() {
+    this.editForm.patchValue({'title': 'TITLE GENERATED WAAAA'})
     this.title = 'TITLE GENERATED WAAAA';
-    console.log('title activated');
+    console.log('title activated')
   }
   makeCategory() {
+    this.editForm.patchValue({'category': 'CAT GENERATED WAAAA'})
     this.category = 'CATEGORY GENERATED WAAAA';
     console.log('category activated');
   }
   makeDate() {
-    this.promotionDate = '19/9/1999';
-    console.log('date activated');
+    this.editForm.patchValue({'promotionDate': 'DATE GENERATED WAAAA'})
+    // this.promotionDate = '19/9/1999';
+    // console.log('date activated');
+    this.endDate = this.datasrv.datePost(this.id);
+    console.log(this.endDate);
   }
 }

@@ -1,7 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { API_URL } from '../app/env';
+import { AI_URL, API_URL } from '../app/env';
 import { Product } from './product.model';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class DataService implements OnInit {
   private productList: Product[];
   private liveProductList: Product[];
   private pendingProductList: Product[];
+  dateExtracted: any;
   ODLatency: number;
   OCRLatency: number;
   NERDateLatency: number;
@@ -161,7 +163,20 @@ export class DataService implements OnInit {
       this.httpOptions
     );
   }
+
+  async datePost(id: number): Promise<Observable<Product>> {
+    
+    this.dateExtracted = await this.http.post<Product>(`${AI_URL}/dateparse`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.", this.httpOptions);
+    console.log(this.productList[id].content);
+    return this.dateExtracted;
+
+  }
+
+
 }
+
+
+
 
 // {"id":1,
 // "title":null,
