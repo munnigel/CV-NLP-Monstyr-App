@@ -19,11 +19,11 @@ public class DateParser
     {
 
         HawkingTimeParser parser = new HawkingTimeParser();
-        String inputText = "Stay cool and hydrated. Grab a refreshing beverage from our SPC Choices stores today! 😋 Promotion is valid till 28 February 2021 or while stocks last. Click here for our latest promotions: https://www.spc.com.sg/our-business/spc-service-station/latest-promotions/ #SPCSingapore #SPCChoices";
+        String inputText = "Enjoy 10% OFF your Air Fryer Oven purchase when you pay using GrabPay! Make sure you use the code 'AFOGrab10' at checkout to take home the Air Fryer Oven for $359.1 (from $399). Get a FREE GIFT worth $88 and a chance to earn x2 Grab Reward Points - ONLY until Oct 28!  Don't miss out: https://bit.ly/FBOAirFryerOvenGrabPay!";
         HawkingConfiguration hawkingConfiguration = new HawkingConfiguration();
         hawkingConfiguration.setFiscalYearStart(1);
         hawkingConfiguration.setFiscalYearEnd(12);
-        hawkingConfiguration.setTimeZone("IST");
+        hawkingConfiguration.setTimeZone("SST");
         Date referenceDate = new Date();
         DatesFound datesFound = null;
 
@@ -31,11 +31,14 @@ public class DateParser
             datesFound = parser.parse(inputText, referenceDate, hawkingConfiguration, "eng"); //No I18N
           } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
           }
-          assert datesFound != null;
-          LOGGER.info("DATES FOUND ::  "+ datesFound.toString());
-        }
+          // assert datesFound != null;
+          // LOGGER.info("DATES FOUND ::  "+ datesFound.toString());
+          System.out.println("\n");
+          System.out.println("\n");
+          System.out.println(datesFound.toString());
+      }
         // System.out.println( "Hello World!" );
     }
 
