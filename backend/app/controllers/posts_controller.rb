@@ -26,7 +26,10 @@ class PostsController < ApplicationController
 
   # Retrieves live posts in batches of N
   def livepostsinbatches
+    end_idx = (params[:batch].to_i * 15) - 1
+    start_idx = end_idx - 14
     @posts = Post.where("status = 'live'")
+    @posts = @posts[start_idx..end_idx]
     #.first(params[batch])
     respond_to do |format|
       format.html { render json: @posts}
@@ -36,14 +39,16 @@ class PostsController < ApplicationController
 
   # Retrieves pending posts in batches of N
   def pendingpostsinbatches
+    end_idx = (params[:batch].to_i * 15) - 1
+    start_idx = end_idx - 14
     @posts = Post.where("status = 'pending'")
+    @posts = @posts[start_idx..end_idx]
     #.first(params[batch])
     respond_to do |format|
       format.html { render json: @posts}
       format.json {render json: @posts}
     end
   end
-
 
   # Returns number of posts in db
   def noofposts
