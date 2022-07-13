@@ -63,8 +63,8 @@ When(/^I click on one of the "(.*)" post$/, (selector) => {
     cy.get('.post-container').first().click()
 })
 
+
 Then (/^I should be able to see "(.*)" in the "(.*)" section$/, (selectors1, selectors2) => {
-    
     let sel1 = selectors1.split(", ")
     let sel2 = selectors2.toLowerCase()
     
