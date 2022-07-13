@@ -28,6 +28,10 @@ export class DataService implements OnInit {
     this.pendingProductList = [];
     await this.updateAllProductList();
     console.log(API_URL);
+    await this.updateOverviewData();
+  }
+
+  async updateOverviewData() {
     let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
     this.ODLatency = ODLatency['odlatency'];
     let OCRLatency = await lastValueFrom(
