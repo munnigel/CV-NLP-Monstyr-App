@@ -22,7 +22,12 @@ const routes: Routes = [
       { path: 'overview', component: OverviewPageComponent },
       { path: 'pending', component: PendingPostPageComponent },
       { path: 'processed', component: ProcessedPostPageComponent },
-      { path: 'developertools', component: DeveloperToolsPageComponent },
+      {
+        path: 'developertools',
+        component: DeveloperToolsPageComponent,
+      },
+      { path: 'developertools/live/:id', redirectTo: 'developertools' },
+      { path: 'developertools/pending/:id', redirectTo: 'developertools' },
       { path: 'settings', component: SettingsPageComponent },
     ],
   },
@@ -33,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

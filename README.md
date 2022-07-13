@@ -63,3 +63,26 @@ While in the frontend folder,
 $ npm install
 $ ng serve
 ```
+# Testing with Cucumber 
+
+while in backend folder, (make sure u gitpull backend to have updated gemfile dependencies)
+
+To install gems:
+
+```
+$ bundle install  
+```
+create the conventional folder structure for our Gherkin specifications and the code that will let Cucumber test them:
+
+```
+$ cucumber --init
+```
+
+To run cucumber :
+
+```
+$ bundle exec cucumber
+```
+### Click here for more information on implementing Gherkin steps in Cucumber 
+
+[cucumber_steps](cucumber_steps.md)

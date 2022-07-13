@@ -23,21 +23,19 @@ export class EditItemComponent implements OnInit {
   errMsg: string;
   id: number;
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: FormBuilder,
-  ) {
-
-  }
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       // console.log(this.datasrv.getPendingProductList()[id]);
-      let pendingProductList = this.datasrv.getPendingProductList()
+      console.log(this.id);
+      let pendingProductList = this.datasrv.getPendingProductList();
       for (let pendingProduct of pendingProductList) {
         // console.log(pendingProduct);
         if (pendingProduct.id == this.id) {
@@ -45,19 +43,20 @@ export class EditItemComponent implements OnInit {
           break;
         }
       }
-      console.log(this.pendingProduct)
+      console.log(this.pendingProduct);
       this.editForm = this.fb.group({
         title: [`Auto generated title ${this.id}`, Validators.required],
-        description: [`Auto generated description ${this.id}`, Validators.required],
+        description: [
+          `Auto generated description ${this.id}`,
+          Validators.required,
+        ],
         category: [`Auto generated category ${this.id}`, Validators.required],
         promotionDate: [`Auto generated date ${this.id}`, Validators.required],
       });
-
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
   }
-
 
   async onProcessed() {
     if (this.editForm.invalid) {
@@ -70,12 +69,10 @@ export class EditItemComponent implements OnInit {
       return;
     } else {
       let editedData = await this.datasrv.getPendingProductList();
-      this.pendingProduct.title = this.editForm.value.title,
-        this.pendingProduct.description = this.editForm.value.description,
-        this.pendingProduct.category = this.editForm.value.category,
-        this.pendingProduct.promotionDate = this.editForm.value.promotionDate,
-
-
+      (this.pendingProduct.title = this.editForm.value.title),
+        (this.pendingProduct.description = this.editForm.value.description),
+        (this.pendingProduct.category = this.editForm.value.category),
+        (this.pendingProduct.promotionDate = this.editForm.value.promotionDate),
         // this.datasrv.updatePendingPost(this.pendingProduct).subscribe({
         //   next: (v) => console.log(v),
         //   error: (e) => console.error(e),
@@ -84,36 +81,40 @@ export class EditItemComponent implements OnInit {
 
         this.datasrv.addLivePost(this.pendingProduct).subscribe({
           next: (v) => console.log(v),
-          error: (e) => console.error("completed add", e),
+          error: (e) => console.error('completed add', e),
           complete: () => console.log('completed add'),
-        })
+        });
 
       this.datasrv.deletePendingPost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
-        complete: () => { this.datasrv.updateLiveProductList(), this.datasrv.updatePendingProductList(), this.router.navigate(['home/processed'], {}) }
-      })
+        complete: async () => {
+          await this.datasrv.updateLiveProductList();
+          await this.datasrv.updatePendingProductList();
+          this.router.navigate(['home/processed'], {});
+        },
+      });
     }
   }
 
   onPending() {
-    this.router.navigate(['home/pending'], {})
+    this.router.navigate(['home/pending'], {});
   }
 
   makeDescription() {
-    this.description = "DESCRIPTION GENERATED WAAAA"
-    console.log("description activated")
+    this.description = 'DESCRIPTION GENERATED WAAAA';
+    console.log('description activated');
   }
   makeTitle() {
-    this.title = "TITLE GENERATED WAAAA"
-    console.log("title activated")
+    this.title = 'TITLE GENERATED WAAAA';
+    console.log('title activated');
   }
   makeCategory() {
-    this.category = "CATEGORY GENERATED WAAAA"
-    console.log("category activated")
+    this.category = 'CATEGORY GENERATED WAAAA';
+    console.log('category activated');
   }
   makeDate() {
-    this.promotionDate = "19/9/1999"
-    console.log("date activated")
+    this.promotionDate = '19/9/1999';
+    console.log('date activated');
   }
 }

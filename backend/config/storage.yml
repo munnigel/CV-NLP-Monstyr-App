@@ -1,29 +1,20 @@
-local:
-  service: Disk
-  root: <%= Rails.root.join("storage") %>
-
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+# Remember not to checkin your GCS keyfile to a repository
+# [START cloudrun_rails_storage]
 google:
   service: GCS
-  credentials: <%= Rails.root.join("service-account.json") %>
-  project: "rubyduckies"
-  bucket: "rubyduckies_cloudstorage"
-  public: true
-
-# amazon:
-#   service: S3
-#   # ...
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# google:
-#   service: GCS
-#   # ...
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# azure:
-#   service: AzureStorage
-#   # ...
-#   container: your_container_name-<%= Rails.env %>
+  # project: <%= ENV["GOOGLE_PROJECT_ID"] %>
+  project: rubyduckies
+  # credentials: <%= Rails.application.credentials.gcskey.as_json %>
+  credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].to_json %>
+  # bucket: <%= ENV["STORAGE_BUCKET_NAME"] %>
+  # bucket: rubyduckies-rubyduckies_cloudstorage
+  bucket: rubyduckies_cloudstorage
+# [END cloudrun_rails_storage]

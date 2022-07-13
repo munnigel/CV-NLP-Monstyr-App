@@ -1,140 +1,60 @@
+### As a software developer at Monstyr in charge of automating the Monstyr promotion upload process,
+# I want to be able to upload/ select a promotion post(consists of an image + description)
+# so that I can test the performance of newly implemented features in a controlled manner
+# And view the implemented feature results in their relevant tabs to evaluate the feature.
+
+
 Feature: Manual selection of image/description of a promotion to use to test other features
 
-    Scenario: Option to select post from developer tools
-        Given I am on the home page
-        When I click on the "developer-tools" tab
-        Then I should be on the "Dev-tools" tab
-        * I should be able to see "choose-live, choose-pending, choose-manually" buttons
-
-    Scenario: Able to view and select from a list of live posts
-        Given I am on the "Dev-tools" tab
-        When I click on the "choose-live" button
-        Then I should be on the "choose-live" sub-tab
-        * I should see a list of "live" posts which I can select from
-
+## SELECT POST
+    Scenario: Option to select post from developer tools tab
+        Given I am on the "Overview" page as a developer
+        When I click on the "Developer Tools" tab
+        Then I should be on the "Developer Tools" page
+        And I should be able to see "Choose Live, Choose Pending, Choose Manually" button
+        
+#### BACK BUTTON TEST => in Choose Live Tab
     Scenario: Able to return to select post options using back button from choose-live tab
-        Given  I am on the "choose-live" sub-tab
-        When I click on the "back" button
-        Then I should be on the "select-post" sub-tab
+        Given the "Choose Live" button is selected
+        When I click on the "Back" button
+        Then I should be on the "Select Post" section 
 
-    Scenario: Able to view and select from a list of pending posts
-        Given I am on the "Dev-tools" tab
-        When I click on the "choose-pending" button
-        Then I should be on the "choose-pending" sub-tab
-        * I should see a list of "pending" posts which I can select from
+## CHOOSE LIVE BUTTON
+    Scenario: Selecting a post from the "Choose Live" option
+        Given the "Choose Live" button is selected
+        When I click on one of the "Live" post 
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
+        And I should be able to see "Processed Tags" in the "OD" section
+        And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
 
+## CHOOSE PENDING BUTTON
+    Scenario: Selecting a post from the "Choose Pending" option
+        Given the "Choose Pending" button is selected
+        When I click on one of the "Pending" post 
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
+        And I should be able to see "Processed Tags" in the "OD" section
+        And I should be able to see "Extracted Keywords" in the "Keyword Extraction" section
+
+#### BACK BUTTON TEST => in Choose Pending Tab
     Scenario: Able to return to select post options using back button from choose-pending tab
-        Given I am on the "choose-pending" sub-tab
-        When I click on the "back" button
-        Then I should be on the "select-post" sub-tab
+        Given the "Choose Pending" button is selected
+        When I click on the "Back" button
+        Then I should be on the "Select Post" section 
 
-    Scenario: Able to upload a post from local file
-        Given I am on the "Dev-tools" tab
-        When I click on the "choose-manually" button
-        Then I should be on the "choose-manually" sub-tab
+## UPLOAD MANUALLY BUTTON
+    Scenario: Able to upload files manually from local desktop
+        Given the "Upload Manually" button is selected
+        When I click on "Choose File" button
+        Then I should be able to see a "Choose Files to Upload" dialog 
+        And I should be able to upload a file from my computer
+        When I click on the "Click here to upload" button
+        Then I should be able to see "Input Image, Processed Text" in the "OCR" section
+        And I should be able to see "Processed Tags" in the "OD" section
+        And I should be able to see "Extracted Keywords" in the "NER" section
 
+        
+## BACK BUTTON TEST => in Upload Manually Tab
     Scenario: Able to return to select post options using back button from choose-manually tab
-        Given I am on the "choose-manually" sub-tab
+        Given the "Upload Manually" button is selected
         When I click on the "back" button
-        Then I should be on the "select-post" sub-tab
-
-    Scenario: Viewing OCR data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "ocr" nav-tab
-        Then I should be on the "ocr" nav-tab
-
-    Scenario: Viewing OD data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "od" nav-tab
-        Then I should be on the "od" nav-tab
-
-    Scenario: Viewing NER data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "ner" nav-tab
-        Then I should be on the "ner" nav-tab
-
-    Scenario: Viewing keyword extraction data from select post nav tab
-        Given I am on the "Dev-tools" tab
-        When I click on the "keyword" nav-tab
-        Then I should be on the "keyword" nav-tab
-
-# Scenario: Viewing OCR data from ocr nav tab
-#     Given I am on the "ocr" nav-tab
-#     When I click on the "select-post" nav-tab
-#     Then I should be on the "select-post" nav-tab
-
-# Scenario: Viewing OD data from ocr nav tab
-#     Given I am on the "ocr" nav-tab
-#     When I click on the "od" nav-tab
-#     Then I should be on the "od" nav-tab
-
-# Scenario: Viewing NER data from ocr nav tab
-#     Given I am on the "ocr" nav-tab
-#     When I click on the "ner" nav-tab
-#     Then I should be on the "ner" nav-tab
-
-# Scenario: Viewing keyword extraction data from ocr nav tab
-#     Given I am on the "ocr" nav-tab
-#     When I click on the "keyword" nav-tab
-#     Then I should be on the "keyword" nav-tab
-
-# Scenario: Viewing OCR data from od nav tab
-#     Given I am on the "od" nav-tab
-#     When I click on the "ocr" nav-tab
-#     Then I should be on the "ocr" nav-tab
-
-# Scenario: Viewing OD data from od nav tab
-#     Given I am on the "od" nav-tab
-#     When I click on the "select-post" nav-tab
-#     Then I should be on the "select-post" nav-tab
-
-# Scenario: Viewing NER data from od nav tab
-#     Given I am on the "od" nav-tab
-#     When I click on the "ner" nav-tab
-#     Then I should be on the "ner" nav-tab
-
-# Scenario: Viewing keyword extraction data from d nav tab
-#     Given I am on the "od" nav-tab
-#     When I click on the "keyword" nav-tab
-#     Then I should be on the "keyword" nav-tab
-
-# Scenario: Viewing OCR data from ner nav tab
-#     Given I am on the "ner" nav-tab
-#     When I click on the "ocr" nav-tab
-#     Then I should be on the "ocr" nav-tab
-
-# Scenario: Viewing OD data from ner nav tab
-#     Given I am on the "ner" nav-tab
-#     When I click on the "od" nav-tab
-#     Then I should be on the "od" nav-tab
-
-# Scenario: Viewing NER data from ner nav tab
-#     Given I am on the "ner" nav-tab
-#     When I click on the "select-post" nav-tab
-#     Then I should be on the "select-post" nav-tab
-
-# Scenario: Viewing keyword extraction data from ner nav tab
-#     Given I am on the "ner" nav-tab
-#     When I click on the "keyword" nav-tab
-#     Then I should be on the "keyword" nav-tab
-
-# Scenario: Viewing OCR data from keyword nav tab
-#     Given I am on the "keyword" nav-tab
-#     When I click on the "ocr" nav-tab
-#     Then I should be on the "ocr" nav-tab
-
-# Scenario: Viewing OD data from keyword nav tab
-#     Given I am on the "keyword" nav-tab
-#     When I click on the "od" nav-tab
-#     Then I should be on the "od" nav-tab
-
-# Scenario: Viewing NER data from keyword nav tab
-#     Given I am on the "keyword" nav-tab
-#     When I click on the "ner" nav-tab
-#     Then I should be on the "ner" nav-tab
-
-# Scenario: Viewing keyword extraction data from keyword nav tab
-#     Given I am on the "keyword" nav-tab
-#     When I click on the "select-post" nav-tab
-#     Then I should be on the "select-post" nav-tab
-
+        Then I should be on the "Select Post" section
