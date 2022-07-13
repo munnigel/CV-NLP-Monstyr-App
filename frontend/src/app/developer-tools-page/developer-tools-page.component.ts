@@ -7,7 +7,7 @@ import { Product } from '../product.model';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { API_URL } from '../../app/env';
@@ -143,6 +143,10 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.currentTabSelector = titleList[index];
   }
 
+  manualCreatePost() {
+
+  }
+
   backToSelector() {
     this.tabSelector = this.tabSelectorList[0];
     this.liveEditing = false;
@@ -200,11 +204,12 @@ export class DeveloperToolsPageComponent implements OnInit {
   }
   async submitForm() {
     var formData: any = new FormData();
-    formData.append('caption', this.imageForm.get('caption').value);
     formData.append('image', this.imageForm.get('image').value);
     let res = await lastValueFrom(
-      this.http.post(`${API_URL}/photos`, formData)
+      this.http.post(`${API_URL}/posts`, formData)
     );
-    console.log(res);
+    let temp = new Product();
+    temp.images = res['images'];
+    this.currentSelectedProduct = temp;
   }
 }
