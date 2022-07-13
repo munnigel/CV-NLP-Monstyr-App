@@ -9,6 +9,7 @@ import { ProcessedPostPageComponent } from './processed-post-page/processed-post
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 const routes: Routes = [
   { path: 'edit/:id', component: EditItemComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
         path: 'developertools',
         component: DeveloperToolsPageComponent,
       },
+      {path:'addpost', component:AddPostComponent},
       { path: 'developertools/live/:id', redirectTo: 'developertools' },
       { path: 'developertools/pending/:id', redirectTo: 'developertools' },
       { path: 'settings', component: SettingsPageComponent },

@@ -26,7 +26,7 @@
     </div>
     <div *ngIf="!loadingTrainedData">
       <div style="position: relative" id="select-post-nav-container">
-        <div class="back-btn">
+        <div class="back-btn create-btn">
           <button
             *ngIf="tabSelector != 'selecting'"
             class="btn btn-primary"
@@ -71,7 +71,7 @@
                 (click)="onFunctionClick(2)"
                 id="choose-manually-btn"
               >
-                Upload manually
+                Choose manually
               </button>
             </div>
           </div>
@@ -130,7 +130,10 @@
                 </div>
                 <div class="text-center">
                   <div class="form-group">
-                    <button class="btn btn-danger btn-block btn-lg">
+                    <button 
+                    class="btn btn-danger btn-block btn-lg" 
+                    id="create-btn" 
+                    (click)="onFunctionClick(2) ">
                       Create
                     </button>
                   </div>

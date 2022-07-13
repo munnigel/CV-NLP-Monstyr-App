@@ -20,6 +20,7 @@ export class DataService implements OnInit {
   NERTitleLatency: number;
   pendingPercentage: number;
   livePercentage: number;
+  private tab: number;
 
   constructor(private http: HttpClient) { }
 
@@ -28,9 +29,17 @@ export class DataService implements OnInit {
     this.productList = [];
     this.liveProductList = [];
     this.pendingProductList = [];
+    this.setTab(1);
     await this.updateAllProductList();
     console.log(API_URL);
     await this.updateOverviewData();
+  }
+
+  setTab(i: number) {
+    this.tab = i;
+  }
+  getTab() {
+    return this.tab;
   }
 
   async updateOverviewData() {
@@ -96,6 +105,9 @@ export class DataService implements OnInit {
   };
 
   async updateAllProductList() {
+    this.productList = [];
+    this.pendingProductList = [];
+    this.liveProductList = [];
     let res1: any = await lastValueFrom(
       this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
     );
@@ -104,14 +116,14 @@ export class DataService implements OnInit {
     this.createAndStoreProductList(this.productList, res1);
     // console.log(this.productList);
     let res2: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/live/1`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/live/${this.tab}`, this.httpOptions)
     );
     // console.log('live products');
     // console.log(res2);
     this.createAndStoreProductList(this.liveProductList, res2);
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/pending/2`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/pending/${this.tab}`, this.httpOptions)
     );
     // console.log('pending products');
     // console.log(res3);
@@ -153,6 +165,10 @@ export class DataService implements OnInit {
       // console.log(temp);
       list.push(temp);
     }
+  }
+
+  addPost(formData: FormData) {
+    return this.http.post(`${API_URL}/posts`, formData);
   }
 
   updatePost(product: Product): Observable<Product> {
