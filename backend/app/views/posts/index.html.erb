@@ -1,14 +1,27 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+    </div>
 </div>
+<br>
 
-<%= link_to "New post", new_post_path %>
+<% if @posts.empty? %>
+  <div class="container">
+    <div class="row justify-content-center">
+    <p>No posts found. Add new posts to view them.</p>
+    </div>
+  </div>
+<% else %>
+  <div class="grid-container">
+    <% @posts.each do |post| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <!-- <img class="card-img-top" src="<%= image_url post %>" alt="Card image cap"> -->
+          <%= image_tag(post.image, size: "200") %>
+          <h5 class="card-title"><%= post.title %></h5>
+          <%= link_to 'Show', post_path(post), class:"btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
