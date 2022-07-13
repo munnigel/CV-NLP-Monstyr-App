@@ -130,10 +130,11 @@
                 </div>
                 <div class="text-center">
                   <div class="form-group">
-                    <button 
-                    class="btn btn-danger btn-block btn-lg" 
-                    id="create-btn" 
-                    (click)="onFunctionClick(2) ">
+                    <button
+                      class="btn btn-danger btn-block btn-lg"
+                      id="create-btn"
+                      (click)="onFunctionClick(2)"
+                    >
                       Create
                     </button>
                   </div>
@@ -193,7 +194,10 @@
                   <mat-card-title>Location</mat-card-title>
                   <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
                   <mat-card-title>Validity Period</mat-card-title>
-                  <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+                  <mat-card-subtitle
+                    >{{ currentParsedStartDate }} till
+                    {{ currentParsedEndDate }}</mat-card-subtitle
+                  >
                 </mat-card>
               </div>
               <div class="updated-ner">
@@ -208,7 +212,10 @@
                   <mat-card-title>Location</mat-card-title>
                   <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
                   <mat-card-title>Validity Period</mat-card-title>
-                  <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+                  <mat-card-subtitle
+                    >{{ currentParsedStartDate }} till
+                    {{ currentParsedEndDate }}</mat-card-subtitle
+                  >
                 </mat-card>
               </div>
             </div>
