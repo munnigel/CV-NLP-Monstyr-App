@@ -104,7 +104,6 @@ body {
   animation: animation 3s cubic-bezier(0.6, 0.02, 0.37, 1.02) infinite;
 }
 
-
 @keyframes animation {
 
   0%,
@@ -118,8 +117,6 @@ body {
     width: 103%;
   }
 }
-
-
 
 .imgg {
   width: 150px;
@@ -139,6 +136,11 @@ body {
 
 .form-control {
   font-weight: 200;
+}
+
+.form-control-name {
+  font-weight: 200;
+  width: 600px;
 }
 
 .col-12 {
@@ -185,7 +187,6 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-
 }
 
 .refresh {
@@ -194,9 +195,8 @@ body {
   border-radius: 10px;
   background-color: rgb(72, 70, 70);
   color: aliceblue;
-  transition: .5s;
+  transition: 0.5s;
 }
-
 
 .btns::before {
   transform: scale(1.1);
@@ -209,8 +209,6 @@ body {
   text-shadow: 0 0 5px #ffee10;
 }
 
-
-
 .pending-posts-container {
   display: flex;
   flex-direction: column;
@@ -221,16 +219,14 @@ body {
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: scale3d(.75, .75, 2);
+    transform: scale3d(0.75, 0.75, 2);
   }
-
 
   100% {
     opacity: 1;
     transform: scale3d(1, 1, 1);
   }
 }
-
 
 .pending-posts-item {
   margin: 20px;
@@ -243,7 +239,7 @@ body {
 }
 
 .fade {
-  animation: fadeIn .7s both;
+  animation: fadeIn 0.7s both;
   transform-origin: center bottom;
 }
 
@@ -621,4 +617,12 @@ body {
 
 a {
   text-decoration: none;
+}
+
+.center-box {
+  width: 602px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  border: 1px solid #8d8d8d;
 }

@@ -24,12 +24,4 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add('loginWith', ({ email, password }) =>
-cy.visit('/login')
-.findByPlaceholderText(/email/)
-.type(email)
-.findByPlaceholderText(/password/)
-.type(password)
-.findByText('Log in')
-.click()
-)
+import 'cypress-file-upload';

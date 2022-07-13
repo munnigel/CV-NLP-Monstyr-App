@@ -38,7 +38,8 @@ class PhotosController < ApplicationController
       @photo.image.attach image if image
       @photo.ImgUrl = url_for(@photo.image)
       @photo.save
-      redirect_to photos_path, notice: "Photo was successfully uploaded."
+      # redirect_to photos_path, notice: "Photo was successfully uploaded."
+      render json: @photo
     else
       flash.now[:alert] = "Photo could not be saved."
       render :new
@@ -89,5 +90,6 @@ class PhotosController < ApplicationController
 
   def photo_params
     params.permit(:caption, :image)
+    # params.require(:photo).permit(:caption, :image)
   end
 end

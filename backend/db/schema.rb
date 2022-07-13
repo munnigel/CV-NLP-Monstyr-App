@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_172546) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_13_082343) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,9 +67,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_172546) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
+    t.text "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sp_id"
+    t.integer "pid"
+    t.string "status"
+    t.text "gen_title"
+    t.text "gen_categories"
+    t.text "categories"
+    t.datetime "gen_start_date"
+    t.datetime "start_date"
+    t.datetime "gen_end_date"
+    t.datetime "end_date"
+    t.text "gen_tags"
+    t.text "tags"
+    t.text "od_image"
+    t.text "ocr_image"
+    t.text "gen_content"
+    t.text "images"
+    t.text "content"
+    t.float "score"
+    t.integer "od_latency"
+    t.integer "ocr_latency"
+    t.integer "ner_date_latency"
+    t.integer "ner_categories_latency"
+    t.integer "ner_title_latency"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

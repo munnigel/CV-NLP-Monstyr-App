@@ -46,7 +46,7 @@ RUN bundle exec rake assets:precompile
 
 ENV RAILS_ENV=production
 
-RUN bundle exec rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1 
+RUN bundle exec rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
 RUN bundle exec rake db:seed

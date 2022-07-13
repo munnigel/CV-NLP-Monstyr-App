@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data-service.service';
-import { PendingProduct } from '../pending-product.model';
 import { Product } from '../product.model';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-edit-item',
@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./edit-item.component.css'],
 })
 export class EditItemComponent implements OnInit {
-  pendingProduct: PendingProduct;
+  pendingProduct: Product;
   description = '';
   title = '';
   category = '';
@@ -45,13 +45,14 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        title: [`Auto generated title ${this.id}`, Validators.required],
-        description: [
-          `Auto generated description ${this.id}`,
+        title: [`${this.pendingProduct.genTitle}`, Validators.required],
+        content: [`${this.pendingProduct.genContent}`, Validators.required],
+        categories: [
+          `${this.pendingProduct.genCategories}`,
           Validators.required,
         ],
-        category: [`Auto generated category ${this.id}`, Validators.required],
-        promotionDate: [`Auto generated date ${this.id}`, Validators.required],
+        startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
+        endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
       });
     });
 
@@ -68,31 +69,15 @@ export class EditItemComponent implements OnInit {
       }, 2000);
       return;
     } else {
-      let editedData = await this.datasrv.getPendingProductList();
-      (this.pendingProduct.title = this.editForm.value.title),
-        (this.pendingProduct.description = this.editForm.value.description),
-        (this.pendingProduct.category = this.editForm.value.category),
-        (this.pendingProduct.promotionDate = this.editForm.value.promotionDate),
-        // this.datasrv.updatePendingPost(this.pendingProduct).subscribe({
-        //   next: (v) => console.log(v),
-        //   error: (e) => console.error(e),
-        //   complete: () => console.log('completed update'),
-        // })
-
-        this.datasrv.addLivePost(this.pendingProduct).subscribe({
-          next: (v) => console.log(v),
-          error: (e) => console.error('completed add', e),
-          complete: () => console.log('completed add'),
-        });
-
-      this.datasrv.deletePendingPost(this.pendingProduct).subscribe({
+      this.pendingProduct.title = this.editForm.value.title;
+      this.pendingProduct.content = this.editForm.value.description;
+      this.pendingProduct.categories = this.editForm.value.category;
+      this.pendingProduct.startDate = this.editForm.value.promotionDate;
+      this.pendingProduct.status = 'live';
+      this.datasrv.updatePost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
-        error: (e) => console.error(e),
-        complete: async () => {
-          await this.datasrv.updateLiveProductList();
-          await this.datasrv.updatePendingProductList();
-          this.router.navigate(['home/processed'], {});
-        },
+        error: (e) => console.error('completed add', e),
+        complete: () => console.log('completed add'),
       });
     }
   }

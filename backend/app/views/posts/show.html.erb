@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<div class="show-content">
 
-<%= render @post %>
+  <h2>Post detail</h2>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <div class="card" style="width: 30rem;">
+    <div class="card-body">
+      <!-- <img class="card-img-top" src="<%= image_url @post %>" alt="Card image cap"> -->
+      <%= image_tag(@post.image, size: "300") %>
+      <h5 class="card-title"><%= @post.title %></h5>
+      <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-light" %>
+      <%= link_to 'Back', posts_path, class:"btn btn-light" %>
+      <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-danger" %>
+    </div>
+  </div>
 </div>
