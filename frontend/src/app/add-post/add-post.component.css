@@ -1,0 +1,26 @@
+.main-container {
+    margin-top: 50px;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-bottom: 200px;
+}
+
+.header {
+    font-size: 50px;
+    font-weight: 500;
+    margin: 50px 0px;
+    text-align: center;
+}
+
+.options-container {
+    display:flex;
+    justify-content: center;
+}
+
+.clear {
+    margin-right: 10px;
+}
+
+.upload-field {
+    margin-left: 10px;
+}

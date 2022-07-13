@@ -126,12 +126,6 @@ body {
   font-size: 15px;
 }
 
-.main-container {
-  margin-left: 200px;
-  height: 100%;
-  overflow: auto;
-}
-
 .sub-container {
   display: flex;
   flex-direction: column;

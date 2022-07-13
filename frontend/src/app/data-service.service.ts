@@ -96,6 +96,9 @@ export class DataService implements OnInit {
   };
 
   async updateAllProductList() {
+    this.productList = [];
+    this.pendingProductList = [];
+    this.liveProductList = [];
     let res1: any = await lastValueFrom(
       this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
     );
