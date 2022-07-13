@@ -18,9 +18,11 @@
 }
 
 .clear {
+    width: 130px;
     margin-right: 10px;
 }
 
 .upload-field {
+    width: 130px;
     margin-left: 10px;
 }
