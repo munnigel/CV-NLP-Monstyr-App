@@ -34,7 +34,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -51,21 +51,15 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        // title: [`${this.pendingProduct.genTitle}`, Validators.required],
-        // content: [`${this.pendingProduct.genContent}`, Validators.required],
-        // categories: [
-        //   `${this.pendingProduct.genCategories}`,
-        //   Validators.required,
-        // ],
-        // // startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
-        // // endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
-        // promotionDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
+        categories: [
+          `${this.pendingProduct.genCategories}`,
+          Validators.required,
+        ],
+        startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
+        endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
         title: [`gfdfgd`, Validators.required],
-        description: [`hhhh`, Validators.required],
+        content: [`hhhh`, Validators.required],
         category: [`hello`, Validators.required],
-        // startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
-        // endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
-        promotionDate: [`hi`, Validators.required],
       });
     });
 
@@ -84,13 +78,18 @@ export class EditItemComponent implements OnInit {
     } else {
       this.pendingProduct.title = this.editForm.value.title;
       this.pendingProduct.content = this.editForm.value.description;
-      this.pendingProduct.categories = this.editForm.value.category;
-      this.pendingProduct.startDate = this.editForm.value.promotionDate;
+      this.pendingProduct.categories = this.editForm.value.categories;
+      this.pendingProduct.startDate = this.editForm.value.startDate;
+      this.pendingProduct.endDate = this.editForm.value.endDate;
       this.pendingProduct.status = 'live';
       this.datasrv.updatePost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error('completed add', e),
-        complete: () => console.log('completed add'),
+        complete: () => {
+          console.log('completed add');
+          this.datasrv.updateAllProductList();
+          this.router.navigate(['/home/processed']);
+        },
       });
     }
   }
@@ -120,12 +119,12 @@ export class EditItemComponent implements OnInit {
     // console.log('date activated');
     let temp;
     this.datasrv.datePost(this.pendingProduct).subscribe({
-      next: (r) => temp = r, complete: () => {
-        console.log(temp)
-        this.editForm.patchValue({ promotionDate: temp[0]["end date"] });
-      }
+      next: (r) => (temp = r),
+      complete: () => {
+        console.log(temp);
+        this.editForm.patchValue({ promotionDate: temp[0]['end date'] });
+      },
     });
-
   }
 
   deletePost(id: number) {
@@ -138,7 +137,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => { },
+          next: () => {},
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();

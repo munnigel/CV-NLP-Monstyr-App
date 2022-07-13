@@ -23,7 +23,7 @@
         <textarea
           class="page-item"
           placeholder="Enter your description here"
-          formControlName="description"
+          formControlName="content"
           rows="5"
         ></textarea>
         <button type="button" class="special-btn" (click)="makeDescription()">
@@ -35,7 +35,7 @@
         <textarea
           class="page-item-category"
           placeholder="Category"
-          formControlName="category"
+          formControlName="categories"
           rows="3"
         ></textarea>
         <button type="button" class="special-btn" (click)="makeCategory()">
@@ -46,8 +46,19 @@
       <div class="item-cont">
         <textarea
           class="page-item-date"
-          placeholder="Promotional Date"
-          formControlName="promotionDate"
+          placeholder="Promotional Start Date"
+          formControlName="startDate"
+          rows="3"
+        ></textarea>
+        <button type="button" class="special-btn" (click)="makeDate()">
+          Generate
+        </button>
+      </div>
+      <div class="item-cont">
+        <textarea
+          class="page-item-date"
+          placeholder="Promotional End Date"
+          formControlName="endDate"
           rows="3"
         ></textarea>
         <button type="button" class="special-btn" (click)="makeDate()">
@@ -69,18 +80,24 @@
     </div>
   </div>
 
-  
   <div class="item-page-right">
     <img [src]="pendingProduct.images" alt="IMAGE" class="product-img" />
     <div class="page-item-description">
-        <textarea> 
+      <textarea>
+ 
           {{ pendingProduct["content"] }}
-        </textarea>
+        </textarea
+      >
     </div>
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(pendingProduct.id)">
+  <button
+    type="button"
+    class="btn btn-danger"
+    style="margin-right: 20px"
+    (click)="deletePost(pendingProduct.id)"
+  >
     Delete Post
   </button>
   <button

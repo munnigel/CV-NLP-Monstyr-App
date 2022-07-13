@@ -66,15 +66,18 @@ export class EditProcessedPostComponent implements OnInit {
       return;
     } else {
       this.product.title = this.editForm.value.title;
-      this.product.content = this.editForm.value.description;
-      this.product.content = this.editForm.value.category;
+      this.product.content = this.editForm.value.content;
+      this.product.categories = this.editForm.value.categories;
       this.product.startDate = this.editForm.value.startDate;
+      this.product.endDate = this.editForm.value.endDate;
       console.log(this.product);
-
       this.datasrv.updatePost(this.product).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
-        complete: () => this.router.navigate(['home/processed'], {}),
+        complete: () => {
+          this.datasrv.updateAllProductList();
+          this.router.navigate(['home/processed'], {});
+        },
       });
     }
   }
