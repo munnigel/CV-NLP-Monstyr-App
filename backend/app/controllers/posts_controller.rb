@@ -24,9 +24,40 @@ class PostsController < ApplicationController
     end
   end
 
+  # Retrieves live posts in batches of N
+  def livepostsinbatches
+    @posts = Post.where("status = 'live'")
+    #.first(params[batch])
+    respond_to do |format|
+      format.html { render json: @posts}
+      format.json {render json: @posts}
+    end
+  end
+
+  # Retrieves pending posts in batches of N
+  def pendingpostsinbatches
+    @posts = Post.where("status = 'pending'")
+    #.first(params[batch])
+    respond_to do |format|
+      format.html { render json: @posts}
+      format.json {render json: @posts}
+    end
+  end
+
+
   # Returns number of posts in db
   def noofposts
     render json: Post.count
+  end
+
+  # Returns number of live posts in db
+  def noofliveposts
+    render json: Post.where("status = 'live'").count
+  end
+
+  # Returns number of pending posts in db
+  def noofpendingposts
+    render json: Post.where("status = 'pending'").count
   end
 
   # GET /posts/1 or /posts/1.json
