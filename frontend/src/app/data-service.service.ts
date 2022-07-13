@@ -22,7 +22,7 @@ export class DataService implements OnInit {
   livePercentage: number;
   private tab: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
     console.log('getting');
@@ -206,18 +206,10 @@ export class DataService implements OnInit {
     return this.http.delete<Product>(`${API_URL}/posts/${id}`);
   }
 
-  async datePost(product: Product): Promise<Observable<Product>> {
-    this.http
-      .post<any>(
-        `${AI_URL}/getdates`,
-        'Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.'
-      )
-      .subscribe((data) => {
-        this.dateExtracted = data.text;
-      });
-    console.log(product.content);
-
-    return this.dateExtracted;
+  datePost(product: Product) {
+    let cleanedcleanedText = product.content.replace(/[^ ]*weeks[^ ]*/, "").replace(/[^ ]*days[^ ]*/, "").replace(/[^a-zA-Z0-9 ]/g, '').replace(/[^ ]*now[^ ]*/, "").replace(/[^ ]*today[^ ]*/, "").replace(/[^ ]*available[^ ]*/, "");
+    console.log(cleanedcleanedText);
+    return this.http.post<any>(`${AI_URL}/getdates`, cleanedcleanedText);
   }
 }
 

@@ -34,7 +34,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -115,10 +115,17 @@ export class EditItemComponent implements OnInit {
     console.log('category activated');
   }
   makeDate() {
-    this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
+    // this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
     // this.promotionDate = '19/9/1999';
     // console.log('date activated');
-    this.endDate = this.datasrv.datePost(this.pendingProduct);
+    let temp;
+    this.datasrv.datePost(this.pendingProduct).subscribe({
+      next: (r) => temp = r, complete: () => {
+        console.log(temp)
+        this.editForm.patchValue({ promotionDate: temp[0]["end date"] });
+      }
+    });
+
   }
 
   deletePost(id: number) {
@@ -131,7 +138,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => {},
+          next: () => { },
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();
