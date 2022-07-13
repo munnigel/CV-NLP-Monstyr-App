@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { API_URL } from './env';
+import { API_URL } from 'src/environments/environment';
 import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
 import { PendingProduct } from './pending-product.model';
 import { Product } from './product.model';
@@ -23,6 +23,7 @@ export class DataService implements OnInit {
     this.pendingProductList = [];
     await this.updateLiveProductList();
     await this.updatePendingProductList();
+    console.log(API_URL);
   }
 
   setLiveEditingStatus(newValue: boolean) {
