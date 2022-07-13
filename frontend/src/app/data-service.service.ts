@@ -158,6 +158,10 @@ export class DataService implements OnInit {
     }
   }
 
+  addPost(formData: FormData) {
+    return this.http.post(`${API_URL}/posts`, formData);
+  }
+
   updatePost(product: Product): Observable<Product> {
     console.log(product);
     return this.http.put<Product>(
@@ -172,7 +176,14 @@ export class DataService implements OnInit {
   }
 
   async datePost(product: Product): Promise<Observable<Product>> {
-    this.http.post<any>(`${AI_URL}/getdates`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.").subscribe(data => {this.dateExtracted = data.text});
+    this.http
+      .post<any>(
+        `${AI_URL}/getdates`,
+        'Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.'
+      )
+      .subscribe((data) => {
+        this.dateExtracted = data.text;
+      });
     console.log(product.content);
 
     return this.dateExtracted;
