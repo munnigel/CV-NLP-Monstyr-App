@@ -87,7 +87,11 @@ export class EditItemComponent implements OnInit {
       this.datasrv.deletePendingPost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
-        complete: () => this.router.navigate(['home/processed'], {}),
+        complete: async () => {
+          await this.datasrv.updateLiveProductList();
+          await this.datasrv.updatePendingProductList();
+          this.router.navigate(['home/processed'], {});
+        },
       });
     }
   }

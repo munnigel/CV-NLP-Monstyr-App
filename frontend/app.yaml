@@ -3,12 +3,12 @@ runtime: nodejs16
 instance_class: F2
 
 env_variables:
-  BUCKET_NAME: "rottengcloud_wanglin_bucket"
+  BUCKET_NAME: "rubyduckies_cloudstorage"
 
 handlers:
   - url: /
-    static_files: dist/MonstyrApp/index.html
-    upload: dist/MonstyrApp/index.html
+    static_files: dist/monstyr-app/index.html
+    upload: dist/monstyr-app/index.html
 
   - url: /
-    static_dir: dist/MonstyrApp
+    static_dir: dist/monstyr-app

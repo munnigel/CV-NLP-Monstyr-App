@@ -8,6 +8,10 @@ import { Product } from '../product.model';
 import { Router, RouterEvent } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../env';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -76,25 +80,39 @@ export class DeveloperToolsPageComponent implements OnInit {
   // Loading and waiting for trained data
   loadingTrainedData: boolean;
 
+  imageForm: FormGroup;
+
   constructor(
     private fileUploadService: FileUploadService,
     private dataSrv: DataService,
     private titleService: Title,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
+    this.imageForm = this.fb.group({
+      caption: [''],
+      image: [null],
+    });
+  }
 
   ngOnInit(): void {
     let startTabIndex = 0;
     this.onTopIndex = startTabIndex;
     this.tabSelector = this.tabSelectorList[startTabIndex];
     this.pageTitle = this.pageTitleList[startTabIndex];
-    this.barValue = (100 / 5) * (startTabIndex + 1);
+
+    // TODO: make progress bar dynamic according to which part of the page the user is at
+    // set to 100 so the whole bar is filled
+    // this.barValue = (100 / 5) * (startTabIndex + 1);
+
+    this.barValue = 100;
     this.liveProductList = this.dataSrv.getLiveProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
     this.trainedData = "this is jack's fav website";
     this.words = "this is jack's fav website".split(' ');
-    this.titleService.setTitle('Dev-tools');
+    this.titleService.setTitle('developer-tools');
   }
 
   reset() {
@@ -111,7 +129,7 @@ export class DeveloperToolsPageComponent implements OnInit {
       return;
     }
     this.onTopIndex = index;
-    this.barValue = (100 / 5) * (index + 1);
+    // this.barValue = (100 / 5) * (index + 1);
     this.pageTitle = this.pageTitleList[index];
     this.currentTabSelector = undefined;
     this.reset();
@@ -130,7 +148,19 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.tabSelector = this.tabSelectorList[0];
     this.liveEditing = false;
     this.pendingEditing = false;
-    this.router.navigate(['home/developertools']);
+    this.router
+      .navigateByUrl('/', {})
+      .then(() => this.router.navigate(['home/developertools']));
+  }
+
+  backTo(currentTabSelector: string) {
+    if (currentTabSelector.includes('live'))
+      this.tabSelector = this.tabSelectorList[1];
+    else if (currentTabSelector.includes('pending'))
+      this.tabSelector = this.tabSelectorList[2];
+    this.liveEditing = false;
+    this.pendingEditing = false;
+    this.currentSelectedProduct = undefined;
   }
 
   onSelectLivePost(i: number) {
@@ -141,7 +171,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
-    }, 3000);
+    }, 500);
   }
 
   onSelectPendingPost(i: number) {
@@ -154,7 +184,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
-    }, 3000);
+    }, 500);
   }
 
   // updateEditStatus(editing: boolean) {
@@ -162,20 +192,20 @@ export class DeveloperToolsPageComponent implements OnInit {
   //   console.log('switch back to page');
   // };
 
-  // On file Select
-  onChange(event) {
-    this.file = event.target.files[0];
-  }
-
-  // OnClick of button Upload
-  onUpload() {
-    this.loading = !this.loading;
-    this.fileUploadService.upload(this.file).subscribe((event: any) => {
-      if (typeof event === 'object') {
-        // Short link via api response
-        this.shortLink = event.link;
-        this.loading = false; // Flag variable
-      }
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.imageForm.patchValue({
+      image: file,
     });
+    this.imageForm.get('image').updateValueAndValidity();
+  }
+  async submitForm() {
+    var formData: any = new FormData();
+    formData.append('caption', this.imageForm.get('caption').value);
+    formData.append('image', this.imageForm.get('image').value);
+    let res = await lastValueFrom(
+      this.http.post(`${API_URL}/photos`, formData)
+    );
+    console.log(res);
   }
 }
