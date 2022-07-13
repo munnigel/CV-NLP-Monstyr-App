@@ -65,6 +65,31 @@ class PostsController < ApplicationController
     render json: Post.where("status = 'pending'").count
   end
 
+  # Returns the latency of the object detection (OD) model
+  def odlatency
+    render json: Post.average(:od_latency).to_f
+  end
+
+  # Returns the latency of the optical character recognition (OCR) model
+  def ocrlatency
+    render json: Post.average(:ocr_latency).to_f
+  end
+
+  # Returns the latency of the NER-date model
+  def nerdatelatency
+    render json: Post.average(:ner_date_latency).to_f
+  end
+
+  # Returns the latency of the NER-categories model
+  def nercategorieslatency
+    render json: Post.average(:ner_categories_latency).to_f
+  end
+
+  # Returns the latency of the NER-title model
+  def nertitlelatency
+    render json: Post.average(:ner_title_latency).to_f
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
     render json: @post
