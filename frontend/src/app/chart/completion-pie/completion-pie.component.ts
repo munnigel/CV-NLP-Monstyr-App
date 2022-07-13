@@ -1,34 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-
+import { DataService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-completion-pie',
   templateUrl: './completion-pie.component.html',
-  styleUrls: ['./completion-pie.component.css']
+  styleUrls: ['./completion-pie.component.css'],
 })
 export class CompletionPieComponent implements OnInit {
-
-  constructor() { }
+  constructor(private dataSrv: DataService) {}
 
   ngOnInit(): void {
-
-    const completionPie = new Chart("completion-pie", {
+    console.log(this.dataSrv.livePercentage);
+    console.log(this.dataSrv.pendingPercentage);
+    const completionPie = new Chart('completion-pie', {
       type: 'doughnut',
       data: {
-        labels: ["Processed", "Pending"],
+        labels: ['Live', 'Pending'],
         datasets: [
           {
-            label: "Completion of Posts",
+            label: 'Completion of Posts',
             backgroundColor: ['#228B22', '#AFE1AF'],
-            data: [65, 35]
-          }
-        ]
+            data: [this.dataSrv.livePercentage, this.dataSrv.pendingPercentage],
+          },
+        ],
       },
-      options: {responsive: false }
-    })
-
-
+      options: { responsive: false },
+    });
   }
-
 }

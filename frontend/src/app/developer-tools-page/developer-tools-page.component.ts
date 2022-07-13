@@ -10,7 +10,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { API_URL } from 'src/environments/environment';
+import { API_URL } from '../../app/env';
 
 @Component({
   selector: 'app-developer-tools-page',

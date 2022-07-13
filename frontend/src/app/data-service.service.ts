@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { API_URL } from 'src/environments/environment';
+import { API_URL } from '../app/env';
 import { Product } from './product.model';
 
 @Injectable({
@@ -16,6 +16,8 @@ export class DataService implements OnInit {
   NERDateLatency: number;
   NERCategoriesLatency: number;
   NERTitleLatency: number;
+  pendingPercentage: number;
+  livePercentage: number;
 
   constructor(private http: HttpClient) {}
 
@@ -26,11 +28,30 @@ export class DataService implements OnInit {
     this.pendingProductList = [];
     await this.updateAllProductList();
     console.log(API_URL);
-    this.ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
-    await lastValueFrom(this.http.get(`${API_URL}/ocrlatency`));
-    await lastValueFrom(this.http.get(`${API_URL}/nerdatelatency`));
-    await lastValueFrom(this.http.get(`${API_URL}/nercategorieslatency`));
-    await lastValueFrom(this.http.get(`${API_URL}/nertitlelatency`));
+    let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
+    this.ODLatency = ODLatency['odlatency'];
+    let OCRLatency = await lastValueFrom(
+      this.http.get(`${API_URL}/ocrlatency`)
+    );
+    this.OCRLatency = OCRLatency['ocrlatency'];
+    let NERDateLatency = await lastValueFrom(
+      this.http.get(`${API_URL}/nerdatelatency`)
+    );
+    this.NERDateLatency = NERDateLatency['nerdatelatency'];
+    let NERCategoriesLatency = await lastValueFrom(
+      this.http.get(`${API_URL}/nercategorieslatency`)
+    );
+    this.NERCategoriesLatency = NERCategoriesLatency['nercategorieslatency'];
+    let NERTitleLatency = await lastValueFrom(
+      this.http.get(`${API_URL}/nertitlelatency`)
+    );
+    this.NERTitleLatency = NERTitleLatency['nertitlelatency'];
+    let pending = await lastValueFrom(
+      this.http.get(`${API_URL}/noofpendingposts`)
+    );
+    let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
+    this.pendingPercentage = pending['noofpendingposts'];
+    this.livePercentage = live['noofliveposts'];
   }
 
   async setEditingStatus(id: number) {
