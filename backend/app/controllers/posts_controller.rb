@@ -52,17 +52,42 @@ class PostsController < ApplicationController
 
   # Returns number of posts in db
   def noofposts
-    render json: Post.count
+    render json: {'noofposts': Post.count}
   end
 
   # Returns number of live posts in db
   def noofliveposts
-    render json: Post.where("status = 'live'").count
+    render json: {'noofliveposts': Post.where("status = 'live'").count}
   end
 
   # Returns number of pending posts in db
   def noofpendingposts
-    render json: Post.where("status = 'pending'").count
+    render json: {'noofpendingposts': Post.where("status = 'pending'").count}
+  end
+
+  # Returns the latency of the object detection (OD) model
+  def odlatency
+    render json: {'odlatency': Post.average(:od_latency).to_f}
+  end
+
+  # Returns the latency of the optical character recognition (OCR) model
+  def ocrlatency
+    render json: {'ocrlatency': Post.average(:ocr_latency).to_f}
+  end
+
+  # Returns the latency of the NER-date model
+  def nerdatelatency
+    render json: {'nerdatelatency': Post.average(:ner_date_latency).to_f}
+  end
+
+  # Returns the latency of the NER-categories model
+  def nercategorieslatency
+    render json: {'nercategorieslatency': Post.average(:ner_categories_latency).to_f}
+  end
+
+  # Returns the latency of the NER-title model
+  def nertitlelatency
+    render json: {'nertitlelatency': Post.average(:ner_title_latency).to_f}
   end
 
   # GET /posts/1 or /posts/1.json

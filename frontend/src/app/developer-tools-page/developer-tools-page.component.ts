@@ -3,15 +3,14 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Title } from '@angular/platform-browser';
 import { DataService } from '../data-service.service';
 import { FileUploadService } from '../file-upload.service';
-import { PendingProduct } from '../pending-product.model';
 import { Product } from '../product.model';
-import { Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { API_URL } from 'src/environments/environment';
+import { API_URL } from '../../app/env';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -37,7 +36,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   // from accessing the subsequent parts without any post chosen
   invalidAction: boolean;
   // To store currently selected product
-  currentSelectedProduct: PendingProduct | Product;
+  currentSelectedProduct: Product;
 
   // Variable to store shortLink from api response
   shortLink: string = '';
@@ -45,7 +44,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   file: File = null; // Variable to store file
 
   liveProductList: Product[];
-  pendingProductList: PendingProduct[];
+  pendingProductList: Product[];
 
   // For display at the top showing which part is user currently at
   pageTitle: string;

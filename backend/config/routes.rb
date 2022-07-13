@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  
   resources :posts
   resources :photos, :except => [:new]
   resources :pendingposts
   resources :liveposts
+
   root "posts#index"
   get 'latest', to: 'posts#latest'
   get '/allphotosjson', to: 'photos#allphotosjson'
@@ -13,5 +15,11 @@ Rails.application.routes.draw do
   get '/noofpendingposts', to: 'posts#noofpendingposts'
   get '/posts/live/:batch', to: 'posts#livepostsinbatches'
   get '/posts/pending/:batch', to: 'posts#pendingpostsinbatches'
+  get '/odlatency', to: 'posts#odlatency'
+  get '/ocrlatency', to: 'posts#ocrlatency'
+  get '/nerdatelatency', to: 'posts#nerdatelatency'
+  get '/nercategorieslatency', to: 'posts#nercategorieslatency'
+  get '/nertitlelatency', to: 'posts#nertitlelatency'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

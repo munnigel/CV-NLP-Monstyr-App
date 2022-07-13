@@ -38,10 +38,11 @@ export class EditProcessedPostComponent implements OnInit {
       }
       console.log(this.product);
       this.editForm = this.fb.group({
-        title: [`${this.product['title']}`, Validators.required],
-        description: [`${this.product['description']}`, Validators.required],
-        category: [`${this.product['category']}`, Validators.required],
-        date: [`${this.product['promotionDate']}`, Validators.required],
+        title: [`${this.product.title}`, Validators.required],
+        content: [`${this.product.content}`, Validators.required],
+        categories: [`${this.product.categories}`, Validators.required],
+        startDate: [`${this.product.startDate}`, Validators.required],
+        endDate: [`${this.product.endDate}`, Validators.required],
       });
     });
   }
@@ -60,14 +61,13 @@ export class EditProcessedPostComponent implements OnInit {
       }, 2000);
       return;
     } else {
-      let editedData = await this.datasrv.getLiveProductList();
-      (this.product.title = this.editForm.value.title),
-        (this.product.description = this.editForm.value.description),
-        (this.product.category = this.editForm.value.category),
-        (this.product.promotionDate = this.editForm.value.date),
-        console.log(this.product);
+      this.product.title = this.editForm.value.title;
+      this.product.content = this.editForm.value.description;
+      this.product.content = this.editForm.value.category;
+      this.product.startDate = this.editForm.value.startDate;
+      console.log(this.product);
 
-      this.datasrv.updateLivePost(this.product).subscribe({
+      this.datasrv.updatePost(this.product).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
         complete: () => this.router.navigate(['home/processed'], {}),

@@ -81,13 +81,14 @@
                 *ngFor="let product of liveProductList; let i = index"
               >
                 <div class="post-container" (click)="onSelectLivePost(i)">
-                  <img class="post-img" [src]="product.imgUrl" />
+                  <img class="post-img" [src]="product.images" />
                   <div class="post-desc">
                     <h3>Post Description</h3>
                     <h5>{{ product.title }}</h5>
-                    <h5>{{ product.category }}</h5>
-                    <h5>{{ product.promotionDate }}</h5>
-                    <h5>{{ product.description }}</h5>
+                    <h5>{{ product.categories }}</h5>
+                    <h5>{{ product.startDate }}</h5>
+                    <h5>{{ product.endDate }}</h5>
+                    <h5>{{ product.content }}</h5>
                   </div>
                 </div>
               </ng-container>
@@ -102,12 +103,9 @@
                 *ngFor="let product of pendingProductList; let i = index"
               >
                 <div class="post-container" (click)="onSelectPendingPost(i)">
-                  <img class="post-img" [src]="product.imgUrl" />
+                  <img class="post-img" [src]="product.images" />
                   <div class="post-desc">
-                    <h3>Post Description</h3>
-                    <h5>{{ product.title }}</h5>
-                    <h5>{{ product.category }}</h5>
-                    <h5>{{ product.description }}</h5>
+                    <h3>To be processed</h3>
                   </div>
                 </div>
               </ng-container>
@@ -146,7 +144,7 @@
             <img class="banner" src="../../assets/pictures/ocr-banner.png" />
             <div class="ocr-page-container">
               <div class="ocr-page-original" id="input-image-container">
-                <img class="img" [src]="currentSelectedProduct.imgUrl" />
+                <img class="img" [src]="currentSelectedProduct.images" />
                 <div class="processed-words">
                   <ng-container *ngFor="let word of words">
                     <div class="processed-word">{{ word }}</div>
@@ -154,7 +152,7 @@
                 </div>
               </div>
               <div class="ocr-page-processed" id="processed-text-container">
-                <img class="img" [src]="currentSelectedProduct.imgUrl" />
+                <img class="img" [src]="currentSelectedProduct.images" />
                 <!-- <textarea class="processed-text">{{ trainedData }}</textarea> -->
                 <div class="processed-words">
                   <ng-container *ngFor="let word of words">
@@ -171,7 +169,7 @@
               <div class="od-page-cropped" id="processed-tags-container">
                 <img
                   class="od-img-cropped"
-                  [src]="currentSelectedProduct.imgUrl"
+                  [src]="currentSelectedProduct.images"
                 />
               </div>
             </div>
