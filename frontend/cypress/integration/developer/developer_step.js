@@ -35,6 +35,7 @@ When(/^I click on the "(.*)" button$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
         cy.get("#"+sel+"-btn").click()
     })
+
 Then (/^I should be able to see a "(.*)" dialog$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
     cy.get(".selecting-container").find("#" + sel + "-dialog").should('exist')
