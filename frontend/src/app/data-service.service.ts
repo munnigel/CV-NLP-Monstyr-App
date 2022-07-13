@@ -42,6 +42,27 @@ export class DataService implements OnInit {
     return this.tab;
   }
 
+  async nextTab() {
+    console.log(this.tab);
+    if (this.tab < (await this.getNoOfPendingPosts() / 15)) {
+      this.tab++;
+    }
+  }
+
+  prevTab() {
+    console.log(this.tab);
+    if (this.tab > 1) {
+      this.tab--;
+    }
+  }
+
+  async getNoOfPendingPosts() {
+    let res:any = await lastValueFrom(this.http.get(`${API_URL}/noofpendingposts`));
+    console.log(res);
+
+    return res.noofpendingposts;
+  }
+
   async updateOverviewData() {
     let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
     this.ODLatency = ODLatency['odlatency'];
@@ -119,8 +140,9 @@ export class DataService implements OnInit {
       this.http.get(`${API_URL}/posts/live/${this.tab}`, this.httpOptions)
     );
     // console.log('live products');
-    // console.log(res2);
-    this.createAndStoreProductList(this.liveProductList, res2);
+    console.log(res2);
+    if (res2)
+    {this.createAndStoreProductList(this.liveProductList, res2);}
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
       this.http.get(`${API_URL}/posts/pending/${this.tab}`, this.httpOptions)
