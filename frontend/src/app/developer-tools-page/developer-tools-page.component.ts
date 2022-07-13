@@ -5,7 +5,7 @@ import { DataService } from '../data-service.service';
 import { FileUploadService } from '../file-upload.service';
 import { Product } from '../product.model';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -37,6 +37,10 @@ export class DeveloperToolsPageComponent implements OnInit {
   invalidAction: boolean;
   // To store currently selected product
   currentSelectedProduct: Product;
+
+  // To store currently parsed date
+  currentParsedStartDate: string;
+  currentParsedEndDate: string;
 
   // Variable to store shortLink from api response
   shortLink: string = '';
@@ -80,6 +84,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   loadingTrainedData: boolean;
 
   imageForm: FormGroup;
+  pipe: DatePipe;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -166,10 +171,24 @@ export class DeveloperToolsPageComponent implements OnInit {
     let chosenProduct = this.liveProductList[i];
     this.currentSelectedProduct = chosenProduct;
     this.location.replaceState(`home/developertools/live/${chosenProduct.id}`);
+    // send product to backend for processing
+    // receive and update currentSelectedProduct
     this.loadingTrainedData = true;
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
+      if (this.currentSelectedProduct.startDate)
+        this.currentParsedStartDate = this.pipe.transform(
+          this.currentSelectedProduct.startDate,
+          'dd/mm/yyyy'
+        );
+      else this.currentParsedStartDate = '-';
+      if (this.currentSelectedProduct.endDate)
+        this.currentParsedEndDate = this.pipe.transform(
+          this.currentSelectedProduct.endDate,
+          'dd/mm/yyyy'
+        );
+      else this.currentParsedEndDate = '-';
     }, 500);
   }
 
