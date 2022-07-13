@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/nerdatelatency', to: 'posts#nerdatelatency'
   get '/nercategorieslatency', to: 'posts#nercategorieslatency'
   get '/nertitlelatency', to: 'posts#nertitlelatency'
+  get '/acceptedaiml', to: 'posts#acceptedaiml'
+  get '/rejectedaiml', to: 'posts#rejectedaiml'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

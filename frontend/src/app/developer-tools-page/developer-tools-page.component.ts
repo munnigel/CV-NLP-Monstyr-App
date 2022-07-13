@@ -5,9 +5,9 @@ import { DataService } from '../data-service.service';
 import { FileUploadService } from '../file-upload.service';
 import { Product } from '../product.model';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { API_URL } from '../../app/env';
@@ -37,6 +37,10 @@ export class DeveloperToolsPageComponent implements OnInit {
   invalidAction: boolean;
   // To store currently selected product
   currentSelectedProduct: Product;
+
+  // To store currently parsed date
+  currentParsedStartDate: string;
+  currentParsedEndDate: string;
 
   // Variable to store shortLink from api response
   shortLink: string = '';
@@ -80,6 +84,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   loadingTrainedData: boolean;
 
   imageForm: FormGroup;
+  pipe: DatePipe;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -143,6 +148,10 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.currentTabSelector = titleList[index];
   }
 
+  manualCreatePost() {
+
+  }
+
   backToSelector() {
     this.tabSelector = this.tabSelectorList[0];
     this.liveEditing = false;
@@ -166,10 +175,24 @@ export class DeveloperToolsPageComponent implements OnInit {
     let chosenProduct = this.liveProductList[i];
     this.currentSelectedProduct = chosenProduct;
     this.location.replaceState(`home/developertools/live/${chosenProduct.id}`);
+    // send product to backend for processing
+    // receive and update currentSelectedProduct
     this.loadingTrainedData = true;
     setTimeout(() => {
       this.loadingTrainedData = false;
       this.onTopIndex = 1;
+      if (this.currentSelectedProduct.startDate)
+        this.currentParsedStartDate = this.pipe.transform(
+          this.currentSelectedProduct.startDate,
+          'dd/mm/yyyy'
+        );
+      else this.currentParsedStartDate = '-';
+      if (this.currentSelectedProduct.endDate)
+        this.currentParsedEndDate = this.pipe.transform(
+          this.currentSelectedProduct.endDate,
+          'dd/mm/yyyy'
+        );
+      else this.currentParsedEndDate = '-';
     }, 500);
   }
 
@@ -200,11 +223,12 @@ export class DeveloperToolsPageComponent implements OnInit {
   }
   async submitForm() {
     var formData: any = new FormData();
-    formData.append('caption', this.imageForm.get('caption').value);
     formData.append('image', this.imageForm.get('image').value);
     let res = await lastValueFrom(
-      this.http.post(`${API_URL}/photos`, formData)
+      this.http.post(`${API_URL}/posts`, formData)
     );
-    console.log(res);
+    let temp = new Product();
+    temp.images = res['images'];
+    this.currentSelectedProduct = temp;
   }
 }

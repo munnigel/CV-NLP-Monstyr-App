@@ -1,12 +1,16 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7913425&assignment_repo_type=AssignmentRepo)
 
-Team 7 (RubyDuckies)- Design Workbook
+## _Team 7 (RubyDuckies)- Design Workbook_
+
 Public access link : https://docs.google.com/document/d/1YMKmIOjpvpO_nUn9TZ1Golm0piNVRxc6CtTDen5pzHQ/edit?usp=sharing
 
-Google Site containing our Team’s video here:
+## _Google Site containing our Team’s video:_
+
 https://sites.google.com/sutd.edu.sg/rubyduckies/home
 
-# Installation Procedures for Local macOS Development
+# Installation Procedures
+
+### Local macOS Development
 
 - Version of Ruby : 2.7.6
 - Version of Rails : 7.0.3
@@ -37,7 +41,7 @@ $ ruby --version
 $ rails --version
 ```
 
-# Installation Procedures for Local Windows OS:
+### for Local Windows OS:
 
 - Version of Ruby : 2.7.6
 - Version of Rails : 7.0.3
@@ -64,7 +68,8 @@ Ensure ruby and rails are installed
 While in the backend folder,
 
 ```
-$ rails s
+$ cd backend
+$ cd rails s
 ```
 
 # Procedures to run Angular app
@@ -75,6 +80,7 @@ Download NodeJS: https://nodejs.org/en/download/
 While in the frontend folder,
 
 ```
+$ cd frontend
 $ npm install
 $ ng serve
 ```
@@ -86,21 +92,19 @@ while in backend folder, (make sure u gitpull backend to have updated gemfile de
 To install gems:
 
 ```
+$ cd backend
 $ bundle install
 ```
 
-create the conventional folder structure for our Gherkin specifications and the code that will let Cucumber test them:
+Run cucumber
 
 ```
-$ cucumber --init
+$ cd backend
+$ ng e2e
 ```
 
-To run cucumber :
+Click on `.feature` files to run test cases
 
-```
-$ bundle exec cucumber
-```
-
-### Click here for more information on implementing Gherkin steps in Cucumber
+### For more information on implementing Gherkin steps in Cucumber
 
 [cucumber_steps](cucumber_steps.md)

@@ -1,7 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { API_URL } from '../app/env';
+import { AI_URL, API_URL } from '../app/env';
 import { Product } from './product.model';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class DataService implements OnInit {
   private productList: Product[];
   private liveProductList: Product[];
   private pendingProductList: Product[];
+  dateExtracted: any;
   ODLatency: number;
   OCRLatency: number;
   NERDateLatency: number;
@@ -18,6 +20,8 @@ export class DataService implements OnInit {
   NERTitleLatency: number;
   pendingPercentage: number;
   livePercentage: number;
+  private pendingTab: number;
+  private liveTab: number;
 
   constructor(private http: HttpClient) { }
 
@@ -26,9 +30,65 @@ export class DataService implements OnInit {
     this.productList = [];
     this.liveProductList = [];
     this.pendingProductList = [];
+    this.setPendingTab(1);
+    this.setLiveTab(1);
     await this.updateAllProductList();
     console.log(API_URL);
     await this.updateOverviewData();
+  }
+
+  setPendingTab(i: number) {
+    this.pendingTab = i;
+  }
+  getPendingTab() {
+    return this.pendingTab;
+  }
+
+  setLiveTab(i: number) {
+    this.liveTab = i;
+  }
+  getLiveTab() {
+    return this.liveTab;
+  }
+
+  async nextPendingTab() {
+    console.log(this.pendingTab);
+    if (this.pendingTab < (await this.getNoOfPendingPosts() / 15)) {
+      this.pendingTab++;
+    }
+  }
+
+  prevPendingTab() {
+    console.log(this.pendingTab);
+    if (this.pendingTab > 1) {
+      this.pendingTab--;
+    }
+  }
+
+  async getNoOfPendingPosts() {
+    let res: any = await lastValueFrom(this.http.get(`${API_URL}/noofpendingposts`));
+    console.log(res);
+    return res.noofpendingposts;
+  }
+
+  async nextLiveTab() {
+    console.log(this.liveTab);
+    if (this.liveTab < (await this.getNoOfLivePosts() / 15)) {
+      this.liveTab++;
+    }
+  }
+
+  prevLiveTab() {
+    console.log(this.liveTab);
+    if (this.liveTab > 1) {
+      this.liveTab--;
+    }
+  }
+
+  async getNoOfLivePosts() {
+    let res: any = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
+    console.log(res);
+    return res.noofliveposts;
   }
 
   async updateOverviewData() {
@@ -94,6 +154,9 @@ export class DataService implements OnInit {
   };
 
   async updateAllProductList() {
+    this.productList = [];
+    this.pendingProductList = [];
+    this.liveProductList = [];
     let res1: any = await lastValueFrom(
       this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
     );
@@ -102,14 +165,14 @@ export class DataService implements OnInit {
     this.createAndStoreProductList(this.productList, res1);
     // console.log(this.productList);
     let res2: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/live/1`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/live/${this.liveTab}`, this.httpOptions)
     );
     // console.log('live products');
-    // console.log(res2);
-    this.createAndStoreProductList(this.liveProductList, res2);
+    console.log(res2);
+    if (res2) { this.createAndStoreProductList(this.liveProductList, res2); }
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/pending/1`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/pending/${this.pendingTab}`, this.httpOptions)
     );
     // console.log('pending products');
     // console.log(res3);
@@ -138,7 +201,7 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images,
+        res[i].images.replace('{', '').replace('}', ''),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -153,6 +216,10 @@ export class DataService implements OnInit {
     }
   }
 
+  addPost(formData: FormData) {
+    return this.http.post(`${API_URL}/posts`, formData);
+  }
+
   updatePost(product: Product): Observable<Product> {
     console.log(product);
     return this.http.put<Product>(
@@ -162,6 +229,15 @@ export class DataService implements OnInit {
     );
   }
 
+  deletePost(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${API_URL}/posts/${id}`);
+  }
+
+  datePost(product: Product) {
+    let cleanedcleanedText = product.content.replace(/[^ ]*weeks[^ ]*/, "").replace(/[^ ]*days[^ ]*/, "").replace(/[^a-zA-Z0-9 ]/g, '').replace(/[^ ]*now[^ ]*/, "").replace(/[^ ]*today[^ ]*/, "").replace(/[^ ]*available[^ ]*/, "");
+    console.log(cleanedcleanedText);
+    return this.http.post<any>(`${AI_URL}/getdates`, cleanedcleanedText);
+  }
 }
 
 // {"id":1,

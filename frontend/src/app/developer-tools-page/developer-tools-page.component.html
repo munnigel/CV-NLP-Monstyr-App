@@ -19,67 +19,37 @@
       </div>
     </div> -->
     <div class="loading-spinner" *ngIf="loadingTrainedData">
-      <mat-progress-spinner
-        [mode]="spinnerMode"
-        [value]="spinnerValue"
-      ></mat-progress-spinner>
+      <mat-progress-spinner [mode]="spinnerMode" [value]="spinnerValue"></mat-progress-spinner>
     </div>
     <div *ngIf="!loadingTrainedData">
       <div style="position: relative" id="select-post-nav-container">
-        <div class="back-btn">
-          <button
-            *ngIf="tabSelector != 'selecting'"
-            class="btn btn-primary"
-            (click)="backToSelector()"
-            id="back-btn"
-            style="margin-right: 5px"
-          >
+        <div class="back-btn create-btn">
+          <button *ngIf="tabSelector != 'selecting'" class="btn btn-primary" (click)="backToSelector()" id="back-btn"
+            style="margin-right: 5px">
             Back to options
           </button>
-          <button
-            *ngIf="tabSelector != 'selecting' && currentSelectedProduct"
-            class="btn btn-primary"
-            (click)="backTo(currentTabSelector)"
-            id="back-btn"
-            style="margin-left: 5px"
-          >
+          <button *ngIf="tabSelector != 'selecting' && currentSelectedProduct" class="btn btn-primary"
+            (click)="backTo(currentTabSelector)" id="back-btn" style="margin-left: 5px">
             View {{ currentTabSelector }}
           </button>
         </div>
         <div *ngIf="!currentSelectedProduct">
           <div id="select-post-container">
-            <div
-              *ngIf="tabSelector === 'selecting'"
-              class="selecting-container"
-            >
-              <button
-                class="btn btn-primary selector-btn"
-                (click)="onFunctionClick(0)"
-                id="choose-live-btn"
-              >
+            <div *ngIf="tabSelector === 'selecting'" class="selecting-container">
+              <button class="btn btn-primary selector-btn" (click)="onFunctionClick(0)" id="choose-live-btn">
                 Choose Live
               </button>
-              <button
-                class="btn btn-primary selector-btn"
-                (click)="onFunctionClick(1)"
-                id="choose-pending-btn"
-              >
+              <button class="btn btn-primary selector-btn" (click)="onFunctionClick(1)" id="choose-pending-btn">
                 Choose Pending
               </button>
-              <button
-                class="btn btn-primary selector-btn"
-                (click)="onFunctionClick(2)"
-                id="choose-manually-btn"
-              >
-                Upload manually
+              <button class="btn btn-primary selector-btn" (click)="onFunctionClick(2)" id="choose-manually-btn">
+                Choose manually
               </button>
             </div>
           </div>
           <div *ngIf="tabSelector === 'chooseLive'" id="choose-live-container">
             <div class="posts-container">
-              <ng-container
-                *ngFor="let product of liveProductList; let i = index"
-              >
+              <ng-container *ngFor="let product of liveProductList; let i = index">
                 <div class="post-container" (click)="onSelectLivePost(i)">
                   <img class="post-img" [src]="product.images" />
                   <div class="post-desc">
@@ -94,14 +64,9 @@
               </ng-container>
             </div>
           </div>
-          <div
-            *ngIf="tabSelector === 'choosePending'"
-            id="choose-pending-container"
-          >
+          <div *ngIf="tabSelector === 'choosePending'" id="choose-pending-container">
             <div class="posts-container">
-              <ng-container
-                *ngFor="let product of pendingProductList; let i = index"
-              >
+              <ng-container *ngFor="let product of pendingProductList; let i = index">
                 <div class="post-container" (click)="onSelectPendingPost(i)">
                   <img class="post-img" [src]="product.images" />
                   <div class="post-desc">
@@ -112,25 +77,18 @@
             </div>
           </div>
 
-          <div
-            *ngIf="tabSelector === 'chooseFile'"
-            id="choose-manually-container"
-          >
+          <div *ngIf="tabSelector === 'chooseFile'" id="choose-manually-container">
             <div class="center-box" id="upload-section-container">
-              <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
-                <div class="form-group" id="choose-file-container">
-                  <input type="file" (change)="uploadFile($event)" />
+              <form [formGroup]="imageForm">
+                <div class="form-group">
+                  <input id="choose-file-container" type="file" (change)="uploadFile($event)" />
                 </div>
                 <div class="form-group input-group-lg">
-                  <input
-                    class="form-control-name"
-                    placeholder="caption"
-                    formControlName="caption"
-                  />
+                  <input class="form-control-name" placeholder="caption" formControlName="caption" />
                 </div>
                 <div class="text-center">
                   <div class="form-group">
-                    <button class="btn btn-danger btn-block btn-lg">
+                    <button class="btn btn-danger btn-block btn-lg" id="create-btn" (click)="submitForm()">
                       Create
                     </button>
                   </div>
@@ -167,10 +125,7 @@
             <img class="banner" src="../../assets/pictures/od-banner.png" />
             <div class="od-page-container">
               <div class="od-page-cropped" id="processed-tags-container">
-                <img
-                  class="od-img-cropped"
-                  [src]="currentSelectedProduct.images"
-                />
+                <img class="od-img-cropped" [src]="currentSelectedProduct.images" />
               </div>
             </div>
           </div>
@@ -190,7 +145,8 @@
                   <mat-card-title>Location</mat-card-title>
                   <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
                   <mat-card-title>Validity Period</mat-card-title>
-                  <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+                  <mat-card-subtitle>{{ currentParsedStartDate }} till
+                    {{ currentParsedEndDate }}</mat-card-subtitle>
                 </mat-card>
               </div>
               <div class="updated-ner">
@@ -205,7 +161,8 @@
                   <mat-card-title>Location</mat-card-title>
                   <mat-card-subtitle>Expo Hall 3</mat-card-subtitle>
                   <mat-card-title>Validity Period</mat-card-title>
-                  <mat-card-subtitle>13 Jun - 22 Jul 2022</mat-card-subtitle>
+                  <mat-card-subtitle>{{ currentParsedStartDate }} till
+                    {{ currentParsedEndDate }}</mat-card-subtitle>
                 </mat-card>
               </div>
             </div>

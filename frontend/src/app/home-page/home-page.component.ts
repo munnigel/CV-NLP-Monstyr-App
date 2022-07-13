@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
       'processed',
       'pending',
       'developertools',
+      'addpost',
       'settings',
     ];
     if (this.router.url.includes(this.tabList[0])) this.tabIndex = 0;
@@ -23,10 +24,12 @@ export class HomePageComponent implements OnInit {
     else if (this.router.url.includes(this.tabList[2])) this.tabIndex = 2;
     else if (this.router.url.includes(this.tabList[3])) this.tabIndex = 3;
     else if (this.router.url.includes(this.tabList[4])) this.tabIndex = 4;
+    else if (this.router.url.includes(this.tabList[5])) this.tabIndex = 5;
   }
 
   onTabClick(index: number) {
     this.tabIndex = index;
+    if (this.router.url.includes(this.tabList[0]) && index == 0) return;
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate([`/home/${this.tabList[index]}`]));

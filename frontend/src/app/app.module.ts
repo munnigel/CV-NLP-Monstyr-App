@@ -35,6 +35,7 @@ import { AccuracyLineComponent } from './chart/accuracy-line/accuracy-line.compo
 import { CompletionPieComponent } from './chart/completion-pie/completion-pie.component';
 import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';
 import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
     CompletionPieComponent,
     AcceptancePieComponent,
     EditProcessedPostComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,6 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
     MatDialogModule,
     MatProgressBarModule,
     NgChartsModule,
-    MatProgressSpinnerModule,
   ],
   providers: [
     FileUploadService,

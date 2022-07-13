@@ -33,32 +33,63 @@
 #   Post.create!(post)
 # end
 
-livePost = [{:score => "1.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "First title", :description => "First description"},
-               {:score => "2.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Second title", :description => "Second description"},
-                {:score => "3.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Third title", :description => "Third description"},
-                {:score => "4.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Fourth title", :description => "Fourth description"},
-                {:score => "5.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Fifth title", :description => "Fifth description"},
-                {:score => "6.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Sixth title", :description => "Sixth description"},
-                {:score => "7.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Seventh title", :description => "Seventh description"},
-                {:score => "8.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Eighth title", :description => "Eighth description"},
-                {:score => "9.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Nineth title", :description => "Nineth description"},
-                {:score => "10.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Tenth title", :description => "Tenth description"}]
+# livePost = [{:score => "1.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "First title", :description => "First description"},
+#                {:score => "2.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Second title", :description => "Second description"},
+#                 {:score => "3.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Third title", :description => "Third description"},
+#                 {:score => "4.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Fourth title", :description => "Fourth description"},
+#                 {:score => "5.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Fifth title", :description => "Fifth description"},
+#                 {:score => "6.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Sixth title", :description => "Sixth description"},
+#                 {:score => "7.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Seventh title", :description => "Seventh description"},
+#                 {:score => "8.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Eighth title", :description => "Eighth description"},
+#                 {:score => "9.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Nineth title", :description => "Nineth description"},
+#                 {:score => "10.43243", :imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "Tenth title", :description => "Tenth description"}]
 
-livePost.each do |post|
-    Pendingpost.create(post)
-    end
+# livePost.each do |post|
+#     Pendingpost.create(post)
+#     end
 
-live = [{:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/rz994jo06q2no622epzvpm36g0zg", :title => "This is the first live", :category => "This is the first category", :promotionDate => "This is the first promotion date", :description => "This is the first description"},
-           {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/lbcjghv23xcy406yv8vydv0j4so8", :title => "This is the second live", :category => "This is the second category", :promotionDate => "This is the second promotion date", :description => "This is the second description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/cz4ec8sdvylukkmh5pix01u2m60t", :title => "This is the third live", :category => "This is the third category", :promotionDate => "This is the third promotion date", :description => "This is the third description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the fourth live", :category => "This is the fourth category", :promotionDate => "This is the fourth promotion date", :description => "This is the fourth description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the fifth live", :category => "This is the fifth category", :promotionDate => "This is the fifth promotion date", :description => "This is the fifth description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the sixth live", :category => "This is the sixth category", :promotionDate => "This is the sixth promotion date", :description => "This is the sixth description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the seventh live", :category => "This is the seventh category", :promotionDate => "This is the seventh promotion date", :description => "This is the seventh description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the eighth live", :category => "This is the eighth category", :promotionDate => "This is the eighth promotion date", :description => "This is the eighth description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the nineth live", :category => "This is the nineth category", :promotionDate => "This is the nineth promotion date", :description => "This is the nineth description"},
-            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the tenth live", :category => "This is the tenth category", :promotionDate => "This is the tenth promotion date", :description => "This is the tenth description"}]
+# live = [{:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/rz994jo06q2no622epzvpm36g0zg", :title => "This is the first live", :category => "This is the first category", :promotionDate => "This is the first promotion date", :description => "This is the first description"},
+#            {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/lbcjghv23xcy406yv8vydv0j4so8", :title => "This is the second live", :category => "This is the second category", :promotionDate => "This is the second promotion date", :description => "This is the second description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/cz4ec8sdvylukkmh5pix01u2m60t", :title => "This is the third live", :category => "This is the third category", :promotionDate => "This is the third promotion date", :description => "This is the third description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the fourth live", :category => "This is the fourth category", :promotionDate => "This is the fourth promotion date", :description => "This is the fourth description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the fifth live", :category => "This is the fifth category", :promotionDate => "This is the fifth promotion date", :description => "This is the fifth description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the sixth live", :category => "This is the sixth category", :promotionDate => "This is the sixth promotion date", :description => "This is the sixth description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the seventh live", :category => "This is the seventh category", :promotionDate => "This is the seventh promotion date", :description => "This is the seventh description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the eighth live", :category => "This is the eighth category", :promotionDate => "This is the eighth promotion date", :description => "This is the eighth description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the nineth live", :category => "This is the nineth category", :promotionDate => "This is the nineth promotion date", :description => "This is the nineth description"},
+#             {:imgUrl => "https://storage.googleapis.com/rubyduckies_cloudstorage/a_ruby_ducky.jpg", :title => "This is the tenth live", :category => "This is the tenth category", :promotionDate => "This is the tenth promotion date", :description => "This is the tenth description"}]
 
-live.each do |live|
-    Livepost.create(live)
-    end
+# live.each do |live|
+#     Livepost.create(live)
+#     end
+
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'))
+csv = CSV.parse(csv_text,:headers => true, :encoding => 'ISO-8859-1')
+
+csv.each_with_index do |row, index|
+  if index < 100
+  t = Post.new
+  t.sp_id = row['sp_id']
+  t.pid = row['pid']
+  t.content = row['content']
+  t.title = row['gen_title']
+  t.start_date = row['gen_start_date']
+  t.end_date = row['gen_end_date']
+  t.images = row['images']
+  t.status = 'pending'
+  t.save
+  puts "#{t.sp_id}, #{t.pid} saved"
+  end
+end
+
+
+# CSV.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'), headers: true).each do |row|
+#   t = Import.create(row.to_hash)
+#   puts "#{t.production}, #{t.episode} saved"
+# end
+
+
+# puts "There are now #{Import.count} rows in the imports table"

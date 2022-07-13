@@ -35,6 +35,7 @@ When(/^I click on the "(.*)" button$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
         cy.get("#"+sel+"-btn").click()
     })
+
 Then (/^I should be able to see a "(.*)" dialog$/, (selector) => {
     let sel= selector.toLowerCase().replace(" ", "-")
     cy.get(".selecting-container").find("#" + sel + "-dialog").should('exist')
@@ -62,8 +63,8 @@ When(/^I click on one of the "(.*)" post$/, (selector) => {
     cy.get('.post-container').first().click()
 })
 
+
 Then (/^I should be able to see "(.*)" in the "(.*)" section$/, (selectors1, selectors2) => {
-    
     let sel1 = selectors1.split(", ")
     let sel2 = selectors2.toLowerCase()
     

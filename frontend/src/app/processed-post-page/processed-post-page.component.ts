@@ -23,7 +23,21 @@ export class ProcessedPostPageComponent implements OnInit {
     this.tabIndex = 2;
     this.showItem = false;
     this.liveProductList = this.dataSrv.getLiveProductList();
+    console.log(this.liveProductList[0]);
+    console.log(this.liveProductList);
     this.titleService.setTitle('Live-posts');
+  }
+
+  async nextPage() {
+    this.dataSrv.nextLiveTab();
+    await this.dataSrv.updateAllProductList();
+    this.liveProductList = this.dataSrv.getLiveProductList();
+  }
+
+  async prevPage() {
+    this.dataSrv.prevLiveTab();
+    await this.dataSrv.updateAllProductList();
+    this.liveProductList = this.dataSrv.getLiveProductList();
   }
 
   onTabClick(index: number) {
