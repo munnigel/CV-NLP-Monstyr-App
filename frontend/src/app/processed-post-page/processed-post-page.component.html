@@ -1,9 +1,13 @@
 <div class="header-row">
   <div class="page-header">Live Posts</div>
-  <div class="search-bar">
+  <!-- <div class="search-bar">
     <textarea class="search-input" rows="1"></textarea>
     <button class="search-btn">F</button>
-  </div>
+  </div> -->
+</div>
+<div class="button">
+  <button (click)="prevPage()" type="button">Previous</button>
+  <button (click)="nextPage()" type="button">Next</button>
 </div>
 <div class="filter-row">
   <div class="filter-type" (click)="onFilter(1)">

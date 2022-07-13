@@ -20,7 +20,8 @@ export class DataService implements OnInit {
   NERTitleLatency: number;
   pendingPercentage: number;
   livePercentage: number;
-  private tab: number;
+  private pendingTab: number;
+  private liveTab: number;
 
   constructor(private http: HttpClient) { }
 
@@ -29,17 +30,65 @@ export class DataService implements OnInit {
     this.productList = [];
     this.liveProductList = [];
     this.pendingProductList = [];
-    this.setTab(1);
+    this.setPendingTab(1);
+    this.setLiveTab(1);
     await this.updateAllProductList();
     console.log(API_URL);
     await this.updateOverviewData();
   }
 
-  setTab(i: number) {
-    this.tab = i;
+  setPendingTab(i: number) {
+    this.pendingTab = i;
   }
-  getTab() {
-    return this.tab;
+  getPendingTab() {
+    return this.pendingTab;
+  }
+
+  setLiveTab(i: number) {
+    this.liveTab = i;
+  }
+  getLiveTab() {
+    return this.liveTab;
+  }
+
+  async nextPendingTab() {
+    console.log(this.pendingTab);
+    if (this.pendingTab < (await this.getNoOfPendingPosts() / 15)) {
+      this.pendingTab++;
+    }
+  }
+
+  prevPendingTab() {
+    console.log(this.pendingTab);
+    if (this.pendingTab > 1) {
+      this.pendingTab--;
+    }
+  }
+
+  async getNoOfPendingPosts() {
+    let res:any = await lastValueFrom(this.http.get(`${API_URL}/noofpendingposts`));
+    console.log(res);
+    return res.noofpendingposts;
+  }
+
+  async nextLiveTab() {
+    console.log(this.liveTab);
+    if (this.liveTab < (await this.getNoOfLivePosts() / 15)) {
+      this.liveTab++;
+    }
+  }
+
+  prevLiveTab() {
+    console.log(this.liveTab);
+    if (this.liveTab > 1) {
+      this.liveTab--;
+    }
+  }
+
+  async getNoOfLivePosts() {
+    let res:any = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
+    console.log(res);
+    return res.noofliveposts;
   }
 
   async updateOverviewData() {
@@ -116,14 +165,15 @@ export class DataService implements OnInit {
     this.createAndStoreProductList(this.productList, res1);
     // console.log(this.productList);
     let res2: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/live/${this.tab}`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/live/${this.liveTab}`, this.httpOptions)
     );
     // console.log('live products');
-    // console.log(res2);
-    this.createAndStoreProductList(this.liveProductList, res2);
+    console.log(res2);
+    if (res2)
+    {this.createAndStoreProductList(this.liveProductList, res2);}
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/pending/${this.tab}`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/pending/${this.pendingTab}`, this.httpOptions)
     );
     // console.log('pending products');
     // console.log(res3);

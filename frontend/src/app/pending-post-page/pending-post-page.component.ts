@@ -28,6 +28,18 @@ export class PendingPostPageComponent implements OnInit {
     this.titleService.setTitle('Pending-posts');
   }
 
+  async nextPage() {
+    this.dataSrv.nextPendingTab();
+    await this.dataSrv.updateAllProductList();
+    this.pendingProductList = this.dataSrv.getPendingProductList();
+  }
+
+  async prevPage() {
+    this.dataSrv.prevPendingTab();
+    await this.dataSrv.updateAllProductList();
+    this.pendingProductList = this.dataSrv.getPendingProductList();
+  }
+
   onTabClick(index: number) {
     this.tabIndex = index;
   }
