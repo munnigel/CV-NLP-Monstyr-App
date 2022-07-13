@@ -23,6 +23,7 @@ export class DataService implements OnInit {
     this.pendingProductList = [];
     await this.updateLiveProductList();
     await this.updatePendingProductList();
+    console.log(API_URL);
   }
 
   setLiveEditingStatus(newValue: boolean) {
