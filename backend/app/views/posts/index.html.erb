@@ -17,7 +17,9 @@
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <!-- <img class="card-img-top" src="<%= image_url post %>" alt="Card image cap"> -->
-          <%= image_tag(post.image, size: "200") %>
+          <% if post.image.present? %>
+            <%= image_tag(post.image, size: "200") %>
+          <% end %>
           <h5 class="card-title"><%= post.title %></h5>
           <%= link_to 'Show', post_path(post), class:"btn btn-primary" %>
         </div>
