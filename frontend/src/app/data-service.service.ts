@@ -140,7 +140,7 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images,
+        res[i].images.replace('{', '').replace('}', ''),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -164,20 +164,17 @@ export class DataService implements OnInit {
     );
   }
 
-  async datePost(id: number): Promise<Observable<Product>> {
-    console.log(id);
-    this.dateExtracted = await this.http.post<Product>(`${AI_URL}/getdates`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.", this.httpOptions);
-    console.log(this.productList[id].content);
-
-    return this.dateExtracted;
-
+  deletePost(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${API_URL}/posts/${id}`);
   }
 
+  async datePost(product: Product): Promise<Observable<Product>> {
+    this.http.post<any>(`${AI_URL}/getdates`, "Indulge in a luxurious evening at The Lobby Lounge with a premium selection of gourmet cheeses from around the world perfectly complemented with a pairing of wines hand-picked by Shangri-La Hotel, Singapore’s Head Sommelier, Britt Ng.  Available from 14 December, visit bit.ly/ShangrilaCheeseAndWine to find out more.").subscribe(data => {this.dateExtracted = data.text});
+    console.log(product.content);
 
+    return this.dateExtracted;
+  }
 }
-
-
-
 
 // {"id":1,
 // "title":null,

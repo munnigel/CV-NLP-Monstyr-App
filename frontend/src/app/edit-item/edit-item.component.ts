@@ -4,6 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../product.model';
+import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-edit-item',
@@ -21,13 +25,15 @@ export class EditItemComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+
   endDate: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -56,10 +62,7 @@ export class EditItemComponent implements OnInit {
         // promotionDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
         title: [`gfdfgd`, Validators.required],
         description: [`hhhh`, Validators.required],
-        category: [
-          `hello`,
-          Validators.required,
-        ],
+        category: [`hello`, Validators.required],
         // startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
         // endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
         promotionDate: [`hi`, Validators.required],
@@ -97,25 +100,48 @@ export class EditItemComponent implements OnInit {
   }
 
   makeDescription() {
-    this.editForm.patchValue({'description': 'TAGS GENERATED WAAAA'})
+    this.editForm.patchValue({ description: 'TAGS GENERATED WAAAA' });
     // this.description = 'DESCRIPTION GENERATED WAAAA';
     console.log('description activated');
   }
   makeTitle() {
-    this.editForm.patchValue({'title': 'TITLE GENERATED WAAAA'})
+    this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
     this.title = 'TITLE GENERATED WAAAA';
-    console.log('title activated')
+    console.log('title activated');
   }
   makeCategory() {
-    this.editForm.patchValue({'category': 'CAT GENERATED WAAAA'})
+    this.editForm.patchValue({ category: 'CAT GENERATED WAAAA' });
     this.category = 'CATEGORY GENERATED WAAAA';
     console.log('category activated');
   }
   makeDate() {
-    this.editForm.patchValue({'promotionDate': 'DATE GENERATED WAAAA'})
+    this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
     // this.promotionDate = '19/9/1999';
     // console.log('date activated');
-    this.endDate = this.datasrv.datePost(this.id);
-    console.log(this.id+"aaaa");
+    this.endDate = this.datasrv.datePost(this.pendingProduct);
+  }
+
+  deletePost(id: number) {
+    const dialogData = new ConfirmationDialogModel('Delete this post?', '');
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: '400px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    dialogRef.afterClosed().subscribe(async (dialogResult) => {
+      if (dialogResult) {
+        this.datasrv.deletePost(id).subscribe({
+          next: () => {},
+          complete: async () => {
+            console.log('post deleted');
+            await this.datasrv.updateAllProductList();
+            this.router.navigate(['/home/pending']);
+          },
+          error: (e) => {
+            console.log(e);
+          },
+        });
+      }
+    });
   }
 }
