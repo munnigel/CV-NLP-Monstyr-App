@@ -93,12 +93,12 @@ class PostsController < ApplicationController
   # Returns number of accepted AI/ML suggestions
   # TODO: Handle categories, tags that are stringified lists
   def acceptedaiml
-    used_titles = Post.where("gen_title = title").count
-    used_categories = Post.where("gen_categories = categories").count
-    used_start_dates = Post.where("gen_start_date = start_date").count
-    used_end_dates = Post.where("gen_end_date = end_date").count
-    used_tags = Post.where("gen_tags = tags").count
-    used_content = Post.where("gen_content = content").count
+    used_titles = Post.where('gen_title is not null').where("gen_title = title").count
+    used_categories = Post.where('gen_categories is not null').where("gen_categories = categories").count
+    used_start_dates = Post.where('gen_start_date is not null').where("gen_start_date = start_date").count
+    used_end_dates = Post.where('gen_end_date is not null').where("gen_end_date = end_date").count
+    used_tags = Post.where('gen_tags is not null').where("gen_tags = tags").count
+    used_content = Post.where('gen_content is not null').where("gen_content = content").count
 
     render json: {'acceptedaiml': (used_titles + used_categories + used_start_dates + used_end_dates + used_tags + used_content).to_i}
   end
@@ -106,16 +106,15 @@ class PostsController < ApplicationController
   # Returns number of unused AI/ML suggestions
   # TODO: Handle categories, tags that are stringified lists
   def rejectedaiml
-    used_titles = Post.pluck(:gen_title).count - Post.where("gen_title = title").count
-    used_categories = Post.pluck(:gen_categories).count - Post.where("gen_categories = categories").count
-    used_start_dates = Post.pluck(:gen_start_date).count - Post.where("gen_start_date = start_date").count
-    used_end_dates = Post.pluck(:gen_end_date).count - Post.where("gen_end_date = end_date").count
-    used_tags = Post.pluck(:gen_tags).count - Post.where("gen_tags = tags").count
-    used_content = Post.pluck(:gen_content).count - Post.where("gen_content = content").count
+    used_titles = Post.where('gen_title is not null').pluck(:gen_title).count - Post.where("gen_title = title").count
+    used_categories = Post.where('gen_categories is not null').pluck(:gen_categories).count - Post.where("gen_categories = categories").count
+    used_start_dates = Post.where('gen_start_date is not null').pluck(:gen_start_date).count - Post.where("gen_start_date = start_date").count
+    used_end_dates = Post.where('gen_end_date is not null').pluck(:gen_end_date).count - Post.where("gen_end_date = end_date").count
+    used_tags = Post.where('gen_tags is not null').pluck(:gen_tags).count - Post.where("gen_tags = tags").count
+    used_content = Post.where('gen_content is not null').pluck(:gen_content).count - Post.where("gen_content = content").count
 
     render json: {'rejectedaiml': (used_titles + used_categories + used_start_dates + used_end_dates + used_tags + used_content).to_i}
   end
-
 
   # GET /posts/1 or /posts/1.json
   def show
@@ -163,12 +162,14 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    id = @post
     @post.destroy
+    render json: id
 
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+    #   format.json { head :no_content }
+    # end
   end
 
   def latest

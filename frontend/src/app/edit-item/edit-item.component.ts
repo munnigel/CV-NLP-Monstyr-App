@@ -7,6 +7,7 @@ import { Product } from '../product.model';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-edit-item',
@@ -117,8 +118,7 @@ export class EditItemComponent implements OnInit {
     this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
     // this.promotionDate = '19/9/1999';
     // console.log('date activated');
-    this.endDate = this.datasrv.datePost(this.id);
-    console.log(this.endDate);
+    this.endDate = this.datasrv.datePost(this.pendingProduct);
   }
 
   deletePost(id: number) {
