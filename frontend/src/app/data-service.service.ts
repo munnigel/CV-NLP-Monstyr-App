@@ -2,44 +2,32 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { API_URL } from 'src/environments/environment';
-import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
-import { PendingProduct } from './pending-product.model';
 import { Product } from './product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService implements OnInit {
+  private productList: Product[];
   private liveProductList: Product[];
-  private pendingProductList: PendingProduct[];
-  res: any;
-  private checkLiveEditing = new BehaviorSubject<boolean>(false);
-  private checkPendingEditing = new BehaviorSubject<boolean>(false);
+  private pendingProductList: Product[];
   constructor(private http: HttpClient) {}
 
   async ngOnInit() {
     console.log('getting');
-    this.liveProductList = [];
-    this.pendingProductList = [];
-    await this.updateLiveProductList();
-    await this.updatePendingProductList();
+    this.productList = [];
+    await this.updateAllProductList();
     console.log(API_URL);
   }
 
-  setLiveEditingStatus(newValue: boolean) {
-    this.checkLiveEditing.next(newValue);
-  }
-
-  getLiveEditingStatus() {
-    return this.checkLiveEditing.asObservable();
-  }
-
-  setPendingEditingStatus(newValue: boolean) {
-    this.checkPendingEditing.next(newValue);
-  }
-
-  getPendingEditingStatus() {
-    return this.checkPendingEditing.asObservable();
+  async setEditingStatus(id: number) {
+    await lastValueFrom(
+      this.http.put(
+        `${API_URL}/posts/${id}`,
+        { status: 'editing' },
+        this.httpOptions
+      )
+    );
   }
 
   getLiveProductList() {
@@ -50,6 +38,15 @@ export class DataService implements OnInit {
     return this.pendingProductList;
   }
 
+  async getEditingStatus(id: number) {
+    let res = await lastValueFrom(this.http.get(`${API_URL}/posts/${id}`));
+    return res[0].status == 'editing';
+  }
+
+  getProductList() {
+    return this.productList;
+  }
+
   private httpOptions = {
     headers: new HttpHeaders({
       // "Accept": "*/*",
@@ -58,108 +55,82 @@ export class DataService implements OnInit {
     }),
   };
 
-  async updateLiveProductList() {
-    this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/liveposts.json`, this.httpOptions)
+  async updateAllProductList() {
+    let res: any = await lastValueFrom(
+      this.http.get(`${API_URL}/posts.json`, this.httpOptions)
     );
-    console.log(this.res);
-    this.liveProductList = [];
-    for (let i = 0; i < this.res.length; i++) {
-      this.liveProductList.push(
-        new Product(
-          this.res[i].title,
-          this.res[i].category,
-          this.res[i].promotionDate,
-          this.res[i].description,
-          this.res[i].id,
-          this.res[i].imgUrl
-        )
+    console.log(res);
+    for (let i = 0; i < res.length; i++) {
+      let temp = new Product(
+        res[i].id,
+        res[i].sp_id,
+        res[i].pid,
+        res[i].status,
+        res[i].gen_title,
+        res[i].title,
+        res[i].gen_categories,
+        res[i].categories,
+        res[i].gen_start_date,
+        res[i].start_date,
+        res[i].gen_end_date,
+        res[i].end_date,
+        res[i].gen_tags,
+        res[i].tags,
+        res[i].gen_content,
+        res[i].content,
+        res[i].od_image,
+        res[i].ocr_image,
+        res[i].images,
+        res[i].score,
+        res[i].created_at,
+        res[i].updated_at,
+        res[i].od_latency,
+        res[i].ocr_latency,
+        res[i].ner_date_latency,
+        res[i].ner_categories_latency,
+        res[i].ner_title_latency
       );
+      if (temp.status == 'live') this.liveProductList.push(temp);
+      else if (temp.status == 'pending') this.pendingProductList.push(temp);
+      this.productList.push(temp);
+      console.log(this.productList);
     }
   }
 
-  async updatePendingProductList() {
-    this.res = await lastValueFrom(
-      this.http.get(`${API_URL}/pendingposts.json`, this.httpOptions)
-    );
-    console.log(this.res);
-    this.pendingProductList = [];
-    for (let i = 0; i < this.res.length; i++) {
-      this.pendingProductList.push(
-        new PendingProduct(
-          this.res[i].category,
-          this.res[i].imgUrl,
-          this.res[i].title,
-          this.res[i].description,
-          this.res[i].promotionDate,
-          this.res[i].id
-        )
-      );
-    }
-
-    // this.pendingProductList = [
-    //   new PendingProduct(1, '../../assets/pictures/image1.png', 'description1'),
-    //   new PendingProduct(2, '../../assets/pictures/image2.png', 'description2'),
-    //   new PendingProduct(3, '../../assets/pictures/image3.jpg', 'description3'),
-    //   new PendingProduct(4, '../../assets/pictures/image4.jpg', 'description4'),
-    //   new PendingProduct(5, '../../assets/pictures/image5.jpg', 'description5'),
-    // ];
-  }
-
-  updateLivePost(product: Product): Observable<Product> {
+  updatePost(product: Product): Observable<Product> {
     console.log(product);
-    let temp = new Product(
-      product.title,
-      product.category,
-      product.promotionDate,
-      product.description
-    );
     return this.http.put<Product>(
-      `${API_URL}/liveposts/${product.id}`,
-      temp,
-      this.httpOptions
-    );
-  }
-
-  updatePendingPost(
-    pendingProduct: PendingProduct
-  ): Observable<PendingProduct> {
-    console.log(pendingProduct);
-    let temp = new PendingProduct(
-      pendingProduct.category,
-      pendingProduct.imgUrl,
-      pendingProduct.title,
-      pendingProduct.description,
-      pendingProduct.promotionDate
-    );
-    return this.http.put<PendingProduct>(
-      `${API_URL}/pendingposts/${pendingProduct.id}`,
-      temp,
-      this.httpOptions
-    );
-  }
-
-  addLivePost(product: Product): Observable<Product> {
-    console.log(product);
-    let temp = new Product(
-      product.title,
-      product.category,
-      product.promotionDate,
-      product.description
-    );
-    return this.http.post<Product>(
-      `${API_URL}/liveposts`,
-      temp,
-      this.httpOptions
-    );
-  }
-
-  deletePendingPost(
-    pendingProduct: PendingProduct
-  ): Observable<PendingProduct> {
-    return this.http.delete<PendingProduct>(
-      `${API_URL}/pendingposts/${pendingProduct.id}`,
+      `${API_URL}/posts/${product.id}`,
+      product,
       this.httpOptions
     );
   }
 }
+
+// {"id":1,
+// "title":null,
+// "created_at":"2022-07-13T08:38:48.030Z",
+// "updated_at":"2022-07-13T08:38:48.574Z",
+// "sp_id":null,
+// "pid":null,
+// "status":null,
+// "gen_title":null,
+// "gen_categories":null,
+// "categories":null,
+// "gen_start_date":null,
+// "start_date":null,
+// "gen_end_date":null,
+// "end_date":null,
+// "gen_tags":null,
+// "tags":null,
+// "od_image":null,
+// "ocr_image":null,
+// "gen_content":null,
+// "images":"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBHdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9714dd87916dff1be62ef13bb09b27f86d196c0c/ESC_SDS%20Project%20UML%20Use%20Case%20Diagram%20-%20UML%20Class%20diagram.png",
+// "content":null,
+// "score":null,
+// "od_latency":null,
+// "ocr_latency":null,
+// "ner_date_latency":null,
+// "ner_categories_latency":null,
+// "ner_title_latency":null}

@@ -50,7 +50,7 @@
         <div class="item-container fade">
           <div class="item-img">
             <img
-              [src]="product.imgUrl"
+              [src]="product.images[0]"
               alt="image"
               style="
                 object-fit: contain;
@@ -63,11 +63,14 @@
           <div class="item-details">
             <div class="item-title">Title: {{ product.title }}</div>
             <div class="item-description">
-              Description: {{ product.description }}
+              Description: {{ product.content }}
             </div>
-            <div class="item-tag">Category: {{ product.category }}</div>
+            <div class="item-tag">Category: {{ product.categories }}</div>
             <div class="item-tag">
-              Promotion Date: {{ product.promotionDate }}
+              Promotion Start Date: {{ product.startDate }}
+            </div>
+            <div class="item-tag">
+              Promotion End Date: {{ product.endDate }}
             </div>
           </div>
         </div>

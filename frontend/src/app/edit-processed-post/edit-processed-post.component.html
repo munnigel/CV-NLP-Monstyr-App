@@ -1,45 +1,75 @@
 <div class="item-page-container">
-    <div class="item-page-left2">
+  <div class="item-page-left2">
+    <form [formGroup]="editForm">
+      <div class="item-cont">
+        <p>Title</p>
+        <textarea
+          class="page-item-title"
+          placeholder="Enter title here"
+          formControlName="title"
+          rows="2"
+        ></textarea>
+      </div>
 
+      <div class="item-cont">
+        <p>Description</p>
+        <textarea
+          class="page-item"
+          placeholder="Enter your description here"
+          formControlName="content"
+          rows="5"
+        ></textarea>
+      </div>
+      <div class="item-cont">
+        <p>Category</p>
+        <textarea
+          class="page-item-category"
+          placeholder="Category "
+          formControlName="categories"
+          rows="2"
+        ></textarea>
+      </div>
 
-        <form [formGroup]="editForm">
-            <div class="item-cont">
-                <p>Title</p>
-                <textarea class="page-item-title" placeholder="Enter title here" formControlName="title"
-                    rows="2"></textarea>
+      <div class="item-cont">
+        <p>Start</p>
+        <textarea
+          class="page-item-date"
+          placeholder="Promotional Start Date"
+          formControlName="startDate"
+          rows="2"
+        ></textarea>
+      </div>
+      <div class="item-cont">
+        <p>End</p>
+        <textarea
+          class="page-item-date"
+          placeholder="Promotional End Date"
+          formControlName="endDate"
+          rows="2"
+        ></textarea>
+      </div>
+    </form>
+  </div>
 
-            </div>
-
-            <div class="item-cont">
-                <p>Description</p>
-                <textarea class="page-item" placeholder="Enter your description here" formControlName="description"
-                    rows="5"></textarea>
-
-
-            </div>
-            <div class="item-cont">
-                <p>Category</p>
-                <textarea class="page-item-category" placeholder="Category " formControlName="category"
-                    rows="2"></textarea>
-
-
-            </div>
-
-            <div class="item-cont">
-                <p>Date</p>
-                <textarea class="page-item-date" placeholder="Promotional Date" formControlName="date"
-                    rows="2"></textarea>
-            </div>
-
-        </form>
-    </div>
-
-    <div class="item-page-right">
-        <img [src]='product.imgUrl' alt="IMAGE" class="product-img" />
-    </div>
+  <div class="item-page-right">
+    <img [src]="product.images[0]" alt="IMAGE" class="product-img" />
+  </div>
 </div>
 <div class="item-page-btn-container">
-    <button type="button" class="btn btn-primary item-page-btn" id="back-to-live1" (click)="onLive()">Back to Live
-        Page</button>
-    <button type="button" class="btn btn-primary item-page-btn" id="back-to-live2" (click)="onSubmit()">Submit</button>
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="back-to-live1"
+    (click)="onLive()"
+  >
+    Back to Live Page
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="back-to-live2"
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
 </div>

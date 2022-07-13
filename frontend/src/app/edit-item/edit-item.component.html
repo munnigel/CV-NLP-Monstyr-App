@@ -1,60 +1,98 @@
 <!-- {{pendingProduct['title']}} -->
 
 <div class="header-row">
-  <div class="page-header">Pending post item: </div>
+  <div class="page-header">Pending post item:</div>
 </div>
 <div class="item-page-container">
   <div class="item-page-left">
-
     <form [formGroup]="editForm">
-
       <div class="item-cont">
-        <textarea class="page-item-title" placeholder="Enter title here" formControlName="title"
-          rows="3">{{title}}</textarea>
-        <button type="button" class="special-btn" (click)="makeTitle()">Generate</button>
+        <textarea
+          class="page-item-title"
+          placeholder="Enter title here"
+          formControlName="title"
+          rows="3"
+          >{{ title }}</textarea
+        >
+        <button type="button" class="special-btn" (click)="makeTitle()">
+          Generate
+        </button>
       </div>
 
       <div class="item-cont">
-        <textarea class="page-item" placeholder="Enter your description here" formControlName="description"
-          rows="5"></textarea>
-        <button type="button" class="special-btn" (click)="makeDescription()">Generate</button>
+        <textarea
+          class="page-item"
+          placeholder="Enter your description here"
+          formControlName="description"
+          rows="5"
+        ></textarea>
+        <button type="button" class="special-btn" (click)="makeDescription()">
+          Generate
+        </button>
       </div>
 
       <div class="item-cont">
-        <textarea class="page-item-category" placeholder="Category" formControlName="category" rows="3"></textarea>
-        <button type="button" class="special-btn" (click)="makeCategory()">Generate </button>
+        <textarea
+          class="page-item-category"
+          placeholder="Category"
+          formControlName="category"
+          rows="3"
+        ></textarea>
+        <button type="button" class="special-btn" (click)="makeCategory()">
+          Generate
+        </button>
       </div>
 
       <div class="item-cont">
-        <textarea class="page-item-date" placeholder="Promotional Date" formControlName="promotionDate"
-          rows="3"></textarea>
-        <button type="button" class="special-btn" (click)="makeDate()">Generate </button>
+        <textarea
+          class="page-item-date"
+          placeholder="Promotional Date"
+          formControlName="promotionDate"
+          rows="3"
+        ></textarea>
+        <button type="button" class="special-btn" (click)="makeDate()">
+          Generate
+        </button>
       </div>
     </form>
 
     <div class="cv-scan">
-      <button type="button" class="special-btn2" (click)="popup = true">Generate CV image</button>
+      <button type="button" class="special-btn2" (click)="popup = true">
+        Generate CV image
+      </button>
       <div class="overlay" *ngIf="popup">
         <div class="popup">
-          <img src="../../assets/pictures/mon.gif" alt="CV image">
+          <img src="../../assets/pictures/mon.gif" alt="CV image" />
           <a class="close" (click)="popup = false">&times;</a>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="item-page-right">
-    <img [src]="pendingProduct.imgUrl" alt="IMAGE" class="product-img" />
+    <img [src]="pendingProduct.images[0]" alt="IMAGE" class="product-img" />
     <div class="page-item-description">
       <div class="text-align">
-        {{pendingProduct['description']}}
+        {{ pendingProduct["description"] }}
       </div>
     </div>
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button type="button" class="btn btn-primary item-page-btn" id="back-to-pending" (click)="onPending()">Back to Pending
-    Page</button>
-  <button type="button" class="btn btn-primary item-page-btn" id="go-to-live" (click)="onProcessed()">Submit</button>
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="back-to-pending"
+    (click)="onPending()"
+  >
+    Back to Pending Page
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="go-to-live"
+    (click)="onProcessed()"
+  >
+    Submit
+  </button>
 </div>
