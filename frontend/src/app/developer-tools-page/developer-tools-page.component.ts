@@ -10,8 +10,8 @@ import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { API_URL } from '../env';
 import { lastValueFrom } from 'rxjs';
+import { API_URL } from 'src/environments/environment';
 
 @Component({
   selector: 'app-developer-tools-page',
@@ -193,7 +193,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   // };
 
   uploadFile(event) {
-    const file = (event.target as HTMLInputElement).files[0];
+    const file = event.target.files[0];
     this.imageForm.patchValue({
       image: file,
     });

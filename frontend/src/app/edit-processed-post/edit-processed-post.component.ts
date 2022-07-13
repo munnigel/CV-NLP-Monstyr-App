@@ -3,7 +3,6 @@ import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Product } from '../product.model';
-import { API_URL } from '../env';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-tools-page.component';
 

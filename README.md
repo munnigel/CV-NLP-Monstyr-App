@@ -7,6 +7,7 @@ Google Site containing our Team’s video here:
 https://sites.google.com/sutd.edu.sg/rubyduckies/home
 
 # Installation Procedures for Local macOS Development
+
 - Version of Ruby : 2.7.6
 - Version of Rails : 7.0.3
 
@@ -28,20 +29,35 @@ $ echo "gem: --no-document" > ~/.gemrc
 $ sudo gem install bundler
 $ sudo gem install rails
 ```
+
 Close and open a new terminal, then execute the following commands:
+
 ```
 $ ruby --version
 $ rails --version
 ```
+
 # Installation Procedures for Local Windows OS:
+
 - Version of Ruby : 2.7.6
 - Version of Rails : 7.0.3
 
-Use RubyInstaller 
+Use RubyInstaller
+
+# Procedure to run both backend and frontend together
+
+```
+chmod u+x ./testapp.sh
+./testapp.sh
+```
+
+The above code will startup both backend and frontend serve.
+Simply open your browser and go to localhost:4200
 
 # Procedures to run Ruby on Rails app
 
 Ensure ruby and rails are installed
+
 - Version of Ruby : 2.7.6
 - Version of Rails : 7.0.3
 
@@ -56,22 +72,23 @@ $ rails s
 Ensure node.js is installed
 Download NodeJS: https://nodejs.org/en/download/
 
-
 While in the frontend folder,
 
 ```
 $ npm install
 $ ng serve
 ```
-# Testing with Cucumber 
+
+# Testing with Cucumber
 
 while in backend folder, (make sure u gitpull backend to have updated gemfile dependencies)
 
 To install gems:
 
 ```
-$ bundle install  
+$ bundle install
 ```
+
 create the conventional folder structure for our Gherkin specifications and the code that will let Cucumber test them:
 
 ```
@@ -83,6 +100,7 @@ To run cucumber :
 ```
 $ bundle exec cucumber
 ```
-### Click here for more information on implementing Gherkin steps in Cucumber 
+
+### Click here for more information on implementing Gherkin steps in Cucumber
 
 [cucumber_steps](cucumber_steps.md)

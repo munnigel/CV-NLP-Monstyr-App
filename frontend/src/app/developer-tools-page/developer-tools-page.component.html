@@ -121,11 +121,7 @@
             <div class="center-box" id="upload-section-container">
               <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
                 <div class="form-group" id="choose-file-container">
-                  <input
-                    type="file"
-                    (change)="uploadFile($event)"
-                    formControlName="image"
-                  />
+                  <input type="file" (change)="uploadFile($event)" />
                 </div>
                 <div class="form-group input-group-lg">
                   <input
