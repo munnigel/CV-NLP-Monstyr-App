@@ -74,9 +74,11 @@ csv.each do |row|
   t.sp_id = row['sp_id']
   t.pid = row['pid']
   t.content = row['content']
-  t.gen_title = row['gen_title']
-  t.gen_start_date = row['gen_start_date']
-  t.gen_end_date = row['gen_end_date']
+  t.title = row['gen_title']
+  t.start_date = row['gen_start_date']
+  t.end_date = row['gen_end_date']
+  t.images = row['images']
+  t.status = 'pending'
   t.save
   puts "#{t.sp_id}, #{t.pid} saved"
 end
