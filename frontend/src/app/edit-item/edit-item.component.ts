@@ -24,14 +24,15 @@ export class EditItemComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
-  dialog: MatDialog;
+
   endDate: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -131,8 +132,10 @@ export class EditItemComponent implements OnInit {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
           next: () => {},
-          complete: () => {
+          complete: async () => {
             console.log('post deleted');
+            await this.datasrv.updateAllProductList();
+            this.router.navigate(['/home/pending']);
           },
           error: (e) => {
             console.log(e);

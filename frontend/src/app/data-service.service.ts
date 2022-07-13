@@ -140,7 +140,7 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images,
+        res[i].images.replace('{', '').replace('}', ''),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -165,7 +165,7 @@ export class DataService implements OnInit {
   }
 
   deletePost(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${API_URL}/${id}`);
+    return this.http.delete<Product>(`${API_URL}/posts/${id}`);
   }
   async datePost(id: number): Promise<Observable<Product>> {
     this.dateExtracted = await this.http.post<Product>(
