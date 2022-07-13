@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { Product } from '../product.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-tools-page.component';
+import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-edit-processed-post',
@@ -17,6 +20,7 @@ export class EditProcessedPostComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+  dialog: MatDialog;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -73,5 +77,26 @@ export class EditProcessedPostComponent implements OnInit {
         complete: () => this.router.navigate(['home/processed'], {}),
       });
     }
+  }
+  deletePost(id: number) {
+    const dialogData = new ConfirmationDialogModel('Delete this post?', '');
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: '400px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    dialogRef.afterClosed().subscribe(async (dialogResult) => {
+      if (dialogResult) {
+        this.datasrv.deletePost(id).subscribe({
+          next: () => {},
+          complete: () => {
+            console.log('post deleted');
+          },
+          error: (e) => {
+            console.log(e);
+          },
+        });
+      }
+    });
   }
 }

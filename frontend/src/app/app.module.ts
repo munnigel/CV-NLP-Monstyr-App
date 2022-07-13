@@ -75,7 +75,6 @@ import { EditProcessedPostComponent } from './edit-processed-post/edit-processed
     MatDialogModule,
     MatProgressBarModule,
     NgChartsModule,
-    MatProgressSpinnerModule,
   ],
   providers: [
     FileUploadService,

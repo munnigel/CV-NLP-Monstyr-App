@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../product.model';
+import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-item',
@@ -21,6 +24,7 @@ export class EditItemComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+  dialog: MatDialog;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -100,5 +104,27 @@ export class EditItemComponent implements OnInit {
   makeDate() {
     this.promotionDate = '19/9/1999';
     console.log('date activated');
+  }
+
+  deletePost(id: number) {
+    const dialogData = new ConfirmationDialogModel('Delete this post?', '');
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: '400px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    dialogRef.afterClosed().subscribe(async (dialogResult) => {
+      if (dialogResult) {
+        this.datasrv.deletePost(id).subscribe({
+          next: () => {},
+          complete: () => {
+            console.log('post deleted');
+          },
+          error: (e) => {
+            console.log(e);
+          },
+        });
+      }
+    });
   }
 }

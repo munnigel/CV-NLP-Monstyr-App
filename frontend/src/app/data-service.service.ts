@@ -161,6 +161,10 @@ export class DataService implements OnInit {
       this.httpOptions
     );
   }
+
+  deletePost(id:number):Observable<Product> {
+    return this.http.delete<Product>(`${API_URL}/${id}`)
+  }
 }
 
 // {"id":1,
