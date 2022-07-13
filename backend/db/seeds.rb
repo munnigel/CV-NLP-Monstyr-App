@@ -69,7 +69,8 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'))
 csv = CSV.parse(csv_text,:headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+csv.each_with_index do |row, index|
+  if index < 100
   t = Post.new
   t.sp_id = row['sp_id']
   t.pid = row['pid']
@@ -81,6 +82,7 @@ csv.each do |row|
   t.status = 'pending'
   t.save
   puts "#{t.sp_id}, #{t.pid} saved"
+  end
 end
 
 

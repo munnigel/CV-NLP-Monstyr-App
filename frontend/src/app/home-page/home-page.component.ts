@@ -27,6 +27,7 @@ export class HomePageComponent implements OnInit {
 
   onTabClick(index: number) {
     this.tabIndex = index;
+    if (this.router.url.includes(this.tabList[0]) && index == 0) return;
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate([`/home/${this.tabList[index]}`]));

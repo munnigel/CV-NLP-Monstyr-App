@@ -73,12 +73,15 @@
     <img [src]="pendingProduct.images" alt="IMAGE" class="product-img" />
     <div class="page-item-description">
       <div class="text-align">
-        {{ pendingProduct["description"] }}
+        {{ pendingProduct["content"] }}
       </div>
     </div>
   </div>
 </div>
 <div class="item-page-btn-container">
+  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(pendingProduct.id)">
+    Delete Post
+  </button>
   <button
     type="button"
     class="btn btn-primary item-page-btn"
