@@ -15,8 +15,23 @@ class PostsController < ApplicationController
     end
   end
 
+  # Retrieves the first N entries
+  def postsinbatches
+    @posts = Post.first(15)
+    respond_to do |format|
+      format.html { render json: @posts}
+      format.json {render json: @posts}
+    end
+  end
+
+  # Returns number of posts in db
+  def noofposts
+    render json: Post.count
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
+    render json: @post
   end
 
   # GET /posts/new
