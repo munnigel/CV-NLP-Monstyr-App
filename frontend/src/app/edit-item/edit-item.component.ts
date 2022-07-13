@@ -34,7 +34,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -59,7 +59,6 @@ export class EditItemComponent implements OnInit {
         endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
         title: [`gfdfgd`, Validators.required],
         content: [`hhhh`, Validators.required],
-        category: [`hello`, Validators.required],
       });
     });
 
@@ -122,7 +121,7 @@ export class EditItemComponent implements OnInit {
       next: (r) => (temp = r),
       complete: () => {
         console.log(temp);
-        this.editForm.patchValue({ promotionDate: temp[0]['end date'] });
+        this.editForm.patchValue({ endDate: temp[0]['end date'] });
       },
     });
   }
@@ -137,7 +136,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => {},
+          next: () => { },
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();
