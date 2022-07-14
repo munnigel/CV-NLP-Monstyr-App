@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { all } from 'cypress/types/bluebird';
 import { min } from 'cypress/types/lodash';
+// import { parse } from 'path';
 
 @Component({
   selector: 'app-edit-item',
@@ -123,8 +124,11 @@ export class EditItemComponent implements OnInit {
       complete: () => {
         console.log(allDates);
         for (const parsedObject of allDates) {
-          datesList.push(new Date(parsedObject["start date"]));
-          datesList.push(new Date(parsedObject["start date"]));
+          console.log(parsedObject);
+          if (parsedObject["start date"] != null) {
+            datesList.push(new Date(parsedObject["start date"]));
+          }
+          datesList.push(new Date(parsedObject["end date"]));
         }
 
         var maxDate = new Date(Math.max.apply(null, datesList));
