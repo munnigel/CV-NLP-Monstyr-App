@@ -8,6 +8,7 @@ import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dia
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { all } from 'cypress/types/bluebird';
 
 @Component({
   selector: 'app-edit-item',
@@ -52,13 +53,13 @@ export class EditItemComponent implements OnInit {
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
         categories: [
-          `${this.pendingProduct.genCategories}`,
+          ``,
           Validators.required,
         ],
-        startDate: [`${this.pendingProduct.genStartDate}`, Validators.required],
-        endDate: [`${this.pendingProduct.genEndDate}`, Validators.required],
-        title: [`gfdfgd`, Validators.required],
-        content: [`hhhh`, Validators.required],
+        startDate: [``, Validators.required],
+        endDate: [``, Validators.required],
+        title: [``, Validators.required],
+        content: [``, Validators.required],
       });
     });
 
@@ -112,7 +113,41 @@ export class EditItemComponent implements OnInit {
     this.category = 'CATEGORY GENERATED WAAAA';
     console.log('category activated');
   }
-  makeDate() {
+
+  getDates() {
+    let allDates;
+    let datesList = [];
+    this.datasrv.datePost(this.pendingProduct).subscribe({
+      next: (r) => (allDates = r),
+      complete: () => {
+        console.log(allDates);
+        for (const parsedObject of allDates) {
+          datesList.push(new Date(parsedObject["start date"]));
+        }
+      },
+    }
+    );
+
+    console.log(new Date("2022-07-14T17:00:00.000+08:00"));
+    console.log(datesList);
+
+  }
+
+  makeStartDate() {
+    // this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
+    // this.promotionDate = '19/9/1999';
+    // console.log('date activated');
+    let temp;
+    this.datasrv.datePost(this.pendingProduct).subscribe({
+      next: (r) => (temp = r),
+      complete: () => {
+        console.log(temp);
+        this.editForm.patchValue({ startDate: temp[0]['start date'] });
+      },
+    });
+  }
+
+  makeEndDate() {
     // this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
     // this.promotionDate = '19/9/1999';
     // console.log('date activated');
