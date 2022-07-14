@@ -201,7 +201,7 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images.replace('{', '').replace('}', ''),
+        res[i].images.replace('{', '').replace('}', '').split(",", 1),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -211,7 +211,7 @@ export class DataService implements OnInit {
         res[i].ner_categories_latency,
         res[i].ner_title_latency
       );
-      // console.log(temp);
+      console.log(temp);
       list.push(temp);
     }
   }
