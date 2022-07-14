@@ -4,6 +4,7 @@
       <div class="item-cont">
         <p>Title</p>
         <textarea
+          id="title-field"
           class="page-item-title"
           placeholder="Enter title here"
           formControlName="title"
@@ -14,6 +15,7 @@
       <div class="item-cont">
         <p>Description</p>
         <textarea
+          id="description-field"
           class="page-item"
           placeholder="Enter your description here"
           formControlName="content"
@@ -23,6 +25,7 @@
       <div class="item-cont">
         <p>Category</p>
         <textarea
+          id="category-field"
           class="page-item-category"
           placeholder="Category "
           formControlName="categories"
@@ -33,6 +36,7 @@
       <div class="item-cont">
         <p>Start Date</p>
         <textarea
+          id="start-date-field"
           class="page-item-date"
           placeholder="Promotional Start Date"
           formControlName="startDate"
@@ -42,6 +46,7 @@
       <div class="item-cont">
         <p>End Date</p>
         <textarea
+          id="end-date-field"
           class="page-item-date"
           placeholder="Promotional End Date"
           formControlName="endDate"
@@ -75,7 +80,7 @@
   <button
     type="button"
     class="btn btn-primary item-page-btn"
-    id="back-to-live2"
+    id="submit-btn"
     (click)="onSubmit()"
   >
     Submit

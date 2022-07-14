@@ -25,7 +25,7 @@ export class ProcessedPostPageComponent implements OnInit {
     this.liveProductList = this.dataSrv.getLiveProductList();
     console.log(this.liveProductList[0]);
     console.log(this.liveProductList);
-    this.titleService.setTitle('Live-posts');
+    this.titleService.setTitle('live-posts');
   }
 
   async nextPage() {

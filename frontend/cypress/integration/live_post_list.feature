@@ -6,25 +6,16 @@
 Feature: View live posts and edit erronous details
 
 Scenario: Navigating to Live Post tab
-    Given that I am logged in and on the overview page as a developer
-    When I click on "Live Posts" tab
-    Then I should be redirected to the correct Live Posts url
-
+    Given I am on the "Overview" page as a developer
+    When I click on the "Live Posts" tab
+    Then I should be on the "Live Posts" page
+    
 Scenario: Navigating to specific entry of Live Post
-    Given that I click on the "Live Post" tab
-    When I click on the number "1" entry in the Live Post page
-    Then I should be redirected to edit url of the number "1" entry in the Live Post page
+    Given that I click on the "Live Posts" tab
+    When I click on one of the "Live" post
+    Then I should be able to see the "Title, Description, Category, Start Date, End Date" fields of the selected post
 
 Scenario: Edit chosen entry of Live Post
-    Given that I am on the edit url of the number "1" entry
-    When I click on the "Title" field and edit the Title to "New Title"
-    And I click on the "Description" field and edit the description to "New Description"
-    And I click on the "Category" field and edit the category to "New Category"
-    And I click on the "Date" field and edit the date to "New Date"
-    When I click on the "Submit" button
-    Then the number "1" entry in the Live Post page contains "New Title", "New Description", "New Category", "New Date"
-
-Scenario: Able to return to Live Posts page using back button from edit url of number "1" entry
-    Given that I am on the edit url of the number "1" entry
-    When I click on the 'Back to Live Page' button
-    Then I should be redirected to the Live Posts url
+    Given that I am able to view the "Title, Description, Category, Start Date, End Date" fields of the selected post I am on
+    Then I can click on the "Title, Description, Category, Start Date, End Date" fields to edit the selected post
+    
