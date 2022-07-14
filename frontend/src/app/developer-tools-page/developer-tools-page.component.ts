@@ -114,8 +114,8 @@ export class DeveloperToolsPageComponent implements OnInit {
     this.barValue = 100;
     this.liveProductList = this.dataSrv.getLiveProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
-    this.trainedData = "this is jack's fav website";
-    this.words = "this is jack's fav website".split(' ');
+    this.trainedData = "Deteced.";
+    this.words = this.trainedData.split(' ');
     this.titleService.setTitle('developer-tools');
   }
 

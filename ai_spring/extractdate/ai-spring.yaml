@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: rbai-api
+  labels:
+    cloud.googleapis.com/location: asia-southeast1
+  annotations:
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '3'
+    spec:
+      serviceAccountName: rbai-api
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      containers:
+      - image: gcr.io/rbai-356302/rbai-api:latest
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 256Mi
+  traffic:
+    - percent: 100
+      latestRevision: true

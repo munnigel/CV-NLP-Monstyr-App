@@ -1,6 +1,3 @@
-import { assert } from "console";
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
-
 // Navigating to live post tab
 Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
   cy.visit("http://localhost:4200/home");

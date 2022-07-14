@@ -13,11 +13,11 @@
           <app-latency-bar></app-latency-bar>
       </app-dashboard-card>
    </mat-grid-tile>
-   <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+   <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
       <app-dashboard-card title="Accuracy/Confidence over Time">
           <app-accuracy-line></app-accuracy-line>
       </app-dashboard-card>
-   </mat-grid-tile>
+   </mat-grid-tile> -->
    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
     <app-dashboard-card title="Post Processing">
         <app-completion-pie></app-completion-pie>

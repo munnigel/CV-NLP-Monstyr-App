@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 import { DataService } from '../data-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from '../data-service.service';
 })
 export class AddPostComponent implements OnInit {
   postForm: FormGroup;
-  constructor(private fb: FormBuilder, private dataSrv: DataService) {
+  constructor(private router: Router, private fb: FormBuilder, private dataSrv: DataService) {
     this.postForm = this.fb.group({
       sp_id: [''],
       pid: [''],
@@ -62,6 +63,7 @@ export class AddPostComponent implements OnInit {
       next: (r) => console.log(r),
       complete: () => {
         console.log('post added');
+        this.router.navigate([`/home/overview`], {});
       },
       error: (e) => console.log(e),
     });

@@ -20,6 +20,8 @@ export class DataService implements OnInit {
   NERTitleLatency: number;
   pendingPercentage: number;
   livePercentage: number;
+  acceptedAiMl: number;
+  rejectedAiMl: number;
   private pendingTab: number;
   private liveTab: number;
 
@@ -113,6 +115,13 @@ export class DataService implements OnInit {
     let pending = await lastValueFrom(
       this.http.get(`${API_URL}/noofpendingposts`)
     );
+
+    let acceptedAiMl = await lastValueFrom(this.http.get(`${API_URL}/acceptedaiml`));
+    this.acceptedAiMl = acceptedAiMl['acceptedaiml'];
+
+    let rejectedAiMl = await lastValueFrom(this.http.get(`${API_URL}/rejectedaiml`));
+    this.rejectedAiMl = rejectedAiMl['rejectedaiml'];
+
     let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
     this.pendingPercentage = pending['noofpendingposts'];
     this.livePercentage = live['noofliveposts'];
@@ -201,7 +210,7 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images.replace('{', '').replace('}', ''),
+        res[i].images.replace('{', '').replace('}', '').split(",", 1),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -211,7 +220,7 @@ export class DataService implements OnInit {
         res[i].ner_categories_latency,
         res[i].ner_title_latency
       );
-      // console.log(temp);
+      console.log(temp);
       list.push(temp);
     }
   }
