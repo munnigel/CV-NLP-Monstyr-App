@@ -70,6 +70,7 @@ export class EditProcessedPostComponent implements OnInit {
       this.product.categories = this.editForm.value.categories;
       this.product.startDate = this.editForm.value.startDate;
       this.product.endDate = this.editForm.value.endDate;
+      console.log(this.editForm.value.startDate);
       console.log(this.product);
       this.datasrv.updatePost(this.product).subscribe({
         next: (v) => console.log(v),

@@ -25,7 +25,7 @@ export class DataService implements OnInit {
   private pendingTab: number;
   private liveTab: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   async ngOnInit() {
     console.log('getting');
@@ -55,7 +55,7 @@ export class DataService implements OnInit {
 
   async nextPendingTab() {
     console.log(this.pendingTab);
-    if (this.pendingTab < (await this.getNoOfPendingPosts() / 15)) {
+    if (this.pendingTab < (await this.getNoOfPendingPosts()) / 15) {
       this.pendingTab++;
     }
   }
@@ -68,14 +68,16 @@ export class DataService implements OnInit {
   }
 
   async getNoOfPendingPosts() {
-    let res: any = await lastValueFrom(this.http.get(`${API_URL}/noofpendingposts`));
+    let res: any = await lastValueFrom(
+      this.http.get(`${API_URL}/noofpendingposts`)
+    );
     console.log(res);
     return res.noofpendingposts;
   }
 
   async nextLiveTab() {
     console.log(this.liveTab);
-    if (this.liveTab < (await this.getNoOfLivePosts() / 15)) {
+    if (this.liveTab < (await this.getNoOfLivePosts()) / 15) {
       this.liveTab++;
     }
   }
@@ -88,7 +90,9 @@ export class DataService implements OnInit {
   }
 
   async getNoOfLivePosts() {
-    let res: any = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
+    let res: any = await lastValueFrom(
+      this.http.get(`${API_URL}/noofliveposts`)
+    );
     console.log(res);
     return res.noofliveposts;
   }
@@ -116,10 +120,14 @@ export class DataService implements OnInit {
       this.http.get(`${API_URL}/noofpendingposts`)
     );
 
-    let acceptedAiMl = await lastValueFrom(this.http.get(`${API_URL}/acceptedaiml`));
+    let acceptedAiMl = await lastValueFrom(
+      this.http.get(`${API_URL}/acceptedaiml`)
+    );
     this.acceptedAiMl = acceptedAiMl['acceptedaiml'];
 
-    let rejectedAiMl = await lastValueFrom(this.http.get(`${API_URL}/rejectedaiml`));
+    let rejectedAiMl = await lastValueFrom(
+      this.http.get(`${API_URL}/rejectedaiml`)
+    );
     this.rejectedAiMl = rejectedAiMl['rejectedaiml'];
 
     let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
@@ -170,18 +178,25 @@ export class DataService implements OnInit {
       this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
     );
     // console.log('all products');
-    // console.log(res1);
+    console.log(res1);
+    console.log(this.productList);
     this.createAndStoreProductList(this.productList, res1);
-    // console.log(this.productList);
+    console.log(this.productList);
+    console.log(this.liveTab);
     let res2: any = await lastValueFrom(
       this.http.get(`${API_URL}/posts/live/${this.liveTab}`, this.httpOptions)
     );
     // console.log('live products');
     console.log(res2);
-    if (res2) { this.createAndStoreProductList(this.liveProductList, res2); }
+    if (res2) {
+      this.createAndStoreProductList(this.liveProductList, res2);
+    }
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/pending/${this.pendingTab}`, this.httpOptions)
+      this.http.get(
+        `${API_URL}/posts/pending/${this.pendingTab}`,
+        this.httpOptions
+      )
     );
     // console.log('pending products');
     // console.log(res3);
@@ -190,7 +205,10 @@ export class DataService implements OnInit {
   }
 
   private createAndStoreProductList(list: Product[], res: any) {
+    console.log(list);
+    console.log(res);
     for (let i = 0; i < res.length; i++) {
+      console.log(res[i]);
       let temp = new Product(
         res[i].id,
         res[i].sp_id,
@@ -210,7 +228,6 @@ export class DataService implements OnInit {
         res[i].content,
         res[i].od_image,
         res[i].ocr_image,
-        res[i].images.replace('{', '').replace('}', '').split(",", 1),
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -220,7 +237,10 @@ export class DataService implements OnInit {
         res[i].ner_categories_latency,
         res[i].ner_title_latency
       );
-      console.log(temp);
+      temp.images = res[i].images
+        .replace('{', '')
+        .replace('}', '')
+        .split(',', 1);
       list.push(temp);
     }
   }
@@ -231,8 +251,8 @@ export class DataService implements OnInit {
 
   updatePost(product: Product): Observable<Product> {
     console.log(product);
-    return this.http.put<Product>(
-      `${API_URL}/posts/${product.id}`,
+    return this.http.post<Product>(
+      `${API_URL}/posts`,
       product,
       this.httpOptions
     );
@@ -243,7 +263,13 @@ export class DataService implements OnInit {
   }
 
   datePost(product: Product) {
-    let cleanedcleanedText = product.content.replace(/[^ ]*weeks[^ ]*/, "").replace(/[^ ]*days[^ ]*/, "").replace(/[^a-zA-Z0-9 ]/g, '').replace(/[^ ]*now[^ ]*/, "").replace(/[^ ]*today[^ ]*/, "").replace(/[^ ]*available[^ ]*/, "");
+    let cleanedcleanedText = product.content
+      .replace(/[^ ]*weeks[^ ]*/, '')
+      .replace(/[^ ]*days[^ ]*/, '')
+      .replace(/[^a-zA-Z0-9 ]/g, '')
+      .replace(/[^ ]*now[^ ]*/, '')
+      .replace(/[^ ]*today[^ ]*/, '')
+      .replace(/[^ ]*available[^ ]*/, '');
     console.log(cleanedcleanedText);
     return this.http.post<any>(`${AI_URL}/getdates`, cleanedcleanedText);
   }
