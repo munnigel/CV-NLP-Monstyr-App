@@ -108,3 +108,9 @@ Click on `.feature` files to run test cases
 ### For more information on implementing Gherkin steps in Cucumber
 
 [cucumber_steps](cucumber_steps.md)
+
+# Deploying AI 
+
+### using 
+step 1 : ensure Maven is installed 
+

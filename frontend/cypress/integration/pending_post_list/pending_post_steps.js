@@ -1,18 +1,19 @@
-import { assert } from "console";
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 
 // Scenario: Navigating to pending post tab
-Given("that I am logged in and on the overview page as a developer", () => {
-    cy.visit("http://localhost:4200/home/overview")
+Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
+    cy.visit("http://localhost:4200/home")
+    cy.title().should('eq', tabSelector)
 });
+When(/^I click on the "(.*)" tab$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.get("#" + tabSel + "-tab").click()
+})
 
-When("I click on 'Pending Posts' tab", () => {
-    cy.get("#pending-posts-tab").click()
-});
-
-Then("I should be redirected to the correct Pending Posts url", () => {
-    cy.url().should('eq', 'http://localhost:4200/home/pending')
-});
+Then(/^I should be on the "(.*)" page$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.title().should('eq', tabSel)
+})
 
 //Scenario: Edit post x details in pending post tab
 

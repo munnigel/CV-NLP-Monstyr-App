@@ -1,17 +1,19 @@
-import { assert } from "console";
+
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 
-Given("that I am logged in and on the overview page", () => {
-    cy.visit("http://localhost:4200/home/overview")
+Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
+    cy.visit("http://localhost:4200/home")
+    cy.title().should('eq', tabSelector)
+});
+When(/^I click on the "(.*)" tab$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.get("#" + tabSel + "-tab").click()
 })
 
-When("I click on 'Live Posts' tab", () => {
-    cy.get("#live-posts-tab").click()
-});
-
-Then("I should be redirected to the correct url", () => {
-    cy.url().should('eq', 'http://localhost:4200/home/processed')
-});
+Then(/^I should be on the "(.*)" page$/, (tabSelector) => {
+    let tabSel= tabSelector.toLowerCase().replace(" ", "-")
+    cy.title().should('eq', tabSel)
+})
 
 Given("that I am in the Live Post tab", () => {
     cy.visit("http://localhost:4200/home/processed")

@@ -6,9 +6,9 @@
 Feature: View live posts and edit erronous details
 
 Scenario: Navigating to Live Post tab
-    Given that I am logged in and on the overview page as a developer
-    When I click on "Live Posts" tab
-    Then I should be redirected to the correct Live Posts url
+    Given I am on the "Overview" page as a developer
+        When I click on the "Live Posts" tab
+        Then I should be on the "Live Posts" page
 
 Scenario: Navigating to specific entry of Live Post
     Given that I click on the "Live Post" tab
