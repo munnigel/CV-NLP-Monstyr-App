@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-
+import { DataService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-acceptance-pie',
@@ -9,7 +9,7 @@ import { Chart } from 'chart.js';
 })
 export class AcceptancePieComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataSrv: DataService) { }
 
   ngOnInit(): void {
 
@@ -21,7 +21,7 @@ export class AcceptancePieComponent implements OnInit {
           {
             label: "Completion of Posts",
             backgroundColor: ['#EC6B56', '#FFC154'],
-            data: [82, 18]
+            data: [this.dataSrv.acceptedAiMl, this.dataSrv.rejectedAiMl]
           }
         ]
       },

@@ -20,6 +20,8 @@ export class DataService implements OnInit {
   NERTitleLatency: number;
   pendingPercentage: number;
   livePercentage: number;
+  acceptedAiMl: number;
+  rejectedAiMl: number;
   private pendingTab: number;
   private liveTab: number;
 
@@ -113,6 +115,13 @@ export class DataService implements OnInit {
     let pending = await lastValueFrom(
       this.http.get(`${API_URL}/noofpendingposts`)
     );
+
+    let acceptedAiMl = await lastValueFrom(this.http.get(`${API_URL}/acceptedaiml`));
+    this.acceptedAiMl = acceptedAiMl['acceptedaiml'];
+
+    let rejectedAiMl = await lastValueFrom(this.http.get(`${API_URL}/rejectedaiml`));
+    this.rejectedAiMl = rejectedAiMl['rejectedaiml'];
+
     let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
     this.pendingPercentage = pending['noofpendingposts'];
     this.livePercentage = live['noofliveposts'];
