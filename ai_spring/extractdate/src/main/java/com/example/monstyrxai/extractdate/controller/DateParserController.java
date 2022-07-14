@@ -25,58 +25,53 @@ import edu.stanford.nlp.io.EncodingPrintWriter.out;
 @RestController
 public class DateParserController {
 
-  
+  // @PostMapping("/getdates")
+  // public ArrayList<MonstyrDate> getDateObject(@RequestBody String inputText)
+  // throws Exception {
+  // MonstyrDate monstyrDate = new MonstyrDate();
+  // ArrayList<MonstyrDate> outputList= monstyrDate.parseMonstyrDates(inputText);
 
+  // // Gson gson = new Gson();
+  // // return gson.toJson(datesFound);
+  // return outputList;
+  // }
 
-    // @PostMapping("/getdates")
-    // public ArrayList<MonstyrDate> getDateObject(@RequestBody String inputText) throws Exception {
-    //   MonstyrDate monstyrDate = new MonstyrDate();
-    //   ArrayList<MonstyrDate> outputList= monstyrDate.parseMonstyrDates(inputText);
+  @CrossOrigin(origins = "*")
+  @PostMapping("/getdates")
+  public List<HashMap<String, String>> getDateObject(@RequestBody String inputText) throws Exception {
+    HawkingTimeParser parser = new HawkingTimeParser();
+    HawkingConfiguration hawkingConfiguration = new HawkingConfiguration();
+    hawkingConfiguration.setFiscalYearStart(1);
+    hawkingConfiguration.setFiscalYearEnd(12);
+    hawkingConfiguration.setTimeZone("GMT+8");
+    Date referenceDate = new Date();
+    DatesFound datesFound = parser.parse(inputText, referenceDate, hawkingConfiguration, "eng");
 
-    //   // Gson gson = new Gson();
-    //   // return gson.toJson(datesFound);
-    //   return outputList;
-    // }
+    List<HashMap<String, String>> outputList = new ArrayList<HashMap<String, String>>();
+    // outputMap.put(datesFound.getParserOutputs().get(0).getId(),
+    // datesFound.getParserOutputs().get(0).getText());
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/getdates")
-    public List<HashMap<String, String>> getDateObject(@RequestBody String inputText) throws Exception {
-      HawkingTimeParser parser = new HawkingTimeParser();
-      HawkingConfiguration hawkingConfiguration = new HawkingConfiguration();
-      hawkingConfiguration.setFiscalYearStart(1);
-      hawkingConfiguration.setFiscalYearEnd(12);
-      hawkingConfiguration.setTimeZone("GMT+8");
-      Date referenceDate = new Date();
-      DatesFound datesFound = parser.parse(inputText, referenceDate, hawkingConfiguration, "eng");
+    for (ParserOutput parserOutput : datesFound.getParserOutputs()) {
+      HashMap<String, String> outputMap = new HashMap<String, String>();
+      outputMap.put("text", parserOutput.getText());
+      outputMap.put("start index", Integer.toString(parserOutput.getParserStartIndex()));
+      outputMap.put("end index", Integer.toString(parserOutput.getParserEndIndex()));
 
-      List<HashMap<String, String>> outputList = new ArrayList<HashMap<String, String>>();
-      // outputMap.put(datesFound.getParserOutputs().get(0).getId(), datesFound.getParserOutputs().get(0).getText());
-
-      for (ParserOutput parserOutput: datesFound.getParserOutputs()){
-        HashMap<String, String> outputMap = new HashMap<String, String>();
-        outputMap.put("text", parserOutput.getText());
-        outputMap.put("start index", Integer.toString(parserOutput.getParserStartIndex()));
-        outputMap.put("end index", Integer.toString(parserOutput.getParserEndIndex()));
-
-        if (parserOutput.getDateRange().getStart() != null) {
-          outputMap.put("start date", parserOutput.getDateRange().getStart().toString());
-        }
-
-        if (parserOutput.getDateRange().getEnd() != null) {
-          outputMap.put("end date", parserOutput.getDateRange().getEnd().toString());
-        }
-
-        outputList.add(outputMap);
+      if (parserOutput.getDateRange().getStart() != null) {
+        outputMap.put("start date", parserOutput.getDateRange().getStart().toString());
       }
-      return outputList;
-    }
-    
-    
-    
 
-    public static void main(String[] args) {
-      SpringApplication.run(DateParserController.class, args);
-    }
+      if (parserOutput.getDateRange().getEnd() != null) {
+        outputMap.put("end date", parserOutput.getDateRange().getEnd().toString());
+      }
 
-    
+      outputList.add(outputMap);
+    }
+    return outputList;
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run(DateParserController.class, args);
+  }
+
 }

@@ -36,7 +36,7 @@
         <p>Start Date</p>
         <textarea class="page-item-date" placeholder="Promotional Start Date" formControlName="startDate"
           rows="3"></textarea>
-        <button type="button" class="special-btn" (click)="getDates()">
+        <button type="button" class="special-btn" (click)="getMinOrMaxDates('min')">
           Generate
         </button>
       </div>
@@ -44,7 +44,7 @@
         <p>End Date</p>
         <textarea class="page-item-date" placeholder="Promotional End Date" formControlName="endDate"
           rows="3"></textarea>
-        <button type="button" class="special-btn" (click)="makeEndDate()">
+        <button type="button" class="special-btn" (click)="getMinOrMaxDates ('max')">
           Generate
         </button>
       </div>

@@ -9,6 +9,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { MatDialog } from '@angular/material/dialog';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { all } from 'cypress/types/bluebird';
+import { min } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-edit-item',
@@ -114,7 +115,7 @@ export class EditItemComponent implements OnInit {
     console.log('category activated');
   }
 
-  getDates() {
+  async getMinOrMaxDates(minOrMax: string) {
     let allDates;
     let datesList = [];
     this.datasrv.datePost(this.pendingProduct).subscribe({
@@ -123,43 +124,18 @@ export class EditItemComponent implements OnInit {
         console.log(allDates);
         for (const parsedObject of allDates) {
           datesList.push(new Date(parsedObject["start date"]));
+          datesList.push(new Date(parsedObject["start date"]));
         }
+
+        var maxDate = new Date(Math.max.apply(null, datesList));
+        var minDate = new Date(Math.min.apply(null, datesList));
+        if (minOrMax == 'min') this.editForm.patchValue({ startDate: minDate });
+        else if (minOrMax == 'max') this.editForm.patchValue({ endDate: maxDate });
       },
     }
     );
-
-    console.log(new Date("2022-07-14T17:00:00.000+08:00"));
-    console.log(datesList);
-
   }
 
-  makeStartDate() {
-    // this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
-    // this.promotionDate = '19/9/1999';
-    // console.log('date activated');
-    let temp;
-    this.datasrv.datePost(this.pendingProduct).subscribe({
-      next: (r) => (temp = r),
-      complete: () => {
-        console.log(temp);
-        this.editForm.patchValue({ startDate: temp[0]['start date'] });
-      },
-    });
-  }
-
-  makeEndDate() {
-    // this.editForm.patchValue({ promotionDate: 'DATE GENERATED WAAAA' });
-    // this.promotionDate = '19/9/1999';
-    // console.log('date activated');
-    let temp;
-    this.datasrv.datePost(this.pendingProduct).subscribe({
-      next: (r) => (temp = r),
-      complete: () => {
-        console.log(temp);
-        this.editForm.patchValue({ endDate: temp[0]['end date'] });
-      },
-    });
-  }
 
   deletePost(id: number) {
     const dialogData = new ConfirmationDialogModel('Delete this post?', '');
