@@ -37,7 +37,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -54,12 +54,9 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        categories: [
-          ``,
-          Validators.required,
-        ],
-        startDate: [``, Validators.required],
-        endDate: [``, Validators.required],
+        categories: [``, Validators.required],
+        startDate: [``],
+        endDate: [``],
         title: [``, Validators.required],
         content: [``, Validators.required],
       });
@@ -125,21 +122,20 @@ export class EditItemComponent implements OnInit {
         console.log(allDates);
         for (const parsedObject of allDates) {
           console.log(parsedObject);
-          if (parsedObject["start date"] != null) {
-            datesList.push(new Date(parsedObject["start date"]));
+          if (parsedObject['start date'] != null) {
+            datesList.push(new Date(parsedObject['start date']));
           }
-          datesList.push(new Date(parsedObject["end date"]));
+          datesList.push(new Date(parsedObject['end date']));
         }
 
         var maxDate = new Date(Math.max.apply(null, datesList));
         var minDate = new Date(Math.min.apply(null, datesList));
         if (minOrMax == 'min') this.editForm.patchValue({ startDate: minDate });
-        else if (minOrMax == 'max') this.editForm.patchValue({ endDate: maxDate });
+        else if (minOrMax == 'max')
+          this.editForm.patchValue({ endDate: maxDate });
       },
-    }
-    );
+    });
   }
-
 
   deletePost(id: number) {
     const dialogData = new ConfirmationDialogModel('Delete this post?', '');
@@ -151,7 +147,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => { },
+          next: () => {},
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();

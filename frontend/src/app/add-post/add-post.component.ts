@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { DataService } from '../data-service.service';
@@ -11,7 +11,11 @@ import { DataService } from '../data-service.service';
 })
 export class AddPostComponent implements OnInit {
   postForm: FormGroup;
-  constructor(private router: Router, private fb: FormBuilder, private dataSrv: DataService) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private dataSrv: DataService
+  ) {
     this.postForm = this.fb.group({
       sp_id: [''],
       pid: [''],
@@ -58,14 +62,15 @@ export class AddPostComponent implements OnInit {
     formData.append('genTags', this.postForm.get('genTags').value);
     formData.append('content', this.postForm.get('content').value);
     formData.append('genContent', this.postForm.get('genContent').value);
-    formData.append('image', this.postForm.get('image').value);
+    if (this.postForm.get('image').value)
+      formData.append('image', this.postForm.get('image').value);
     this.dataSrv.addPost(formData).subscribe({
       next: (r) => console.log(r),
       complete: () => {
+        this.dataSrv.updateAllProductList();
         console.log('post added');
         this.router.navigate([`/home/overview`], {});
       },
-      error: (e) => console.log(e),
     });
   }
 }

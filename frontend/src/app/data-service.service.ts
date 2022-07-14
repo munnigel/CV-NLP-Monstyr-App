@@ -205,10 +205,10 @@ export class DataService implements OnInit {
   }
 
   private createAndStoreProductList(list: Product[], res: any) {
-    console.log(list);
-    console.log(res);
+    // console.log(list);
+    // console.log(res);
     for (let i = 0; i < res.length; i++) {
-      console.log(res[i]);
+      // console.log(res[i]);
       let temp = new Product(
         res[i].id,
         res[i].sp_id,
@@ -237,10 +237,11 @@ export class DataService implements OnInit {
         res[i].ner_categories_latency,
         res[i].ner_title_latency
       );
-      temp.images = res[i].images
-        .replace('{', '')
-        .replace('}', '')
-        .split(',', 1);
+      if (res[i].images)
+        temp.images = res[i].images
+          .replace('{', '')
+          .replace('}', '')
+          .split(',', 1);
       list.push(temp);
     }
   }
@@ -251,11 +252,39 @@ export class DataService implements OnInit {
 
   updatePost(product: Product): Observable<Product> {
     console.log(product);
-    return this.http.post<Product>(
-      `${API_URL}/posts`,
-      product,
-      this.httpOptions
-    );
+    console.log('update');
+    let formData = new FormData();
+    console.log(typeof product.startDate.toString());
+    if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
+    if (product.pid) formData.append('pid', product.pid.toString());
+    if (product.status) formData.append('status', product.status);
+    if (product.title) formData.append('title', product.title);
+    if (product.genTitle)
+      formData.append('gen_title', product.genTitle.toString());
+    if (product.categories)
+      formData.append('categories', product.categories.toString());
+    if (product.genCategories)
+      formData.append('gen_categories', product.genCategories.toString());
+    if (product.startDate)
+      formData.append('start_date', product.startDate.toString());
+    if (product.genStartDate)
+      formData.append('gen_start_date', product.genStartDate.toString());
+    if (product.endDate)
+      formData.append('end_date', product.endDate.toString());
+    if (product.genEndDate)
+      formData.append('gen_end_date', product.genEndDate.toString());
+    if (product.tags) formData.append('tags', product.tags.toString());
+    if (product.genTags)
+      formData.append('gen_tags', product.genTags.toString());
+    if (product.content) formData.append('content', product.content);
+    if (product.genContent) formData.append('gen_content', product.genContent);
+    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData, {
+      headers: new HttpHeaders({
+        // "Accept": "*/*",
+        Accept: '/',
+        'Content-Type': 'multipart/form-data',
+      }),
+    });
   }
 
   deletePost(id: number): Observable<Product> {

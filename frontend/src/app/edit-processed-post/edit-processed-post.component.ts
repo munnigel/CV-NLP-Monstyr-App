@@ -72,6 +72,7 @@ export class EditProcessedPostComponent implements OnInit {
       this.product.endDate = this.editForm.value.endDate;
       console.log(this.editForm.value.startDate);
       console.log(this.product);
+
       this.datasrv.updatePost(this.product).subscribe({
         next: (v) => console.log(v),
         error: (e) => console.error(e),
@@ -80,6 +81,10 @@ export class EditProcessedPostComponent implements OnInit {
           this.router.navigate(['home/processed'], {});
         },
       });
+      setTimeout(() => {
+        this.datasrv.updateAllProductList();
+        this.router.navigate(['home/processed'], {});
+      }, 2000);
     }
   }
   deletePost(id: number) {
