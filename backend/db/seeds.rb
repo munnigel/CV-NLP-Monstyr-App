@@ -66,7 +66,7 @@
 
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'data-team-duckies.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'Seeds_Sprint_2.csv'))
 csv = CSV.parse(csv_text,:headers => true, :encoding => 'ISO-8859-1')
 
 csv.each_with_index do |row, index|
