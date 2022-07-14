@@ -278,13 +278,7 @@ export class DataService implements OnInit {
       formData.append('gen_tags', product.genTags.toString());
     if (product.content) formData.append('content', product.content);
     if (product.genContent) formData.append('gen_content', product.genContent);
-    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData, {
-      headers: new HttpHeaders({
-        // "Accept": "*/*",
-        Accept: '/',
-        'Content-Type': 'multipart/form-data',
-      }),
-    });
+    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData);
   }
 
   deletePost(id: number): Observable<Product> {

@@ -69,14 +69,9 @@ export class EditItemComponent implements OnInit {
     if (this.editForm.invalid) {
       this.error = true;
       this.errMsg = 'Please complete all required fields.';
-      setTimeout(() => {
-        this.error = false;
-        this.errMsg = undefined;
-      }, 2000);
-      return;
     } else {
       this.pendingProduct.title = this.editForm.value.title;
-      this.pendingProduct.content = this.editForm.value.description;
+      this.pendingProduct.content = this.editForm.value.content;
       this.pendingProduct.categories = this.editForm.value.categories;
       this.pendingProduct.startDate = this.editForm.value.startDate;
       this.pendingProduct.endDate = this.editForm.value.endDate;
@@ -90,6 +85,10 @@ export class EditItemComponent implements OnInit {
           this.router.navigate(['/home/processed']);
         },
       });
+      setTimeout(() => {
+        this.datasrv.updateAllProductList();
+        this.router.navigate(['home/processed'], {});
+      }, 2000);
     }
   }
 
