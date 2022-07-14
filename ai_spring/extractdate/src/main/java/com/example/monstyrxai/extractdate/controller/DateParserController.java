@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -36,7 +38,7 @@ public class DateParserController {
     //   return outputList;
     // }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/getdates")
     public List<HashMap<String, String>> getDateObject(@RequestBody String inputText) throws Exception {
       HawkingTimeParser parser = new HawkingTimeParser();
@@ -64,16 +66,13 @@ public class DateParserController {
           outputMap.put("end date", parserOutput.getDateRange().getEnd().toString());
         }
 
-        
         outputList.add(outputMap);
-
       }
-      
-
       return outputList;
-       
-      
-    } 
+    }
+    
+    
+    
 
     public static void main(String[] args) {
       SpringApplication.run(DateParserController.class, args);
