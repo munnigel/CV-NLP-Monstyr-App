@@ -5,3 +5,6 @@ frontend/dist
 
 # second .gitignore file can be found in /backend
 backend/log/development.log
+
+.vscode
+.idea
