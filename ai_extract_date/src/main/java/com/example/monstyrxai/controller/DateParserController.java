@@ -1,4 +1,4 @@
-package com.example.monstyrxai.extractdate.controller;
+package com.example.monstyrxai.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
