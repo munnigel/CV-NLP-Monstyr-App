@@ -1,0 +1,173 @@
+[
+  {
+    "description": "As a date inputter part of the admin staff,\nI want to be able to automatically get start and end dates of each pending post\nSo that I am able to process the data from the post faster",
+    "keyword": "Feature",
+    "name": "Automatically generate start and end promotion dates",
+    "line": 1,
+    "id": "automatically-generate-start-and-end-promotion-dates",
+    "tags": [],
+    "uri": "dateparser.feature",
+    "elements": [
+      {
+        "id": "automatically-generate-start-and-end-promotion-dates;generating-start-date-when-date-is-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Generating start date when date is present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on \"Edit Item Page\" for a particular pending post",
+            "result": {
+              "status": "passed",
+              "duration": 1601000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I click on the Start Date Generate",
+            "result": {
+              "status": "passed",
+              "duration": 1471000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "the start date of the promotion should appear in the \"Start Date\" text box",
+            "result": {
+              "status": "passed",
+              "duration": 24000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "automatically-generate-start-and-end-promotion-dates;generating-end-date-when-date-is-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Generating end date when date is present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "I am on \"Edit Item Page\" for a particular pending post",
+            "result": {
+              "status": "passed",
+              "duration": 262000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I click on the End Date Generate",
+            "result": {
+              "status": "passed",
+              "duration": 703000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the end date of the promotion should appear in the \"End Date\" text box",
+            "result": {
+              "status": "passed",
+              "duration": 21000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "automatically-generate-start-and-end-promotion-dates;attempting-to-generate-start-date-when-date-is-not-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 18,
+        "name": "Attempting to generate start date when date is not present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "I am on \"Edit Item Page\" for a particular pending post with no date",
+            "result": {
+              "status": "passed",
+              "duration": 221000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 20,
+            "name": "I click on the Start Date Generate",
+            "result": {
+              "status": "passed",
+              "duration": 847000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the Start Date text box should remain empty",
+            "result": {
+              "status": "passed",
+              "duration": 125000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "automatically-generate-start-and-end-promotion-dates;attempting-to-generate-end-date-when-date-is-not-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Attempting to generate end date when date is not present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 25,
+            "name": "I am on \"Edit Item Page\" for a particular pending post with no date",
+            "result": {
+              "status": "passed",
+              "duration": 260000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "I click on the End Date Generate",
+            "result": {
+              "status": "passed",
+              "duration": 728000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "the \"End Date\" text box should remain empty",
+            "result": {
+              "status": "passed",
+              "duration": 40000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
