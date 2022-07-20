@@ -30,6 +30,7 @@ export class EditItemComponent implements OnInit {
   id: number;
 
   endDate: any;
+  genCategories: string[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +41,7 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.genCategories = ['cat1', 'cat2', 'cat3', 'cat4'];
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       // console.log(this.datasrv.getPendingProductList()[id]);
@@ -54,15 +56,21 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        categories: [``, Validators.required],
-        startDate: [``],
-        endDate: [``],
-        title: [``, Validators.required],
-        content: [``, Validators.required],
+        categories: ['', Validators.required],
+        startDate: [''],
+        endDate: [''],
+        title: ['', Validators.required],
+        content: ['', Validators.required],
       });
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
+  }
+
+  selectCat(i: number) {
+    this.editForm.patchValue({ categories: this.genCategories[i] });
+    console.log('set to');
+    console.log(this.genCategories[i]);
   }
 
   async onProcessed() {

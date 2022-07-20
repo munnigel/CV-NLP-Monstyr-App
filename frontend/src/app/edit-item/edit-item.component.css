@@ -1,2 +1,25 @@
+#dropdownMenu2 {
+  width: 100%;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid black;
+}
 
-   
+.page-item-category {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.item-page-left {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 300px;
+  align-items: center;
+  margin-left: 30px;
+}

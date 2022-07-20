@@ -8,8 +8,13 @@
     <form [formGroup]="editForm">
       <div class="item-cont">
         <p>Title</p>
-        <textarea class="page-item-title" placeholder="Enter title here" formControlName="title"
-          rows="3">{{ title }}</textarea>
+        <textarea
+          class="page-item-title"
+          placeholder="Enter title here"
+          formControlName="title"
+          rows="3"
+          >{{ title }}</textarea
+        >
         <button type="button" class="special-btn" (click)="makeTitle()">
           Generate
         </button>
@@ -17,34 +22,74 @@
 
       <div class="item-cont">
         <p>Description</p>
-        <textarea class="page-item" placeholder="Enter your description here" formControlName="content"
-          rows="5"></textarea>
+        <textarea
+          class="page-item"
+          placeholder="Enter your description here"
+          formControlName="content"
+          rows="5"
+        ></textarea>
         <button type="button" class="special-btn" (click)="makeDescription()">
           Generate
         </button>
       </div>
 
-      <div class="item-cont">
-        <p>Category</p>
-        <textarea class="page-item-category" placeholder="Category" formControlName="categories" rows="3"></textarea>
-        <button type="button" class="special-btn" (click)="makeCategory()">
-          Generate
-        </button>
+      <div class="dropdown">
+        <textarea
+          class="page-item-category"
+          id="dropdownMenu2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          placeholder="Category"
+          formControlName="categories"
+        ></textarea>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <ng-container *ngFor="let cat of genCategories; let i = index">
+            <li>
+              <button
+                class="dropdown-item"
+                type="button"
+                (click)="selectCat(i)"
+              >
+                {{ cat }}
+              </button>
+            </li>
+          </ng-container>
+        </ul>
       </div>
 
       <div class="item-cont">
         <p>Start Date</p>
-        <textarea class="page-item-date" id="startText" placeholder="Promotional Start Date" formControlName="startDate"
-          rows="3"></textarea>
-        <button type="button" class="special-btn" id="startGen" (click)="getMinOrMaxDates('min')">
+        <textarea
+          class="page-item-date"
+          id="startText"
+          placeholder="Promotional Start Date"
+          formControlName="startDate"
+          rows="3"
+        ></textarea>
+        <button
+          type="button"
+          class="special-btn"
+          id="startGen"
+          (click)="getMinOrMaxDates('min')"
+        >
           Generate
         </button>
       </div>
       <div class="item-cont">
         <p>End Date</p>
-        <textarea class="page-item-date" id="endText" placeholder="Promotional End Date" formControlName="endDate"
-          rows="3"></textarea>
-        <button type="button" class="special-btn" id="endGen" (click)="getMinOrMaxDates ('max')">
+        <textarea
+          class="page-item-date"
+          id="endText"
+          placeholder="Promotional End Date"
+          formControlName="endDate"
+          rows="3"
+        ></textarea>
+        <button
+          type="button"
+          class="special-btn"
+          id="endGen"
+          (click)="getMinOrMaxDates('max')"
+        >
           Generate
         </button>
       </div>
@@ -69,18 +114,34 @@
       <textarea>
 
           {{ pendingProduct["content"] }}
-        </textarea>
+        </textarea
+      >
     </div>
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(pendingProduct.id)">
+  <button
+    type="button"
+    class="btn btn-danger"
+    style="margin-right: 20px"
+    (click)="deletePost(pendingProduct.id)"
+  >
     Delete Post
   </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="back-to-pending" (click)="onPending()">
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="back-to-pending"
+    (click)="onPending()"
+  >
     Back to Pending Page
   </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="go-to-live" (click)="onProcessed()">
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="go-to-live"
+    (click)="onProcessed()"
+  >
     Submit
   </button>
 </div>

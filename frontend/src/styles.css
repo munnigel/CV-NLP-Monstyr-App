@@ -40,7 +40,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: hsla(200, 40%, 30%, .4);
+  background-color: hsla(200, 40%, 30%, 0.4);
   /* background-image:
     url('./assets/pictures/mon.gif'),
     url('./assets/pictures/mon2.gif'),
@@ -59,10 +59,7 @@ body {
 
 @keyframes para {
   100% {
-    background-position:
-      -2000px 0%,
-      2000px 50%,
-      -2000px 100%;
+    background-position: -2000px 0%, 2000px 50%, -2000px 100%;
   }
 }
 
@@ -71,17 +68,12 @@ body {
 }
 
 .mb-3:hover {
-  background-image:
-    url('./assets/pictures/mon3.gif');
+  background-image: url("./assets/pictures/mon3.gif");
   background-repeat: repeat-x;
-  background-position:
-    0 0%;
-  background-size:
-    50px;
+  background-position: 0 0%;
+  background-size: 50px;
   animation: 45s para infinite linear;
 }
-
-
 
 .h2 {
   position: relative;
@@ -105,7 +97,6 @@ body {
 }
 
 @keyframes animation {
-
   0%,
   10%,
   100% {
@@ -277,17 +268,6 @@ body {
   justify-content: space-evenly;
 }
 
-.item-page-left {
-  padding-top: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 600px;
-  height: 300px;
-  align-items: center;
-  margin-left: 30px;
-}
-
 .item-cont {
   display: flex;
   flex-direction: row;
@@ -416,15 +396,6 @@ body {
   margin: 10px;
 }
 
-.page-item-category {
-  resize: none;
-  height: 35px;
-  width: 600px;
-  border-radius: 15px;
-  padding: 0px 10px;
-  margin: 10px;
-}
-
 .page-item-date {
   resize: none;
   height: 30px;
@@ -464,12 +435,11 @@ body {
   margin: 5px;
 }
 
-
 .page-item-description textarea {
   width: 100%;
-  height:  100%;
-  display:block;
-  resize:none;
+  height: 100%;
+  display: block;
+  resize: none;
   overflow: auto;
 }
 
