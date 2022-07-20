@@ -1,6 +1,6 @@
 Feature: Automatically generate start and end promotion dates
-As a date inputter part of the admin staff,\n
-I want to be able to automatically get start and end dates of each pending post,\n
+As a date inputter part of the admin staff,
+I want to be able to automatically get start and end dates of each pending post,
 So that I am able to process the data from the post faster
 
 Scenario: Generating start date when date is present in product description
