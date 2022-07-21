@@ -14,4 +14,6 @@ So that i am able to process the data from the post faster
         Given I am on "Edit Item Page" for a particular pending post
         When I click on the "generate categories" button
         Then I should see the "categories generated failure" sign
+        When I click on the "enter categories" text area
+        Then I should see "no categories found" options
         

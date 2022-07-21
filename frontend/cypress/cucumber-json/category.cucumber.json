@@ -1,0 +1,128 @@
+[
+  {
+    "description": "As a date inputter part of the admin staff, \nI want to be able to automatically get categories of each pending post,\nSo that i am able to process the data from the post faster",
+    "keyword": "Feature",
+    "name": "Automatically generate categories",
+    "line": 1,
+    "id": "automatically-generate-categories",
+    "tags": [],
+    "uri": "category.feature",
+    "elements": [
+      {
+        "id": "automatically-generate-categories;generating-categories-when-text-is-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Generating categories when text is present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on \"Edit Item Page\" for a particular pending post",
+            "result": {
+              "status": "passed",
+              "duration": 1476000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I click on the \"generate categories\" button",
+            "result": {
+              "status": "failed",
+              "duration": 4012000000,
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.generate-categories-btn`, but never found it.\n    at Context.eval (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:46:6)\n    at Context.resolveAndRunStepDefinition (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:10988:29)\n    at Context.eval (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:10309:35)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I should see the \"categories generated successfully\" sign",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I click on the \"enter categories\" text area",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should see \"categories\" options",
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      },
+      {
+        "id": "automatically-generate-categories;attempting-to-generate-categories-when-text-is-not-present-in-product-description",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Attempting to generate categories when text is not present in product description",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "I am on \"Edit Item Page\" for a particular pending post",
+            "result": {
+              "status": "passed",
+              "duration": 1237000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I click on the \"generate categories\" button",
+            "result": {
+              "status": "failed",
+              "error_message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.generate-categories-btn`, but never found it.\n    at Context.eval (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:46:6)\n    at Context.resolveAndRunStepDefinition (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:10988:29)\n    at Context.eval (http://localhost:4200/__cypress/tests?p=cypress/integration/category.feature:10309:35)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "I should see the \"categories generated failure\" sign",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I click on the \"enter categories\" text area",
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "I should see \"no categories found\" options",
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -33,28 +33,43 @@
         </button>
       </div>
 
-      <div class="dropdown">
-        <textarea
-          class="page-item-category"
-          id="dropdownMenu2"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          placeholder="Category"
-          formControlName="categories"
-        ></textarea>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <ng-container *ngFor="let cat of genCategories; let i = index">
-            <li>
-              <button
-                class="dropdown-item"
-                type="button"
-                (click)="selectCat(i)"
-              >
-                {{ cat }}
-              </button>
-            </li>
-          </ng-container>
-        </ul>
+      <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label"
+          >Category</label
+        >
+        <div class="col-sm-10">
+          <div class="dropdown">
+            <textarea
+              class="page-item-category"
+              id="dropdownMenu2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              placeholder="Category"
+              formControlName="categories"
+            ></textarea>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <ng-container *ngFor="let cat of genCategories; let i = index">
+                <li>
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    (click)="selectCat(i)"
+                  >
+                    {{ cat }}
+                  </button>
+                </li>
+              </ng-container>
+            </ul>
+            <button
+              type="button"
+              class="special-btn"
+              id="generate-categories-btn"
+              (click)="makeCategory()"
+            >
+              Generate
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="item-cont">
