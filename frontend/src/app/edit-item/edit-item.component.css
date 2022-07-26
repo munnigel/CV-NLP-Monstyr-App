@@ -5,6 +5,10 @@
   border: 1px solid black;
 }
 
+.example-chip-list {
+  width: 100%;
+}
+
 .page-item-category {
   resize: none;
   width: 100%;

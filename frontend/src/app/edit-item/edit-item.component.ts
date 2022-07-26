@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Product } from '../product.model';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { all } from 'cypress/types/bluebird';
-import { min } from 'cypress/types/lodash';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 // import { parse } from 'path';
 
 @Component({
@@ -32,6 +39,19 @@ export class EditItemComponent implements OnInit {
   endDate: any;
   genCategories: string[];
 
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagCtrl = new FormControl('');
+  filteredTags: Observable<string[]>;
+  tags: string[] = [];
+  allTags: string[] = ['Tag1', 'Tag2', 'Tag3', 'Tag4', 'Tag5'];
+  categoryCtrl = new FormControl('');
+  filteredCategories: Observable<string[]>;
+  categories: string[] = [];
+  allCategories: string[] = ['Cat1', 'Cat2', 'Cat3', 'Cat4', 'Cat5'];
+
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
@@ -41,6 +61,18 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) =>
+        tag ? this._filterTags(tag) : this.allTags.slice()
+      )
+    );
+    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      startWith(null),
+      map((category: string | null) =>
+        category ? this._filterCategories(category) : this.allCategories.slice()
+      )
+    );
     this.genCategories = ['cat1', 'cat2', 'cat3', 'cat4'];
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
@@ -65,6 +97,78 @@ export class EditItemComponent implements OnInit {
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
+  }
+
+  addTag(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.tags.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.tagCtrl.setValue(null);
+  }
+
+  removeTag(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  selectedTag(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    this.tagInput.nativeElement.value = '';
+    this.tagCtrl.setValue(null);
+  }
+
+  private _filterTags(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allTags.filter((tag) =>
+      tag.toLowerCase().includes(filterValue)
+    );
+  }
+
+  addCategory(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.categories.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.categoryCtrl.setValue(null);
+  }
+
+  removeCategory(category: string): void {
+    const index = this.categories.indexOf(category);
+
+    if (index >= 0) {
+      this.categories.splice(index, 1);
+    }
+  }
+
+  selectedCategory(event: MatAutocompleteSelectedEvent): void {
+    this.categories.push(event.option.viewValue);
+    this.categoryInput.nativeElement.value = '';
+    this.categoryCtrl.setValue(null);
+  }
+
+  private _filterCategories(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allCategories.filter((category) =>
+      category.toLowerCase().includes(filterValue)
+    );
   }
 
   selectCat(i: number) {
