@@ -30,18 +30,47 @@ class PostsController < ApplicationController
     # Obtain image URL
     @post = Post.find(params[:id])
     @img_urls = @post.images.split(',')
-    @raw_img_url = @img_urls.first
-    @raw_img_url = @raw_img_url[1..-1]
+    @raw_img_url = @img_urls.first.to_s
+    # @raw_img_url["{"] = ""
+    # @raw_img_url["}"] = ""
+    @raw_img_url = @raw_img_url.gsub('{','')
+    @raw_img_url = @raw_img_url.gsub('}','')
     # render json: {'IMG_URL_1': @raw_img_url}
 
+    # Download image and store locally
+    tempfile = Down.download(@raw_img_url)
+    FileUtils.mv(tempfile.path, "./temp_img.jpg")
+
     # Generate appropriate request.json
+
+    # Using image on GCS
+    # @body = {
+    #   "requests": [
+    #       {
+    #         "image": {
+    #           "source": {
+    #               "imageUri": "gs://rubyduckies_cloudstorage/91g7pxvfrk2k75cfa3vg79zm0tem"
+    #           }
+    #         },
+    #         "features": [
+    #           {
+    #             "type": "LABEL_DETECTION",
+    #             "maxResults": 10
+    #           }
+    #         ]
+    #       }
+    #   ]
+    # }
+
+    # Using local image in base64 encoding
+    # @IMAGE_FILE = './sign.jpg'
+    @IMAGE_FILE = './temp_img.jpg'
+    @base64_image = Base64.strict_encode64(File.new(@IMAGE_FILE, 'rb').read)
     @body = {
       "requests": [
           {
             "image": {
-              "source": {
-                  "imageUri": "gs://rubyduckies_cloudstorage/91g7pxvfrk2k75cfa3vg79zm0tem"
-              }
+              "content": @base64_image
             },
             "features": [
               {
@@ -52,6 +81,7 @@ class PostsController < ApplicationController
           }
       ]
     }
+
     # render json: {'body': @body}
 
     # Send POST request
@@ -75,7 +105,7 @@ class PostsController < ApplicationController
     tags.each { |x| processed_tags.append(x['description']) }
 
     # Return tags to frontend as json
-    render json: {'tags': processed_tags}
+    render json: {'gen_tags': processed_tags}
   end
 
   # Retrieves live posts in batches of N
