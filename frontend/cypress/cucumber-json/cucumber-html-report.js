@@ -9,8 +9,7 @@ report.generate({
     },
     device: "Local test machine",
     platform: {
-      name: "mac",
-      version: "Catalina",
+      name: "ubuntu",
     },
   },
 });

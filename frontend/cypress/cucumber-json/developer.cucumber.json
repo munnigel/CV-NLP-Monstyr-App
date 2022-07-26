@@ -22,7 +22,7 @@
             "name": "I am on the \"Overview\" page as a developer",
             "result": {
               "status": "passed",
-              "duration": 3294000000
+              "duration": 2770000000
             }
           },
           {
@@ -32,7 +32,7 @@
             "name": "I click on the \"Developer Tools\" tab",
             "result": {
               "status": "passed",
-              "duration": 286000000
+              "duration": 282000000
             }
           },
           {
@@ -42,7 +42,7 @@
             "name": "I should be on the \"Developer Tools\" page",
             "result": {
               "status": "passed",
-              "duration": 29000000
+              "duration": 18000000
             }
           },
           {
@@ -52,7 +52,7 @@
             "name": "I should be able to see \"Choose Live, Choose Pending, Choose Manually\" button",
             "result": {
               "status": "passed",
-              "duration": 157000000
+              "duration": 94000000
             }
           }
         ]
@@ -72,7 +72,7 @@
             "name": "the \"Choose Live\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 309000000
+              "duration": 241000000
             }
           },
           {
@@ -82,7 +82,7 @@
             "name": "I click on the \"Back\" button",
             "result": {
               "status": "passed",
-              "duration": 152000000
+              "duration": 194000000
             }
           },
           {
@@ -92,7 +92,7 @@
             "name": "I should be able to see \"Choose Live, Choose Pending, Choose Manually\" button",
             "result": {
               "status": "passed",
-              "duration": 63000000
+              "duration": 45000000
             }
           }
         ]
@@ -112,7 +112,7 @@
             "name": "the \"Choose Pending\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 564000000
+              "duration": 178000000
             }
           },
           {
@@ -122,7 +122,7 @@
             "name": "I click on the \"Back\" button",
             "result": {
               "status": "passed",
-              "duration": 172000000
+              "duration": 187000000
             }
           },
           {
@@ -132,7 +132,7 @@
             "name": "I should be able to see \"Choose Live, Choose Pending, Choose Manually\" button",
             "result": {
               "status": "passed",
-              "duration": 99000000
+              "duration": 93000000
             }
           }
         ]
@@ -152,7 +152,7 @@
             "name": "that I click on the \"Developer Tools\" tab",
             "result": {
               "status": "passed",
-              "duration": 328000000
+              "duration": 154000000
             }
           },
           {
@@ -162,7 +162,7 @@
             "name": "the \"Choose Live\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 118000000
+              "duration": 99000000
             }
           },
           {
@@ -172,7 +172,7 @@
             "name": "I click on one of the \"Live\" post",
             "result": {
               "status": "passed",
-              "duration": 187000000
+              "duration": 149000000
             }
           },
           {
@@ -182,7 +182,7 @@
             "name": "I should be able to see \"Input Image, Processed Text\" in the \"OCR\" section",
             "result": {
               "status": "passed",
-              "duration": 577000000
+              "duration": 516000000
             }
           },
           {
@@ -192,7 +192,7 @@
             "name": "I should be able to see \"Processed Tags\" in the \"OD\" section",
             "result": {
               "status": "passed",
-              "duration": 21000000
+              "duration": 28000000
             }
           },
           {
@@ -202,7 +202,7 @@
             "name": "I should be able to see \"Extracted Keywords\" in the \"NER\" section",
             "result": {
               "status": "passed",
-              "duration": 19000000
+              "duration": 21000000
             }
           }
         ]
@@ -222,7 +222,7 @@
             "name": "that I click on the \"Developer Tools\" tab",
             "result": {
               "status": "passed",
-              "duration": 177000000
+              "duration": 234000000
             }
           },
           {
@@ -232,7 +232,7 @@
             "name": "the \"Choose Pending\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 89000000
+              "duration": 114000000
             }
           },
           {
@@ -242,7 +242,7 @@
             "name": "I click on one of the \"Pending\" post",
             "result": {
               "status": "passed",
-              "duration": 150000000
+              "duration": 116000000
             }
           },
           {
@@ -252,7 +252,7 @@
             "name": "I should be able to see \"Input Image, Processed Text\" in the \"OCR\" section",
             "result": {
               "status": "passed",
-              "duration": 499000000
+              "duration": 524000000
             }
           },
           {
@@ -262,7 +262,7 @@
             "name": "I should be able to see \"Processed Tags\" in the \"OD\" section",
             "result": {
               "status": "passed",
-              "duration": 18000000
+              "duration": 16000000
             }
           },
           {
@@ -272,7 +272,7 @@
             "name": "I should be able to see \"Extracted Keywords\" in the \"NER\" section",
             "result": {
               "status": "passed",
-              "duration": 13000000
+              "duration": 15000000
             }
           }
         ]
@@ -292,7 +292,7 @@
             "name": "that I click on the \"Developer Tools\" tab",
             "result": {
               "status": "passed",
-              "duration": 126000000
+              "duration": 194000000
             }
           },
           {
@@ -302,7 +302,7 @@
             "name": "the \"Choose Manually\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 117000000
+              "duration": 110000000
             }
           },
           {
@@ -312,7 +312,7 @@
             "name": "I should be able to see \"Choose File\" in the \"Upload\" section",
             "result": {
               "status": "passed",
-              "duration": 33000000
+              "duration": 16000000
             }
           },
           {
@@ -332,7 +332,7 @@
             "name": "I click on the \"Create\" button",
             "result": {
               "status": "passed",
-              "duration": 136000000
+              "duration": 161000000
             }
           },
           {
@@ -342,7 +342,7 @@
             "name": "I should be able to see \"Input Image, Processed Text\" in the \"OCR\" section",
             "result": {
               "status": "passed",
-              "duration": 451000000
+              "duration": 442000000
             }
           },
           {
@@ -352,7 +352,7 @@
             "name": "I should be able to see \"Processed Tags\" in the \"OD\" section",
             "result": {
               "status": "passed",
-              "duration": 25000000
+              "duration": 18000000
             }
           },
           {
@@ -362,7 +362,7 @@
             "name": "I should be able to see \"Extracted Keywords\" in the \"NER\" section",
             "result": {
               "status": "passed",
-              "duration": 16000000
+              "duration": 19000000
             }
           }
         ]
@@ -382,7 +382,7 @@
             "name": "that I click on the \"Developer Tools\" tab",
             "result": {
               "status": "passed",
-              "duration": 199000000
+              "duration": 135000000
             }
           },
           {
@@ -392,7 +392,7 @@
             "name": "the \"Choose Manually\" button is selected",
             "result": {
               "status": "passed",
-              "duration": 102000000
+              "duration": 149000000
             }
           },
           {
@@ -402,7 +402,7 @@
             "name": "I click on the \"back\" button",
             "result": {
               "status": "passed",
-              "duration": 119000000
+              "duration": 187000000
             }
           },
           {
@@ -412,7 +412,7 @@
             "name": "I should be able to see \"Choose Live, Choose Pending, Choose Manually\" button",
             "result": {
               "status": "passed",
-              "duration": 45000000
+              "duration": 42000000
             }
           }
         ]

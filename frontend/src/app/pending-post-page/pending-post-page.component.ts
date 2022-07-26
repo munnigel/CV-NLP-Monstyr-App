@@ -17,7 +17,7 @@ export class PendingPostPageComponent implements OnInit {
     private dataSrv: DataService,
     private router: Router,
     private titleService: Title
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.tabIndex = 2;
@@ -25,7 +25,7 @@ export class PendingPostPageComponent implements OnInit {
     this.pendingProductList = this.dataSrv.getPendingProductList();
     console.log(this.pendingProductList[0]);
     console.log(this.pendingProductList);
-    this.titleService.setTitle('Pending-posts');
+    this.titleService.setTitle('pending-posts');
   }
 
   async nextPage() {
@@ -48,7 +48,7 @@ export class PendingPostPageComponent implements OnInit {
     this.showItem = true;
   }
 
-  onFilter(index: number) { }
+  onFilter(index: number) {}
 
   selectPost(index: number) {
     console.log(index);

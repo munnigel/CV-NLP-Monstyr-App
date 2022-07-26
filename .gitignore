@@ -8,3 +8,7 @@ backend/log/development.log
 
 .vscode
 .idea
+
+# ignore cucumber reports generated
+frontend/cypress/cucumber-json/*
+frontend/reports/*
