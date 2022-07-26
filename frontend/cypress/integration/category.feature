@@ -1,7 +1,7 @@
 Feature: Automatically generate categories
-As a date inputter part of the admin staff, 
+As a data inputter part of the admin staff, 
 I want to be able to automatically get categories of each pending post,
-So that i am able to process the data from the post faster
+So that I am able to process the data from the post faster
 
     Scenario: Generating categories when text is present in product description
         Given I am on "Edit Item Page" for a particular pending post
@@ -17,3 +17,10 @@ So that i am able to process the data from the post faster
         When I click on the "enter categories" text area
         Then I should see "no categories found" options
         
+    Scenario: Manually input categories when generated categories is wrong or is unable to be generated
+        Given I am on "Edit Item Page" for a particular pending post
+        When I type "discount, online exclusive sales" in the "input category" text area
+        And I click on the "submit" button
+        Then I should be on the "live posts" page 
+        And I should see the same post on the "live posts" page
+        And the post should have "discount, online exclusive sales" in its "category" section
