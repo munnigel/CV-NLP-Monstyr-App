@@ -26,6 +26,7 @@ gem 'rack-cors'
 gem 'carrierwave'
 gem 'carrierwave-base64'
 
+gem 'json'
 # gem 'jsonapi-serializer'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]

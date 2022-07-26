@@ -24,6 +24,60 @@ class PostsController < ApplicationController
     end
   end
 
+  # Calls Google label detection and returns generated tags
+  def taggen
+
+    # Obtain image URL
+    @post = Post.find(params[:id])
+    @img_urls = @post.images.split(',')
+    @raw_img_url = @img_urls.first
+    @raw_img_url = @raw_img_url[1..-1]
+    # render json: {'IMG_URL_1': @raw_img_url}
+
+    # Generate appropriate request.json
+    @body = {
+      "requests": [
+          {
+            "image": {
+              "source": {
+                  "imageUri": "gs://rubyduckies_cloudstorage/91g7pxvfrk2k75cfa3vg79zm0tem"
+              }
+            },
+            "features": [
+              {
+                "type": "LABEL_DETECTION",
+                "maxResults": 10
+              }
+            ]
+          }
+      ]
+    }
+    # render json: {'body': @body}
+
+    # Send POST request
+    @API_KEY = 'AIzaSyCEzKnbVT6d4vS6AkNi8JTmn5URLSxJ-AY'
+    @API_URL = "https://vision.googleapis.com/v1/images:annotate?key=#{@API_KEY}"
+    # render json: {'API_URL': @API_URL}
+
+    uri = URI.parse(@API_URL)
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl = true
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request["Content-Type"] = "application/json"
+    response = https.request(request, @body.to_json)
+
+    # # Receive and process result
+    # render json: {'response body': response.body}
+    result = JSON.parse(response.body)
+    tags = result['responses'][0]
+    tags = tags['labelAnnotations']
+    processed_tags = []
+    tags.each { |x| processed_tags.append(x['description']) }
+
+    # Return tags to frontend as json
+    render json: {'tags': processed_tags}
+  end
+
   # Retrieves live posts in batches of N
   def livepostsinbatches
     end_idx = (params[:batch].to_i * 15) - 1
