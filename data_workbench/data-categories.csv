@@ -1,0 +1,40 @@
+id,group,name
+100,Shop,"Electronics,  Devices, etc"
+101,Shop,Beauty & Health
+102,Shop,Women's
+103,Shop,Men's
+104,Shop,Kids'
+105,Shop,"Groceries,  etc"
+106,Shop,Department  Stores
+107,Shop,"Home,  Bath, etc"
+108,Shop,"Sports,  Travel, etc"
+109,Shop,"Arts, Hobbies, Toys, etc"
+110,Shop,"Jewellery,  Optical, etc"
+111,Shop,"Stationery, Gifts, etc"
+112,Shop,Pets'
+113,Shop,"Cars,  Bikes, etc"
+199,Shop,Others  (Shop)
+200,Eat & Drink,"Cafés, Drinks  & Desserts"
+201,Eat & Drink,Restaurants & Eateries
+202,Eat & Drink,Food Court  & Stalls
+203,Eat & Drink,"Baked Goods, Snacks, etc"
+204,Eat & Drink,"Alcohol, Bars & Clubs"
+205,Eat & Drink,Food  Delivery
+299,Eat & Drink,Others  (Eat & Drink)
+300,Relax,Beauty &  Aesthetics
+301,Relax,Hair & Nails
+302,Relax,Massage & Spa
+399,Relax,Others  (Relax)
+400,Travel & Services,Flights & Hotels
+401,Travel & Services,"Taxi, Rides  & Parking"
+402,Travel & Services,Credit Cards  & Fin Svcs
+403,Travel & Services,"Mobile,  Broadband, etc"
+404,Travel & Services,Repair & Cleaning
+405,Travel & Services,Dental & Medical
+406,Travel & Services,Petrol &  Auto Workshop
+499,Travel & Services,Others (Travel & Svcs)
+500,Play,Attractions
+501,Play,Movies & Theatre
+502,Play,"Concerts,  Shows & Events"
+503,Play,Gaming & Arcade
+599,Play,Others  (Play)
