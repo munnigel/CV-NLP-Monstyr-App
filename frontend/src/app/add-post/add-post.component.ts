@@ -10,6 +10,7 @@ import { DataService } from '../data-service.service';
   styleUrls: ['./add-post.component.css'],
 })
 export class AddPostComponent implements OnInit {
+  selectedFile: File = null;
   postForm: FormGroup;
   constructor(
     private router: Router,
@@ -36,15 +37,17 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   uploadFile(event) {
-    const file = event.target.files[0];
-    this.postForm.patchValue({
-      image: file,
-    });
-    this.postForm.get('image').updateValueAndValidity();
+    // const file = event.target.files[0];
+    // this.postForm.patchValue({
+    //   image: file,
+    // });
+    // this.postForm.get('image').updateValueAndValidity();
+    this.selectedFile = <File>event.target.files[0];
   }
+
   submitForm() {
     console.log(this.postForm);
     console.log(this.postForm.get('genTitle').value);
@@ -82,6 +85,9 @@ export class AddPostComponent implements OnInit {
       formData.append('content', this.postForm.get('content').value);
     if (this.postForm.get('genContent').value)
       formData.append('gen_content', this.postForm.get('genContent').value);
+    if (this.selectedFile)
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+
     this.dataSrv.addPost(formData).subscribe({
       next: (r) => console.log(r),
       complete: () => {
