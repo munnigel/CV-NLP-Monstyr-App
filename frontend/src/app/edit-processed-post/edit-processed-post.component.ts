@@ -59,12 +59,12 @@ export class EditProcessedPostComponent implements OnInit {
       this.editForm = this.fb.group({
         title: [`${this.product.title}`, Validators.required],
         content: [`${this.product.content}`, Validators.required],
-        categories: [`${this.product.categories}`, Validators.required],
         startDate: [`${this.product.startDate}`, Validators.required],
         endDate: [`${this.product.endDate}`, Validators.required],
       });
     });
-    this.tags = this.product.tags;
+    if (this.product.tags) this.tags = this.product.tags;
+    if (this.product.categories) this.categories = this.product.categories;
   }
 
   addTags(event: MatChipInputEvent): void {
@@ -123,7 +123,7 @@ export class EditProcessedPostComponent implements OnInit {
     } else {
       this.product.title = this.editForm.value.title;
       this.product.content = this.editForm.value.content;
-      this.product.categories = this.editForm.value.categories;
+      this.product.categories = this.categories;
       this.product.startDate = this.editForm.value.startDate;
       this.product.endDate = this.editForm.value.endDate;
       console.log(this.editForm.value.startDate);

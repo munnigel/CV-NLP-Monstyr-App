@@ -170,13 +170,14 @@ export class EditItemComponent implements OnInit {
   }
 
   async onProcessed() {
+    console.log(this.categories);
     if (this.editForm.invalid) {
       this.error = true;
       this.errMsg = 'Please complete all required fields.';
     } else {
       this.pendingProduct.title = this.editForm.value.title;
       this.pendingProduct.content = this.editForm.value.content;
-      this.pendingProduct.categories = this.editForm.value.categories;
+      this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.editForm.value.startDate;
       this.pendingProduct.endDate = this.editForm.value.endDate;
