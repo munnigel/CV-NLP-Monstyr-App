@@ -69,6 +69,16 @@
             <div class="item-description">
               Description: {{ product.content }}
             </div>
+            <mat-chip-list>
+              <mat-label>Categories:</mat-label>
+              <mat-chip *ngFor="let category of product.categories">{{
+                category
+              }}</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list>
+              <mat-label>Tags:</mat-label>
+              <mat-chip *ngFor="let tag of product.tags">{{ tag }}</mat-chip>
+            </mat-chip-list>
             <div class="item-tag">Category: {{ product.categories }}</div>
             <div class="item-tag">
               Promotion Start Date: {{ product.startDate }}

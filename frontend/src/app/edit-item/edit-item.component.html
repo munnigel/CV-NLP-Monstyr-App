@@ -33,11 +33,14 @@
         </button>
       </div>
       <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="tags-box" >
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="tags-box"
+        >
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList1 aria-label="Tags selection">
             <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
-
               {{ tag }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>

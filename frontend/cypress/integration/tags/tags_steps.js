@@ -1,6 +1,5 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 
-
 // Scenario: Generating tags when post has an attached image
 
 Given("I am on \"Edit Item Page\" for a particular pending post", () => {
@@ -9,11 +8,11 @@ Given("I am on \"Edit Item Page\" for a particular pending post", () => {
 });
 
 And("the pending post has an attached image", () => {
-    cy.get("img").should("exist")
+  cy.get("img").should("exist");
 });
 
-When("I click on the \"generate tags\" button", () => {
-    cy.get("#generate-tags-btn").click({ force: true })
+When('I click on the "generate tags" button', () => {
+  cy.get("#generate-tags-btn").click({ force: true });
 });
 And("I click on the \"enter tags\" text area", () => {
     cy.get("#tagInput").click({ force: true })
