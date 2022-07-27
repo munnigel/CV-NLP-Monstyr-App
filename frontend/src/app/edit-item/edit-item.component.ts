@@ -17,7 +17,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-// import { parse } from 'path';
 
 @Component({
   selector: 'app-edit-item',
@@ -66,12 +65,6 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
-      startWith(null),
-      map((category: string | null) =>
-        category ? this._filterCategories(category) : this.allCategories.slice()
-      )
-    );
     this.genCategories = ['cat1', 'cat2', 'cat3', 'cat4'];
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
