@@ -8,23 +8,14 @@
     <form [formGroup]="editForm">
       <div class="item-cont">
         <p>Title</p>
-        <textarea
-          class="page-item-title"
-          placeholder="Enter title here"
-          formControlName="title"
-          rows="3"
-          >{{ title }}</textarea
-        >
+        <textarea class="page-item-title" placeholder="Enter title here" formControlName="title"
+          rows="3">{{ title }}</textarea>
         <button type="button" class="special-btn" (click)="makeTitle()">
           Generate
         </button>
       </div>
       <mat-card>
-        <mat-form-field
-          class="example-chip-list"
-          appearance="fill"
-          id="tags-box"
-        >
+        <mat-form-field class="example-chip-list" appearance="fill" id="tags-box">
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList1 aria-label="Tags selection">
             <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
@@ -33,56 +24,28 @@
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input
-              class="tagInput"
-              placeholder="New Tag..."
-              #tagInput
-              [formControl]="tagCtrl"
-              [matAutocomplete]="auto1"
-              [matChipInputFor]="chipList1"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addTag($event)"
-            />
+            <input class="tagInput" placeholder="New Tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto1"
+              [matChipInputFor]="chipList1" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)" />
           </mat-chip-list>
-          <mat-autocomplete
-            #auto1="matAutocomplete"
-            (optionSelected)="selectedTag($event)"
-            class="tags-options"
-          >
+          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedTag($event)" class="tags-options">
             <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
               {{ tag }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <button
-          mat-stroked-button
-          id="generate-tags-btn"
-          (click)="makeTag()"
-          color="primary"
-          style="border-radius: 15px"
-        >
+        <button mat-stroked-button id="generate-tags-btn" (click)="makeTag()" color="primary"
+          style="border-radius: 15px">
           <div style="display: flex; margin: 10px 0px">
             <span style="margin-right: 10px">Generate</span>
 
-            <mat-progress-spinner
-              *ngIf="genTagsLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
-            >
+            <mat-progress-spinner *ngIf="genTagsLoading" class="example-margin" color="primary" mode="indeterminate"
+              value="50" diameter="30">
             </mat-progress-spinner>
-            <span
-              *ngIf="!genTagsLoading && tagsGenerated"
-              class="material-symbols-outlined"
-            >
+            <span *ngIf="!genTagsLoading && tagsGenerated" class="material-symbols-outlined">
               done
             </span>
-            <span
-              *ngIf="!genTagsLoading && zeroTagsGenerated"
-              class="material-symbols-outlined"
-            >
+            <span *ngIf="!genTagsLoading && zeroTagsGenerated" class="material-symbols-outlined">
               close
             </span>
           </div>
@@ -93,68 +56,34 @@
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Categories</mat-label>
           <mat-chip-list #chipList2 aria-label="Categories selection">
-            <mat-chip
-              *ngFor="let category of categories"
-              (removed)="removeCategory(category)"
-            >
+            <mat-chip *ngFor="let category of categories" (removed)="removeCategory(category)">
               {{ category }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input
-              class="categoryInput"
-              placeholder="New Category..."
-              #categoryInput
-              [formControl]="categoryCtrl"
-              [matAutocomplete]="auto2"
-              [matChipInputFor]="chipList2"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addCategory($event)"
-            />
+            <input class="categoryInput" placeholder="New Category..." #categoryInput [formControl]="categoryCtrl"
+              [matAutocomplete]="auto2" [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addCategory($event)" />
           </mat-chip-list>
-          <mat-autocomplete
-            #auto2="matAutocomplete"
-            (optionSelected)="selectedCategory($event)"
-          >
-            <mat-option
-              id="categories-options"
-              *ngFor="let category of filteredCategories | async"
-              [value]="category"
-            >
+          <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedCategory($event)">
+            <mat-option id="categories-options" *ngFor="let category of filteredCategories | async" [value]="category">
               {{ category }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <button
-          mat-stroked-button
-          id="generate-tags-btn"
-          (click)="makeCategory()"
-          color="primary"
-          style="border-radius: 15px"
-        >
+        <button mat-stroked-button id="generate-categories-btn" (click)="makeCategory()" color="primary"
+          style="border-radius: 15px">
           <div style="display: flex; margin: 10px 0px">
             <span style="margin-right: 10px">Generate</span>
 
-            <mat-progress-spinner
-              *ngIf="genCategoriesLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
-            >
+            <mat-progress-spinner *ngIf="genCategoriesLoading" class="example-margin" color="primary"
+              mode="indeterminate" value="50" diameter="30">
             </mat-progress-spinner>
-            <span
-              *ngIf="!genCategoriesLoading && categoriesGenerated"
-              class="material-symbols-outlined"
-            >
+            <span *ngIf="!genCategoriesLoading && categoriesGenerated" class="material-symbols-outlined">
               done
             </span>
-            <span
-              *ngIf="!genTagsLoading && zeroCategoriesGenerated"
-              class="material-symbols-outlined"
-            >
+            <span *ngIf="!genTagsLoading && zeroCategoriesGenerated" class="material-symbols-outlined">
               close
             </span>
           </div>
@@ -163,37 +92,17 @@
 
       <div class="item-cont">
         <p>Start Date</p>
-        <textarea
-          class="page-item-date"
-          id="startText"
-          placeholder="Promotional Start Date"
-          formControlName="startDate"
-          rows="3"
-        ></textarea>
-        <button
-          type="button"
-          class="special-btn"
-          id="startGen"
-          (click)="getMinOrMaxDates('min')"
-        >
+        <textarea class="page-item-date" id="startText" placeholder="Promotional Start Date" formControlName="startDate"
+          rows="3"></textarea>
+        <button type="button" class="special-btn" id="startGen" (click)="getMinOrMaxDates('min')">
           Generate
         </button>
       </div>
       <div class="item-cont">
         <p>End Date</p>
-        <textarea
-          class="page-item-date"
-          id="endText"
-          placeholder="Promotional End Date"
-          formControlName="endDate"
-          rows="3"
-        ></textarea>
-        <button
-          type="button"
-          class="special-btn"
-          id="endGen"
-          (click)="getMinOrMaxDates('max')"
-        >
+        <textarea class="page-item-date" id="endText" placeholder="Promotional End Date" formControlName="endDate"
+          rows="3"></textarea>
+        <button type="button" class="special-btn" id="endGen" (click)="getMinOrMaxDates('max')">
           Generate
         </button>
       </div>
@@ -218,34 +127,18 @@
       <textarea>
 
           {{ pendingProduct["content"] }}
-        </textarea
-      >
+        </textarea>
     </div>
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button
-    type="button"
-    class="btn btn-danger"
-    style="margin-right: 20px"
-    (click)="deletePost(pendingProduct.id)"
-  >
+  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(pendingProduct.id)">
     Delete Post
   </button>
-  <button
-    type="button"
-    class="btn btn-primary item-page-btn"
-    id="back-to-pending"
-    (click)="onPending()"
-  >
+  <button type="button" class="btn btn-primary item-page-btn" id="back-to-pending" (click)="onPending()">
     Back to Pending Page
   </button>
-  <button
-    type="button"
-    class="btn btn-primary item-page-btn"
-    id="go-to-live"
-    (click)="onProcessed()"
-  >
+  <button type="button" class="btn btn-primary item-page-btn" id="go-to-live" (click)="onProcessed()">
     Submit
   </button>
 </div>
