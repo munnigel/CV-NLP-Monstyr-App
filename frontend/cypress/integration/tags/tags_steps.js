@@ -19,7 +19,7 @@ And('I click on the "enter tags" text area', () => {
 });
 
 Then("I should see a dropdown list of tags", (optionSelector) => {
-  cy.get("#tags-options").wait(5000).should("exist");
+  cy.get(".tags-options").should("exist");
 });
 
 // Scenario: Generating tags when post has no attached image
