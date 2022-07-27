@@ -33,11 +33,14 @@
         </button>
       </div>
       <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="tags-box" >
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="tags-box"
+        >
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList1 aria-label="Tags selection">
             <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
-
               {{ tag }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
@@ -45,7 +48,7 @@
             </mat-chip>
             <input
               placeholder="New Tag..."
-              #tagInput
+              id="tagInput"
               [formControl]="tagCtrl"
               [matAutocomplete]="auto1"
               [matChipInputFor]="chipList1"
@@ -58,7 +61,7 @@
             (optionSelected)="selectedTag($event)"
           >
             <mat-option
-              id="tags-options"
+              id="tags-option"
               *ngFor="let tag of filteredTags | async"
               [value]="tag"
             >
