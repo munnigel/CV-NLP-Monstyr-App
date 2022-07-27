@@ -14,8 +14,8 @@ Scenario: Navigating to specific entry of Pending Post
     When I click on one of the "Pending" post
     Then I should be able to see the "Title, Description, Category, Start Date, End Date" fields of the selected post
 
-Scenario: Able to return to Pending Posts page using back button
-    Given that I am able to view the "Title, Description, Category, Start Date, End Date" fields of the selected Pending post I am on
+Scenario: Able to go back to pending page from edit page using back button
+    Given that I am in the edit post tab
     When I click on the 'Back to Pending Page' button
     Then I should be redirected to the Pending Posts tab
 
@@ -23,4 +23,7 @@ Scenario: Going to live page after submitting on edit page
     Given that I am able to view the "Title, Description, Category, Start Date, End Date" fields of the selected Pending post I am on
     When I click on the 'Submit' button
     Then I should be redirected to the Live Posts page 
-    And I should be able to see the edited post published in the Live Post Page 
+
+Scenario:Checking if live post that was uploaded in specific has the required fields filled
+    Given that I click on the uploaded post which can be seen at the first index of the page
+    Then I should be able to see the same "Title, Description, Category, Start Date, End Date" fields that I added when I published the post
