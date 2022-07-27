@@ -27,6 +27,9 @@ class PostsController < ApplicationController
   # Calls Google label detection and returns generated tags
   def taggen
 
+    # Start timer for query latency calculations
+    @starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
     # Obtain image URL
     @post = Post.find(params[:id])
     @img_urls = @post.images.split(',')
@@ -99,19 +102,30 @@ class PostsController < ApplicationController
     # # Receive and process result
     # render json: {'response body': response.body}
     result = JSON.parse(response.body)
-    @post.gen_tags = result
+    @post.meta_label_detection = result.to_s
     tags = result['responses'][0]
     tags = tags['labelAnnotations']
     processed_tags = []
     tags.each { |x| processed_tags.append(x['description']) }
+    @post.gen_tags = processed_tags
 
+    # Stop timer for query latency calculations
+    @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    @latency = @ending - @starting
+    @post.od_latency = @latency * 1000
+    @post.save
+    # render json: {'starting': @starting, 'ending': @ending, 'latency': @latency, 'od_latency': @post.od_latency}
+    
     # Return tags to frontend as json
     render json: {'gen_tags': processed_tags}
   end
 
   # Calls custom trained categories detection model and returns generated categories
   def catgen
-    
+
+    # Start timer for query latency calculations
+    @starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
     # Obtain post description text
     @post = Post.find(params[:id])
     @raw_des = @post.content
@@ -133,7 +147,7 @@ class PostsController < ApplicationController
     scope = 'https://www.googleapis.com/auth/cloud-platform'
 
     authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io: File.open('../backend/monstyrxai-41a5fb651ce9.json'),
+      json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
       scope: scope)
 
     @ACCESS_TOKEN = authorizer.fetch_access_token!
@@ -164,19 +178,29 @@ class PostsController < ApplicationController
     # Receive and process result
     # render json: {'response body': response.body}
     result = JSON.parse(response.body)
+    @post.meta_cat_gen = result.to_s
     # render json: {'result': result}
     @disp_names = result['predictions'][0]['displayNames']
     @confs = result['predictions'][0]['confidences']
     @cats_dict = @disp_names.zip(@confs)
     @cats_dict = @cats_dict.sort_by(&:last).reverse
+    @post.gen_categories = @cats_dict.to_s
     # @cats_dict = @cats_dict[0..9]
     # cats = tags['labelAnnotations']
     # processed_tags = []
     # tags.each { |x| processed_tags.append(x['description']) }
-    # render json: {'disp_names': @disp_names, 'confs': @confs}
-    render json: {'cats_dict': @cats_dict}
+    # render json: {'disp_names': @disp_names, 'confs': @confs}    
     # Return tags to frontend as json
     # render json: {'gen_categories': processed_categories}
+
+    # End timer for query latency calculations
+    @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    @latency = @ending - @starting
+    @post.ner_categories_latency = @latency * 1000
+    @post.save
+
+    # Return generated categories as json
+    render json: {'cats_dict': @cats_dict}
   end
 
   # Retrieves live posts in batches of N
@@ -340,6 +364,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency)
+      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen, :meta_date_gen, :meta_title_gen)
     end
 end
