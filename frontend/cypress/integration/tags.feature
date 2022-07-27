@@ -13,8 +13,8 @@ Scenario: Generating tags when post has an attached image
 Scenario: Accept tag
     Given I see a dropdown list of tags
     When I click on a suitable tag related to the post
-    Then the tag should be flagged for submission
-
+    Then the tag should be inserted into the "enter tags" text area
+    
 Scenario: Attempting to generate tags when post has no attached image
     Given I am on "Edit Item Page" for a particular pending post
     And the pending post has no attached image
