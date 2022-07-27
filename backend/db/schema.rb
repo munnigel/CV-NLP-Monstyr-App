@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_13_082343) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_27_134550) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -93,6 +93,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_13_082343) do
     t.integer "ner_date_latency"
     t.integer "ner_categories_latency"
     t.integer "ner_title_latency"
+    t.text "meta_label_detection"
+    t.text "meta_cat_gen"
+    t.text "meta_date_gen"
+    t.text "meta_title_gen"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
