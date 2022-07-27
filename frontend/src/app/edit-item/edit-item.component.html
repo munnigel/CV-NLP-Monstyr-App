@@ -19,19 +19,6 @@
           Generate
         </button>
       </div>
-
-      <div class="item-cont">
-        <p>Description</p>
-        <textarea
-          class="page-item"
-          placeholder="Enter your description here"
-          formControlName="content"
-          rows="5"
-        ></textarea>
-        <button type="button" class="special-btn" (click)="makeDescription()">
-          Generate
-        </button>
-      </div>
       <mat-card>
         <mat-form-field
           class="example-chip-list"
@@ -47,8 +34,9 @@
               </button>
             </mat-chip>
             <input
+              class="tagInput"
               placeholder="New Tag..."
-              id ="tagInput"
+              #tagInput
               [formControl]="tagCtrl"
               [matAutocomplete]="auto1"
               [matChipInputFor]="chipList1"
@@ -59,12 +47,9 @@
           <mat-autocomplete
             #auto1="matAutocomplete"
             (optionSelected)="selectedTag($event)"
+            class="tags-options"
           >
-            <mat-option
-              id="tags-options"
-              *ngFor="let tag of filteredTags | async"
-              [value]="tag"
-            >
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
               {{ tag }}
             </mat-option>
           </mat-autocomplete>
@@ -94,6 +79,12 @@
             >
               done
             </span>
+            <span
+              *ngIf="!genTagsLoading && zeroTagsGenerated"
+              class="material-symbols-outlined"
+            >
+              close
+            </span>
           </div>
         </button>
       </mat-card>
@@ -112,6 +103,7 @@
               </button>
             </mat-chip>
             <input
+              class="categoryInput"
               placeholder="New Category..."
               #categoryInput
               [formControl]="categoryCtrl"
@@ -158,6 +150,12 @@
               class="material-symbols-outlined"
             >
               done
+            </span>
+            <span
+              *ngIf="!genTagsLoading && zeroCategoriesGenerated"
+              class="material-symbols-outlined"
+            >
+              close
             </span>
           </div>
         </button>
