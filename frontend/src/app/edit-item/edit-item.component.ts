@@ -39,6 +39,8 @@ export class EditItemComponent implements OnInit {
   genTagsLoading: boolean = false;
   categoriesGenerated: boolean = false;
   genCategoriesLoading: boolean = false;
+  zeroTagsGenerated: boolean = false;
+  zeroCategoriesGenerated: boolean = false;
 
   endDate: any;
   genCategories: string[];
@@ -53,8 +55,8 @@ export class EditItemComponent implements OnInit {
   categories: string[] = [];
   allCategories: string[] = [];
 
-  @ViewChild('#tagInput') tagInput: ElementRef<HTMLInputElement>;
-  @ViewChild('#categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -84,7 +86,6 @@ export class EditItemComponent implements OnInit {
         startDate: [''],
         endDate: [''],
         title: [''],
-        content: [''],
       });
     });
 
@@ -177,7 +178,6 @@ export class EditItemComponent implements OnInit {
       this.errMsg = 'Please complete all required fields.';
     } else {
       this.pendingProduct.title = this.editForm.value.title;
-      this.pendingProduct.content = this.editForm.value.content;
       this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.editForm.value.startDate;
