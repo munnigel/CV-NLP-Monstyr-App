@@ -43,7 +43,7 @@ export class EditItemComponent implements OnInit {
   tagCtrl = new FormControl('');
   filteredTags: Observable<string[]>;
   tags: string[] = [];
-  allTags: string[] = ['Tag1', 'Tag2', 'Tag3', 'Tag4', 'Tag5'];
+  allTags: string[] = [];
   categoryCtrl = new FormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
@@ -61,12 +61,6 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) =>
-        tag ? this._filterTags(tag) : this.allTags.slice()
-      )
-    );
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) =>
@@ -218,6 +212,16 @@ export class EditItemComponent implements OnInit {
     this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
   }
+  async makeTag() {
+    this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) =>
+        tag ? this._filterTags(tag) : this.allTags.slice()
+      )
+    );
+  }
+
   makeCategory() {
     this.editForm.patchValue({ category: 'CAT GENERATED WAAAA' });
     this.category = 'CATEGORY GENERATED WAAAA';

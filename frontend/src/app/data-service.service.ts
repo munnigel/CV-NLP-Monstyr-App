@@ -162,6 +162,13 @@ export class DataService implements OnInit {
     return this.productList;
   }
 
+  async getGenTags(id: number) {
+    let res = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/taggen/${id}`)
+    );
+    return res['gen_tags'];
+  }
+
   private httpOptions = {
     headers: new HttpHeaders({
       // "Accept": "*/*",

@@ -32,109 +32,89 @@
           Generate
         </button>
       </div>
-
-      <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Tags</mat-label>
-        <mat-chip-list #chipList1 aria-label="Tags selection">
-          <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
-            {{ tag }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
-          <input
-            placeholder="New Tag..."
-            #tagInput
-            [formControl]="tagCtrl"
-            [matAutocomplete]="auto1"
-            [matChipInputFor]="chipList1"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="addTag($event)"
-          />
-        </mat-chip-list>
-        <mat-autocomplete
-          #auto1="matAutocomplete"
-          (optionSelected)="selectedTag($event)"
-        >
-          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-            {{ tag }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Categories</mat-label>
-        <mat-chip-list #chipList2 aria-label="Categories selection">
-          <mat-chip
-            *ngFor="let category of categories"
-            (removed)="removeCategory(category)"
+      <mat-card>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-list #chipList1 aria-label="Tags selection">
+            <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New Tag..."
+              #tagInput
+              [formControl]="tagCtrl"
+              [matAutocomplete]="auto1"
+              [matChipInputFor]="chipList1"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto1="matAutocomplete"
+            (optionSelected)="selectedTag($event)"
           >
-            {{ category }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
-          <input
-            placeholder="New Category..."
-            #categoryInput
-            [formControl]="categoryCtrl"
-            [matAutocomplete]="auto2"
-            [matChipInputFor]="chipList2"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="addCategory($event)"
-          />
-        </mat-chip-list>
-        <mat-autocomplete
-          #auto2="matAutocomplete"
-          (optionSelected)="selectedCategory($event)"
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+              {{ tag }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button
+          type="button"
+          class="special-btn"
+          id="generate-tags-btn"
+          (click)="makeTag()"
         >
-          <mat-option
-            *ngFor="let category of filteredCategories | async"
-            [value]="category"
-          >
-            {{ category }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+          Generate
+        </button>
+      </mat-card>
 
-      <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label"
-          >Category</label
-        >
-        <div class="col-sm-10">
-          <div class="dropdown">
-            <textarea
-              class="page-item-category"
-              id="input-category"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              placeholder="Category"
-              formControlName="categories"
-            ></textarea>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <ng-container *ngFor="let cat of genCategories; let i = index">
-                <li>
-                  <button
-                    class="dropdown-item"
-                    type="button"
-                    (click)="selectCat(i)"
-                  >
-                    {{ cat }}
-                  </button>
-                </li>
-              </ng-container>
-            </ul>
-            <button
-              type="button"
-              class="special-btn"
-              id="generate-categories-btn"
-              (click)="makeCategory()"
+      <mat-card>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Categories</mat-label>
+          <mat-chip-list #chipList2 aria-label="Categories selection">
+            <mat-chip
+              *ngFor="let category of categories"
+              (removed)="removeCategory(category)"
             >
-              Generate
-            </button>
-          </div>
-        </div>
-      </div>
+              {{ category }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New Category..."
+              #categoryInput
+              [formControl]="categoryCtrl"
+              [matAutocomplete]="auto2"
+              [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addCategory($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto2="matAutocomplete"
+            (optionSelected)="selectedCategory($event)"
+          >
+            <mat-option
+              *ngFor="let category of filteredCategories | async"
+              [value]="category"
+            >
+              {{ category }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button
+          type="button"
+          class="special-btn"
+          id="generate-categories-btn"
+          (click)="makeCategory()"
+        >
+          Generate
+        </button>
+      </mat-card>
 
       <div class="item-cont">
         <p>Start Date</p>

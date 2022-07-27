@@ -9,6 +9,11 @@
   width: 100%;
 }
 
+.item-page-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
 .page-item-category {
   resize: none;
   width: 100%;

@@ -443,11 +443,6 @@ body {
   overflow: auto;
 }
 
-.item-page-btn-container {
-  display: flex;
-  justify-content: center;
-}
-
 .item-page-btn:first-child {
   margin-right: 20px;
 }
