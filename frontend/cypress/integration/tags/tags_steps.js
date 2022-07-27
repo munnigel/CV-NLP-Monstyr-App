@@ -32,8 +32,8 @@ When("I click on a suitable tag related to the post", () => {
   cy.get("#tags-options").first().click({ force: true });
 });
 
-Then('the tag should be inserted into the "enter tags" text area', () => {
-  cy.get("#tags-options").first().should("not.exist");
+Then('I should not see a dropdown list of categories', () => {
+  cy.get("#tags-options").should("not.exist");
 });
 
 And('I click on the "submit" button', () => {

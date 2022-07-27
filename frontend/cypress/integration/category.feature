@@ -8,7 +8,7 @@ Scenario: Generating categories when text is present in product description
     And the pending post has a text description
     When I click on the "generate categories" button
     And I click on the "enter categories" text area
-    Then I should see a dropdown list of tags
+    Then I should see a dropdown list of categories
 
 Scenario: Accept categories
     Given I see a dropdown list of categories
