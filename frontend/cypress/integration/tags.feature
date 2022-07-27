@@ -17,7 +17,7 @@ Scenario: Accept tag
 
 Scenario: Creating a tag not present in generated suggestions
     Given I am on "Edit Item Page" for a particular pending post
-    When I click on the "enter tags" text area
+    And I click on the "enter tags" text area
     When I type a new tag and press the "enter" key
     Then the new tag should be inserted into the "enter tags" text area
 

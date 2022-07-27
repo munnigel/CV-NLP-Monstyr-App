@@ -1,3 +1,5 @@
+require 'uri'
+
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -32,20 +34,79 @@ class PostsController < ApplicationController
 
     # Obtain image URL
     @post = Post.find(params[:id])
-    @img_urls = @post.images.split(',')
-    @raw_img_url = @img_urls.first.to_s
-    # @raw_img_url["{"] = ""
-    # @raw_img_url["}"] = ""
-    @raw_img_url = @raw_img_url.gsub('{','')
-    @raw_img_url = @raw_img_url.gsub('}','')
-    # render json: {'IMG_URL_1': @raw_img_url}
+    # render json: {'post_images': @post.images}
+    if @post.images.to_s.empty?
+      render json: {'images': @post.images.to_s}
+    else
+      @img_urls = @post.images.split(',')
+      # render json: {'img_urls': @img_urls}
+      @raw_img_url = @img_urls.first.to_s
+      @raw_img_url = @raw_img_url.gsub('{','')
+      @raw_img_url = @raw_img_url.gsub('}','')
+      # render json: {'raw_img_url': @raw_img_url}
+      if @raw_img_url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+        # Download image and store locally
+        tempfile = Down.download(@raw_img_url)
+        FileUtils.mv(tempfile.path, "./temp_img.jpg")
+        
+        # Generate appropriate request.json
+        # Using local image in base64 encoding
+        @IMAGE_FILE = './temp_img.jpg'
+        @base64_image = Base64.strict_encode64(File.new(@IMAGE_FILE, 'rb').read)
+        @body = {
+          "requests": [
+              {
+                "image": {
+                  "content": @base64_image
+                },
+                "features": [
+                  {
+                    "type": "LABEL_DETECTION",
+                    "maxResults": 10
+                  }
+                ]
+              }
+          ]
+        }
 
-    # Download image and store locally
-    tempfile = Down.download(@raw_img_url)
-    FileUtils.mv(tempfile.path, "./temp_img.jpg")
+        # render json: {'body': @body}
 
-    # Generate appropriate request.json
+        # Send POST request
+        @API_KEY = 'AIzaSyCEzKnbVT6d4vS6AkNi8JTmn5URLSxJ-AY'
+        @API_URL = "https://vision.googleapis.com/v1/images:annotate?key=#{@API_KEY}"
+        # render json: {'API_URL': @API_URL}
 
+        uri = URI.parse(@API_URL)
+        https = Net::HTTP.new(uri.host, uri.port)
+        https.use_ssl = true
+        request = Net::HTTP::Post.new(uri.request_uri)
+        request["Content-Type"] = "application/json"
+        response = https.request(request, @body.to_json)
+
+        # # Receive and process result
+        # render json: {'response body': response.body}
+        result = JSON.parse(response.body)
+        @post.meta_label_detection = result.to_s
+        tags = result['responses'][0]
+        tags = tags['labelAnnotations']
+        processed_tags = []
+        tags.each { |x| processed_tags.append(x['description']) }
+        @post.gen_tags = processed_tags
+
+        # Stop timer for query latency calculations
+        @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        @latency = @ending - @starting
+        @post.od_latency = @latency * 1000
+        @post.save
+        # render json: {'starting': @starting, 'ending': @ending, 'latency': @latency, 'od_latency': @post.od_latency}
+        
+        # Return tags to frontend as json
+        render json: {'gen_tags': processed_tags}
+      else
+        render json: {'images': "no valid image url found"}
+      end
+    end
+    
     # Using image on GCS
     # @body = {
     #   "requests": [
@@ -64,60 +125,6 @@ class PostsController < ApplicationController
     #       }
     #   ]
     # }
-
-    # Using local image in base64 encoding
-    # @IMAGE_FILE = './sign.jpg'
-    @IMAGE_FILE = './temp_img.jpg'
-    @base64_image = Base64.strict_encode64(File.new(@IMAGE_FILE, 'rb').read)
-    @body = {
-      "requests": [
-          {
-            "image": {
-              "content": @base64_image
-            },
-            "features": [
-              {
-                "type": "LABEL_DETECTION",
-                "maxResults": 10
-              }
-            ]
-          }
-      ]
-    }
-
-    # render json: {'body': @body}
-
-    # Send POST request
-    @API_KEY = 'AIzaSyCEzKnbVT6d4vS6AkNi8JTmn5URLSxJ-AY'
-    @API_URL = "https://vision.googleapis.com/v1/images:annotate?key=#{@API_KEY}"
-    # render json: {'API_URL': @API_URL}
-
-    uri = URI.parse(@API_URL)
-    https = Net::HTTP.new(uri.host, uri.port)
-    https.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri)
-    request["Content-Type"] = "application/json"
-    response = https.request(request, @body.to_json)
-
-    # # Receive and process result
-    # render json: {'response body': response.body}
-    result = JSON.parse(response.body)
-    @post.meta_label_detection = result.to_s
-    tags = result['responses'][0]
-    tags = tags['labelAnnotations']
-    processed_tags = []
-    tags.each { |x| processed_tags.append(x['description']) }
-    @post.gen_tags = processed_tags
-
-    # Stop timer for query latency calculations
-    @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    @latency = @ending - @starting
-    @post.od_latency = @latency * 1000
-    @post.save
-    # render json: {'starting': @starting, 'ending': @ending, 'latency': @latency, 'od_latency': @post.od_latency}
-    
-    # Return tags to frontend as json
-    render json: {'gen_tags': processed_tags}
   end
 
   # Calls custom trained categories detection model and returns generated categories
@@ -130,84 +137,89 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @raw_des = @post.content
     @processed_des = @raw_des
-    # @processed_des = @processed_des.gsub(/[\u{1F600}-\u{1F6FF}]/,'')
-    # @processed_des = @processed_des.gsub!(/\xC2/n, '')
-    # @processed_des = @processed_des.gsub!(/\W/,' ')
-    # render json: {'processed_des': @processed_des}
+    # @processed_des = ""
+    if @processed_des.to_s.empty?
+      render json: {'content': @processed_des.to_s}
+    else
+      # @processed_des = @processed_des.gsub(/[\u{1F600}-\u{1F6FF}]/,'')
+      # @processed_des = @processed_des.gsub!(/\xC2/n, '')
+      # @processed_des = @processed_des.gsub!(/\W/,' ')
+      # render json: {'processed_des': @processed_des}
 
-    # Generate appropriate request.json
-    @body = {
-      "instances": {
-        "mimeType": "text/plain",
-        "content": @processed_des
+      # Generate appropriate request.json
+      @body = {
+        "instances": {
+          "mimeType": "text/plain",
+          "content": @processed_des
+        }
       }
-    }
 
-    # render json: {'body': @body}
-    scope = 'https://www.googleapis.com/auth/cloud-platform'
+      # render json: {'body': @body}
+      scope = 'https://www.googleapis.com/auth/cloud-platform'
 
-    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
-      scope: scope)
+      authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+        json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
+        scope: scope)
 
-    @ACCESS_TOKEN = authorizer.fetch_access_token!
-    @ACCESS_TOKEN = @ACCESS_TOKEN['access_token']
-    @ACCESS_TOKEN = @ACCESS_TOKEN.gsub('.',' ')
-    @ACCESS_TOKEN = @ACCESS_TOKEN.strip
-    @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
+      @ACCESS_TOKEN = authorizer.fetch_access_token!
+      @ACCESS_TOKEN = @ACCESS_TOKEN['access_token']
+      @ACCESS_TOKEN = @ACCESS_TOKEN.gsub('.',' ')
+      @ACCESS_TOKEN = @ACCESS_TOKEN.strip
+      @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
 
-    # render json: {'access-token': @ACCESS_TOKEN}
-    
-    # Send POST request
-    # @ACCESS_TOKEN ="ya29.A0AVA9y1v4xyzukyT5rC5SL0yZGMWX9b29nRd5hDL-efB1psqU5coX8eCSeNa_GRgT2sdB1Gq7qUKY66jD5yBx_mpjbkwg36dZOwfnQWI7rfmno3RQp9ezfbm4rHRBWuzLueU3yVoejoy750luEX5xiH1XoLULkZWURItXMbNJLLSXNnXc7iK60qA5ds8Zg8wfoaK-W17SIGr930u7qXMxofJvoRFeVQUDpCrtshIi-Kndm8-Ajvr6WCUMkLmitU4FEVoPigYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4cWRfc1I0VEptSVhQVkNXWVBodkg1Zw0269"
-    # @ACCESS_TOKEN = "ya29.c.b0AXv0zTPB-QblbK1DcDb1AnhPbgovuw13SQGaE8LqZt3dNVi3eogtUA42RVxYJ323pymiWVePPoFOOmgF-CJtZXdPMSSD9iAs8Z6ZDEnsnMasLbFP_OwfsjP-NRLmohhLKk-tWwP0zIylLr82bdfG7X1Va2s9osabBdzl6InFUztwhvjdP8cIl2aCchK6kzl_Y7eNVUdbvWzaAExVMR7Es09L8lAGlSw"
-    @ENDPOINT_ID="3168906860459720704"
-    @PROJECT_ID="276757795685"
-    @API_KEY2 = 'AIzaSyCxv0PN2L6VdD3Z3zZ98SGp_Rm1YoviYso'
-    @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
-    # render json: {'API_URL': @API_URL2}
+      # render json: {'access-token': @ACCESS_TOKEN}
+      
+      # Send POST request
+      # @ACCESS_TOKEN ="ya29.A0AVA9y1v4xyzukyT5rC5SL0yZGMWX9b29nRd5hDL-efB1psqU5coX8eCSeNa_GRgT2sdB1Gq7qUKY66jD5yBx_mpjbkwg36dZOwfnQWI7rfmno3RQp9ezfbm4rHRBWuzLueU3yVoejoy750luEX5xiH1XoLULkZWURItXMbNJLLSXNnXc7iK60qA5ds8Zg8wfoaK-W17SIGr930u7qXMxofJvoRFeVQUDpCrtshIi-Kndm8-Ajvr6WCUMkLmitU4FEVoPigYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4cWRfc1I0VEptSVhQVkNXWVBodkg1Zw0269"
+      # @ACCESS_TOKEN = "ya29.c.b0AXv0zTPB-QblbK1DcDb1AnhPbgovuw13SQGaE8LqZt3dNVi3eogtUA42RVxYJ323pymiWVePPoFOOmgF-CJtZXdPMSSD9iAs8Z6ZDEnsnMasLbFP_OwfsjP-NRLmohhLKk-tWwP0zIylLr82bdfG7X1Va2s9osabBdzl6InFUztwhvjdP8cIl2aCchK6kzl_Y7eNVUdbvWzaAExVMR7Es09L8lAGlSw"
+      @ENDPOINT_ID="3168906860459720704"
+      @PROJECT_ID="276757795685"
+      @API_KEY2 = 'AIzaSyCxv0PN2L6VdD3Z3zZ98SGp_Rm1YoviYso'
+      @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
+      # render json: {'API_URL': @API_URL2}
 
-    uri = URI.parse(@API_URL2)
-    https = Net::HTTP.new(uri.host, uri.port)
-    https.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri)
-    request["Authorization"] = "Bearer #{@ACCESS_TOKEN}"
-    request["Content-Type"] = "application/json"
-    response = https.request(request, @body.to_json)
+      uri = URI.parse(@API_URL2)
+      https = Net::HTTP.new(uri.host, uri.port)
+      https.use_ssl = true
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request["Authorization"] = "Bearer #{@ACCESS_TOKEN}"
+      request["Content-Type"] = "application/json"
+      response = https.request(request, @body.to_json)
 
-    # Receive and process result
-    # render json: {'response body': response.body}
-    result = JSON.parse(response.body)
-    @post.meta_cat_gen = result.to_s
-    # render json: {'result': result}
-    @disp_names = result['predictions'][0]['displayNames']
-    @confs = result['predictions'][0]['confidences']
-    @cats_dict = @disp_names.zip(@confs)
-    @cats_dict = @cats_dict.sort_by(&:last).reverse
-    @post.gen_categories = @cats_dict.to_s
-    # @cats_dict = @cats_dict[0..9]
-    # cats = tags['labelAnnotations']
-    # processed_tags = []
-    # tags.each { |x| processed_tags.append(x['description']) }
-    # render json: {'disp_names': @disp_names, 'confs': @confs}    
-    # Return tags to frontend as json
-    # render json: {'gen_categories': processed_categories}
+      # Receive and process result
+      # render json: {'response body': response.body}
+      result = JSON.parse(response.body)
+      @post.meta_cat_gen = result.to_s
+      # render json: {'result': result}
+      @disp_names = result['predictions'][0]['displayNames']
+      @confs = result['predictions'][0]['confidences']
+      @cats_dict = @disp_names.zip(@confs)
+      @cats_dict = @cats_dict.sort_by(&:last).reverse
+      @post.gen_categories = @cats_dict.to_s
+      # @cats_dict = @cats_dict[0..9]
+      # cats = tags['labelAnnotations']
+      # processed_tags = []
+      # tags.each { |x| processed_tags.append(x['description']) }
+      # render json: {'disp_names': @disp_names, 'confs': @confs}    
+      # Return tags to frontend as json
+      # render json: {'gen_categories': processed_categories}
 
-    # End timer for query latency calculations
-    @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    @latency = @ending - @starting
-    @post.ner_categories_latency = @latency * 1000
-    @post.save
+      # End timer for query latency calculations
+      @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      @latency = @ending - @starting
+      @post.ner_categories_latency = @latency * 1000
+      @post.save
 
-    # Return generated categories as json
-    render json: {'cats_dict': @cats_dict}
+      # Return generated categories as json
+      render json: {'cats_dict': @cats_dict}
+    end
   end
 
   # Retrieves live posts in batches of N
   def livepostsinbatches
     end_idx = (params[:batch].to_i * 15) - 1
     start_idx = end_idx - 14
-    @posts = Post.where("status = 'live'")
+    @posts = Post.where("status = 'live'").order(updated_at: :desc)
     @posts = @posts[start_idx..end_idx]
     #.first(params[batch])
     respond_to do |format|
@@ -220,7 +232,7 @@ class PostsController < ApplicationController
   def pendingpostsinbatches
     end_idx = (params[:batch].to_i * 15) - 1
     start_idx = end_idx - 14
-    @posts = Post.where("status = 'pending'")
+    @posts = Post.where("status = 'pending'").order(updated_at: :desc)
     @posts = @posts[start_idx..end_idx]
     #.first(params[batch])
     respond_to do |format|

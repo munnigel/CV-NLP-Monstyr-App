@@ -32,6 +32,10 @@ When("I click on a suitable tag related to the post", () => {
   cy.get(".tags-options").first().click({ force: true });
 });
 
+When('I type a new tag and press the "enter" key', () => {
+  cy.get("#tagInput").type("new tag").type("{enter}");
+});
+
 Then('the tag should be inserted into the "enter tags" text area', () => {
   cy.get(".tags-options").first().should("exist");
 });
