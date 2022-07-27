@@ -223,7 +223,7 @@ export class DataService implements OnInit {
     // console.log(res);
     for (let i = 0; i < res.length; i++) {
       try {
-        console.log(res[i]);
+        // console.log(res[i]);
         let temp = new Product(
           res[i].id,
           res[i].sp_id,
