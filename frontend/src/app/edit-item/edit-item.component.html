@@ -56,7 +56,11 @@
             #auto1="matAutocomplete"
             (optionSelected)="selectedTag($event)"
           >
-            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            <mat-option
+              id="tags-options"
+              *ngFor="let tag of filteredTags | async"
+              [value]="tag"
+            >
               {{ tag }}
             </mat-option>
           </mat-autocomplete>
@@ -80,6 +84,11 @@
               diameter="30"
             >
             </mat-progress-spinner>
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="tick"
+            ></mat-icon>
           </div>
         </button>
       </mat-card>
@@ -112,6 +121,7 @@
             (optionSelected)="selectedCategory($event)"
           >
             <mat-option
+              id="categories-options"
               *ngFor="let category of filteredCategories | async"
               [value]="category"
             >
