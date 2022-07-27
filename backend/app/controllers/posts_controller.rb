@@ -315,9 +315,11 @@ class PostsController < ApplicationController
     image = params[:image]
 
     if @post.save
-      @post.image.attach image if image
-      @post.images = url_for(@post.image)
-      @post.save
+      if image
+        @post.image.attach image if image
+        @post.images = url_for(@post.image)
+        @post.save
+      end
       # redirect_to posts_path, notice: "Post was successfully uploaded."
       render json: @post
     else
