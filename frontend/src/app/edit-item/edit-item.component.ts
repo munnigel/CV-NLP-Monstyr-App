@@ -53,7 +53,47 @@ export class EditItemComponent implements OnInit {
   categoryCtrl = new FormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
-  allCategories: string[] = [];
+  allCategories: string[] = [
+    'Electronics,  Devices, etc',
+    'Beauty & Health',
+    "Women's",
+    "Men's",
+    "Kids'",
+    'Groceries,  etc',
+    'Department  Stores',
+    'Home,  Bath, etc',
+    'Sports,  Travel, etc',
+    'Arts, Hobbies, Toys, etc',
+    'Jewellery,  Optical, etc',
+    'Stationery, Gifts, etc',
+    "Pets'",
+    'Cars,  Bikes, etc',
+    'Others  (Shop)',
+    'Cafés, Drinks  & Desserts',
+    'Restaurants & Eateries',
+    'Food Court  & Stalls',
+    'Baked Goods, Snacks, etc',
+    'Alcohol, Bars & Clubs',
+    'Food  Delivery',
+    'Others  (Eat & Drink)',
+    'Beauty &  Aesthetics',
+    'Hair & Nails',
+    'Massage & Spa',
+    'Others  (Relax)',
+    'Flights & Hotels',
+    'Taxi, Rides  & Parking',
+    'Credit Cards  & Fin Svcs',
+    'Mobile,  Broadband, etc',
+    'Repair & Cleaning',
+    'Dental & Medical',
+    'Petrol &  Auto Workshop',
+    'Others (Travel & Svcs)',
+    'Attractions',
+    'Movies & Theatre',
+    'Concerts,  Shows & Events',
+    'Gaming & Arcade',
+    'Others  (Play)',
+  ];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
@@ -67,7 +107,12 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.genCategories = ['cat1', 'cat2', 'cat3', 'cat4'];
+    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      startWith(null),
+      map((category: string | null) =>
+        category ? this._filterCategories(category) : this.allCategories.slice()
+      )
+    );
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       // console.log(this.datasrv.getPendingProductList()[id]);
@@ -165,12 +210,6 @@ export class EditItemComponent implements OnInit {
     );
   }
 
-  selectCat(i: number) {
-    this.editForm.patchValue({ categories: this.genCategories[i] });
-    console.log('set to');
-    console.log(this.genCategories[i]);
-  }
-
   async onProcessed() {
     console.log(this.categories);
     if (this.editForm.invalid) {
@@ -228,6 +267,7 @@ export class EditItemComponent implements OnInit {
         tag ? this._filterTags(tag) : this.allTags.slice()
       )
     );
+    this.tagInput.nativeElement.click();
   }
 
   async makeCategory() {
@@ -236,16 +276,10 @@ export class EditItemComponent implements OnInit {
     this.genCategoriesLoading = true;
     let temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
     for (let i = 0; i < 5; i++) {
-      this.allCategories.push(temp[i][0]);
+      this.categories.push(temp[i][0]);
     }
     this.genCategoriesLoading = false;
     this.categoriesGenerated = true;
-    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
-      startWith(null),
-      map((category: string | null) =>
-        category ? this._filterCategories(category) : this.allCategories.slice()
-      )
-    );
   }
 
   async getMinOrMaxDates(minOrMax: string) {

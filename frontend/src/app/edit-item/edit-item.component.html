@@ -28,8 +28,8 @@
               [matChipInputFor]="chipList1" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="addTag($event)" />
           </mat-chip-list>
-          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedTag($event)">
-            <mat-option id="tags-options" *ngFor="let tag of filteredTags | async" [value]="tag">
+          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedTag($event)" class="tags-options">
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
               {{ tag }}
             </mat-option>
           </mat-autocomplete>
