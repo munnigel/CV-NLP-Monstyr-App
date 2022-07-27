@@ -34,6 +34,9 @@ When("I click on a suitable tag related to the post", () => {
   cy.get(".tags-options").first().click({ force: true });
 });
 
+When("I type a new tag and press the \"enter\" key", () => {
+  cy.get("#tagInput").type("new tag").type("{enter}")
+});
 
 Then('the tag should be inserted into the "enter tags" text area', () => {
   cy.get(".tags-options").first().should("exist");
@@ -73,8 +76,10 @@ Given('I am on "Edit Item Page" for a particular pending post with no attached i
   cy.visit("http://localhost:4200/edit/25");
 });
 
+And("the pending post has no attached image", () => {
+  cy.get("img").should("not.exist");
+});
+
 When('I click on the "generate tags" button', () => {
   cy.get("#generate-tags-btn").click({ force: true });
-  });
-
-
+});
