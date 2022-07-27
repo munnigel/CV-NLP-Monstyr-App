@@ -12,10 +12,10 @@ And("the pending post has an attached image", () => {
 });
 
 When('I click on the "generate tags" button', () => {
-  cy.get("#generate-tags-btn").click({ force: true });
+  cy.get("#generate-tags-btn").click({ force: true }).wait(5000);
 });
 And('I click on the "enter tags" text area', () => {
-  cy.get(".tagInput").click({ force: true });
+  cy.get(".tagInput").click({ force: true }).wait(5000);
 });
 
 Then("I should see a dropdown list of tags", (optionSelector) => {
