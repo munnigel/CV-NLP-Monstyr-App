@@ -53,11 +53,12 @@ export class AddPostComponent implements OnInit {
       formData.append('sp_id', this.postForm.get('sp_id').value);
     if (this.postForm.get('pid').value)
       formData.append('pid', this.postForm.get('pid').value);
-    if (this.postForm.status) formData.append('status', this.postForm.status);
+    if (this.postForm.status)
+      formData.append('status', this.postForm.get('status').value);
     if (this.postForm.get('title').value)
       formData.append('title', this.postForm.get('title').value);
-    if (this.postForm.get('getTitle').value)
-      formData.append('gen_title', this.postForm.get('getTitle').value);
+    if (this.postForm.get('genTitle').value)
+      formData.append('gen_title', this.postForm.get('genTitle').value);
     if (this.postForm.get('categories').value)
       formData.append('categories', this.postForm.get('categories').value);
     if (this.postForm.get('genCategories').value)
