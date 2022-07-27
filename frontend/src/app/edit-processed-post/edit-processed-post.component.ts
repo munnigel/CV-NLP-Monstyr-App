@@ -1,13 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Product } from '../product.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-tools-page.component';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-edit-processed-post',
@@ -20,6 +30,11 @@ export class EditProcessedPostComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags: string[] = [];
+  categories: string[] = [];
+  addOnBlur = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,11 +59,52 @@ export class EditProcessedPostComponent implements OnInit {
       this.editForm = this.fb.group({
         title: [`${this.product.title}`, Validators.required],
         content: [`${this.product.content}`, Validators.required],
-        categories: [`${this.product.categories}`, Validators.required],
         startDate: [`${this.product.startDate}`, Validators.required],
         endDate: [`${this.product.endDate}`, Validators.required],
       });
     });
+    if (this.product.tags) this.tags = this.product.tags;
+    if (this.product.categories) this.categories = this.product.categories;
+  }
+
+  addTags(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.tags.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  removeTags(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  addCategories(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our category
+    if (value) {
+      this.categories.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  removeCategories(category: string): void {
+    const index = this.categories.indexOf(category);
+
+    if (index >= 0) {
+      this.categories.splice(index, 1);
+    }
   }
 
   onLive() {
@@ -67,7 +123,7 @@ export class EditProcessedPostComponent implements OnInit {
     } else {
       this.product.title = this.editForm.value.title;
       this.product.content = this.editForm.value.content;
-      this.product.categories = this.editForm.value.categories;
+      this.product.categories = this.categories;
       this.product.startDate = this.editForm.value.startDate;
       this.product.endDate = this.editForm.value.endDate;
       console.log(this.editForm.value.startDate);

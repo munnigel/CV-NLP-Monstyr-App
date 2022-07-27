@@ -222,7 +222,6 @@ export class DataService implements OnInit {
     // console.log(list);
     // console.log(res);
     for (let i = 0; i < res.length; i++) {
-      // console.log(res[i]);
       let temp = new Product(
         res[i].id,
         res[i].sp_id,
@@ -231,17 +230,17 @@ export class DataService implements OnInit {
         res[i].gen_title,
         res[i].title,
         res[i].gen_categories,
-        res[i].categories,
+        res[i].categories ? JSON.parse(res[i].categories) : undefined,
         res[i].gen_start_date,
         res[i].start_date,
         res[i].gen_end_date,
         res[i].end_date,
         res[i].gen_tags,
-        res[i].tags,
+        res[i].tags ? JSON.parse(res[i].tags) : undefined,
         res[i].gen_content,
         res[i].content,
         res[i].od_image,
-        res[i].ocr_image,
+        res[i].images ? res[i].ocr_image : undefined,
         res[i].score,
         res[i].created_at,
         res[i].updated_at,
@@ -274,11 +273,11 @@ export class DataService implements OnInit {
     if (product.status) formData.append('status', product.status);
     if (product.title) formData.append('title', product.title);
     if (product.genTitle)
-      formData.append('gen_title', product.genTitle.toString());
+      formData.append('gen_title', JSON.stringify(product.genTitle));
     if (product.categories)
-      formData.append('categories', product.categories.toString());
+      formData.append('categories', JSON.stringify(product.categories));
     if (product.genCategories)
-      formData.append('gen_categories', product.genCategories.toString());
+      formData.append('gen_categories', JSON.stringify(product.genCategories));
     if (product.startDate)
       formData.append('start_date', product.startDate.toString());
     if (product.genStartDate)
@@ -287,9 +286,9 @@ export class DataService implements OnInit {
       formData.append('end_date', product.endDate.toString());
     if (product.genEndDate)
       formData.append('gen_end_date', product.genEndDate.toString());
-    if (product.tags) formData.append('tags', product.tags.toString());
+    if (product.tags) formData.append('tags', JSON.stringify(product.tags));
     if (product.genTags)
-      formData.append('gen_tags', product.genTags.toString());
+      formData.append('gen_tags', JSON.stringify(product.genTags));
     if (product.content) formData.append('content', product.content);
     if (product.genContent) formData.append('gen_content', product.genContent);
     return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData);

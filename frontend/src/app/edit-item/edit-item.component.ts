@@ -17,7 +17,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-// import { parse } from 'path';
 
 @Component({
   selector: 'app-edit-item',
@@ -66,12 +65,6 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
-      startWith(null),
-      map((category: string | null) =>
-        category ? this._filterCategories(category) : this.allCategories.slice()
-      )
-    );
     this.genCategories = ['cat1', 'cat2', 'cat3', 'cat4'];
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
@@ -177,13 +170,14 @@ export class EditItemComponent implements OnInit {
   }
 
   async onProcessed() {
+    console.log(this.categories);
     if (this.editForm.invalid) {
       this.error = true;
       this.errMsg = 'Please complete all required fields.';
     } else {
       this.pendingProduct.title = this.editForm.value.title;
       this.pendingProduct.content = this.editForm.value.content;
-      this.pendingProduct.categories = this.editForm.value.categories;
+      this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.editForm.value.startDate;
       this.pendingProduct.endDate = this.editForm.value.endDate;

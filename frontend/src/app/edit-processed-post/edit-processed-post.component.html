@@ -22,16 +22,50 @@
           rows="5"
         ></textarea>
       </div>
-      <div class="item-cont">
-        <p>Category</p>
-        <textarea
-          id="category-field"
-          class="page-item-category"
-          placeholder="Category "
-          formControlName="categories"
-          rows="2"
-        ></textarea>
-      </div>
+      <mat-card>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-list #chipList1 aria-label="Tag selection">
+            <mat-chip *ngFor="let tag of tags" (removed)="removeTags(tag)">
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New Tag..."
+              [matChipInputFor]="chipList1"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTags($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Favorite Categories</mat-label>
+          <mat-chip-list #chipList2 aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let category of categories"
+              (removed)="removeCategories(category)"
+            >
+              {{ category }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New Category..."
+              [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addCategories($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+      </mat-card>
 
       <div class="item-cont">
         <p>Start Date</p>
