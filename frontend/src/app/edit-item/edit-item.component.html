@@ -48,7 +48,7 @@
             </mat-chip>
             <input
               placeholder="New Tag..."
-              id="tagInput"
+              id ="tagInput"
               [formControl]="tagCtrl"
               [matAutocomplete]="auto1"
               [matChipInputFor]="chipList1"
@@ -61,7 +61,7 @@
             (optionSelected)="selectedTag($event)"
           >
             <mat-option
-              id="tags-option"
+              id="tags-options"
               *ngFor="let tag of filteredTags | async"
               [value]="tag"
             >
