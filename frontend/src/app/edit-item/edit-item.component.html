@@ -56,18 +56,40 @@
             #auto1="matAutocomplete"
             (optionSelected)="selectedTag($event)"
           >
-            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            <mat-option
+              id="tags-options"
+              *ngFor="let tag of filteredTags | async"
+              [value]="tag"
+            >
               {{ tag }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
         <button
-          type="button"
-          class="special-btn"
+          mat-stroked-button
           id="generate-tags-btn"
           (click)="makeTag()"
+          color="primary"
+          style="border-radius: 15px"
         >
-          Generate
+          <div style="display: flex; margin: 10px 0px">
+            <span style="margin-right: 10px">Generate</span>
+
+            <mat-progress-spinner
+              *ngIf="genTagsLoading"
+              class="example-margin"
+              color="primary"
+              mode="indeterminate"
+              value="50"
+              diameter="30"
+            >
+            </mat-progress-spinner>
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="tick"
+            ></mat-icon>
+          </div>
         </button>
       </mat-card>
 
@@ -99,6 +121,7 @@
             (optionSelected)="selectedCategory($event)"
           >
             <mat-option
+              id="categories-options"
               *ngFor="let category of filteredCategories | async"
               [value]="category"
             >
@@ -108,11 +131,32 @@
         </mat-form-field>
         <button
           type="button"
-          class="special-btn"
+          class="primary primary-btn"
           id="generate-categories-btn"
           (click)="makeCategory()"
         >
           Generate
+        </button>
+        <button
+          mat-stroked-button
+          id="generate-tags-btn"
+          (click)="makeCategory()"
+          color="primary"
+          style="border-radius: 15px"
+        >
+          <div style="display: flex; margin: 10px 0px">
+            <span style="margin-right: 10px">Generate</span>
+
+            <mat-progress-spinner
+              *ngIf="genCategoriesLoading"
+              class="example-margin"
+              color="primary"
+              mode="indeterminate"
+              value="50"
+              diameter="30"
+            >
+            </mat-progress-spinner>
+          </div>
         </button>
       </mat-card>
 

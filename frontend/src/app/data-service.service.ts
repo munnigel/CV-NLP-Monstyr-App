@@ -169,6 +169,8 @@ export class DataService implements OnInit {
     return res['gen_tags'];
   }
 
+  async getGenCategories() {}
+
   private httpOptions = {
     headers: new HttpHeaders({
       // "Accept": "*/*",
