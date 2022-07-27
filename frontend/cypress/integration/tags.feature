@@ -13,12 +13,12 @@ Scenario: Generating tags when post has an attached image
 Scenario: Accept tag
     Given I see a dropdown list of tags
     When I click on a suitable tag related to the post
-    Then Then I should not see a dropdown list of tags
+    Then I should not see a dropdown list of tags
     And the tag should be inserted into the "enter tags" text area
 
 Scenario: Creating a tag not present in generated suggestions
     Given I am on "Edit Item Page" for a particular pending post
-    When I click on the "enter tags" text area
+    And I click on the "enter tags" text area
     When I type a new tag and press the "enter" key
     Then the new tag should be inserted into the "enter tags" text area
 
