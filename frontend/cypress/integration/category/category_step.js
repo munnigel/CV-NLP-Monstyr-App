@@ -42,10 +42,23 @@ And('the category should be inserted into the "enter categories" text area', (op
 
 
 // Scenario: Attempting to generate categories when text is not present in product description
-Given(/^I am on "Edit Item Page" for an empty pending post$/, () => {
-  cy.visit("http://localhost:4200/home/pending");
-  cy.get(".pending-posts-item").eq(1).click();
+Given(' I am on "Edit Item Page" for an empty pending post', () => {
+  cy.visit("http://localhost:4200/edit/39");
 });
+
+When('I click on the "generate categories" button', () => {
+  cy.get("#generate-categories-btn").click({ force: true });
+});
+Then('I should see an empty "enter categories" text area', (optionSelector) => {
+  cy.get(".categoryInput").should("be.empty");
+});
+When('I click on the "enter categories" text area', () => {
+  cy.get(".categoryInput").click({ force: true });
+});
+Then('I should see "no categories found" options', (optionSelector) => {
+  cy.get(".mat-option-text").should("exist");
+});
+
 
 
 
