@@ -222,40 +222,45 @@ export class DataService implements OnInit {
     // console.log(list);
     // console.log(res);
     for (let i = 0; i < res.length; i++) {
-      let temp = new Product(
-        res[i].id,
-        res[i].sp_id,
-        res[i].pid,
-        res[i].status,
-        res[i].gen_title,
-        res[i].title,
-        res[i].gen_categories,
-        res[i].categories ? JSON.parse(res[i].categories) : undefined,
-        res[i].gen_start_date,
-        res[i].start_date,
-        res[i].gen_end_date,
-        res[i].end_date,
-        res[i].gen_tags,
-        res[i].tags ? JSON.parse(res[i].tags) : undefined,
-        res[i].gen_content,
-        res[i].content,
-        res[i].od_image,
-        res[i].images ? res[i].ocr_image : undefined,
-        res[i].score,
-        res[i].created_at,
-        res[i].updated_at,
-        res[i].od_latency,
-        res[i].ocr_latency,
-        res[i].ner_date_latency,
-        res[i].ner_categories_latency,
-        res[i].ner_title_latency
-      );
-      if (res[i].images)
-        temp.images = res[i].images
-          .replace('{', '')
-          .replace('}', '')
-          .split(',', 1);
-      list.push(temp);
+      try {
+        console.log(res[i]);
+        let temp = new Product(
+          res[i].id,
+          res[i].sp_id,
+          res[i].pid,
+          res[i].status,
+          res[i].gen_title,
+          res[i].title,
+          res[i].gen_categories,
+          res[i].categories ? JSON.parse(res[i].categories) : undefined,
+          res[i].gen_start_date,
+          res[i].start_date,
+          res[i].gen_end_date,
+          res[i].end_date,
+          res[i].gen_tags,
+          res[i].tags ? JSON.parse(res[i].tags) : undefined,
+          res[i].gen_content,
+          res[i].content,
+          res[i].od_image,
+          res[i].images ? res[i].ocr_image : undefined,
+          res[i].score,
+          res[i].created_at,
+          res[i].updated_at,
+          res[i].od_latency,
+          res[i].ocr_latency,
+          res[i].ner_date_latency,
+          res[i].ner_categories_latency,
+          res[i].ner_title_latency
+        );
+        if (res[i].images)
+          temp.images = res[i].images
+            .replace('{', '')
+            .replace('}', '')
+            .split(',', 1);
+        list.push(temp);
+      } catch (e) {
+        continue;
+      }
     }
   }
 

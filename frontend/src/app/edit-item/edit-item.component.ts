@@ -53,8 +53,8 @@ export class EditItemComponent implements OnInit {
   categories: string[] = [];
   allCategories: string[] = [];
 
-  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
-  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+  @ViewChild('#tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('#categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -103,6 +103,7 @@ export class EditItemComponent implements OnInit {
     event.chipInput!.clear();
 
     this.tagCtrl.setValue(null);
+    console.log(this.filteredTags);
   }
 
   removeTag(tag: string): void {
