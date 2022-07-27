@@ -36,7 +36,9 @@ export class EditItemComponent implements OnInit {
   errMsg: string;
   id: number;
 
+  tagsGenerated: boolean = false;
   genTagsLoading: boolean = false;
+  categoriesGenerated: boolean = false;
   genCategoriesLoading: boolean = false;
 
   endDate: any;
@@ -50,7 +52,7 @@ export class EditItemComponent implements OnInit {
   categoryCtrl = new FormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
-  allCategories: string[] = ['Cat1', 'Cat2', 'Cat3', 'Cat4', 'Cat5'];
+  allCategories: string[] = [];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
@@ -211,15 +213,20 @@ export class EditItemComponent implements OnInit {
     // this.description = 'DESCRIPTION GENERATED WAAAA';
     console.log('description activated');
   }
+
   makeTitle() {
     this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
     this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
   }
+
   async makeTag() {
+    this.allTags = [];
+    this.tagsGenerated = false;
     this.genTagsLoading = true;
     this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
     this.genTagsLoading = false;
+    this.tagsGenerated = true;
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) =>
@@ -228,10 +235,22 @@ export class EditItemComponent implements OnInit {
     );
   }
 
-  makeCategory() {
-    this.editForm.patchValue({ category: 'CAT GENERATED WAAAA' });
-    this.category = 'CATEGORY GENERATED WAAAA';
-    console.log('category activated');
+  async makeCategory() {
+    this.allCategories = [];
+    this.categoriesGenerated = false;
+    this.genCategoriesLoading = true;
+    let temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
+    for (let i = 0; i < 5; i++) {
+      this.allCategories.push(temp[i][0]);
+    }
+    this.genCategoriesLoading = false;
+    this.categoriesGenerated = true;
+    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      startWith(null),
+      map((category: string | null) =>
+        category ? this._filterCategories(category) : this.allCategories.slice()
+      )
+    );
   }
 
   async getMinOrMaxDates(minOrMax: string) {

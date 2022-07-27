@@ -84,11 +84,12 @@
               diameter="30"
             >
             </mat-progress-spinner>
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="tick"
-            ></mat-icon>
+            <span
+              *ngIf="!genTagsLoading && tagsGenerated"
+              class="material-symbols-outlined"
+            >
+              done
+            </span>
           </div>
         </button>
       </mat-card>
@@ -130,14 +131,6 @@
           </mat-autocomplete>
         </mat-form-field>
         <button
-          type="button"
-          class="primary primary-btn"
-          id="generate-categories-btn"
-          (click)="makeCategory()"
-        >
-          Generate
-        </button>
-        <button
           mat-stroked-button
           id="generate-tags-btn"
           (click)="makeCategory()"
@@ -156,6 +149,12 @@
               diameter="30"
             >
             </mat-progress-spinner>
+            <span
+              *ngIf="!genCategoriesLoading && categoriesGenerated"
+              class="material-symbols-outlined"
+            >
+              done
+            </span>
           </div>
         </button>
       </mat-card>
