@@ -99,6 +99,7 @@ class PostsController < ApplicationController
     # # Receive and process result
     # render json: {'response body': response.body}
     result = JSON.parse(response.body)
+    @post.gen_tags = result
     tags = result['responses'][0]
     tags = tags['labelAnnotations']
     processed_tags = []
@@ -106,6 +107,76 @@ class PostsController < ApplicationController
 
     # Return tags to frontend as json
     render json: {'gen_tags': processed_tags}
+  end
+
+  # Calls custom trained categories detection model and returns generated categories
+  def catgen
+    
+    # Obtain post description text
+    @post = Post.find(params[:id])
+    @raw_des = @post.content
+    @processed_des = @raw_des
+    # @processed_des = @processed_des.gsub(/[\u{1F600}-\u{1F6FF}]/,'')
+    # @processed_des = @processed_des.gsub!(/\xC2/n, '')
+    # @processed_des = @processed_des.gsub!(/\W/,' ')
+    # render json: {'processed_des': @processed_des}
+
+    # Generate appropriate request.json
+    @body = {
+      "instances": {
+        "mimeType": "text/plain",
+        "content": @processed_des
+      }
+    }
+
+    # render json: {'body': @body}
+    scope = 'https://www.googleapis.com/auth/cloud-platform'
+
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: File.open('../backend/monstyrxai-41a5fb651ce9.json'),
+      scope: scope)
+
+    @ACCESS_TOKEN = authorizer.fetch_access_token!
+    @ACCESS_TOKEN = @ACCESS_TOKEN['access_token']
+    @ACCESS_TOKEN = @ACCESS_TOKEN.gsub('.',' ')
+    @ACCESS_TOKEN = @ACCESS_TOKEN.strip
+    @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
+
+    # render json: {'access-token': @ACCESS_TOKEN}
+    
+    # Send POST request
+    # @ACCESS_TOKEN ="ya29.A0AVA9y1v4xyzukyT5rC5SL0yZGMWX9b29nRd5hDL-efB1psqU5coX8eCSeNa_GRgT2sdB1Gq7qUKY66jD5yBx_mpjbkwg36dZOwfnQWI7rfmno3RQp9ezfbm4rHRBWuzLueU3yVoejoy750luEX5xiH1XoLULkZWURItXMbNJLLSXNnXc7iK60qA5ds8Zg8wfoaK-W17SIGr930u7qXMxofJvoRFeVQUDpCrtshIi-Kndm8-Ajvr6WCUMkLmitU4FEVoPigYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4cWRfc1I0VEptSVhQVkNXWVBodkg1Zw0269"
+    # @ACCESS_TOKEN = "ya29.c.b0AXv0zTPB-QblbK1DcDb1AnhPbgovuw13SQGaE8LqZt3dNVi3eogtUA42RVxYJ323pymiWVePPoFOOmgF-CJtZXdPMSSD9iAs8Z6ZDEnsnMasLbFP_OwfsjP-NRLmohhLKk-tWwP0zIylLr82bdfG7X1Va2s9osabBdzl6InFUztwhvjdP8cIl2aCchK6kzl_Y7eNVUdbvWzaAExVMR7Es09L8lAGlSw"
+    @ENDPOINT_ID="3168906860459720704"
+    @PROJECT_ID="276757795685"
+    @API_KEY2 = 'AIzaSyCxv0PN2L6VdD3Z3zZ98SGp_Rm1YoviYso'
+    @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
+    # render json: {'API_URL': @API_URL2}
+
+    uri = URI.parse(@API_URL2)
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl = true
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request["Authorization"] = "Bearer #{@ACCESS_TOKEN}"
+    request["Content-Type"] = "application/json"
+    response = https.request(request, @body.to_json)
+
+    # Receive and process result
+    # render json: {'response body': response.body}
+    result = JSON.parse(response.body)
+    # render json: {'result': result}
+    @disp_names = result['predictions'][0]['displayNames']
+    @confs = result['predictions'][0]['confidences']
+    @cats_dict = @disp_names.zip(@confs)
+    @cats_dict = @cats_dict.sort_by(&:last).reverse
+    # @cats_dict = @cats_dict[0..9]
+    # cats = tags['labelAnnotations']
+    # processed_tags = []
+    # tags.each { |x| processed_tags.append(x['description']) }
+    # render json: {'disp_names': @disp_names, 'confs': @confs}
+    render json: {'cats_dict': @cats_dict}
+    # Return tags to frontend as json
+    # render json: {'gen_categories': processed_categories}
   end
 
   # Retrieves live posts in batches of N
