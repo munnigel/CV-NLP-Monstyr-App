@@ -27,9 +27,6 @@ Scenario: Saving tags to post
     And I click the "submit" button
     Then the accepted tags should be added to the post
 
-
-
-
 Scenario: Attempting to generate tags when post has no attached image
     Given I am on "Edit Item Page" for a particular pending post
     And the pending post has no attached image
