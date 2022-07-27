@@ -17,7 +17,7 @@ Scenario: Accept tag
 
 Scenario: Creating a tag not present in generated suggestions
     Given I am on "Edit Item Page" for a particular pending post
-    And I click on the "enter tags" text area
+    When I click on the "enter tags" text area
     When I type a new tag and press the "enter" key
     Then the new tag should be inserted into the "enter tags" text area
 
@@ -26,3 +26,8 @@ Scenario: Saving tags to post
     When I click the "submit" button
     Then the accepted tags should be added to the post
 
+Scenario: Attempting to generate tags when post has no attached image
+    Given I am on "Edit Item Page" for a particular pending post
+    And the pending post has no attached image
+    When I click on the "generate tags" button
+    Then I should see no tags in the dropdown list

@@ -47,7 +47,7 @@ Given('I am on "Edit Item Page" for a particular pending post', () => {
   cy.get(".pending-posts-item").first().click();
 });
 
-And('I click on the "enter tags" text area', () => {
+When('I click on the "enter tags" text area', () => {
   cy.get(".tagInput").click({ force: true });
 });
 
@@ -74,16 +74,23 @@ Then("the accepted tags should be added to the post", () => {
   cy.visit("http://localhost:4200/home/live");
 });
 
-// Scenario: Creating a tag not present in generated suggestions
-//     Given I am on "Edit Item Page" for a particular pending post
-//     When I click on the "enter tags" text area
-//     When I type a new tag and press the "enter" key
-//     Then the new tag should be inserted into the "enter tags" text area
+//Scenario: Creating a tag not present in generated suggestions
+Given('I am on "Edit Item Page" for a particular pending post', () => {
+  cy.visit("http://localhost:4200/edit/25");
+  cy.get(".pending-posts-item").first().click();
+});
 
-// And("the pending post has no attached image", () => {
-//     cy.get("img").should("not.exist");
-//   });
+And("the pending post has no attached image", () => {
+  cy.get("img").should("not.exist");
+});
 
-//   When('I click on the "generate tags" button', () => {
-//     cy.get("#generate-tags-btn").click({ force: true });
-//   });
+When('I click on the "generate tags" button', () => {
+  cy.get("#generate-tags-btn").click({ force: true });
+});
+And('I click on the "enter tags" text area', () => {
+  cy.get(".tagInput").click({ force: true });
+});
+
+Then("I should see a dropdown list of tags", (optionSelector) => {
+  cy.get(".tags-options").should("not.exist");
+});
