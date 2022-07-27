@@ -36,6 +36,9 @@ export class EditItemComponent implements OnInit {
   errMsg: string;
   id: number;
 
+  genTagsLoading: boolean = false;
+  genCategoriesLoading: boolean = false;
+
   endDate: any;
   genCategories: string[];
 
@@ -82,11 +85,11 @@ export class EditItemComponent implements OnInit {
       }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
-        categories: ['', Validators.required],
+        categories: [''],
         startDate: [''],
         endDate: [''],
-        title: ['', Validators.required],
-        content: ['', Validators.required],
+        title: [''],
+        content: [''],
       });
     });
 
@@ -179,6 +182,7 @@ export class EditItemComponent implements OnInit {
       this.pendingProduct.title = this.editForm.value.title;
       this.pendingProduct.content = this.editForm.value.content;
       this.pendingProduct.categories = this.editForm.value.categories;
+      this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.editForm.value.startDate;
       this.pendingProduct.endDate = this.editForm.value.endDate;
       this.pendingProduct.status = 'live';
@@ -213,7 +217,9 @@ export class EditItemComponent implements OnInit {
     console.log('title activated');
   }
   async makeTag() {
+    this.genTagsLoading = true;
     this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
+    this.genTagsLoading = false;
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) =>
