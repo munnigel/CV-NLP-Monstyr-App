@@ -27,5 +27,5 @@ Scenario: Attempting to generate categories when text is not present in product 
 Scenario: Manually input categories when generated categories is wrong or is unable to be generated
     Given I am on "Edit Item Page" for a particular pending post
     When I click on the "enter categories" text area
-    When I type a new categories and press the "enter" key
-    Then the new tag should be inserted into the "enter tags" text area
+    When I type a new category and press the "enter" key
+    Then the category should be inserted into the "enter categories" text area
