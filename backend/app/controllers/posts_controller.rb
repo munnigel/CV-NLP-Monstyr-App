@@ -139,7 +139,7 @@ class PostsController < ApplicationController
     @processed_des = @raw_des
     # @processed_des = ""
     if @processed_des.to_s.empty?
-      render json: {'content': @processed_des.to_s}
+      render json: {'content': ""}
     else
       # @processed_des = @processed_des.gsub(/[\u{1F600}-\u{1F6FF}]/,'')
       # @processed_des = @processed_des.gsub!(/\xC2/n, '')
@@ -213,6 +213,42 @@ class PostsController < ApplicationController
       # Return generated categories as json
       render json: {'cats_dict': @cats_dict}
     end
+  end
+
+  def dategen
+    # # Start timer for query latency calculations
+    # @starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+    # # Obtain post description text
+    # @post = Post.find(params[:id])
+    # @raw_des = @post.content
+
+    # # Clean data
+
+    # # POST request to Java model
+    # @API_URL = "https://aiextractdate-scexlpt36a-as.a.run.app/"
+    # uri = URI.parse(@API_URL)
+    # https = Net::HTTP.new(uri.host, uri.port)
+    # https.use_ssl = true
+    # request = Net::HTTP::Post.new(uri.request_uri)
+    # request["Content-Type"] = "application/json"
+    # response = https.request(request, @body.to_json)
+
+    # # # Receive and process result
+    # # render json: {'response body': response.body}
+    # result = JSON.parse(response.body)
+    # @post.meta_label_detection = result.to_s
+    # tags = result['responses'][0]
+    # tags = tags['labelAnnotations']
+    # processed_tags = []
+    # tags.each { |x| processed_tags.append(x['description']) }
+    # @post.gen_tags = processed_tags
+
+    # # End timer for query latency calculations
+    # @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    # @latency = @ending - @starting
+    # @post.ner_date_latency = @latency * 1000
+    # @post.save
   end
 
   # Retrieves live posts in batches of N
