@@ -14,13 +14,13 @@ Scenario: Accept categories
     Given I see a dropdown list of categories
     When I click on a suitable category related to the post
     Then I should not see a dropdown list of categories
-    And the tag should be inserted into the "enter categories" text area
+    And the category should be inserted into the "enter categories" text area
 
 
 Scenario: Attempting to generate categories when text is not present in product description
-    Given I am on "Edit Item Page" for a particular pending post
+    Given I am on "Edit Item Page" for an empty pending post
     When I click on the "generate categories" button
-    Then I should see the "categories generated failure" sign
+    Then I should see an empty "enter categories" text area
     When I click on the "enter categories" text area
     Then I should see "no categories found" options
     
