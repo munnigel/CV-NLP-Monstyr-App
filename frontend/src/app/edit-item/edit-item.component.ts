@@ -228,6 +228,7 @@ export class EditItemComponent implements OnInit {
         tag ? this._filterTags(tag) : this.allTags.slice()
       )
     );
+    this.tagInput.nativeElement.click();
   }
 
   async makeCategory() {
@@ -246,6 +247,7 @@ export class EditItemComponent implements OnInit {
         category ? this._filterCategories(category) : this.allCategories.slice()
       )
     );
+    this.categoryInput.nativeElement.click();
   }
 
   async getMinOrMaxDates(minOrMax: string) {
