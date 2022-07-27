@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/acceptedaiml', to: 'posts#acceptedaiml'
   get '/rejectedaiml', to: 'posts#rejectedaiml'
   get '/posts/taggen/:id', to: 'posts#taggen'
+  get '/posts/catgen/:id', to: 'posts#catgen'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

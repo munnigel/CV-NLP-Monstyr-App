@@ -169,7 +169,12 @@ export class DataService implements OnInit {
     return res['gen_tags'];
   }
 
-  async getGenCategories() {}
+  async getGenCategories(id: number) {
+    let res = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/catgen/${id}`)
+    );
+    return res['cats_dict'];
+  }
 
   private httpOptions = {
     headers: new HttpHeaders({
