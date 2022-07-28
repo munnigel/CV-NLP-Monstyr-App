@@ -265,7 +265,7 @@ export class EditItemComponent implements OnInit {
       setTimeout(() => {
         this.datasrv.updateAllProductList();
         this.router.navigate(['home/processed'], {});
-      }, 2000);
+      }, 1000);
     }
   }
 

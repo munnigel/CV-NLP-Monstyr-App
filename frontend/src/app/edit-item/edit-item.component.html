@@ -8,7 +8,7 @@
     <form [formGroup]="editForm">
       <mat-card>
         <mat-form-field
-          class="example-chip-list"
+          class="example-chip-list page-item-title"
           appearance="fill"
           id="title-box"
         >
@@ -193,6 +193,7 @@
           <mat-label>Enter a date range</mat-label>
           <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
             <input
+              class="dateInput"
               matStartDate
               formControlName="start"
               placeholder="Start date"

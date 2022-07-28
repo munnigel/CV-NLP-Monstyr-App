@@ -272,7 +272,6 @@ export class DataService implements OnInit {
     console.log(product);
     console.log('update');
     let formData = new FormData();
-    console.log(typeof product.startDate.toString());
     if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
     if (product.pid) formData.append('pid', product.pid.toString());
     if (product.status) formData.append('status', product.status);

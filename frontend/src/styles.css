@@ -382,14 +382,7 @@ body {
   font-weight: bold;
 }
 
-.page-item-title {
-  resize: none;
-  height: 75px;
-  width: 600px;
-  border-radius: 15px;
-  padding: 0px 10px;
-  margin: 10px;
-}
+
 
 .page-item {
   resize: none;
