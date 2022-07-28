@@ -1,4 +1,4 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, L } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-edit-item',
@@ -35,6 +36,8 @@ export class EditItemComponent implements OnInit {
   errMsg: string;
   id: number;
 
+  titlesGenerated: boolean = false;
+  genTitlesLoading: boolean = false;
   tagsGenerated: boolean = false;
   genTagsLoading: boolean = false;
   categoriesGenerated: boolean = false;
@@ -44,8 +47,13 @@ export class EditItemComponent implements OnInit {
 
   endDate: any;
   genCategories: string[];
+  titleString: string = '';
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  titleCtrl = new FormControl('');
+  filteredTitles: Observable<string[]>;
+  titles: string[] = [];
+  allTitles: string[] = [];
   tagCtrl = new FormControl('');
   filteredTags: Observable<string[]>;
   tags: string[] = [];
@@ -94,7 +102,7 @@ export class EditItemComponent implements OnInit {
     'Gaming & Arcade',
     'Others  (Play)',
   ];
-
+  @ViewChild('titleInput', { static: true }) public titleInput: MatInput;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
@@ -104,7 +112,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
@@ -130,11 +138,24 @@ export class EditItemComponent implements OnInit {
         categories: [''],
         startDate: [''],
         endDate: [''],
-        title: [''],
       });
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
+  }
+
+  selectedTitle(event: MatAutocompleteSelectedEvent): void {
+    this.titles.push(event.option.viewValue);
+    this.titleString = this.titles.toString();
+    this.titleCtrl.setValue(this.titles.toString());
+  }
+
+  private _filterTitles(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allTags.filter((tag) =>
+      tag.toLowerCase().includes(filterValue)
+    );
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -216,7 +237,7 @@ export class EditItemComponent implements OnInit {
       this.error = true;
       this.errMsg = 'Please complete all required fields.';
     } else {
-      this.pendingProduct.title = this.editForm.value.title;
+      this.pendingProduct.title = this.titleString;
       this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.editForm.value.startDate;
@@ -252,6 +273,7 @@ export class EditItemComponent implements OnInit {
     this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
     this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
+    this.allTitles = ['title1', 'title2', 'title3'];
   }
 
   async makeTag() {
@@ -318,7 +340,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => { },
+          next: () => {},
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();

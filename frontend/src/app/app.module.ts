@@ -39,6 +39,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatInputModule,
   ],
   providers: [
     FileUploadService,
