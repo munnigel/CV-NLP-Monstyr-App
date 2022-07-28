@@ -104,7 +104,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
@@ -275,8 +275,10 @@ export class EditItemComponent implements OnInit {
     this.categoriesGenerated = false;
     this.genCategoriesLoading = true;
     let temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
-    for (let i = 0; i < 5; i++) {
-      this.categories.push(temp[i][0]);
+    if (temp != null) {
+      for (let i = 0; i < 5; i++) {
+        this.categories.push(temp[i][0]);
+      }
     }
     this.genCategoriesLoading = false;
     this.categoriesGenerated = true;
@@ -316,7 +318,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => {},
+          next: () => { },
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();

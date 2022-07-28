@@ -20,7 +20,7 @@ export class AddPostComponent implements OnInit {
     this.postForm = this.fb.group({
       sp_id: [''],
       pid: [''],
-      status: [''],
+      status: ['pending'],
       title: [''],
       genTitle: [''],
       categories: [''],
@@ -93,6 +93,7 @@ export class AddPostComponent implements OnInit {
       complete: () => {
         this.dataSrv.updateAllProductList();
         console.log('post added');
+        alert('post added');
         this.router.navigate([`/home/overview`], {});
       },
     });
