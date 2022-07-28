@@ -1,27 +1,37 @@
 <div class="item-page-container">
   <div class="item-page-left2">
     <form [formGroup]="editForm">
-      <div class="item-cont">
-        <p>Title</p>
-        <textarea
-          id="title-field"
-          class="page-item-title"
-          placeholder="Enter title here"
-          formControlName="title"
-          rows="2"
-        ></textarea>
-      </div>
-
-      <div class="item-cont">
-        <p>Description</p>
-        <textarea
-          id="description-field"
-          class="page-item"
-          placeholder="Enter your description here"
-          formControlName="content"
-          rows="5"
-        ></textarea>
-      </div>
+      <mat-card>
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="title-box"
+        >
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            class="titleInput"
+            placeholder="New Title..."
+            #titleInput
+            [formControl]="titleCtrl"
+          />
+        </mat-form-field>
+      </mat-card>
+      <mat-card>
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="description-box"
+        >
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            placeholder="New Description"
+            #descriptionInput
+            [formControl]="descriptionCtrl"
+          ></textarea>
+        </mat-form-field>
+      </mat-card>
       <mat-card>
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Tags</mat-label>
@@ -66,27 +76,36 @@
           </mat-chip-list>
         </mat-form-field>
       </mat-card>
+      <mat-card>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date"
+            />
+            <input matEndDate formControlName="end" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <div class="item-cont">
-        <p>Start Date</p>
-        <textarea
-          id="start-date-field"
-          class="page-item-date"
-          placeholder="Promotional Start Date"
-          formControlName="startDate"
-          rows="2"
-        ></textarea>
-      </div>
-      <div class="item-cont">
-        <p>End Date</p>
-        <textarea
-          id="end-date-field"
-          class="page-item-date"
-          placeholder="Promotional End Date"
-          formControlName="endDate"
-          rows="2"
-        ></textarea>
-      </div>
+          <mat-error
+            *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')"
+            >Invalid start date</mat-error
+          >
+          <mat-error
+            *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+            >Invalid end date</mat-error
+          >
+        </mat-form-field>
+
+        <p>Selected range: {{ datePicker.value | json }}</p>
+      </mat-card>
     </form>
   </div>
 

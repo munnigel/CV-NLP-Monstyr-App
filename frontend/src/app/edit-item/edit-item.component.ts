@@ -18,6 +18,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatInput } from '@angular/material/input';
+import { minBy } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-edit-item',
@@ -44,10 +45,15 @@ export class EditItemComponent implements OnInit {
   genCategoriesLoading: boolean = false;
   zeroTagsGenerated: boolean = false;
   zeroCategoriesGenerated: boolean = false;
+  genStartDateLoading: boolean = false;
+  startDateGenerated: boolean = false;
+  genEndDateLoading: boolean = false;
+  endDateGenerated: boolean = false;
 
   endDate: any;
   genCategories: string[];
   titleString: string = '';
+  datePicker: FormGroup;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   titleCtrl = new FormControl('');
@@ -115,6 +121,10 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.datePicker = new FormGroup({
+      start: new FormControl(null),
+      end: new FormControl(null),
+    });
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) =>
@@ -240,8 +250,8 @@ export class EditItemComponent implements OnInit {
       this.pendingProduct.title = this.titleString;
       this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
-      this.pendingProduct.startDate = this.editForm.value.startDate;
-      this.pendingProduct.endDate = this.editForm.value.endDate;
+      this.pendingProduct.startDate = this.datePicker.get('start').value;
+      this.pendingProduct.endDate = this.datePicker.get('end').value;
       this.pendingProduct.status = 'live';
       this.datasrv.updatePost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
@@ -270,10 +280,14 @@ export class EditItemComponent implements OnInit {
   }
 
   makeTitle() {
+    this.titlesGenerated = false;
+    this.genTitlesLoading = true;
     this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
     this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
     this.allTitles = ['title1', 'title2', 'title3'];
+    this.titlesGenerated = true;
+    this.genTitlesLoading = false;
   }
 
   async makeTag() {
@@ -307,6 +321,13 @@ export class EditItemComponent implements OnInit {
   }
 
   async getMinOrMaxDates(minOrMax: string) {
+    if (minOrMax == 'min') {
+      this.genStartDateLoading = true;
+      this.startDateGenerated = false;
+    } else if (minOrMax == 'max') {
+      this.genEndDateLoading = true;
+      this.endDateGenerated = false;
+    }
     let allDates;
     let datesList = [];
     this.datasrv.datePost(this.pendingProduct).subscribe({
@@ -323,9 +344,17 @@ export class EditItemComponent implements OnInit {
 
         var maxDate = new Date(Math.max.apply(null, datesList));
         var minDate = new Date(Math.min.apply(null, datesList));
-        if (minOrMax == 'min') this.editForm.patchValue({ startDate: minDate });
-        else if (minOrMax == 'max')
-          this.editForm.patchValue({ endDate: maxDate });
+        console.log(minDate);
+        console.log(maxDate);
+        if (minOrMax == 'min') {
+          this.genStartDateLoading = false;
+          this.startDateGenerated = true;
+          this.datePicker.patchValue({ start: minDate });
+        } else if (minOrMax == 'max') {
+          this.genEndDateLoading = false;
+          this.endDateGenerated = true;
+          this.datePicker.patchValue({ end: maxDate });
+        }
       },
     });
   }

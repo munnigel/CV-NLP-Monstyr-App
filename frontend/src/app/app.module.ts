@@ -40,6 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { MatInputModule } from '@angular/material/input';
     MatAutocompleteModule,
     MatChipsModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     FileUploadService,

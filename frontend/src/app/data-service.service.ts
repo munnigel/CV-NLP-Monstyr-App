@@ -312,7 +312,7 @@ export class DataService implements OnInit {
       .replace(/[^ ]*today[^ ]*/, '')
       .replace(/[^ ]*available[^ ]*/, '');
     console.log(cleanedcleanedText);
-    return this.http.post<any>(`${AI_URL}/getdates`, cleanedcleanedText);
+    return this.http.post<any>(`${AI_URL}/getdates`, product.content);
   }
 }
 

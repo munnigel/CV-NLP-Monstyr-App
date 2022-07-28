@@ -119,12 +119,6 @@
             >
               done
             </span>
-            <span
-              *ngIf="!genTagsLoading && zeroTagsGenerated"
-              class="material-symbols-outlined"
-            >
-              close
-            </span>
           </div>
         </button>
       </mat-card>
@@ -191,52 +185,93 @@
             >
               done
             </span>
+          </div>
+        </button>
+      </mat-card>
+      <mat-card>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date"
+            />
+            <input matEndDate formControlName="end" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error
+            *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')"
+            >Invalid start date</mat-error
+          >
+          <mat-error
+            *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+            >Invalid end date</mat-error
+          >
+        </mat-form-field>
+
+        <p>Selected range: {{ datePicker.value | json }}</p>
+        <button
+          mat-stroked-button
+          id="generate-start-date-btn"
+          (click)="getMinOrMaxDates('min')"
+          color="primary"
+          style="border-radius: 15px"
+        >
+          <div style="display: flex; margin: 10px 0px">
+            <span style="margin-right: 10px">Generate Start Date</span>
+
+            <mat-progress-spinner
+              *ngIf="genStartDateLoading"
+              class="example-margin"
+              color="primary"
+              mode="indeterminate"
+              value="50"
+              diameter="30"
+            >
+            </mat-progress-spinner>
             <span
-              *ngIf="!genTagsLoading && zeroCategoriesGenerated"
+              *ngIf="!genStartDateLoading && startDateGenerated"
               class="material-symbols-outlined"
             >
-              close
+              done
+            </span>
+          </div>
+        </button>
+        <button
+          mat-stroked-button
+          id="generate-end-date-btn"
+          (click)="getMinOrMaxDates('max')"
+          color="primary"
+          style="border-radius: 15px"
+        >
+          <div style="display: flex; margin: 10px 0px">
+            <span style="margin-right: 10px">Generate End Date</span>
+
+            <mat-progress-spinner
+              *ngIf="genEndDateLoading"
+              class="example-margin"
+              color="primary"
+              mode="indeterminate"
+              value="50"
+              diameter="30"
+            >
+            </mat-progress-spinner>
+            <span
+              *ngIf="!genEndDateLoading && endDateGenerated"
+              class="material-symbols-outlined"
+            >
+              done
             </span>
           </div>
         </button>
       </mat-card>
-
-      <div class="item-cont">
-        <p>Start Date</p>
-        <textarea
-          class="page-item-date"
-          id="startText"
-          placeholder="Promotional Start Date"
-          formControlName="startDate"
-          rows="3"
-        ></textarea>
-        <button
-          type="button"
-          class="special-btn"
-          id="startGen"
-          (click)="getMinOrMaxDates('min')"
-        >
-          Generate
-        </button>
-      </div>
-      <div class="item-cont">
-        <p>End Date</p>
-        <textarea
-          class="page-item-date"
-          id="endText"
-          placeholder="Promotional End Date"
-          formControlName="endDate"
-          rows="3"
-        ></textarea>
-        <button
-          type="button"
-          class="special-btn"
-          id="endGen"
-          (click)="getMinOrMaxDates('max')"
-        >
-          Generate
-        </button>
-      </div>
     </form>
 
     <div class="cv-scan">

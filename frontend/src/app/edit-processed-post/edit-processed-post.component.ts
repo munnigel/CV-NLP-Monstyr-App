@@ -30,11 +30,15 @@ export class EditProcessedPostComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
+  titleCtrl = new FormControl('');
+  descriptionCtrl = new FormControl('');
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: string[] = [];
   categories: string[] = [];
   addOnBlur = true;
+
+  datePicker: FormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,7 +46,12 @@ export class EditProcessedPostComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.datePicker = new FormGroup({
+      start: new FormControl(null),
+      end: new FormControl(null),
+    });
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -63,8 +72,15 @@ export class EditProcessedPostComponent implements OnInit {
         endDate: [`${this.product.endDate}`, Validators.required],
       });
     });
+    if (this.product.title) this.titleCtrl.setValue(this.product.title);
+    if (this.product.content)
+      this.descriptionCtrl.setValue(this.product.content);
     if (this.product.tags) this.tags = this.product.tags;
     if (this.product.categories) this.categories = this.product.categories;
+    if (this.product.startDate)
+      this.datePicker.patchValue({ start: this.product.startDate });
+    if (this.product.endDate)
+      this.datePicker.patchValue({ end: this.product.endDate });
   }
 
   addTags(event: MatChipInputEvent): void {
@@ -121,12 +137,11 @@ export class EditProcessedPostComponent implements OnInit {
       }, 2000);
       return;
     } else {
-      this.product.title = this.editForm.value.title;
-      this.product.content = this.editForm.value.content;
+      this.product.title = this.titleCtrl.value;
+      this.product.content = this.descriptionCtrl.value;
       this.product.categories = this.categories;
-      this.product.startDate = this.editForm.value.startDate;
-      this.product.endDate = this.editForm.value.endDate;
-      console.log(this.editForm.value.startDate);
+      this.product.startDate = this.datePicker.get('start').value;
+      this.product.endDate = this.datePicker.get('end').value;
       console.log(this.product);
 
       this.datasrv.updatePost(this.product).subscribe({

@@ -6,7 +6,7 @@
 }
 
 .example-chip-list {
-  width: 100%;
+  min-width: 500px;
 }
 
 .item-page-btn-container {
