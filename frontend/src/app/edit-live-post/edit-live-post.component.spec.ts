@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditProcessedPostComponent } from './edit-processed-post.component';
+import { EditProcessedPostComponent } from './edit-live-post.component';
 
 describe('EditProcessedPostComponent', () => {
   let component: EditProcessedPostComponent;
@@ -8,9 +8,8 @@ describe('EditProcessedPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditProcessedPostComponent ]
-    })
-    .compileComponents();
+      declarations: [EditProcessedPostComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

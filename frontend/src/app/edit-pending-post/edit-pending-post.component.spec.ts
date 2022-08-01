@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditItemComponent } from './edit-item.component';
+import { EditItemComponent } from './edit-pending-post.component';
 
 describe('EditItemComponent', () => {
   let component: EditItemComponent;
@@ -8,9 +8,8 @@ describe('EditItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditItemComponent ]
-    })
-    .compileComponents();
+      declarations: [EditItemComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

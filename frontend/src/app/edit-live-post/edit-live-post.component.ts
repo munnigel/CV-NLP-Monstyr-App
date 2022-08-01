@@ -21,8 +21,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-edit-processed-post',
-  templateUrl: './edit-processed-post.component.html',
-  styleUrls: ['./edit-processed-post.component.css'],
+  templateUrl: './edit-live-post.component.html',
+  styleUrls: ['./edit-live-post.component.css'],
 })
 export class EditProcessedPostComponent implements OnInit {
   product: Product;

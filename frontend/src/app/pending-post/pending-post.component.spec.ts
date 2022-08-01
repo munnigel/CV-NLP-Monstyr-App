@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingPostPageComponent } from './pending-post-page.component';
+import { PendingPostPageComponent } from './pending-post.component';
 
 describe('PendingPostPageComponent', () => {
   let component: PendingPostPageComponent;
@@ -8,9 +8,8 @@ describe('PendingPostPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PendingPostPageComponent ]
-    })
-    .compileComponents();
+      declarations: [PendingPostPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

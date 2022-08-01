@@ -22,8 +22,8 @@ import { minBy } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-edit-item',
-  templateUrl: './edit-item.component.html',
-  styleUrls: ['./edit-item.component.css'],
+  templateUrl: './edit-pending-post.component.html',
+  styleUrls: ['./edit-pending-post.component.css'],
 })
 export class EditItemComponent implements OnInit {
   pendingProduct: Product;

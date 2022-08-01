@@ -6,8 +6,8 @@ import { Product } from '../product.model';
 
 @Component({
   selector: 'app-pending-post-page',
-  templateUrl: './pending-post-page.component.html',
-  styleUrls: ['./pending-post-page.component.css'],
+  templateUrl: './pending-post.component.html',
+  styleUrls: ['./pending-post.component.css'],
 })
 export class PendingPostPageComponent implements OnInit {
   tabIndex: number;

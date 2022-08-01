@@ -6,8 +6,8 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-processed-post-page',
-  templateUrl: './processed-post-page.component.html',
-  styleUrls: ['./processed-post-page.component.css'],
+  templateUrl: './processed-post.component.html',
+  styleUrls: ['./processed-post.component.css'],
 })
 export class ProcessedPostPageComponent implements OnInit {
   tabIndex: number;
