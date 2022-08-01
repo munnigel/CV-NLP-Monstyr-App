@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     # POST /users
     def create
         @user = User.new(user_params)
+        # @user = User.new(name: params[:name],
+        #                  username: params[:username],
+        #                  email: params[:email],
+        #                  password_digest: BCrypt::Password.create(params[:password]))
         if @user.save
             render json: @user, status: :created
         else
@@ -39,7 +43,7 @@ class UsersController < ApplicationController
 
     private
         def user_params
-            params.permit(:username, :email, :password)
+            params.permit(:username, :name, :email, :password)
         end
 
         def set_user
