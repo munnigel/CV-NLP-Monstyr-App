@@ -62,7 +62,7 @@ class PostsController < ApplicationController
                 "features": [
                   {
                     "type": "LABEL_DETECTION",
-                    "maxResults": 10
+                    "maxResults": 50
                   }
                 ]
               }
