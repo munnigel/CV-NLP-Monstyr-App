@@ -101,6 +101,7 @@ body {
 }
 
 @keyframes animation {
+
   0%,
   10%,
   100% {
@@ -142,6 +143,8 @@ body {
   text-align: center;
   margin-top: 40px;
 }
+
+
 
 .btn-primary {
   background-color: rgb(214, 207, 207);
@@ -477,6 +480,13 @@ body {
   margin-top: 30px;
 }
 
+.nv-bar {
+  width: 100%;
+  padding-left: 225px;
+  height: 100%;
+  overflow: auto;
+}
+
 .top-nav-bar {
   font-size: 20px;
   position: relative;
@@ -581,6 +591,13 @@ body {
   width: 100%;
 }
 
+.live-img {
+  object-fit: contain;
+  width: 99%;
+  height: 99%;
+  border-radius: 5px;
+}
+
 .cloud {
   width: 150px;
   height: 150px;
@@ -598,4 +615,46 @@ a {
   margin-right: auto;
   height: 100%;
   border: 1px solid #8d8d8d;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 40px;
+  padding: 0 500px;
+}
+
+@media screen and (max-width: 1080px) {
+  .button {
+    padding: 0 100px;
+  }
+
+  .pending-posts-item {
+    width: 300px;
+  }
+
+  .pending-posts-item:hover {
+    box-shadow: 0 1px 10px rgb(97, 80, 80);
+    width: 310px;
+  }
+
+  .pending-posts-item:hover:after {
+    width: 300px;
+  }
+
+  .col {
+    width: 100px;
+  }
+
 }

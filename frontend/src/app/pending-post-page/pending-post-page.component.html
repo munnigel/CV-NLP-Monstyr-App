@@ -5,27 +5,20 @@
     <button class="search-btn">F</button>
   </div> -->
   <div class="button">
-    <button (click)="prevPage()" type="button">Previous</button>
-    <button (click)="nextPage()" type="button">Next</button>
+    <button class="special-btn2" (click)="prevPage()" type="button">Previous Page</button>
+    <button class='special-btn2' (click)="nextPage()" type="button">Next Page</button>
   </div>
 </div>
-<div
-  class="pending-posts-container main-item-container"
-  id="pending-post-list-container"
->
+<div class="pending-posts-container main-item-container" id="pending-post-list-container">
   <ng-container *ngFor="let product of pendingProductList; let i = index">
     <div (click)="selectPost(i)" class="pending-posts-item fade">
       <div class="pending-posts-img">
-        <img
-          [src]="product.images"
-          alt="img"
-          style="
+        <img [src]="product.images" alt="img" style="
             object-fit: contain;
             width: 99%;
             height: 99%;
             border-radius: 10px;
-          "
-        />
+          " />
       </div>
       <div class="pending-posts-details">
         <h3>{{ product.content }}</h3>
