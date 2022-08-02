@@ -3,6 +3,11 @@ As a data inputter part of the admin staff,
 I want to be able to automatically get suggested tags for each pending post,
 So that I am able to process the data from the post faster
 
+Scenario: Attempting to generate tags when post has no attached image
+    Given I am on "Edit Item Page" for a particular pending post with no attached image
+    When I click on the "generate tags" button
+    Then I should see no tags in the dropdown list
+
 Scenario: Generating tags when post has an attached image
     Given I am on "Edit Item Page" for a particular pending post
     And the pending post has an attached image
@@ -25,8 +30,3 @@ Scenario: Saving tags to post
     Given I am on "Edit Item Page" for a particular pending post
     When I click the "submit" button
     Then the accepted tags should be added to the post
-
-Scenario: Attempting to generate tags when post has no attached image
-    Given I am on "Edit Item Page" for a particular pending post with no attached image
-    When I click on the "generate tags" button
-    Then I should see no tags in the dropdown list

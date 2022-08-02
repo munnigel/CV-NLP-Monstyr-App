@@ -4,7 +4,7 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 // Scenario: Generating categories when text is present in product description
 Given(/^I am on "Edit Item Page" for a particular pending post$/, () => {
   cy.visit("http://localhost:4200/home/pending");
-  cy.get(".pending-posts-item").eq(0).click();
+  cy.get(".pending-posts-item").eq(5).click();
 });
 
 And("the pending post has a text description", () => {
@@ -43,7 +43,8 @@ And('the category should be inserted into the "enter categories" text area', (op
 
 // Scenario: Attempting to generate categories when text is not present in product description
 Given('I am on "Edit Item Page" for an empty pending post', () => {
-  cy.visit("http://localhost:4200/edit/39");
+  cy.visit("http://localhost:4200/home/pending");
+  cy.get(".pending-posts-item").eq(1).click();
 });
 
 When('I click on the "generate categories" button', () => {
@@ -63,7 +64,7 @@ Then('I should see "no categories found" options', (optionSelector) => {
 //Scenario: Manually input categories when generated categories is wrong or is unable to be generated
 Given ('I am on "Edit Item Page" for a particular pending post', () => {
   cy.visit("http://localhost:4200/home/pending");
-  cy.get(".pending-posts-item").eq(0).click();
+  cy.get(".pending-posts-item").eq(6).click();
 });
 When ('I click on the "enter categories" text area', () => {
   cy.get(".categoryInput").click({ force: true });
