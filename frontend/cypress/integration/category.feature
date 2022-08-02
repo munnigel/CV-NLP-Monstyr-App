@@ -1,4 +1,4 @@
-Feature: Automatically generate categories from pending post image
+Feature: Automatically generate categories from pending post text
 As a data inputter part of the admin staff, 
 I want to be able to automatically get categories of each pending post,
 So that I am able to process the data from the post faster
@@ -21,8 +21,6 @@ Scenario: Attempting to generate categories when text is not present in product 
     Given I am on "Edit Item Page" for an empty pending post
     When I click on the "generate categories" button
     Then I should see an empty "enter categories" text area
-    When I click on the "enter categories" text area
-    Then I should see "no categories found" options
     
 Scenario: Manually input categories when generated categories is wrong or is unable to be generated
     Given I am on "Edit Item Page" for a particular pending post

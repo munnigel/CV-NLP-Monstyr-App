@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :photos, :except => [:new]
   resources :pendingposts
   resources :liveposts
+  resources :users
 
   root "posts#index"
   get 'latest', to: 'posts#latest'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   get '/posts/taggen/:id', to: 'posts#taggen'
   get '/posts/catgen/:id', to: 'posts#catgen'
   get '/posts/dategen/:id', to: 'posts#dategen'
+  post '/auth/login', to: 'authentication#login'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
