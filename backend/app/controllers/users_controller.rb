@@ -32,7 +32,13 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
+        image = params[:image]
         if @user.save
+            if image
+                @user.image.attach image if image
+                @user.profile_pic = url_for(@user.image)
+                @user.save
+            end
             # UserMailer.with(user: @user).welcome_email.deliver_later
             UserMailer.registration_confirmation(@user).deliver_later
             render json: { account: @user, message: "Please activate your account by following the instructions in the account confirmation email you received to proceed"}, status: :created
@@ -75,7 +81,7 @@ class UsersController < ApplicationController
 
     private
         def user_params
-            params.permit(:username, :name, :email, :password, :account_type)
+            params.permit(:username, :name, :email, :password, :account_type, :image, :profile_pic)
         end
 
         def set_user
