@@ -110,7 +110,6 @@ body {
 }
 
 @keyframes animation {
-
   0%,
   10%,
   100% {
@@ -159,8 +158,6 @@ body {
   text-align: center;
   margin-top: 40px;
 }
-
-
 
 .btn-primary {
   background-color: rgb(214, 207, 207);
@@ -400,12 +397,6 @@ body {
   color: rgb(105, 18, 18);
   font-weight: bold;
 }
-
-.item-page-left2 {
-  width: 50%;
-}
-
-
 
 .page-item {
   resize: none;
@@ -679,10 +670,9 @@ a {
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  font-weight: 400;
-  background-color: rgba(204, 204, 204, 0.33)
+  font-weight: bold;
+  background-color: rgba(204, 204, 204, 0.33);
 }
-
 
 .addForm {
   display: flex;
@@ -712,5 +702,4 @@ a {
   .col {
     width: 100px;
   }
-
 }
