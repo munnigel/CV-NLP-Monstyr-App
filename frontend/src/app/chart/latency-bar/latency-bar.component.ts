@@ -8,7 +8,7 @@ import { DataService } from 'src/app/data-service.service';
   styleUrls: ['./latency-bar.component.css'],
 })
 export class LatencyBarComponent implements OnInit {
-  constructor(private dataSrv: DataService) {}
+  constructor(private dataSrv: DataService) { }
 
   ngOnInit(): void {
     const latencyBar = new Chart('latency-bar', {
@@ -51,7 +51,7 @@ export class LatencyBarComponent implements OnInit {
             beginAtZero: true,
           },
         },
-        responsive: true,
+        responsive: false,
       },
     });
   }
