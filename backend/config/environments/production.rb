@@ -45,6 +45,20 @@ Rails.application.configure do
   config.active_storage.service = :google
   # [END cloudrun_rails_storage_prod]
 
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/' #replace with your own url
+  config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "teamrubyduckies@gmail.com",
+    :password             => "krpjzbzpwqqodqnd",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
