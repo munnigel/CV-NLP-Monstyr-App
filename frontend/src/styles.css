@@ -44,7 +44,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: hsl(0, 0%, 0%);
+  background-color: rgba(169, 169, 169, 0.8);
   /* background-image:
     url('./assets/pictures/mon.gif'),
     url('./assets/pictures/mon2.gif'),
@@ -67,6 +67,14 @@ body {
   }
 }
 
+.login {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  align-items: center;
+  padding-top: 7px;
+}
+
 .mb-3 {
   margin-bottom: 10px;
 }
@@ -83,6 +91,7 @@ body {
   position: relative;
   font-size: 4vw;
   color: #252839;
+  margin: 0 auto;
   -webkit-text-stroke: 0.1vw #383d52;
 }
 
@@ -127,11 +136,18 @@ body {
 
 .login-form {
   margin-top: 30px;
-  width: 400px;
+  padding-right: 150px;
+}
+
+.formInput {
+  display: grid;
+  grid-template-columns: 100px 200px;
+  padding: 10px;
 }
 
 .form-control {
   font-weight: 200;
+  background-color: #e7e7e7;
 }
 
 .form-control-name {
@@ -385,6 +401,10 @@ body {
   font-weight: bold;
 }
 
+.item-page-left2 {
+  width: 50%;
+}
+
 
 
 .page-item {
@@ -625,7 +645,7 @@ a {
   flex-direction: row;
   justify-content: space-evenly;
   margin: 40px;
-  padding: 0 500px;
+  padding: 0 550px;
 }
 
 .form-label {
@@ -645,7 +665,7 @@ a {
   vertical-align: middle;
   display: grid;
   grid-template-columns: 180px 300px;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .eachForm:hover {
@@ -659,7 +679,7 @@ a {
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 400;
   background-color: rgba(204, 204, 204, 0.33)
 }
 
