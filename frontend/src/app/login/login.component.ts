@@ -18,4 +18,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/home'], {});
   }
 
+  onCreate() {
+    this.router.navigate(['/add'], {})
+  }
+
+
+
 }

@@ -160,6 +160,11 @@ body {
   margin-top: 40px;
 }
 
+.createAcc {
+  text-align: center;
+  margin-top: 10px;
+}
+
 
 
 .btn-primary {
@@ -690,6 +695,34 @@ a {
   justify-content: space-evenly;
   margin-bottom: 30px;
 }
+
+.addAccBg {
+  background: #BABABA;
+  height: 100%;
+}
+
+.groupForm {
+  width: 30%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: 180px 300px;
+  margin-bottom: 30px;
+  padding-left: 50px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 100px;
+
+}
+
+
 
 @media screen and (max-width: 1080px) {
   .button {
