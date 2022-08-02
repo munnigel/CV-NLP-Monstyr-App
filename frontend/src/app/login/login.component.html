@@ -6,23 +6,25 @@
     <h1>AI-Powered Workflows</h1>
   </div>
   <div class="login-form">
-    <div class="mb-3">
-      <label class="form-label">Email</label>
+    <div class="formInput">
+      <label class="login">Email</label>
       <input type="email" class="form-control" placeholder="Enter email here" />
     </div>
-    <div class="mb-3">
-      <label class="form-label">Password</label>
+    <div class="formInput">
+      <label class="login">Password</label>
       <input type="password" class="form-control" placeholder="Enter password here" />
     </div>
-    <div class="col-12">
-      <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onLogin()">
-        Sign in
-      </button>
-    </div>
-    <div class="col-12 forget-password-container">
-      <button type="submit" class="btn btn-primary btns">
-        Forget password
-      </button>
-    </div>
+  </div>
+
+
+  <div class="col-12">
+    <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onLogin()">
+      Sign in
+    </button>
+  </div>
+  <div class="col-12 forget-password-container">
+    <button type="submit" class="btn btn-primary btns">
+      Forget password
+    </button>
   </div>
 </div>
