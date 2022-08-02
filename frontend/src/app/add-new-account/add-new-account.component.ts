@@ -20,6 +20,7 @@ export class AddNewAccountComponent implements OnInit {
       username: [''],
       email: [''],
       password: [''],
+      role: [''],
     })
   }
 
@@ -41,14 +42,17 @@ export class AddNewAccountComponent implements OnInit {
       alert('Username is required');
     else if (this.postForm.get('password').value === '')
       alert('Password is required');
+    else if (this.postForm.get('role').value === '')
+      alert('Role is required');
 
     else {
       formData.append('name', this.postForm.get('name').value);
       formData.append('username', this.postForm.get('username').value);
       formData.append('email', this.postForm.get('email').value);
       formData.append('password', this.postForm.get('password').value);
+      formData.append('role', this.postForm.get('role').value);
       alert('Account created successfully');
-      console.log(this.postForm.get('email').value);
+      console.log(this.postForm.get('role').value);
       this.router.navigate([''], {});
     }
   }

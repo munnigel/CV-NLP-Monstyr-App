@@ -165,7 +165,12 @@ body {
   margin-top: 10px;
 }
 
-
+.selRole {
+  background-color: #e7e7e7;
+  font-weight: 200;
+  font-size: larger;
+  padding: 5px;
+}
 
 .btn-primary {
   background-color: rgb(214, 207, 207);
@@ -702,9 +707,14 @@ a {
 
 .forms {
   display: grid;
-  grid-template-columns: 180px 300px;
+  grid-template-columns: 100px 300px;
   margin-bottom: 30px;
-  padding-left: 50px;
+  padding-top: 10px;
+  padding-left: 80px;
+}
+
+.forms label {
+  margin-top: 10px;
 }
 
 .buttons {
