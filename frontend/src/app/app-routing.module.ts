@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditItemComponent } from './edit-item/edit-item.component';
+import { EditItemComponent } from './edit-pending-post/edit-pending-post.component';
 import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
-import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
-import { ProcessedPostPageComponent } from './processed-post-page/processed-post-page.component';
+import { PendingPostPageComponent } from './pending-post/pending-post.component';
+import { ProcessedPostPageComponent } from './live-post/processed-post.component';
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
+import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'developertools',
         component: DeveloperToolsPageComponent,
       },
-      {path:'addpost', component:AddPostComponent},
+      { path: 'addpost', component: AddPostComponent },
       { path: 'developertools/live/:id', redirectTo: 'developertools' },
       { path: 'developertools/pending/:id', redirectTo: 'developertools' },
       { path: 'settings', component: SettingsPageComponent },

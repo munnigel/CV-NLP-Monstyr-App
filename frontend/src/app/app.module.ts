@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DataService } from './data-service.service';
-import { EditItemComponent } from './edit-item/edit-item.component';
+import { EditItemComponent } from './edit-pending-post/edit-pending-post.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
-import { PendingPostPageComponent } from './pending-post-page/pending-post-page.component';
-import { ProcessedPostPageComponent } from './processed-post-page/processed-post-page.component';
+import { PendingPostPageComponent } from './pending-post/pending-post.component';
+import { ProcessedPostPageComponent } from './live-post/processed-post.component';
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
@@ -34,11 +34,14 @@ import { LatencyBarComponent } from './chart/latency-bar/latency-bar.component';
 import { AccuracyLineComponent } from './chart/accuracy-line/accuracy-line.component';
 import { CompletionPieComponent } from './chart/completion-pie/completion-pie.component';
 import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';
-import { EditProcessedPostComponent } from './edit-processed-post/edit-processed-post.component';
+import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -83,6 +86,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     FileUploadService,
