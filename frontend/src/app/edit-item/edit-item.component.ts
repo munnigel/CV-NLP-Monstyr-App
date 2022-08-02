@@ -50,7 +50,6 @@ export class EditItemComponent implements OnInit {
   filteredTags: Observable<string[]>;
   tags: string[] = [];
   allTags: string[] = [];
-  dates: string[] = [];
   categoryCtrl = new FormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
@@ -308,8 +307,6 @@ export class EditItemComponent implements OnInit {
       },
     });
   }
-
-
 
   deletePost(id: number) {
     const dialogData = new ConfirmationDialogModel('Delete this post?', '');
