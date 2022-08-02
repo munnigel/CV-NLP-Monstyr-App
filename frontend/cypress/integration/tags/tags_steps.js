@@ -73,12 +73,22 @@ Then("the accepted tags should be added to the post", () => {
 
 // Scenario: Attempting to generate tags when post has no attached image
 
-Given('I am on "Edit Item Page" for a particular pending post with no attached image', () => {
-  // cy.visit("http://localhost:4200/edit/25");
-  cy.visit("http://localhost:4200/home/pending");
-  cy.get(".pending-posts-item").eq(0).click();
-});
+Given(
+  'I am on "Edit Item Page" for a particular pending post with no attached image',
+  () => {
+    // cy.visit("http://localhost:4200/edit/25");
+    cy.visit("http://localhost:4200/home/pending");
+    cy.get(".pending-posts-item").eq(0).click();
+  }
+);
 
-Then ("I should see no tags in the dropdown list", () => {
-    cy.get(".tags-options").should("not.exist");
-  });
+Given(
+  'I am on "Edit Item Page" for a particular pending post with no attached image',
+  () => {
+    cy.visit("http://localhost:4200/edit/25");
+  }
+);
+
+Then("I should see no tags in the dropdown list", () => {
+  cy.get(".tags-options").should("not.exist");
+});

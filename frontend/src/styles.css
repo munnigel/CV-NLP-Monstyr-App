@@ -406,12 +406,6 @@ body {
   font-weight: bold;
 }
 
-.item-page-left2 {
-  width: 50%;
-}
-
-
-
 .page-item {
   resize: none;
   height: 100px;
@@ -684,10 +678,9 @@ a {
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  font-weight: 400;
-  background-color: rgba(204, 204, 204, 0.33)
+  font-weight: bold;
+  background-color: rgba(204, 204, 204, 0.33);
 }
-
 
 .addForm {
   display: flex;
@@ -745,5 +738,4 @@ a {
   .col {
     width: 100px;
   }
-
 }
