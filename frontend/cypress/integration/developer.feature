@@ -43,8 +43,6 @@ Feature: Manual selection of image/description of a promotion to use to test oth
         And I should be able to see "Processed Tags" in the "OD" section
         And I should be able to see "Extracted Keywords" in the "NER" section
 
-
-
     ## UPLOAD MANUALLY BUTTON
     Scenario: Able to upload files manually from local desktop
         Given that I click on the "Developer Tools" tab
