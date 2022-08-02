@@ -147,6 +147,7 @@ body {
 
 .form-control {
   font-weight: 200;
+  background-color: #e7e7e7;
 }
 
 .form-control-name {
@@ -400,6 +401,10 @@ body {
   font-weight: bold;
 }
 
+.item-page-left2 {
+  width: 50%;
+}
+
 
 
 .page-item {
@@ -640,7 +645,7 @@ a {
   flex-direction: row;
   justify-content: space-evenly;
   margin: 40px;
-  padding: 0 500px;
+  padding: 0 550px;
 }
 
 .form-label {
@@ -660,7 +665,7 @@ a {
   vertical-align: middle;
   display: grid;
   grid-template-columns: 180px 300px;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .eachForm:hover {
@@ -674,7 +679,7 @@ a {
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 400;
   background-color: rgba(204, 204, 204, 0.33)
 }
 
