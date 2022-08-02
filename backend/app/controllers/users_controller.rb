@@ -21,6 +21,7 @@ class UsersController < ApplicationController
         #                  email: params[:email],
         #                  password_digest: BCrypt::Password.create(params[:password]))
         if @user.save
+            UserMailer.with(user: @user).welcome_email.deliver_later
             render json: @user, status: :created
         else
             render json: { errors: @user.errors.full_messages },
