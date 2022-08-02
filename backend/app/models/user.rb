@@ -1,8 +1,9 @@
 class User < ApplicationRecord
 
-    APPROVED_DOMAINS = ["monstyr.com", "mymail.sutd.edu.sg"]
-
+    before_create :confirmation_token
     has_secure_password
+
+    APPROVED_DOMAINS = ["monstyr.com", "mymail.sutd.edu.sg"]
 
     # mount_uploader :avatar, AvatarUploader
     validates :email, presence: true, uniqueness: true, if: :domain_check
@@ -15,6 +16,19 @@ class User < ApplicationRecord
     def domain_check
         unless APPROVED_DOMAINS.any? { |word| email.end_with?(word)}
         errors.add(:email, "is not from a valid domain")
+        end
+    end
+
+    def email_activate
+        self.email_confirmed = true
+        self.confirm_token = nil
+        save!(:validate => false)
+    end
+
+    private
+    def confirmation_token
+        if self.confirm_token.blank?
+            self.confirm_token = SecureRandom.urlsafe_base64.to_s
         end
     end
 end
