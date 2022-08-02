@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :authenticate_request, only: [:create, :confirm_email]
-    before_action :set_user, only: [:show, :destroy]
+    before_action :set_user, only: [:show, :destroy, :update]
 
     # GET /users
     def index
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             # UserMailer.with(user: @user).welcome_email.deliver_later
-            UserMailer.registration_confirmation(@user).deliver
+            UserMailer.registration_confirmation(@user).deliver_later
             render json: { account: @user, message: "Please activate your account by following the instructions in the account confirmation email you received to proceed"}, status: :created
         else
             render json: { errors: @user.errors.full_messages },
@@ -54,11 +54,18 @@ class UsersController < ApplicationController
     end
 
     # PUT /users/{username}
+    # def update
+    #     unless @user.update(user_params)
+    #         render json: { errors: @user.errors.full_messages },
+    #                status: :unprocessable_entity
+    #     end
+    # end
+
     def update
-        unless @user.update(user_params)
-            render json: { errors: @user.errors.full_messages },
-                   status: :unprocessable_entity
-        end
+        # @user.name = params[:name]
+        # @user.password = params[:password]
+        @user.account_type = params[:account_type]
+        render json: @user
     end
 
     # DELETE /users/{username}
@@ -68,7 +75,7 @@ class UsersController < ApplicationController
 
     private
         def user_params
-            params.permit(:username, :name, :email, :password)
+            params.permit(:username, :name, :email, :password, :account_type)
         end
 
         def set_user
