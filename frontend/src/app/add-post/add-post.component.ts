@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { DataService } from '../data-service.service';
@@ -37,7 +41,7 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   uploadFile(event) {
     // const file = event.target.files[0];
@@ -90,8 +94,22 @@ export class AddPostComponent implements OnInit {
 
     this.dataSrv.addPost(formData).subscribe({
       next: (r) => console.log(r),
-      complete: () => {
-        this.dataSrv.updateAllProductList();
+      error: (err) => {
+        if (err.error.errors == 'Nil JSON web token') {
+          console.log('need login');
+          this.router.navigate(['/']);
+        }
+      },
+      complete: async () => {
+        try {
+          await this.dataSrv.updateAllProductList();
+        } catch (err: any) {
+          if (err.error.errors == 'Nil JSON web token') {
+            console.log('need login');
+            this.router.navigate(['/']);
+          }
+          return;
+        }
         console.log('post added');
         alert('post added');
         this.router.navigate([`/home/overview`], {});

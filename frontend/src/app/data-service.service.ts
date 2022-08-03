@@ -1,5 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { AI_URL, API_URL } from '../app/env';
@@ -27,7 +31,7 @@ export class DataService implements OnInit {
   private pendingTab: number;
   private liveTab: number;
 
-  constructor(private http: HttpClient, private cookieSrv: CookieService,) { }
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
     //   console.log('getting');
@@ -82,9 +86,18 @@ export class DataService implements OnInit {
   }
 
   async getNoOfPendingPosts() {
+    let token = localStorage.getItem('loginToken');
     let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`, this.httpOptions)
+      this.http.get(`${API_URL}/noofpendingposts`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
+
     console.log(res);
     return res.noofpendingposts;
   }
@@ -104,57 +117,141 @@ export class DataService implements OnInit {
   }
 
   async getNoOfLivePosts() {
+    let token = localStorage.getItem('loginToken');
     let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofliveposts`, this.httpOptions)
+      this.http.get(`${API_URL}/noofliveposts`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     console.log(res);
     return res.noofliveposts;
   }
 
   async updateOverviewData() {
-    let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`, this.httpOptions));
+    let token = localStorage.getItem('loginToken');
+    let ODLatency = await lastValueFrom(
+      this.http.get(`${API_URL}/odlatency`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
+    );
     this.ODLatency = ODLatency['odlatency'];
     let OCRLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/ocrlatency`, this.httpOptions)
+      this.http.get(`${API_URL}/ocrlatency`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.OCRLatency = OCRLatency['ocrlatency'];
     let NERDateLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nerdatelatency`, this.httpOptions)
+      this.http.get(`${API_URL}/nerdatelatency`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.NERDateLatency = NERDateLatency['nerdatelatency'];
     let NERCategoriesLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nercategorieslatency`, this.httpOptions)
+      this.http.get(`${API_URL}/nercategorieslatency`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.NERCategoriesLatency = NERCategoriesLatency['nercategorieslatency'];
     let NERTitleLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nertitlelatency`, this.httpOptions)
+      this.http.get(`${API_URL}/nertitlelatency`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.NERTitleLatency = NERTitleLatency['nertitlelatency'];
     let pending = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`, this.httpOptions)
+      this.http.get(`${API_URL}/noofpendingposts`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
 
     let acceptedAiMl = await lastValueFrom(
-      this.http.get(`${API_URL}/acceptedaiml`, this.httpOptions)
+      this.http.get(`${API_URL}/acceptedaiml`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.acceptedAiMl = acceptedAiMl['acceptedaiml'];
 
     let rejectedAiMl = await lastValueFrom(
-      this.http.get(`${API_URL}/rejectedaiml`, this.httpOptions)
+      this.http.get(`${API_URL}/rejectedaiml`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     this.rejectedAiMl = rejectedAiMl['rejectedaiml'];
 
-    let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`, this.httpOptions));
+    let live = await lastValueFrom(
+      this.http.get(`${API_URL}/noofliveposts`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
+    );
     this.pendingPercentage = pending['noofpendingposts'];
     this.livePercentage = live['noofliveposts'];
   }
 
   async setEditingStatus(id: number) {
+    let token = localStorage.getItem('loginToken');
     await lastValueFrom(
       this.http.put(
         `${API_URL}/posts/${id}`,
         { status: 'editing' },
-        this.httpOptions
+        {
+          headers: new HttpHeaders({
+            // "Accept": "*/*",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: token,
+          }),
+        }
       )
     );
   }
@@ -168,7 +265,17 @@ export class DataService implements OnInit {
   }
 
   async getEditingStatus(id: number) {
-    let res = await lastValueFrom(this.http.get(`${API_URL}/posts/${id}`, this.httpOptions));
+    let token = localStorage.getItem('loginToken');
+    let res = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/${id}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
+    );
     return res[0].status == 'editing';
   }
 
@@ -177,43 +284,104 @@ export class DataService implements OnInit {
   }
 
   async getGenTags(id: number) {
+    let token = localStorage.getItem('loginToken');
     let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/taggen/${id}`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/taggen/${id}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     return res['gen_tags'];
   }
 
   async getGenCategories(id: number) {
+    let token = localStorage.getItem('loginToken');
     let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/catgen/${id}`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/catgen/${id}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     return res['cats_dict'];
   }
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      // "Accept": "*/*",
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token')
-    }),
-  };
+  async updateAllLiveProductList() {
+    let token = localStorage.getItem('loginToken');
+    let res2: any = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/live/${this.liveTab}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
+    );
+    // console.log('live products');
+    console.log(res2);
+    if (res2) {
+      this.createAndStoreProductList(this.liveProductList, res2);
+    }
+  }
+
+  async updateAllPendingProductList() {
+    let token = localStorage.getItem('loginToken');
+    let res3: any = await lastValueFrom(
+      this.http.get(`${API_URL}/posts/pending/${this.pendingTab}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
+    );
+    // console.log('pending products');
+    // console.log(res3);
+    this.createAndStoreProductList(this.pendingProductList, res3);
+    console.log(this.pendingProductList);
+  }
 
   async updateAllProductList() {
+    console.log('getToken');
+    console.log(localStorage.getItem('loginToken'));
     this.productList = [];
     this.pendingProductList = [];
     this.liveProductList = [];
+    let token = localStorage.getItem('loginToken');
     let res1: any = await lastValueFrom(
-      this.http.get(`${API_URL}/allpostsjson`, this.httpOptions)
+      this.http.get(`${API_URL}/allpostsjson`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
-    // console.log('all products');
+    console.log('all products');
     console.log(res1);
     console.log(this.productList);
     this.createAndStoreProductList(this.productList, res1);
     console.log(this.productList);
     console.log(this.liveTab);
     let res2: any = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/live/${this.liveTab}`, this.httpOptions)
+      this.http.get(`${API_URL}/posts/live/${this.liveTab}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     // console.log('live products');
     console.log(res2);
@@ -222,10 +390,14 @@ export class DataService implements OnInit {
     }
     // console.log(this.liveProductList);
     let res3: any = await lastValueFrom(
-      this.http.get(
-        `${API_URL}/posts/pending/${this.pendingTab}`,
-        this.httpOptions
-      )
+      this.http.get(`${API_URL}/posts/pending/${this.pendingTab}`, {
+        headers: new HttpHeaders({
+          // "Accept": "*/*",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }),
+      })
     );
     // console.log('pending products');
     // console.log(res3);
@@ -280,7 +452,15 @@ export class DataService implements OnInit {
   }
 
   addPost(formData: FormData) {
-    return this.http.post(`${API_URL}/posts`, formData, this.httpOptions);
+    let token = localStorage.getItem('loginToken');
+    return this.http.post(`${API_URL}/posts`, formData, {
+      headers: new HttpHeaders({
+        // "Accept": "*/*",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      }),
+    });
   }
 
   addNewAccount(formData: FormData) {
@@ -318,14 +498,31 @@ export class DataService implements OnInit {
       formData.append('gen_tags', JSON.stringify(product.genTags));
     if (product.content) formData.append('content', product.content);
     if (product.genContent) formData.append('gen_content', product.genContent);
-    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData, this.httpOptions);
+    let token = localStorage.getItem('loginToken');
+    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData, {
+      headers: new HttpHeaders({
+        // "Accept": "*/*",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      }),
+    });
   }
 
   deletePost(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${API_URL}/posts/${id}`, this.httpOptions);
+    let token = localStorage.getItem('loginToken');
+    return this.http.delete<Product>(`${API_URL}/posts/${id}`, {
+      headers: new HttpHeaders({
+        // "Accept": "*/*",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      }),
+    });
   }
 
   datePost(product: Product) {
+    let token = localStorage.getItem('loginToken');
     let cleanedcleanedText = product.content
       .replace(/[^ ]*weeks[^ ]*/, '')
       .replace(/[^ ]*days[^ ]*/, '')
@@ -334,7 +531,14 @@ export class DataService implements OnInit {
       .replace(/[^ ]*today[^ ]*/, '')
       .replace(/[^ ]*available[^ ]*/, '');
     console.log(cleanedcleanedText);
-    return this.http.post<any>(`${AI_URL}/getdates`, product.content, this.httpOptions);
+    return this.http.post<any>(`${AI_URL}/getdates`, product.content, {
+      headers: new HttpHeaders({
+        // "Accept": "*/*",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      }),
+    });
   }
 }
 

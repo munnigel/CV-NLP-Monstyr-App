@@ -146,16 +146,25 @@ export class EditProcessedPostComponent implements OnInit {
 
       this.datasrv.updatePost(this.product).subscribe({
         next: (v) => console.log(v),
-        error: (e) => console.error(e),
+        error: (err) => {
+          if (err.error.errors == 'Nil JSON web token') {
+            console.log('need login');
+            this.router.navigate(['/']);
+          }
+        },
         complete: () => {
-          this.datasrv.updateAllProductList();
+          try {
+            this.datasrv.updateAllProductList();
+          } catch (err: any) {
+            if (err.error.errors == 'Nil JSON web token') {
+              console.log('need login');
+              this.router.navigate(['/']);
+            }
+            return;
+          }
           this.router.navigate(['home/processed'], {});
         },
       });
-      setTimeout(() => {
-        this.datasrv.updateAllProductList();
-        this.router.navigate(['home/processed'], {});
-      }, 2000);
     }
   }
   deletePost(id: number) {
@@ -169,13 +178,24 @@ export class EditProcessedPostComponent implements OnInit {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
           next: () => {},
+          error: (err) => {
+            if (err.error.errors == 'Nil JSON web token') {
+              console.log('need login');
+              this.router.navigate(['/']);
+            }
+          },
           complete: async () => {
             console.log('post deleted');
-            await this.datasrv.updateAllProductList();
+            try {
+              await this.datasrv.updateAllProductList();
+            } catch (err: any) {
+              if (err.error.errors == 'Nil JSON web token') {
+                console.log('need login');
+                this.router.navigate(['/']);
+              }
+              return;
+            }
             this.router.navigate(['/home/processed']);
-          },
-          error: (e) => {
-            console.log(e);
           },
         });
       }

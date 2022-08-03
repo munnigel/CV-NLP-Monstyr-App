@@ -3,6 +3,7 @@ import { DataService } from '../data-service.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Product } from '../product.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-pending-post-page',
@@ -23,13 +24,24 @@ export class PendingPostPageComponent implements OnInit {
     this.tabIndex = 2;
     this.showItem = false;
     this.pendingProductList = this.dataSrv.getPendingProductList();
+    if (!this.pendingProductList) {
+      this.router.navigate(['/']);
+      return;
+    }
     console.log(this.pendingProductList[0]);
     console.log(this.pendingProductList);
     this.titleService.setTitle('pending-posts');
   }
 
   async nextPage() {
-    this.dataSrv.nextPendingTab();
+    try {
+      this.dataSrv.nextPendingTab();
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem('loginToken');
+      this.router.navigate(['/']);
+      return;
+    }
     await this.dataSrv.updateAllProductList();
     this.pendingProductList = this.dataSrv.getPendingProductList();
   }

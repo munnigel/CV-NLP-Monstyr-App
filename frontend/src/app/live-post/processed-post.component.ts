@@ -3,6 +3,7 @@ import { DataService } from '../data-service.service';
 import { Product } from '../product.model';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-processed-post-page',
@@ -19,23 +20,41 @@ export class ProcessedPostPageComponent implements OnInit {
     private titleService: Title
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.tabIndex = 2;
     this.showItem = false;
     this.liveProductList = this.dataSrv.getLiveProductList();
+    if (!this.liveProductList) {
+      this.router.navigate(['/']);
+      return;
+    }
     console.log(this.liveProductList[0]);
     console.log(this.liveProductList);
     this.titleService.setTitle('live-posts');
   }
 
   async nextPage() {
-    this.dataSrv.nextLiveTab();
+    try {
+      this.dataSrv.nextLiveTab();
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem('loginToken');
+      this.router.navigate(['/']);
+      return;
+    }
     await this.dataSrv.updateAllProductList();
     this.liveProductList = this.dataSrv.getLiveProductList();
   }
 
   async prevPage() {
-    this.dataSrv.prevLiveTab();
+    try {
+      this.dataSrv.prevLiveTab();
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem('loginToken');
+      this.router.navigate(['/']);
+      return;
+    }
     await this.dataSrv.updateAllProductList();
     this.liveProductList = this.dataSrv.getLiveProductList();
   }
