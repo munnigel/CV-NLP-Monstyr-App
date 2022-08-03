@@ -1,0 +1,43 @@
+<div class="bgg">
+    <div class="addAccBg">
+        <h1 style="text-align: center; padding-top: 100px;">Create new account</h1>
+        <form [formGroup]="postForm" class="groupForm">
+            <div class="forms">
+                <label>Name: </label>
+                <input class='form-control' formControlName='name' />
+            </div>
+            <div class="forms">
+                <label>Username: </label>
+                <input class='form-control' formControlName='username' />
+            </div>
+            <div class="forms">
+                <label for="email">Email: </label>
+                <input type="email" class='form-control' formControlName='email' />
+            </div>
+            <div class="forms">
+                <label>Password: </label>
+                <input class='form-control' formControlName='password' />
+            </div>
+            <div class="forms">
+                <label>Role:</label>
+                <select class='selRole' formControlName="account_type">
+                    <option> </option>
+                    <option>developer</option>
+                    <option>adminteam</option>
+                </select>
+            </div>
+            <div class="forms inline">
+                <label for="formFile" class="form-label">Profile Picture: </label>
+                <input type="file" class="form-control" id="formFile" (change)="uploadFile($event)" />
+                <div><img [src]='url' *ngIf='url' /></div>
+            </div>
+        </form>
+
+        <div class="buttons">
+            <button type="button" class="btn btn-danger clear" (click)="back()">Back to login</button>
+            <button type="button" class="btn btn-primary upload-field" (click)="submitForm()">
+                Sign up
+            </button>
+        </div>
+    </div>
+</div>

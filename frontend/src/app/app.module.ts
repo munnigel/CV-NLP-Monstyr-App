@@ -42,6 +42,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AcceptancePieComponent,
     EditProcessedPostComponent,
     AddPostComponent,
+    AddNewAccountComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ require 'uri'
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_developer, only: [:odlatency, :ocrlatency, :nerdatelatency, :nercategorieslatency, :nertitlelatency, :acceptedaiml, :rejectedaiml]
 
   # GET /posts or /posts.json
   def index
@@ -410,6 +411,16 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    # Only allow developer accounts to access certain features
+    def authenticate_developer
+      if @current_user.account_type == "developer"
+        # access granted
+      else
+        # raise "This is an exception"
+        render json: { errors: "Unauthorized" }, status: :unauthorized
+      end
     end
 
     # Only allow a list of trusted parameters through.

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :photos, :except => [:new]
   resources :pendingposts
   resources :liveposts
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
 
   root "posts#index"
   get 'latest', to: 'posts#latest'

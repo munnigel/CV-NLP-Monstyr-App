@@ -110,6 +110,7 @@ body {
 }
 
 @keyframes animation {
+
   0%,
   10%,
   100% {
@@ -121,6 +122,14 @@ body {
     width: 103%;
   }
 }
+
+.forms img {
+  position: relative;
+  left: 100px;
+  width: 250px;
+  height: 250px;
+}
+
 
 .imgg {
   width: 150px;
@@ -157,6 +166,18 @@ body {
 .col-12 {
   text-align: center;
   margin-top: 40px;
+}
+
+.createAcc {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.selRole {
+  background-color: #e7e7e7;
+  font-weight: 200;
+  font-size: larger;
+  padding: 5px;
 }
 
 .btn-primary {
@@ -680,6 +701,44 @@ a {
   justify-content: space-evenly;
   margin-bottom: 30px;
 }
+
+.addAccBg {
+  background: #BABABA;
+  height: fit-content;
+}
+
+.groupForm {
+  width: 30%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.bgg {
+  background: #BABABA;
+  height: 100%;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: 100px 300px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-left: 80px;
+}
+
+.forms label {
+  margin-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 100px;
+
+}
+
+
 
 @media screen and (max-width: 1080px) {
   .button {

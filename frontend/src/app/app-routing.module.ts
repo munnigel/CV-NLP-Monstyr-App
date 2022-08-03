@@ -10,10 +10,12 @@ import { DeveloperToolsPageComponent } from './developer-tools-page/developer-to
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
+import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 
 const routes: Routes = [
   { path: 'edit/:id', component: EditItemComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'add', component: AddNewAccountComponent },
   { path: 'editLive/:id', component: EditProcessedPostComponent },
   {
     path: 'home',
@@ -40,4 +42,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
