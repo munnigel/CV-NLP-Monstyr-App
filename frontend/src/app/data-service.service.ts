@@ -4,6 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { AI_URL, API_URL } from '../app/env';
 import { Product } from './product.model';
+import { Account } from './account.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,21 @@ export class DataService implements OnInit {
   private pendingTab: number;
   private liveTab: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
+    //   console.log('getting');
+    //   this.productList = [];
+    //   this.liveProductList = [];
+    //   this.pendingProductList = [];
+    //   this.setPendingTab(1);
+    //   this.setLiveTab(1);
+    //   await this.updateAllProductList();
+    //   console.log(API_URL);
+    //   await this.updateOverviewData();
+  }
+
+  async renderMainPage() {
     console.log('getting');
     this.productList = [];
     this.liveProductList = [];
@@ -181,6 +194,8 @@ export class DataService implements OnInit {
       // "Accept": "*/*",
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      // Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTk1NTgxMTN9.oRu-8mXyOZaKcsRzRUBRfcdPHYnx-IGvaSFrLPtvk2s',
+
     }),
   };
 
@@ -267,6 +282,12 @@ export class DataService implements OnInit {
   addPost(formData: FormData) {
     return this.http.post(`${API_URL}/posts`, formData);
   }
+
+  addNewAccount(formData: FormData) {
+    return this.http.post(`${API_URL}/users`, formData);
+  }
+
+
 
   updatePost(product: Product): Observable<Product> {
     console.log(product);

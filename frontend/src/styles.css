@@ -123,6 +123,14 @@ body {
   }
 }
 
+.forms img {
+  position: relative;
+  left: 100px;
+  width: 250px;
+  height: 250px;
+}
+
+
 .imgg {
   width: 150px;
   height: 150px;
@@ -696,13 +704,18 @@ a {
 
 .addAccBg {
   background: #BABABA;
-  height: 100%;
+  height: fit-content;
 }
 
 .groupForm {
   width: 30%;
   margin: auto;
   padding-top: 50px;
+}
+
+.bgg {
+  background: #BABABA;
+  height: 100%;
 }
 
 .forms {
