@@ -51,9 +51,13 @@ class UsersController < ApplicationController
     def confirm_email
         user = User.find_by_confirm_token(params[:id])
         if user
-          user.email_activate
-          render json: { success: "Welcome to Monstyr X AI! Your email has been confirmed.
-          Please sign in to continue." }
+            if user.email_confirmed == false
+                user.email_activate
+                render json: { success: "Welcome to Monstyr X AI! Your email has been confirmed.
+                Please sign in to continue." }
+            else
+                render json: { message: "Email has already been activated." }
+            end
         else
           render json: { error: "Sorry. User does not exist" }
         end
@@ -70,8 +74,20 @@ class UsersController < ApplicationController
     def update
         # @user.name = params[:name]
         # @user.password = params[:password]
-        @user.account_type = params[:account_type]
-        render json: @user
+
+        # @user.account_type = params[:account_type]
+        # begin
+        #     @user.save
+        #     render json: @user
+        # rescue ActiveRecord::Errors => e
+        #     render json: { errors: e.message }, status: :unauthorized
+        # end
+        
+        if @user.update({:account_type => params[:account_type]})
+            render json: @user
+        else
+            render json: { error: "Update failed."}
+        end
     end
 
     # DELETE /users/{username}

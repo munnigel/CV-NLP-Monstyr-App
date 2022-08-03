@@ -5,9 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Product } from '../product.model';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-tools-page.component';
@@ -26,30 +26,30 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class EditProcessedPostComponent implements OnInit {
   product: Product;
-  editForm: FormGroup;
+  editForm: UntypedFormGroup;
   error = false;
   errMsg: string;
   id: number;
-  titleCtrl = new FormControl('');
-  descriptionCtrl = new FormControl('');
+  titleCtrl = new UntypedFormControl('');
+  descriptionCtrl = new UntypedFormControl('');
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: string[] = [];
   categories: string[] = [];
   addOnBlur = true;
 
-  datePicker: FormGroup;
+  datePicker: UntypedFormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatDialog
   ) {
-    this.datePicker = new FormGroup({
-      start: new FormControl(null),
-      end: new FormControl(null),
+    this.datePicker = new UntypedFormGroup({
+      start: new UntypedFormControl(null),
+      end: new UntypedFormControl(null),
     });
   }
 
