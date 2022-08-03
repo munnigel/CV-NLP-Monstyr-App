@@ -66,8 +66,8 @@ export class AddNewAccountComponent implements OnInit {
       alert('Name is required');
     else if (this.postForm.get('username').value === '')
       alert('Username is required');
-    else if (this.postForm.get('password').value === '')
-      alert('Password is required');
+    else if (this.postForm.get('password').value === '' || this.postForm.get('password').value.length < 6)
+      alert('Password is required and has to be at least 6 characters long');
     else if (this.postForm.get('account_type').value === '')
       alert('Role is required');
 
@@ -80,17 +80,19 @@ export class AddNewAccountComponent implements OnInit {
       if (this.selectedFile)
         formData.append('profile_pic', this.selectedFile, this.selectedFile.name);
 
-      this.dataSrv.addNewAccount(formData).subscribe(
-        (res) => {
-          alert('Successfully added new account');
-          this.router.navigate(['/'], {})
+      this.dataSrv.addNewAccount(formData).subscribe({
+        next: (res) => console.log(res),
+        error: (err) => {
+          console.log(err);
+          alert(err.error.errors);
+        },
+        complete: () => {
+          alert('Account added successfully');
+          this.router.navigate([''], {})
         }
+
+      }
       )
-
-
-      alert('Account created successfully');
-      console.log(this.postForm.get('account_type').value);
-      this.router.navigate([''], {});
     }
   }
 
