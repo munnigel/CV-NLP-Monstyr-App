@@ -195,7 +195,7 @@ export class DataService implements OnInit {
       // "Accept": "*/*",
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: this.cookieSrv.get('loginToken')
+      Authorization: 'Bearer ' + localStorage.getItem('token')
     }),
   };
 
