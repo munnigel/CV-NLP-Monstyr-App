@@ -4,7 +4,7 @@ class User < ApplicationRecord
     has_secure_password
     has_one_attached:image
 
-    APPROVED_DOMAINS = ["monstyr.com", "mymail.sutd.edu.sg"]
+    APPROVED_DOMAINS = ["monstyr.com", "mymail.sutd.edu.sg", "gmail.com"]
     APPROVED_ACC_TYPES = ["developer", "adminteam"]
 
     # mount_uploader :avatar, AvatarUploader

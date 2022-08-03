@@ -46,7 +46,7 @@ Rails.application.configure do
   # [END cloudrun_rails_storage_prod]
 
   config.action_mailer.delivery_method = :smtp
-  host = 'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/' #replace with your own url
+  host = 'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app' #replace with your own url
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail

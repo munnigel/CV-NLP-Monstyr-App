@@ -52,7 +52,7 @@ class UsersController < ApplicationController
         user = User.find_by_confirm_token(params[:id])
         if user
           user.email_activate
-          render json: { success: "Welcome to the Sample App! Your email has been confirmed.
+          render json: { success: "Welcome to Monstyr X AI! Your email has been confirmed.
           Please sign in to continue." }
         else
           render json: { error: "Sorry. User does not exist" }
@@ -76,7 +76,9 @@ class UsersController < ApplicationController
 
     # DELETE /users/{username}
     def destroy
+        @temp_user = @user
         @user.destroy
+        render json: @temp_user
     end
 
     private

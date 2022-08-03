@@ -11,7 +11,7 @@ class AuthenticationController < ApplicationController
                 # render json: { token: token }, status: :ok
                 time = Time.now + 24.hours.to_i
                 render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
-                            username: @user.username }, status: :ok
+                            username: @user.username, id: @user.id }, status: :ok
             else
                 render json: { error: 'Please activate your account by following the instructions in the account confirmation email you received to proceed' }
             end
