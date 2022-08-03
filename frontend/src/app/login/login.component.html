@@ -5,31 +5,50 @@
   <div class="sub-login-header">
     <h1>AI-Powered Workflows</h1>
   </div>
-  <div class="login-form">
-    <div class="formInput">
-      <label class="login">Email</label>
-      <input type="email" class="form-control" placeholder="Enter email here" />
+  <form [formGroup]="postForm">
+    <div class="login-form">
+      <div class="formInput">
+        <label class="login">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email here"
+          formControlName="email"
+        />
+      </div>
+      <div class="formInput">
+        <label class="login">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Enter password here"
+          formControlName="password"
+        />
+      </div>
     </div>
-    <div class="formInput">
-      <label class="login">Password</label>
-      <input type="password" class="form-control" placeholder="Enter password here" />
-    </div>
-  </div>
-
+  </form>
 
   <div class="col-12">
-    <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onLogin()">
+    <button
+      type="submit"
+      id="login-button"
+      class="btn btn-primary btns"
+      (click)="onLogin()"
+    >
       Sign in
     </button>
   </div>
   <div class="createAcc">
-    <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onCreate()">
+    <button
+      type="submit"
+      id="login-button"
+      class="btn btn-primary btns"
+      (click)="onCreate()"
+    >
       Create Account
     </button>
   </div>
   <div class="col-12 forget-password-container">
-    <button type="submit" class="btn btn-primary btns">
-      Forget password
-    </button>
+    <button type="submit" class="btn btn-primary btns">Forget password</button>
   </div>
 </div>

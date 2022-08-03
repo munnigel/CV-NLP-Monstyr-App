@@ -287,7 +287,9 @@ export class DataService implements OnInit {
     return this.http.post(`${API_URL}/users`, formData);
   }
 
-
+  login(formData:FormData) {
+    return this.http.post(`${API_URL}/auth/login`,formData);
+  }
 
   updatePost(product: Product): Observable<Product> {
     console.log(product);
