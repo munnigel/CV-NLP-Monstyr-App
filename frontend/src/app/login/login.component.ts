@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private dataSrv: DataService,
     private cookieSrv: CookieService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Login');
@@ -48,6 +48,12 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
+      complete: async () => {
+        await this.dataSrv.updateAllProductList();
+        await this.dataSrv.updateOverviewData();
+        this.router.navigate(['/home'], {});
+      }
+
     });
     // console.log('getting');
 

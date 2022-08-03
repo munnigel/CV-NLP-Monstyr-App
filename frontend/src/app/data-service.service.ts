@@ -5,6 +5,7 @@ import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { AI_URL, API_URL } from '../app/env';
 import { Product } from './product.model';
 import { Account } from './account.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class DataService implements OnInit {
   private pendingTab: number;
   private liveTab: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieSrv: CookieService,) { }
 
   async ngOnInit() {
     //   console.log('getting');
@@ -82,7 +83,7 @@ export class DataService implements OnInit {
 
   async getNoOfPendingPosts() {
     let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`)
+      this.http.get(`${API_URL}/noofpendingposts`, this.httpOptions)
     );
     console.log(res);
     return res.noofpendingposts;
@@ -104,46 +105,46 @@ export class DataService implements OnInit {
 
   async getNoOfLivePosts() {
     let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofliveposts`)
+      this.http.get(`${API_URL}/noofliveposts`, this.httpOptions)
     );
     console.log(res);
     return res.noofliveposts;
   }
 
   async updateOverviewData() {
-    let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`));
+    let ODLatency = await lastValueFrom(this.http.get(`${API_URL}/odlatency`, this.httpOptions));
     this.ODLatency = ODLatency['odlatency'];
     let OCRLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/ocrlatency`)
+      this.http.get(`${API_URL}/ocrlatency`, this.httpOptions)
     );
     this.OCRLatency = OCRLatency['ocrlatency'];
     let NERDateLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nerdatelatency`)
+      this.http.get(`${API_URL}/nerdatelatency`, this.httpOptions)
     );
     this.NERDateLatency = NERDateLatency['nerdatelatency'];
     let NERCategoriesLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nercategorieslatency`)
+      this.http.get(`${API_URL}/nercategorieslatency`, this.httpOptions)
     );
     this.NERCategoriesLatency = NERCategoriesLatency['nercategorieslatency'];
     let NERTitleLatency = await lastValueFrom(
-      this.http.get(`${API_URL}/nertitlelatency`)
+      this.http.get(`${API_URL}/nertitlelatency`, this.httpOptions)
     );
     this.NERTitleLatency = NERTitleLatency['nertitlelatency'];
     let pending = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`)
+      this.http.get(`${API_URL}/noofpendingposts`, this.httpOptions)
     );
 
     let acceptedAiMl = await lastValueFrom(
-      this.http.get(`${API_URL}/acceptedaiml`)
+      this.http.get(`${API_URL}/acceptedaiml`, this.httpOptions)
     );
     this.acceptedAiMl = acceptedAiMl['acceptedaiml'];
 
     let rejectedAiMl = await lastValueFrom(
-      this.http.get(`${API_URL}/rejectedaiml`)
+      this.http.get(`${API_URL}/rejectedaiml`, this.httpOptions)
     );
     this.rejectedAiMl = rejectedAiMl['rejectedaiml'];
 
-    let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`));
+    let live = await lastValueFrom(this.http.get(`${API_URL}/noofliveposts`, this.httpOptions));
     this.pendingPercentage = pending['noofpendingposts'];
     this.livePercentage = live['noofliveposts'];
   }
@@ -167,7 +168,7 @@ export class DataService implements OnInit {
   }
 
   async getEditingStatus(id: number) {
-    let res = await lastValueFrom(this.http.get(`${API_URL}/posts/${id}`));
+    let res = await lastValueFrom(this.http.get(`${API_URL}/posts/${id}`, this.httpOptions));
     return res[0].status == 'editing';
   }
 
@@ -177,14 +178,14 @@ export class DataService implements OnInit {
 
   async getGenTags(id: number) {
     let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/taggen/${id}`)
+      this.http.get(`${API_URL}/posts/taggen/${id}`, this.httpOptions)
     );
     return res['gen_tags'];
   }
 
   async getGenCategories(id: number) {
     let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/catgen/${id}`)
+      this.http.get(`${API_URL}/posts/catgen/${id}`, this.httpOptions)
     );
     return res['cats_dict'];
   }
@@ -194,8 +195,7 @@ export class DataService implements OnInit {
       // "Accept": "*/*",
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTk1NTgxMTN9.oRu-8mXyOZaKcsRzRUBRfcdPHYnx-IGvaSFrLPtvk2s',
-
+      Authorization: this.cookieSrv.get('loginToken')
     }),
   };
 
@@ -280,15 +280,15 @@ export class DataService implements OnInit {
   }
 
   addPost(formData: FormData) {
-    return this.http.post(`${API_URL}/posts`, formData);
+    return this.http.post(`${API_URL}/posts`, formData, this.httpOptions);
   }
 
   addNewAccount(formData: FormData) {
     return this.http.post(`${API_URL}/users`, formData);
   }
 
-  login(formData:FormData) {
-    return this.http.post(`${API_URL}/auth/login`,formData);
+  login(formData: FormData) {
+    return this.http.post(`${API_URL}/auth/login`, formData);
   }
 
   updatePost(product: Product): Observable<Product> {
@@ -318,11 +318,11 @@ export class DataService implements OnInit {
       formData.append('gen_tags', JSON.stringify(product.genTags));
     if (product.content) formData.append('content', product.content);
     if (product.genContent) formData.append('gen_content', product.genContent);
-    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData);
+    return this.http.put<Product>(`${API_URL}/posts/${product.id}`, formData, this.httpOptions);
   }
 
   deletePost(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${API_URL}/posts/${id}`);
+    return this.http.delete<Product>(`${API_URL}/posts/${id}`, this.httpOptions);
   }
 
   datePost(product: Product) {
@@ -334,7 +334,7 @@ export class DataService implements OnInit {
       .replace(/[^ ]*today[^ ]*/, '')
       .replace(/[^ ]*available[^ ]*/, '');
     console.log(cleanedcleanedText);
-    return this.http.post<any>(`${AI_URL}/getdates`, product.content);
+    return this.http.post<any>(`${AI_URL}/getdates`, product.content, this.httpOptions);
   }
 }
 
