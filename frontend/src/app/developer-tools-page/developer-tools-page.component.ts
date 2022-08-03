@@ -7,7 +7,7 @@ import { Product } from '../product.model';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { API_URL } from '../../app/env';
@@ -83,7 +83,7 @@ export class DeveloperToolsPageComponent implements OnInit {
   // Loading and waiting for trained data
   loadingTrainedData: boolean;
 
-  imageForm: FormGroup;
+  imageForm: UntypedFormGroup;
   pipe: DatePipe;
 
   constructor(
@@ -92,7 +92,7 @@ export class DeveloperToolsPageComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     private location: Location,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private http: HttpClient
   ) {
     this.imageForm = this.fb.group({

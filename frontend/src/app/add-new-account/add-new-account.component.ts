@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../data-service.service';
 
@@ -10,11 +10,11 @@ import { DataService } from '../data-service.service';
 })
 export class AddNewAccountComponent implements OnInit {
   selectedFile: File = null;
-  postForm: FormGroup;
+  postForm: UntypedFormGroup;
   url: any;
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dataSrv: DataService,
   ) {
     this.postForm = this.fb.group({

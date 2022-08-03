@@ -43,6 +43,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -92,20 +93,7 @@ import { AddNewAccountComponent } from './add-new-account/add-new-account.compon
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [
-    FileUploadService,
-    // DataService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initDataService,
-      deps: [DataService],
-      multi: true,
-    },
-  ],
+  providers: [FileUploadService, CookieService, DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-export function initDataService(config: DataService) {
-  return () => config.ngOnInit();
-}

@@ -4,9 +4,9 @@ import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Product } from '../product.model';
@@ -32,7 +32,7 @@ export class EditItemComponent implements OnInit {
   category = '';
   promotionDate = '';
   popup;
-  editForm: FormGroup;
+  editForm: UntypedFormGroup;
   error = false;
   errMsg: string;
   id: number;
@@ -53,18 +53,18 @@ export class EditItemComponent implements OnInit {
   endDate: any;
   genCategories: string[];
   titleString: string = '';
-  datePicker: FormGroup;
+  datePicker: UntypedFormGroup;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  titleCtrl = new FormControl('');
+  titleCtrl = new UntypedFormControl('');
   filteredTitles: Observable<string[]>;
   titles: string[] = [];
   allTitles: string[] = [];
-  tagCtrl = new FormControl('');
+  tagCtrl = new UntypedFormControl('');
   filteredTags: Observable<string[]>;
   tags: string[] = [];
   allTags: string[] = [];
-  categoryCtrl = new FormControl('');
+  categoryCtrl = new UntypedFormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
   allCategories: string[] = [
@@ -116,14 +116,14 @@ export class EditItemComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.datePicker = new FormGroup({
-      start: new FormControl(null),
-      end: new FormControl(null),
+    this.datePicker = new UntypedFormGroup({
+      start: new UntypedFormControl(null),
+      end: new UntypedFormControl(null),
     });
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
