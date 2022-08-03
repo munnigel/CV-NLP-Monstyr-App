@@ -74,12 +74,19 @@ class UsersController < ApplicationController
     def update
         # @user.name = params[:name]
         # @user.password = params[:password]
-        @user.account_type = params[:account_type]
-        begin
-            @user.save
+
+        # @user.account_type = params[:account_type]
+        # begin
+        #     @user.save
+        #     render json: @user
+        # rescue ActiveRecord::Errors => e
+        #     render json: { errors: e.message }, status: :unauthorized
+        # end
+        
+        if @user.update({:account_type => params[:account_type]})
             render json: @user
-        rescue ActiveRecord::RecordNotFound => e
-            render json: { errors: e.message }, status: :unauthorized
+        else
+            render json: { error: "Update failed."}
         end
     end
 
