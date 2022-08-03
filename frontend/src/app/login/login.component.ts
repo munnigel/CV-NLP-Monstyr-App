@@ -21,19 +21,50 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private dataSrv: DataService,
-    private cookieSrv: CookieService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.titleService.setTitle('Login');
     this.postForm = this.fb.group({
-      email: [''],
-      password: [''],
+      email: ['nigel_mun@mymail.sutd.edu.sg'],
+      password: ['123123'],
     });
+    try {
+      console.log('try auto login');
+      await this.dataSrv.updateAllProductList();
+      await this.dataSrv.updateOverviewData();
+      this.router.navigate(['/home'], {});
+    } catch (err: any) {
+      // console.log(err);
+      if (err.error)
+        if (err.error.errors == 'Nil JSON web token') {
+          console.log('need login');
+        }
+    }
   }
 
   async onLogin() {
+    let regex = new RegExp('[a-z0-9]+@[mymail]+.[sutd]+.[edu]+.[sg]');
+    let regex2 = new RegExp('[a-z0-9]+@[monstyr]+.[com]');
+    let regex3 = new RegExp('[a-z0-9]+@[gmail]+.[com]');
+    if (
+      this.postForm.get('email').value === '' ||
+      (regex.test(this.postForm.get('email').value) === false &&
+        regex2.test(this.postForm.get('email').value) === false &&
+        regex3.test(this.postForm.get('email').value) === false)
+    ) {
+      alert(
+        'Email is required, and email has to be either @mymail.sutd.edu.sg or @monstyr.com or @gmail.com'
+      );
+      return;
+    } else if (
+      this.postForm.get('password').value === '' ||
+      this.postForm.get('password').value.length < 6
+    ) {
+      alert('Password is required and has to be at least 6 characters long');
+      return;
+    }
     let token = '';
     var formData: any = new FormData();
     formData.append('email', this.postForm.get('email').value);
@@ -43,17 +74,18 @@ export class LoginComponent implements OnInit {
         console.log(data);
         token = data['token'];
         console.log(token);
-        this.cookieSrv.set('loginToken', token);
+        localStorage.setItem('loginToken', token);
+        console.log('set token');
       },
       error: (err) => {
-        console.log(err);
+        if (err.error.error == 'unauthorized')
+          alert('Please check login details. Wrong email/password');
       },
       complete: async () => {
         await this.dataSrv.updateAllProductList();
         await this.dataSrv.updateOverviewData();
-        this.router.navigate(['/home'], {});
-      }
-
+        this.router.navigate(['/home']);
+      },
     });
     // console.log('getting');
 

@@ -255,17 +255,26 @@ export class EditItemComponent implements OnInit {
       this.pendingProduct.status = 'live';
       this.datasrv.updatePost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
-        error: (e) => console.error('completed add', e),
-        complete: () => {
+        error: (err) => {
+          if (err.error.errors == 'Nil JSON web token') {
+            console.log('need login');
+            this.router.navigate(['/']);
+          }
+        },
+        complete: async () => {
           console.log('completed add');
-          this.datasrv.updateAllProductList();
+          try {
+            await this.datasrv.updateAllProductList();
+          } catch (err: any) {
+            if (err.error.errors == 'Nil JSON web token') {
+              console.log('need login');
+              this.router.navigate(['/']);
+            }
+            return;
+          }
           this.router.navigate(['/home/processed']);
         },
       });
-      setTimeout(() => {
-        this.datasrv.updateAllProductList();
-        this.router.navigate(['home/processed'], {});
-      }, 1000);
     }
   }
 
@@ -294,7 +303,15 @@ export class EditItemComponent implements OnInit {
     this.allTags = [];
     this.tagsGenerated = false;
     this.genTagsLoading = true;
-    this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
+    try {
+      this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
+    } catch (err: any) {
+      if (err.error.errors == 'Nil JSON web token') {
+        console.log('need login');
+        this.router.navigate(['/']);
+      }
+      return;
+    }
     this.genTagsLoading = false;
     this.tagsGenerated = true;
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
@@ -310,7 +327,17 @@ export class EditItemComponent implements OnInit {
     this.allCategories = [];
     this.categoriesGenerated = false;
     this.genCategoriesLoading = true;
-    let temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
+    let temp;
+    try {
+      temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
+    } catch (err: any) {
+      if (err.error.errors == 'Nil JSON web token') {
+        console.log('need login');
+        this.router.navigate(['/']);
+      }
+      return;
+    }
+
     if (temp != null) {
       for (let i = 0; i < 5; i++) {
         this.categories.push(temp[i][0]);
@@ -332,6 +359,12 @@ export class EditItemComponent implements OnInit {
     let datesList = [];
     this.datasrv.datePost(this.pendingProduct).subscribe({
       next: (r) => (allDates = r),
+      error: (err) => {
+        if (err.error.errors == 'Nil JSON web token') {
+          console.log('need login');
+          this.router.navigate(['/']);
+        }
+      },
       complete: () => {
         console.log(allDates);
         for (const parsedObject of allDates) {
@@ -370,13 +403,16 @@ export class EditItemComponent implements OnInit {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
           next: () => {},
+          error: (err) => {
+            if (err.error.errors == 'Nil JSON web token') {
+              console.log('need login');
+              this.router.navigate(['/']);
+            }
+          },
           complete: async () => {
             console.log('post deleted');
             await this.datasrv.updateAllProductList();
             this.router.navigate(['/home/pending']);
-          },
-          error: (e) => {
-            console.log(e);
           },
         });
       }
