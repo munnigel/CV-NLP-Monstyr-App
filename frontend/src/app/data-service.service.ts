@@ -33,13 +33,13 @@ export class DataService implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     //   console.log('getting');
     //   this.productList = [];
     //   this.liveProductList = [];
     //   this.pendingProductList = [];
-    //   this.setPendingTab(1);
-    //   this.setLiveTab(1);
+    this.setPendingTab(1);
+    this.setLiveTab(1);
     //   await this.updateAllProductList();
     //   console.log(API_URL);
     //   await this.updateOverviewData();
@@ -47,10 +47,17 @@ export class DataService implements OnInit {
 
   private getHttpOptions() {
     let token = localStorage.getItem('loginToken');
+    // console.log(token);
+    // console.log({
+    //   headers: new HttpHeaders({
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     Authorization: token,
+    //   }),
+    // });
     return {
       headers: new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: '*/*',
         Authorization: token,
       }),
     };
@@ -227,6 +234,7 @@ export class DataService implements OnInit {
   }
 
   async updateAllLiveProductList() {
+    this.liveProductList = [];
     let token = localStorage.getItem('loginToken');
     let res2: any = await lastValueFrom(
       this.http.get(
@@ -234,7 +242,9 @@ export class DataService implements OnInit {
         this.getHttpOptions()
       )
     );
-    // console.log('live products');
+    console.log(this.getHttpOptions());
+    console.log(this.liveTab);
+    console.log('live products');
     console.log(res2);
     if (res2) {
       this.createAndStoreProductList(this.liveProductList, res2);
@@ -242,15 +252,18 @@ export class DataService implements OnInit {
   }
 
   async updateAllPendingProductList() {
+    this.pendingProductList = [];
     let token = localStorage.getItem('loginToken');
+    console.log(this.getHttpOptions());
     let res3: any = await lastValueFrom(
       this.http.get(
         `${API_URL}/posts/pending/${this.pendingTab}`,
         this.getHttpOptions()
       )
     );
-    // console.log('pending products');
-    // console.log(res3);
+    console.log(this.pendingTab);
+    console.log('pending products');
+    console.log(res3);
     this.createAndStoreProductList(this.pendingProductList, res3);
     console.log(this.pendingProductList);
   }
@@ -357,7 +370,8 @@ export class DataService implements OnInit {
   updatePost(product: Product): Observable<Product> {
     console.log(product);
     console.log('update');
-    let formData = new FormData();
+    console.log(product.categories);
+    var formData = new FormData();
     if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
     if (product.pid) formData.append('pid', product.pid.toString());
     if (product.status) formData.append('status', product.status);
@@ -382,6 +396,7 @@ export class DataService implements OnInit {
     if (product.content) formData.append('content', product.content);
     if (product.genContent) formData.append('gen_content', product.genContent);
     let token = localStorage.getItem('loginToken');
+    console.log(this.getHttpOptions());
     return this.http.put<Product>(
       `${API_URL}/posts/${product.id}`,
       formData,

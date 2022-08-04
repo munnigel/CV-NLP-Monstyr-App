@@ -93,7 +93,19 @@ import { CookieService } from 'ngx-cookie-service';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [FileUploadService, CookieService, DataService],
+  providers: [
+    FileUploadService,
+    CookieService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initDataService,
+      deps: [DataService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+export function initDataService(config: DataService) {
+  return () => config.ngOnInit();
+}
