@@ -53,16 +53,16 @@ Scenario: Logging in with a registered and verified email account and incorrect 
         And I fill in a wrong password for that account
         When I click on the "Sign In" button
         Then I should not be able to access the live posts page
-        And I should not be able to acccess the pending posts page
+        And I should not be able to access the pending posts page
 
 Scenario: Logging in with a registered but unverified email account
     Given I am on the "Login Page"
-        When I fill in a registered email address from the monstyr.com domain
+        When I fill in a registered email address from monstyr.com
         And The registered account has not been verified via the confirmation link sent to the email address
         And I fill in the corresponding password for that account
         When I click on the "Sign In" button
         Then I should not be able to access the live posts page
-        And I should not be able to acccess the pending posts page
+        And I should not be able to access the pending posts page
 
 Scenario: Logging in with an unregistered email account
     Given I am on the "Login Page"
@@ -70,4 +70,4 @@ Scenario: Logging in with an unregistered email account
         And I fill in a password for that account
         When I click on the "Sign In" button
         Then I should not be able to access the live posts page
-        And I should not be able to acccess the pending posts page
+        And I should not be able to access the pending posts page
