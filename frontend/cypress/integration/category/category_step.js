@@ -1,9 +1,12 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-
 // Scenario: Generating categories when text is present in product description
 Given(/^I am on "Edit Item Page" for a particular pending post$/, () => {
-  cy.visit("http://localhost:4200/home/pending");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
   cy.get(".pending-posts-item").eq(5).click();
 });
 
@@ -22,7 +25,6 @@ Then("I should see a dropdown list of categories", (optionSelector) => {
   cy.get("#categories-options").should("exist");
 });
 
-
 // Scenario: Accept categories
 Given("I see a dropdown list of categories", (optionSelector) => {
   cy.get("#categories-options").should("exist");
@@ -36,14 +38,20 @@ Then("I should not see a dropdown list of categories", (optionSelector) => {
   cy.get("#categories-options").should("not.exist");
 });
 
-And('the category should be inserted into the "enter categories" text area', (optionSelector) => {
-  cy.get(".mat-chip-ripple").should("exist");
-});
-
+And(
+  'the category should be inserted into the "enter categories" text area',
+  (optionSelector) => {
+    cy.get(".mat-chip-ripple").should("exist");
+  }
+);
 
 // Scenario: Attempting to generate categories when text is not present in product description
 Given('I am on "Edit Item Page" for an empty pending post', () => {
-  cy.visit("http://localhost:4200/home/pending");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
   cy.get(".pending-posts-item").eq(1).click();
 });
 
@@ -60,21 +68,27 @@ Then('I should see "no categories found" options', (optionSelector) => {
   cy.get(".mat-option-text").should("exist");
 });
 
-
 //Scenario: Manually input categories when generated categories is wrong or is unable to be generated
-Given ('I am on "Edit Item Page" for a particular pending post', () => {
-  cy.visit("http://localhost:4200/home/pending");
+Given('I am on "Edit Item Page" for a particular pending post', () => {
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
   cy.get(".pending-posts-item").eq(6).click();
 });
-When ('I click on the "enter categories" text area', () => {
+When('I click on the "enter categories" text area', () => {
   cy.get(".categoryInput").click({ force: true });
 });
 When('I type a new category and press the "enter" key', () => {
   cy.get(".categoryInput").type("new category").type("{enter}");
 });
-Then('the category should be inserted into the "enter categories" text area', () => {
-  cy.get(".mat-chip-ripple").should("exist");
-});
+Then(
+  'the category should be inserted into the "enter categories" text area',
+  () => {
+    cy.get(".mat-chip-ripple").should("exist");
+  }
+);
 
 // When(/^I click on the "(.*)" button$/, (buttonSelector) => {
 //   let temp = buttonSelector.replace(" ", "-");

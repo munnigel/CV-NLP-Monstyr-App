@@ -65,8 +65,6 @@ export class HomePageComponent implements OnInit {
         return;
       }
     }
-    this.router
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate([`/home/${this.tabList[index]}`]));
+    this.router.navigate([`/home/${this.tabList[index]}`]);
   }
 }
