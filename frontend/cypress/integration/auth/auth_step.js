@@ -36,6 +36,17 @@ Then("I should be able to create a user account", () => {
   });
 })
 
+// Scenario: Creating a user account using an email address from the monstyr.com domain and password of less than 6 characters
+And("I fill in a password of less than 6 characters", () => {
+  cy.get("#password-textbox").type(gen_rand_string(5));
+})
+
+Then("I should not be able to create a user account", () => {
+  cy.location().should((loc) => {
+    expect(loc.pathname.toString()).to.contain('/add');
+  });
+})
+
 
 
 // Generates a random string of length specified by the single input argument
