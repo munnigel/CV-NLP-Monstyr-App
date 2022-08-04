@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/rejectedaiml', to: 'posts#rejectedaiml'
   get '/posts/taggen/:id', to: 'posts#taggen'
   get '/posts/catgen/:id', to: 'posts#catgen'
+  get '/posts/titlegen/:id', to: 'posts#titlegen'
   get '/posts/dategen/:id', to: 'posts#dategen'
   post '/auth/login', to: 'authentication#login'
 

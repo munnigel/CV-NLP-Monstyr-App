@@ -252,6 +252,87 @@ class PostsController < ApplicationController
     # @post.save
   end
 
+
+  def titlegen
+
+    # Obtain post description text
+    begin
+      @post = Post.find(params[:id])
+    rescue
+      render json: {"extractions": ""}
+    else
+      @raw_des = @post.content
+    @processed_des = @raw_des.delete!("^\u{0000}-\u{007F}"); 
+
+    # Safe guard againt empty text description and id not existing
+    if @processed_des.to_s.empty?
+      render json: {'content': ""}
+    else
+      # Consruct request body
+      @body = {
+        "instances": {
+          "mimeType": "text/plain",
+          "content": @processed_des 
+        }
+      }
+
+
+      # Authenticate request to Vertex AI 
+      scope = 'https://www.googleapis.com/auth/cloud-platform'
+
+      authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+        json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
+        scope: scope)
+
+      @ACCESS_TOKEN = authorizer.fetch_access_token!
+      @ACCESS_TOKEN = @ACCESS_TOKEN['access_token']
+      @ACCESS_TOKEN = @ACCESS_TOKEN.gsub('.',' ')
+      @ACCESS_TOKEN = @ACCESS_TOKEN.strip
+      @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
+
+      # Send POST request to Vertex AI custom NER endpoint
+      @ENDPOINT_ID="5085469976882577408"
+      @PROJECT_ID="monstyrxai"
+      @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
+      
+      uri = URI.parse(@API_URL2)
+      https = Net::HTTP.new(uri.host, uri.port)
+      https.use_ssl = true
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request["Authorization"] = "Bearer #{@ACCESS_TOKEN}"
+      request["Content-Type"] = "application/json"
+      response = https.request(request, @body.to_json)
+
+      # Receive and process result from Vertex AI custom NER
+      result = JSON.parse(response.body)
+      @product_names = []
+      @outlet_names = []
+      result["predictions"].each do |extracted|
+        startOffset = extracted["textSegmentStartOffsets"][0].to_i
+        endOffset = extracted["textSegmentEndOffsets"][0].to_i
+        extracted_phrase = @processed_des[startOffset..endOffset]
+        displayName = extracted["displayNames"]
+
+        if displayName[0] == "Product Name" 
+          @product_names.append(extracted_phrase)
+        elsif displayName[0] == "Outlet Location"
+          @outlet_names.append(extracted_phrase)
+        end
+      end
+
+      # apply regex to extract unit number, 
+      # @unitNumbers = @processed_des.scan(/(\(?#?[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-?(?:[0-9A-Z]{1,})?(?:/[A-Z0-9]{1,})*\)?)/)
+      # @xPercentOffs = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]!?\*?\^?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
+      # @xForYs = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]\*?\^?!?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
+      # @moneyValues = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]\*?\^?!?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
+
+      # , "unitNumbers": @unitNumbers, "xPercentOffs": @xPercentOffs, "xForYs": @xForYs, "moneyValues": @moneyValues
+
+      render json: {"extractions": {"product_names": @product_names, "outlet_names": @outlet_names}}
+      end
+    end
+  end
+
   # Retrieves live posts in batches of N
   def livepostsinbatches
     end_idx = (params[:batch].to_i * 15) - 1
