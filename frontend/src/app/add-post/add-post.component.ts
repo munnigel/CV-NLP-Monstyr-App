@@ -91,7 +91,7 @@ export class AddPostComponent implements OnInit {
       formData.append('gen_content', this.postForm.get('genContent').value);
     if (this.selectedFile)
       formData.append('image', this.selectedFile, this.selectedFile.name);
-
+    console.log(formData);
     this.dataSrv.addPost(formData).subscribe({
       next: (r) => console.log(r),
       error: (err) => {

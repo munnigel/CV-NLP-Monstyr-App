@@ -256,6 +256,7 @@ export class EditItemComponent implements OnInit {
       this.datasrv.updatePost(this.pendingProduct).subscribe({
         next: (v) => console.log(v),
         error: (err) => {
+          console.log(err);
           if (err.error.errors == 'Nil JSON web token') {
             console.log('need login');
             this.router.navigate(['/']);
