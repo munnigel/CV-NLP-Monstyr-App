@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProcessedPostPageComponent } from './processed-post.component';
+import { LivePostPageComponent } from './live-post.component';
 
-describe('ProcessedPostPageComponent', () => {
-  let component: ProcessedPostPageComponent;
-  let fixture: ComponentFixture<ProcessedPostPageComponent>;
+describe('LivePostPageComponent', () => {
+  let component: LivePostPageComponent;
+  let fixture: ComponentFixture<LivePostPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProcessedPostPageComponent],
+      declarations: [LivePostPageComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProcessedPostPageComponent);
+    fixture = TestBed.createComponent(LivePostPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
