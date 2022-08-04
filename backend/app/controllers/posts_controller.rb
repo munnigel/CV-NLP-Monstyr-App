@@ -259,14 +259,14 @@ class PostsController < ApplicationController
     begin
       @post = Post.find(params[:id])
     rescue
-      render json: {"extractions": ""}
+      render json: {"extractions": "post doesn't exist"}
     else
       @raw_des = @post.content
     @processed_des = @raw_des.delete!("^\u{0000}-\u{007F}"); 
 
     # Safe guard againt empty text description and id not existing
     if @processed_des.to_s.empty?
-      render json: {'content': ""}
+      render json: {'content': "content is empty"}
     else
       # Consruct request body
       @body = {
@@ -321,14 +321,31 @@ class PostsController < ApplicationController
       end
 
       # apply regex to extract unit number, 
-      # @unitNumbers = @processed_des.scan(/(\(?#?[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-?(?:[0-9A-Z]{1,})?(?:/[A-Z0-9]{1,})*\)?)/)
-      # @xPercentOffs = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]!?\*?\^?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
-      # @xForYs = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]\*?\^?!?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
-      # @moneyValues = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]\*?\^?!?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
+      @unitNumbers = @processed_des.scan(/#?[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-?(?:[0-9A-Z]+)?(?:\/[A-Z0-9]+)*\)?/)
+      @xPercentOffs = @processed_des.scan(/((?:\d{1,2})%(?:[-\s][Oo][Ff][Ff]!?\*?\^?)?|(?:[Ss]ave [Uu]p to|[Ss]ave|[Ee]njoy)\s?(?:of\s)?(?:\d{1,2})%)/)
+      @xForYs = @processed_des.scan(/(?:[Bb][Uu][Yy] |[Gg][Ee][Tt] )?[0-9][-|\s](?:[Ff]or|[Ii]n)[-|\s][0-9]/)
+      @moneyValues = @processed_des.scan(/((?:[Ss]ave [Uu]p to |[Ss]ave |[Uu]nder |[Ww]orth |[Ww]orth up to |[Aa]t )?\$[\d,]+(?:\.\d*)?(?:\*)?[-|\s]?(?:[Ff][Oo][Rr])?)/)
 
+      if @unitNumbers.blank?
+        @unitNumbers = []
+      end
+      if @xPercentOffs.blank?
+        @xPercentOffs = []
+      end
+      if @xForYs.blank?
+        @xForYs = []
+      end
+      if @moneyValues.blank?
+        @moneyValues = []
+      end
+
+      puts @unitNumbers
+      puts @xPercentOffs
+      puts @xForYs
+      puts @moneyValues
       # , "unitNumbers": @unitNumbers, "xPercentOffs": @xPercentOffs, "xForYs": @xForYs, "moneyValues": @moneyValues
 
-      render json: {"extractions": {"product_names": @product_names, "outlet_names": @outlet_names}}
+      render json: {"extractions": {"product_names": @product_names.flatten, "outlet_names": @outlet_names.flatten, "unitNumbers": @unitNumbers.flatten, "xPercentOffs": @xPercentOffs.flatten, "xForYs": @xForYs.flatten, "moneyValues": @moneyValues.flatten}}
       end
     end
   end
