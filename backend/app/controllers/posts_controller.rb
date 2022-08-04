@@ -253,6 +253,7 @@ class PostsController < ApplicationController
   end
 
 
+
   def titlegen
 
     # Obtain post description text
@@ -262,7 +263,10 @@ class PostsController < ApplicationController
       render json: {"extractions": "post doesn't exist"}
     else
       @raw_des = @post.content
-    @processed_des = @raw_des.delete!("^\u{0000}-\u{007F}"); 
+      @processed_des = @raw_des.delete!("^\u{0000}-\u{007F}"); 
+      if @processed_des.to_s.empty?
+        @processed_des = @raw_des
+      end
 
     # Safe guard againt empty text description and id not existing
     if @processed_des.to_s.empty?
@@ -307,6 +311,7 @@ class PostsController < ApplicationController
       result = JSON.parse(response.body)
       @product_names = []
       @outlet_names = []
+      puts result
       result["predictions"].each do |extracted|
         startOffset = extracted["textSegmentStartOffsets"][0].to_i
         endOffset = extracted["textSegmentEndOffsets"][0].to_i
@@ -507,6 +512,15 @@ class PostsController < ApplicationController
   end
 
   private
+  def clean_emoji(str='')
+		str=str.force_encoding('utf-8').encode
+		arr_regex=[/[\u{1f600}-\u{1f64f}]/,/[\u{2702}-\u{27b0}]/,/[\u{1f680}-\u{1f6ff}]/,/[\u{24C2}-\u{1F251}]/,/[\u{1f300}-\u{1f5ff}]/]
+		arr_regex.each do |regex|
+			str = str.gsub regex, ''
+		end
+		return str
+	end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
