@@ -13,6 +13,46 @@
           id="title-box"
         >
           <mat-label>Title</mat-label>
+          <mat-chip-list #chipList3 aria-label="Titles selection">
+            <mat-chip
+              *ngFor="let title of titles"
+              (removed)="removeTitle(title)"
+            >
+              {{ title }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              class="titleInput"
+              placeholder="New Title..."
+              #categoryInput
+              [formControl]="titleCtrl"
+              [matAutocomplete]="auto3"
+              [matChipInputFor]="chipList3"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTitle($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto3="matAutocomplete"
+            (optionSelected)="selectedTitle($event)"
+          >
+            <mat-option
+              id="titles-options"
+              *ngFor="let title of filteredTitles | async"
+              [value]="title"
+            >
+              {{ title }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <!-- <mat-form-field
+          class="example-chip-list page-item-title"
+          appearance="fill"
+          id="title-box"
+        >
+          <mat-label>Title</mat-label>
           <input
             matInput
             class="titleInput"
@@ -30,8 +70,8 @@
             <mat-option *ngFor="let title of allTitles" [value]="title">
               {{ title }}
             </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+          </mat-autocomplete> -->
+        <!-- </mat-form-field> -->
         <button
           mat-stroked-button
           id="generate-titles-btn"

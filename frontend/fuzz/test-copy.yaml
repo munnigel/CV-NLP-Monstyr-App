@@ -1,13 +1,13 @@
 config:
   target: "https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app"
   phases:
-    - duration: 5
-      arrivalCount: 5
+    - duration: 50
+      arrivalCount: 50
   plugins:
     fuzzer: {}
     expect: {}
   payload:
-    path: "email.csv"
+    path: "test-copy.csv"
     fields:
       - "email"
       - "password"

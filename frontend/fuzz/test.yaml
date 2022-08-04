@@ -1,0 +1,42 @@
+config:
+  target: "https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app"
+  phases:
+    - duration: 50
+      arrivalCount: 50
+  plugins:
+    fuzzer: {}
+    expect: {}
+  payload:
+    path: "test.csv"
+    fields:
+      - "email"
+      - "password"
+    order: sequence
+    skipHeader: true
+scenarios:
+  - name: "Fuzz some stuff"
+    flow:
+      # - post:
+      #     url: "/users"
+      #     json:
+      #       name: "test"
+      #       username: "test"
+      #       email: "wanglin_sim@mymail.sutd.edu.sg"
+      #       password: "123123"
+      #       account_type: "adminteam"
+      #     expect:
+      #       - statusCode: 201
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: "token"
+          expect:
+            - statusCode: 200
+      # - get:
+      #     url: "/users"
+      #     headers:
+      #       Authorization: "{{ token }}"

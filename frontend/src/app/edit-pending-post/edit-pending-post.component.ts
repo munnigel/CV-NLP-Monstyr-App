@@ -1,4 +1,4 @@
-import { COMMA, ENTER, L } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, L, P } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -108,7 +108,8 @@ export class EditItemComponent implements OnInit {
     'Gaming & Arcade',
     'Others  (Play)',
   ];
-  @ViewChild('titleInput', { static: true }) public titleInput: MatInput;
+  @ViewChild('titleInput', { static: true })
+  public titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
@@ -129,6 +130,12 @@ export class EditItemComponent implements OnInit {
       startWith(null),
       map((category: string | null) =>
         category ? this._filterCategories(category) : this.allCategories.slice()
+      )
+    );
+    this.filteredTitles = this.titleCtrl.valueChanges.pipe(
+      startWith(null),
+      map((title: string | null) =>
+        title ? this._filterCategories(title) : this.allTitles.slice()
       )
     );
     this.activatedRoute.params.subscribe((params) => {
@@ -155,23 +162,39 @@ export class EditItemComponent implements OnInit {
     // console.log(this.datasrv.getPendingProductList()[0]);
   }
 
+  addTitle(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.titles.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.titleCtrl.setValue(null);
+  }
+
+  removeTitle(title: string): void {
+    const index = this.titles.indexOf(title);
+
+    if (index >= 0) {
+      this.titles.splice(index, 1);
+    }
+  }
+
   selectedTitle(event: MatAutocompleteSelectedEvent): void {
     this.titles.push(event.option.viewValue);
-
-    this.titleString = this.titles.toString();
-    console.log(event.option.viewValue);
-    console.log(this.editForm.get('title').value);
-    let newTitle = this.editForm.get('title').value + event.option.viewValue;
-    // console.log(newTitle);
-    this.editForm.patchValue({ title: newTitle });
-    console.log(this.titleCtrl.getRawValue());
+    this.titleInput.nativeElement.value = '';
+    this.titleCtrl.setValue(null);
   }
 
   private _filterTitles(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allTags.filter((tag) =>
-      tag.toLowerCase().includes(filterValue)
+    return this.allTitles.filter((title) =>
+      title.toLowerCase().includes(filterValue)
     );
   }
 
@@ -302,17 +325,26 @@ export class EditItemComponent implements OnInit {
     // this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
     // this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
+    let output: any;
     this.datasrv.makeTitle(this.pendingProduct.id).subscribe({
       next: (res) => {
         console.log('new title');
         console.log(res);
+        output = res['extractions'];
       },
       error: () => {},
-      complete: () => {},
+      complete: () => {
+        for (let key in output) {
+          // console.log(output[key]);
+          if (output[key].length != 0) {
+            this.titles.push(output[key]);
+          }
+        }
+        // console.log(this.titles);
+        this.titlesGenerated = true;
+        this.genTitlesLoading = false;
+      },
     });
-    this.allTitles = ['title1', 'title2', 'title3'];
-    this.titlesGenerated = true;
-    this.genTitlesLoading = false;
   }
 
   async makeTag() {
