@@ -197,6 +197,13 @@ export class DataService implements OnInit {
     );
   }
 
+  makeTitle(id: number) {
+    return this.http.get(
+      `${API_URL}/posts/titlegen/${id}`,
+      this.getHttpOptions()
+    );
+  }
+
   getLiveProductList() {
     return this.liveProductList;
   }

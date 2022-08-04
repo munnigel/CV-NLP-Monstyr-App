@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
       this.router.navigate(['/']);
     }
     this.tabIndex = index;
-    if (this.router.url.includes(this.tabList[0]) && index == 0) {
+    if (index == 0) {
       try {
         await this.dataSrv.updateOverviewData();
       } catch (err) {
@@ -46,7 +46,6 @@ export class HomePageComponent implements OnInit {
         this.router.navigate(['/']);
         return;
       }
-      return;
     } else if (index == 1) {
       try {
         await this.dataSrv.updateAllLiveProductList();

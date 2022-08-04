@@ -9,11 +9,11 @@ import { DataService } from 'src/app/data-service.service';
 })
 export class CompletionPieComponent implements OnInit {
   constructor(private dataSrv: DataService) {}
-
+  completionPie: Chart;
   ngOnInit(): void {
-    console.log(this.dataSrv.livePercentage);
+    if (!this.completionPie) console.log(this.dataSrv.livePercentage);
     console.log(this.dataSrv.pendingPercentage);
-    const completionPie = new Chart('completion-pie', {
+    this.completionPie = new Chart('completion-pie', {
       type: 'doughnut',
       data: {
         labels: ['Live', 'Pending'],

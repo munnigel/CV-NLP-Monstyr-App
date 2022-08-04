@@ -263,7 +263,10 @@ class PostsController < ApplicationController
     else
       @raw_des = @post.content
     @processed_des = @raw_des.delete!("^\u{0000}-\u{007F}"); 
-
+    puts "here"
+    puts @raw_des
+    puts "filtered"
+    puts @processed_des
     # Safe guard againt empty text description and id not existing
     if @processed_des.to_s.empty?
       render json: {'content': "content is empty"}

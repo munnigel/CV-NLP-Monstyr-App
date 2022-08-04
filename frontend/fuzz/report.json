@@ -1,0 +1,82 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.Fuzz some stuff": 5,
+      "vusers.created": 5,
+      "http.requests": 5,
+      "http.codes.401": 4,
+      "http.responses": 5,
+      "plugins.expect.failed": 4,
+      "plugins.expect.failed.statusCode": 4,
+      "errors.Failed expectations for request https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/auth/login": 4,
+      "vusers.failed": 4,
+      "http.codes.200": 1,
+      "plugins.expect.ok": 1,
+      "plugins.expect.ok.statusCode": 1,
+      "vusers.completed": 1
+    },
+    "rates": {
+      "http.request_rate": 1
+    },
+    "firstCounterAt": 1659631031737,
+    "firstHistogramAt": 1659631032187,
+    "lastCounterAt": 1659631036147,
+    "lastHistogramAt": 1659631036143,
+    "firstMetricAt": 1659631031737,
+    "lastMetricAt": 1659631036147,
+    "period": 1659631030000,
+    "summaries": {
+      "http.response_time": {
+        "min": 311,
+        "max": 420,
+        "count": 5,
+        "p50": 368.8,
+        "median": 368.8,
+        "p75": 391.6,
+        "p90": 391.6,
+        "p95": 391.6,
+        "p99": 391.6,
+        "p999": 391.6
+      },
+      "vusers.session_length": {
+        "min": 462.5,
+        "max": 462.5,
+        "count": 1,
+        "p50": 459.5,
+        "median": 459.5,
+        "p75": 459.5,
+        "p90": 459.5,
+        "p95": 459.5,
+        "p99": 459.5,
+        "p999": 459.5
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 311,
+        "max": 420,
+        "count": 5,
+        "p50": 368.8,
+        "median": 368.8,
+        "p75": 391.6,
+        "p90": 391.6,
+        "p95": 391.6,
+        "p99": 391.6,
+        "p999": 391.6
+      },
+      "vusers.session_length": {
+        "min": 462.5,
+        "max": 462.5,
+        "count": 1,
+        "p50": 459.5,
+        "median": 459.5,
+        "p75": 459.5,
+        "p90": 459.5,
+        "p95": 459.5,
+        "p99": 459.5,
+        "p999": 459.5
+      }
+    }
+  },
+  "intermediate": []
+}

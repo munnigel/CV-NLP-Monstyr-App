@@ -148,6 +148,7 @@ export class EditItemComponent implements OnInit {
         categories: [''],
         startDate: [''],
         endDate: [''],
+        title: [''],
       });
     });
 
@@ -156,8 +157,14 @@ export class EditItemComponent implements OnInit {
 
   selectedTitle(event: MatAutocompleteSelectedEvent): void {
     this.titles.push(event.option.viewValue);
+
     this.titleString = this.titles.toString();
-    this.titleCtrl.setValue(this.titles.toString());
+    console.log(event.option.viewValue);
+    console.log(this.editForm.get('title').value);
+    let newTitle = this.editForm.get('title').value + event.option.viewValue;
+    // console.log(newTitle);
+    this.editForm.patchValue({ title: newTitle });
+    console.log(this.titleCtrl.getRawValue());
   }
 
   private _filterTitles(value: string): string[] {
@@ -292,9 +299,17 @@ export class EditItemComponent implements OnInit {
   makeTitle() {
     this.titlesGenerated = false;
     this.genTitlesLoading = true;
-    this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
-    this.title = 'TITLE GENERATED WAAAA';
+    // this.editForm.patchValue({ title: 'TITLE GENERATED WAAAA' });
+    // this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
+    this.datasrv.makeTitle(this.pendingProduct.id).subscribe({
+      next: (res) => {
+        console.log('new title');
+        console.log(res);
+      },
+      error: () => {},
+      complete: () => {},
+    });
     this.allTitles = ['title1', 'title2', 'title3'];
     this.titlesGenerated = true;
     this.genTitlesLoading = false;
