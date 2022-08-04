@@ -11,7 +11,7 @@ import { EditItemComponent } from './edit-pending-post/edit-pending-post.compone
 import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
-import { ProcessedPostPageComponent } from './live-post/processed-post.component';
+import { LivePostPageComponent } from './live-post/live-post.component';
 import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
@@ -53,7 +53,7 @@ import { CookieService } from 'ngx-cookie-service';
     HomePageComponent,
     OverviewPageComponent,
     PendingPostPageComponent,
-    ProcessedPostPageComponent,
+    LivePostPageComponent,
     DeveloperToolsPageComponent,
     SettingsPageComponent,
     OverviewDashboardComponent,

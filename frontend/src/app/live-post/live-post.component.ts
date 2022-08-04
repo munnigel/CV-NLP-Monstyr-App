@@ -3,14 +3,13 @@ import { DataService } from '../data-service.service';
 import { Product } from '../product.model';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
-  selector: 'app-processed-post-page',
-  templateUrl: './processed-post.component.html',
-  styleUrls: ['./processed-post.component.css'],
+  selector: 'app-live-post-page',
+  templateUrl: './live-post.component.html',
+  styleUrls: ['./live-post.component.css'],
 })
-export class ProcessedPostPageComponent implements OnInit {
+export class LivePostPageComponent implements OnInit {
   tabIndex: number;
   showItem: boolean;
   liveProductList: Product[];

@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   async ngOnInit() {
     this.titleService.setTitle('Login');
     this.postForm = this.fb.group({
-      email: ['nigel_mun@mymail.sutd.edu.sg'],
-      password: ['123123'],
+      email: [''],
+      password: [''],
     });
     try {
       console.log('try auto login');
