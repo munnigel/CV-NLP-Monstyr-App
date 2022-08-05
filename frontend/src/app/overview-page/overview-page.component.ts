@@ -19,6 +19,7 @@ export class OverviewPageComponent implements OnInit {
   async ngOnInit() {
     try {
       await this.dataSrv.updateOverviewData();
+      console.log('get overview');
     } catch (err) {
       console.log(err);
       localStorage.removeItem('loginToken');

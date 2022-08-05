@@ -5,11 +5,25 @@
   </div> -->
 
 <div class="button">
-  <button mat-stroked-button color="primary" class='special-btn2' (click)="prevPage()" type="button">Previous
-    Page</button>
-  <button mat-stroked-button color="primary" class='special-btn2' (click)="nextPage()" type="button">Next Page</button>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="special-btn2"
+    (click)="prevPage()"
+    type="button"
+  >
+    Previous Page
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="special-btn2"
+    (click)="nextPage()"
+    type="button"
+  >
+    Next Page
+  </button>
 </div>
-
 
 <!-- <div class="filter-row">
   <div class="filter-type" (click)="onFilter(1)">
@@ -35,18 +49,20 @@
       <div class="col" (click)="selectLivePost(i)">
         <div class="item-container fade">
           <div class="item-img">
-            <img class='live-img' [src]="product.images" alt="image" />
+            <img class="live-img" [src]="product.images" alt="image" />
           </div>
           <div class="item-details">
-            <div class="item-title">Title: {{ product.title }}</div>
-            <div class="item-description">
+            <div class="item-title" id="title-field">
+              Title: {{ product.title }}
+            </div>
+            <div class="item-description" id="description-field">
               Description: {{ product.content }}
             </div>
-            <mat-chip-list>
+            <mat-chip-list id="category-field">
               <mat-label>Categories:</mat-label>
               <mat-chip *ngFor="let category of product.categories">{{
                 category
-                }}</mat-chip>
+              }}</mat-chip>
             </mat-chip-list>
             <mat-chip-list>
               <mat-label>Tags:</mat-label>

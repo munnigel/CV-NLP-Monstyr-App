@@ -19,13 +19,13 @@ export class LivePostPageComponent implements OnInit {
     private titleService: Title
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.tabIndex = 2;
     this.showItem = false;
     this.liveProductList = this.dataSrv.getLiveProductList();
     if (!this.liveProductList) {
-      this.router.navigate(['/']);
-      return;
+      await this.dataSrv.updateAllLiveProductList();
+      this.liveProductList = this.dataSrv.getLiveProductList();
     }
     console.log(this.liveProductList[0]);
     console.log(this.liveProductList);

@@ -1,6 +1,9 @@
 // Navigating to live post tab
 Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
-  cy.visit("http://localhost:4200/home");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
   cy.title().should("eq", tabSelector);
 });
 
@@ -16,6 +19,10 @@ Then(/^I should be on the "(.*)" page$/, (tabSelector) => {
 
 // navigating to a specific entry
 Given(/^that I click on the "(.*)" tab$/, (tabSelector) => {
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
   let tabSel = tabSelector.toLowerCase().replace(" ", "-");
   cy.get("#" + tabSel + "-tab").click();
 });
@@ -30,9 +37,7 @@ Then(
     let selectorList = selectors.split(", ");
     for (let selector of selectorList) {
       let sel = selector.toLowerCase().replace(" ", "-");
-      cy.get(".item-page-left2")
-        .find("#" + sel + "-field")
-        .should("exist");
+      cy.get("#" + sel + "-field").should("exist");
     }
   }
 );
