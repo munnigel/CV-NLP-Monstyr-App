@@ -3,54 +3,39 @@
     <div class="h2" data-text="Monstyr X AI">Monstyr X AI</div>
   </div>
   <div class="sub-login-header">
-    <h1>AI-Powered Workflows</h1>
+    <div class="wrapper">
+
+      <span>Analytics tools</span>
+      <span>Posts management</span>
+      <span>AI powered workflow</span>
+      <span>Content creation</span>
+      <span>Analytics tools</span>
+
+    </div>
   </div>
   <form [formGroup]="postForm">
     <div class="login-form">
       <div class="formInput">
         <label class="login">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Enter email here"
-          formControlName="email"
-          id="loginEmail"
-        />
+        <input type="email" class="form-control" placeholder="Enter email here" formControlName="email"
+          id="loginEmail" />
       </div>
       <div class="formInput">
         <label class="login">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Enter password here"
-          formControlName="password"
-          id="loginPassword"
-        />
+        <input type="password" class="form-control" placeholder="Enter password here" formControlName="password"
+          id="loginPassword" />
       </div>
     </div>
   </form>
 
   <div class="col-12">
-    <button
-      type="submit"
-      id="login-button"
-      class="btn btn-primary btns"
-      (click)="onLogin()"
-    >
+    <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onLogin()">
       Sign in
     </button>
   </div>
   <div class="createAcc">
-    <button
-      type="submit"
-      id="login-button"
-      class="btn btn-primary btns"
-      (click)="onCreate()"
-    >
+    <button type="submit" id="login-button" class="btn btn-primary btns" (click)="onCreate()">
       Create Account
     </button>
-  </div>
-  <div class="col-12 forget-password-container">
-    <button type="submit" class="btn btn-primary btns">Forget password</button>
   </div>
 </div>
