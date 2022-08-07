@@ -1,5 +1,6 @@
 // Navigating to live post tab
 Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
+  cy.log("hello");
   cy.visit("http://localhost:4200");
   cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
   cy.get("#loginPassword").type("123123");

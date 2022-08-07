@@ -9,6 +9,16 @@
   min-width: 1000px;
 }
 
+.page-item-title {
+  min-width: 400px;
+  margin: 0px 10px;
+}
+
+.dropdown {
+  display: inline-block;
+  margin-right: 20px;
+}
+
 .item-page-btn-container {
   display: flex;
   justify-content: center;
@@ -34,4 +44,8 @@
 
 .mb-3:hover {
   background: none;
+}
+
+mat-card {
+  margin: 30px 0px;
 }

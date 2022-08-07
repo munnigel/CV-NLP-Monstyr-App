@@ -7,71 +7,215 @@
   <div class="item-page-left">
     <form [formGroup]="editForm">
       <mat-card>
-        <mat-form-field
-          class="example-chip-list page-item-title"
-          appearance="fill"
-          id="title-box"
-        >
-          <mat-label>Title</mat-label>
-          <mat-chip-list #chipList3 aria-label="Titles selection">
-            <mat-chip
-              *ngFor="let title of titles"
-              (removed)="removeTitle(title)"
-            >
-              {{ title }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
+        <mat-card-title>Title</mat-card-title>
+        <ng-container *ngIf="selectedFormat == 0">
+          <span>New!</span>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
             <input
-              class="titleInput"
-              placeholder="New Title..."
-              #categoryInput
-              [formControl]="titleCtrl"
-              [matAutocomplete]="auto3"
-              [matChipInputFor]="chipList3"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addTitle($event)"
+              matInput
+              #titleProductName
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 1">
+          <span>New Outlet!</span>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Location</mat-label>
+            <input
+              matInput
+              placeholder="Location"
+              [value]="titleLocation"
+              (keyup)="updateLocation($event)"
             />
-          </mat-chip-list>
-          <mat-autocomplete
-            #auto3="matAutocomplete"
-            (optionSelected)="selectedTitle($event)"
+          </mat-form-field>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
           >
-            <mat-option
-              id="titles-options"
-              *ngFor="let title of filteredTitles | async"
-              [value]="title"
-            >
-              {{ title }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <!-- <mat-form-field
-          class="example-chip-list page-item-title"
-          appearance="fill"
-          id="title-box"
-        >
-          <mat-label>Title</mat-label>
-          <input
-            matInput
-            class="titleInput"
-            placeholder="New Title..."
-            #titleInput
-            [formControl]="titleCtrl"
-            formControlName="title"
-            [matAutocomplete]="auto3"
-          />
-          <mat-autocomplete
-            #auto3="matAutocomplete"
-            (optionSelected)="selectedTitle($event)"
-            class="title-options"
+            <mat-label>Unit Number</mat-label>
+            <input
+              matInput
+              placeholder="Unit Number"
+              [value]="titleUnitNumber"
+              (keyup)="updateUnitNumber($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 2">
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
           >
-            <mat-option *ngFor="let title of allTitles" [value]="title">
-              {{ title }}
-            </mat-option>
-          </mat-autocomplete> -->
-        <!-- </mat-form-field> -->
+            <mat-label>X% OFF</mat-label>
+            <input
+              matInput
+              placeholder="X% OFF"
+              [value]="titleXOFF"
+              (keyup)="updateXOFF($event)"
+            />
+          </mat-form-field>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 3">
+          <span>Up to</span>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>X% OFF</mat-label>
+            <input
+              matInput
+              placeholder="X% OFF"
+              [value]="titleXOFF"
+              (keyup)="updateXOFF($event)"
+            />
+          </mat-form-field>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 4">
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>X-for-Y</mat-label>
+            <input
+              matInput
+              placeholder="X-for-Y"
+              [value]="titleXForY"
+              (keyup)="updateXForY($event)"
+            />
+          </mat-form-field>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 5">
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Amount</mat-label>
+            <input
+              matInput
+              placeholder="Amount"
+              [value]="titleAmount"
+              (keyup)="updateAmount($event)"
+            />
+          </mat-form-field>
+          <span>for</span>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <ng-container *ngIf="selectedFormat == 6">
+          <span>Free</span>
+          <mat-form-field
+            class="page-item-title"
+            appearance="fill"
+            id="title-box"
+          >
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [value]="titleProductName"
+              (keyup)="updateProductName($event)"
+            /> </mat-form-field
+        ></ng-container>
+        <hr />
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="formatDropDown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Format
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ng-container *ngFor="let format of formats; let i = index">
+              <li (click)="selectFormat(i)">
+                <a class="dropdown-item">{{ format.join(" ") }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            #suggestionDropDown
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Suggestions
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ng-container *ngFor="let suggestion of suggestions; let i = index">
+              <li (click)="selectSuggestion(i)">
+                <a class="dropdown-item" [ngClass]="{ disabled: i % 2 == 0 }">{{
+                  suggestion
+                }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
         <button
           mat-stroked-button
           id="generate-titles-btn"
@@ -80,7 +224,7 @@
           style="border-radius: 15px"
         >
           <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate</span>
+            <span style="margin-right: 10px">Generate Title</span>
 
             <mat-progress-spinner
               *ngIf="genTitlesLoading"
@@ -99,6 +243,8 @@
             </span>
           </div>
         </button>
+        <br />
+        <mat-label>Final String: {{ finalTitle }}</mat-label>
       </mat-card>
       <mat-card>
         <mat-form-field

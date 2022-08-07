@@ -1,5 +1,11 @@
 import { COMMA, ENTER, L, P } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -13,12 +19,13 @@ import { Product } from '../product.model';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatInput } from '@angular/material/input';
 import { minBy } from 'cypress/types/lodash';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-edit-item',
@@ -108,10 +115,33 @@ export class EditItemComponent implements OnInit {
     'Gaming & Arcade',
     'Others  (Play)',
   ];
+  formats = [
+    ['New!', '<Product Name>'],
+    ['New Outlet!', '<Location>', '<Unit Number>'],
+    ['X%', 'OFF', '<Product Name>'],
+    ['Up to', 'X%', 'OFF', '<Product Name>'],
+    ['X', '-for-', 'Y', '<Product Name>'],
+    ['$', '<Amount>', 'for', '<Product Name>'],
+    ['Free', '<Product Name>'],
+  ];
+  suggestions: string[][] = [];
+  selectedFormat: number;
+  finalTitle: string;
+  titleProductName: string;
+  titleLocation: string;
+  titleXOFF: string;
+  titleXForY: string;
+  titleUnitNumber: string;
+  titleAmount: string;
+
   @ViewChild('titleInput', { static: true })
   public titleInput: ElementRef<HTMLInputElement>;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+  @ViewChild('suggestionDropDown')
+  suggestionDropDown: ElementRef<HTMLInputElement>;
+  @ViewChild('titleProductName')
+  titleProductNameElement: ElementRef<HTMLInputElement>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -162,6 +192,165 @@ export class EditItemComponent implements OnInit {
     // console.log(this.datasrv.getPendingProductList()[0]);
   }
 
+  updateProductName(event) {
+    // console.log(event.target.value);
+    this.titleProductName = event.target.value;
+    this.updateFinalString();
+  }
+
+  updateAmount(event) {
+    // console.log(event.target.value);
+    this.titleAmount = event.target.value;
+    this.updateFinalString();
+  }
+
+  updateXForY(event) {
+    // console.log(event.target.value);
+    this.titleXForY = event.target.value;
+    this.updateFinalString();
+  }
+
+  updateXOFF(event) {
+    // console.log(event.target.value);
+    this.titleXOFF = event.target.value;
+    this.updateFinalString();
+  }
+
+  updateUnitNumber(event) {
+    // console.log(event.target.value);
+    this.titleUnitNumber = event.target.value;
+    this.updateFinalString();
+  }
+
+  updateLocation(event) {
+    // console.log(event.target.value);
+    this.titleLocation = event.target.value;
+    this.updateFinalString();
+  }
+
+  selectFormat(i: number) {
+    this.resetFields();
+    this.selectedFormat = i;
+    this.updateFinalString();
+  }
+
+  resetFields() {
+    this.titleProductName = '';
+    this.titleLocation = '';
+    this.titleXOFF = '';
+    this.titleXForY = '';
+    this.titleUnitNumber = '';
+    this.titleAmount = '';
+  }
+
+  updateFinalString() {
+    if (this.selectedFormat == 0) {
+      this.finalTitle = 'New! ' + this.titleProductName;
+    } else if (this.selectedFormat == 1) {
+      this.finalTitle =
+        'New Outlet! ' + this.titleLocation + ', ' + this.titleUnitNumber;
+    } else if (this.selectedFormat == 2) {
+      this.finalTitle = this.titleXOFF + ' ' + this.titleProductName;
+    } else if (this.selectedFormat == 3) {
+      this.finalTitle = 'Up to ' + this.titleXOFF + ' ' + this.titleProductName;
+    } else if (this.selectedFormat == 4) {
+      this.finalTitle = this.titleXForY + ' ' + this.titleProductName;
+    } else if (this.selectedFormat == 5) {
+      this.finalTitle = this.titleAmount + ' for ' + this.titleProductName;
+    } else if (this.selectedFormat == 6) {
+      this.finalTitle = 'Free ' + this.titleProductName;
+    }
+  }
+
+  selectSuggestion(i: number) {
+    this.resetFields();
+    this.selectedFormat = this.formats.indexOf(this.suggestions[i - 1]);
+    if (this.selectedFormat == 0) {
+      this.titleProductName = this.suggestions[i][1];
+      console.log(this.suggestions[i]);
+    } else if (this.selectedFormat == 1) {
+      this.titleLocation = this.suggestions[i][1];
+      this.titleUnitNumber = this.suggestions[i][2];
+    } else if (this.selectedFormat == 2) {
+      this.titleXOFF = this.suggestions[i][0];
+      this.titleProductName = this.suggestions[i][1];
+    } else if (this.selectedFormat == 3) {
+      this.titleXOFF = this.suggestions[i][1];
+      this.titleProductName = this.suggestions[i][2];
+    } else if (this.selectedFormat == 4) {
+      this.titleXForY = this.suggestions[i][0];
+      this.titleProductName = this.suggestions[i][1];
+    } else if (this.selectedFormat == 5) {
+      console.log(this.suggestions[i]);
+      this.titleAmount = this.suggestions[i][0];
+      this.titleProductName = this.suggestions[i][2];
+    } else if (this.selectedFormat == 6) {
+      this.titleProductName = this.suggestions[i][1];
+    }
+    this.selectedFormat = this.formats.indexOf(this.suggestions[i - 1]);
+    this.updateFinalString();
+  }
+
+  processSuggestions(res) {
+    console.log('process suggestions');
+    this.suggestions = [];
+    let extracted = res.extractions;
+    if (extracted.product_names != []) {
+      if (extracted.moneyValues != []) {
+        console.log(extracted);
+        for (let name of extracted.product_names) {
+          for (let moneyValue of extracted.moneyValues) {
+            this.suggestions.push(this.formats[5]);
+            this.suggestions.push([moneyValue, this.formats[5][2], name]);
+          }
+        }
+      }
+      if (extracted.xForYs != []) {
+        for (let name of extracted.product_names) {
+          for (let xForY of extracted.xForYs) {
+            this.suggestions.push(this.formats[4]);
+            this.suggestions.push([xForY, name]);
+          }
+        }
+      }
+      if (extracted.xPercentOffs != []) {
+        for (let name of extracted.product_names) {
+          for (let xPercentOff of extracted.xPercentOffs) {
+            this.suggestions.push(this.formats[2]);
+            this.suggestions.push([xPercentOff, name]);
+          }
+        }
+        for (let name of extracted.product_names) {
+          for (let xPercentOff of extracted.xPercentOffs) {
+            this.suggestions.push(this.formats[3]);
+            this.suggestions.push([this.formats[3][0], xPercentOff, name]);
+          }
+        }
+      }
+      for (let name of extracted.product_names) {
+        this.suggestions.push(this.formats[0]);
+        this.suggestions.push([this.formats[0][0], name]);
+        this.suggestions.push(this.formats[6]);
+        this.suggestions.push([this.formats[6][0], name]);
+      }
+    }
+    if (extracted.outlet_names != []) {
+      if (extracted.unitNumbers == [])
+        for (let outlet of extracted.outlet_names) {
+          this.suggestions.push(this.formats[1].splice(-1));
+          this.suggestions.push([this.formats[1][0], outlet]);
+        }
+      else {
+        for (let outlet of extracted.outlet_names) {
+          for (let unitNumber of extracted.unitNumbers) {
+            this.suggestions.push(this.formats[1]);
+            this.suggestions.push([this.formats[1][0], outlet, unitNumber]);
+          }
+        }
+      }
+    }
+  }
+
   addTitle(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -184,7 +373,7 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  selectedTitle(event: MatAutocompleteSelectedEvent): void {
+  selectedTitle(event): void {
     this.titles.push(event.option.viewValue);
     this.titleInput.nativeElement.value = '';
     this.titleCtrl.setValue(null);
@@ -326,11 +515,13 @@ export class EditItemComponent implements OnInit {
     // this.title = 'TITLE GENERATED WAAAA';
     console.log('title activated');
     let output: any;
+    let result: any;
     this.datasrv.makeTitle(this.pendingProduct.id).subscribe({
       next: (res) => {
         console.log('new title');
         console.log(res);
         output = res['extractions'];
+        result = res;
       },
       error: () => {},
       complete: () => {
@@ -343,6 +534,9 @@ export class EditItemComponent implements OnInit {
         // console.log(this.titles);
         this.titlesGenerated = true;
         this.genTitlesLoading = false;
+        this.processSuggestions(result);
+        console.log(this.suggestions);
+        this.suggestionDropDown.nativeElement.click();
       },
     });
   }

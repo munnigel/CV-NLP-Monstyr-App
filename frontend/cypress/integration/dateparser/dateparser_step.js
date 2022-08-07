@@ -8,7 +8,7 @@ Given('I am on "Edit Item Page" for a particular pending post', () => {
   cy.get("#loginPassword").type("123123");
   cy.get("#login-button").click();
   cy.get("#pending-posts-tab").click();
-  cy.visit("http://localhost:4200/edit/2");
+  cy.visit("http://localhost:4200/edit/6");
 });
 
 When("I click on the Start Date Generate", () => {
@@ -28,7 +28,7 @@ Given('I am on "Edit Item Page" for a particular pending post', () => {
   cy.get("#loginPassword").type("123123");
   cy.get("#login-button").click();
   cy.get("#pending-posts-tab").click();
-  cy.visit("http://localhost:4200/edit/2");
+  cy.visit("http://localhost:4200/edit/6");
 });
 
 When("I click on the End Date Generate", () => {

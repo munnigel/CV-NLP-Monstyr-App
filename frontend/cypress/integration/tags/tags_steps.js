@@ -3,7 +3,11 @@ import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 // Scenario: Generating tags when post has an attached image
 
 Given('I am on "Edit Item Page" for a particular pending post', () => {
-  cy.visit("http://localhost:4200/home/pending");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
   cy.get(".pending-posts-item").eq(5).click();
 });
 
@@ -57,9 +61,11 @@ Then('the new tag should be inserted into the "enter tags" text area', () => {
 //Scenario: Saving tags to post
 
 Given('I am on "Edit Item Page" for a particular pending post', () => {
-  // cy.visit("http://localhost:4200/home/pending");
-  // cy.get(".pending-posts-item").first().click();
-  cy.visit("http://localhost:4200/home/pending");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
   cy.get(".pending-posts-item").eq(5).click();
 });
 
@@ -76,8 +82,11 @@ Then("the accepted tags should be added to the post", () => {
 Given(
   'I am on "Edit Item Page" for a particular pending post with no attached image',
   () => {
-    // cy.visit("http://localhost:4200/edit/25");
-    cy.visit("http://localhost:4200/home/pending");
+    cy.visit("http://localhost:4200");
+    cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+    cy.get("#loginPassword").type("123123");
+    cy.get("#login-button").click();
+    cy.get("#pending-posts-tab").click();
     cy.get(".pending-posts-item").eq(0).click();
   }
 );
@@ -85,6 +94,11 @@ Given(
 Given(
   'I am on "Edit Item Page" for a particular pending post with no attached image',
   () => {
+    cy.visit("http://localhost:4200");
+    cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+    cy.get("#loginPassword").type("123123");
+    cy.get("#login-button").click();
+    cy.get("#pending-posts-tab").click();
     cy.visit("http://localhost:4200/edit/25");
   }
 );

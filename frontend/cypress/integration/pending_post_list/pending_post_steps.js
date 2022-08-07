@@ -2,7 +2,10 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 // Scenario: Navigating to pending post tab
 Given(/^I am on the "(.*)" page as a developer$/, (tabSelector) => {
-  cy.visit("http://localhost:4200/home");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
   cy.title().should("eq", tabSelector);
 });
 When(/^I click on the "(.*)" tab$/, (tabSelector) => {
@@ -18,7 +21,11 @@ Then(/^I should be on the "(.*)" page$/, (tabSelector) => {
 //Scenario: Edit post x details in pending post tab
 
 Given('that I click on the "Pending Posts" tab', () => {
-  cy.visit("http://localhost:4200/home/pending");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
 });
 
 When('I click on one of the "Pending" post', () => {
@@ -26,7 +33,7 @@ When('I click on one of the "Pending" post', () => {
 });
 
 Then(
-  'I should be able to see the "Title, Description, Category, Start Date, End Date" fields of the selected post',
+  'I should be able to see the "Title, Tag, Category, Start Date, End Date" fields of the selected post',
   () => {
     cy.get(".page-item-title").should("exist");
     cy.get(".page-item-description").should("exist");
@@ -38,7 +45,12 @@ Then(
 //Scenario: Able to go back to pending page from edit page using back button
 
 Given("that I am in the edit post tab", () => {
-  cy.visit("http://localhost:4200/edit/0");
+  cy.visit("http://localhost:4200");
+  cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+  cy.get("#loginPassword").type("123123");
+  cy.get("#login-button").click();
+  cy.get("#pending-posts-tab").click();
+  cy.get(".pending-posts-item").first().click();
 });
 
 When("I click on the 'Back to Pending Page' button", () => {
@@ -52,9 +64,9 @@ Then("I should be redirected to the Pending Posts tab", () => {
 //Scenario: Going to live page after submitting on edit page
 
 Given(
-  'that I am able to view the "Title, Description, Category, Start Date, End Date" fields of the selected Pending post I am on',
-  (URL) => {
-    cy.get(".pending-posts-item").eq(0).click();
+  'that I am able to view the "Title, Tag, Category, Start Date, End Date" fields of the selected Pending post I am on',
+  () => {
+    cy.get(".pending-posts-item").first().click();
     cy.get(".page-item-title").should("exist");
     cy.get(".page-item-description").should("exist");
     cy.get(".categoryInput").should("be.visible");
@@ -74,12 +86,16 @@ Then("I should be redirected to the Live Posts page", () => {
 Given(
   "that I click on the uploaded post which can be seen at the first index of the page",
   () => {
-    cy.url().should("eq", "http://localhost:4200/home/processed");
+    cy.visit("http://localhost:4200");
+    cy.get("#loginEmail").type("nigel_mun@mymail.sutd.edu.sg");
+    cy.get("#loginPassword").type("123123");
+    cy.get("#login-button").click();
+    cy.get("#live-posts-tab").click();
   }
 );
 
 Then(
-  'I should be able to see the same "Title, Description, Category, Start Date, End Date" fields that I added when I published the post',
+  'I should be able to see the same "Title, Tag, Category, Start Date, End Date" fields that I added when I published the post',
   () => {
     //visit pending
     // cy.get(".col").eq(0).click();   //click first
