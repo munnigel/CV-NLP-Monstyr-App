@@ -44,7 +44,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: rgba(169, 169, 169, 0.8);
+  background-image: url(./assets/pictures/bgg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
   /* background-image:
     url('./assets/pictures/mon.gif'),
     url('./assets/pictures/mon2.gif'),
