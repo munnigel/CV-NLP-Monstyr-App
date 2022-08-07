@@ -5,22 +5,12 @@
   </div> -->
 
 <div class="button">
-  <button
-    mat-stroked-button
-    color="primary"
-    class="special-btn2"
-    (click)="prevPage()"
-    type="button"
-  >
+  <button mat-stroked-button color="primary" class="special-btn2" (click)="prevPage()" type="button"
+    style='margin: 5px;'>
     Previous Page
   </button>
-  <button
-    mat-stroked-button
-    color="primary"
-    class="special-btn2"
-    (click)="nextPage()"
-    type="button"
-  >
+  <button mat-stroked-button color="primary" class="special-btn2" (click)="nextPage()" type="button"
+    style='margin: 5px;'>
     Next Page
   </button>
 </div>
@@ -62,7 +52,7 @@
               <mat-label>Categories:</mat-label>
               <mat-chip *ngFor="let category of product.categories">{{
                 category
-              }}</mat-chip>
+                }}</mat-chip>
             </mat-chip-list>
             <mat-chip-list>
               <mat-label>Tags:</mat-label>

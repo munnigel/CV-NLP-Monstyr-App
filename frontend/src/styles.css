@@ -75,6 +75,9 @@ body {
   padding-top: 7px;
 }
 
+
+
+
 .sub-login-header {
   font-size: 30px;
   font-weight: 500;
@@ -194,6 +197,7 @@ body {
   width: 150px;
   height: 150px;
 }
+
 
 .main-login-header {
   font-weight: 400;
@@ -361,6 +365,7 @@ body {
   padding: 0px 30px;
 }
 
+
 .item-page-container {
   display: flex;
   padding: 50px 0px;
@@ -392,6 +397,20 @@ body {
   transition: opacity 500ms;
   visibility: visible;
   opacity: 1;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .popup {
@@ -430,7 +449,7 @@ body {
   font-size: smaller;
   align-self: center;
   border-radius: 10px;
-  width: fit-content;
+  width: auto;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
@@ -714,7 +733,7 @@ a {
 .button {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 40px;
   padding: 0 550px;
 }
@@ -794,23 +813,43 @@ a {
   flex-direction: row;
   justify-content: center;
   margin-top: 100px;
-
 }
 
+@media screen and (max-width: 1800px) {
+  .button {
+    padding: 0 50px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+  }
+
+  .col {
+    width: 100%;
+  }
+}
 
 
 @media screen and (max-width: 1080px) {
   .button {
+    display: flex;
+    flex-direction: column;
     padding: 0 100px;
   }
 
+  .pending-posts-container {
+    margin: 0 30px;
+  }
+
   .pending-posts-item {
-    width: 300px;
+    width: 100%;
   }
 
   .pending-posts-item:hover {
     box-shadow: 0 1px 10px rgb(97, 80, 80);
-    width: 310px;
+    width: 100%;
   }
 
   .pending-posts-item:hover:after {
@@ -818,6 +857,12 @@ a {
   }
 
   .col {
-    width: 100px;
+    width: 100%;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-self: center;
   }
 }
