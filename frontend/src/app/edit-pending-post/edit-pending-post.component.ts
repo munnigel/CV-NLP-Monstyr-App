@@ -466,7 +466,7 @@ export class EditItemComponent implements OnInit {
       this.error = true;
       this.errMsg = 'Please complete all required fields.';
     } else {
-      this.pendingProduct.title = this.titleString;
+      this.pendingProduct.title = this.finalTitle;
       this.pendingProduct.categories = this.categories;
       this.pendingProduct.tags = this.tags;
       this.pendingProduct.startDate = this.datePicker.get('start').value;
