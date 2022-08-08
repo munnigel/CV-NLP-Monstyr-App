@@ -1,5 +1,21 @@
 <div class="page-header">Live Posts</div>
-
+<div style="text-align: center">
+  <mat-form-field appearance="fill">
+    <mat-label>Search posts by title</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchTerm"
+      placeholder="Search posts by title"
+    />
+    <mat-icon
+      class="search-icon"
+      color="primary"
+      matPrefix
+      (click)="filterPosts(searchTerm)"
+      >search</mat-icon
+    >
+  </mat-form-field>
+</div>
 <div class="button">
   <button
     mat-stroked-button
@@ -24,7 +40,7 @@
 </div>
 <div class="container">
   <div class="row row-cols-4">
-    <ng-container *ngFor="let product of liveProductList; let i = index">
+    <ng-container *ngFor="let product of filteredProductList; let i = index">
       <mat-card class="col" (click)="selectLivePost(i)">
         <div class="item-container fade">
           <div class="item-img">

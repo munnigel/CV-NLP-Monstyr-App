@@ -104,7 +104,7 @@ export class HomePageComponent implements OnInit {
     }
   }
   toggleOutsideSideNav() {
-    console.log('test');
+    // console.log('test');
     if (this.mobile) this.opened = false;
   }
 }

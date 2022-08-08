@@ -116,14 +116,22 @@ export class EditProcessedPostComponent implements OnInit {
   }
 
   updateAllFields() {
-    this.titleAmount = this.product.selectedTitle['amount'];
-    this.titleLocation = this.product.selectedTitle['location'];
-    this.titleProductName = this.product.selectedTitle['productName'];
-    this.titleUnitNumber = this.product.selectedTitle['unitNumber'];
-    this.titleXForY = this.product.selectedTitle['XForY'];
-    this.titleXOFF = this.product.selectedTitle['XOFF'];
-    this.selectedFormat = this.product.selectedTitle['formatNumber'];
-    this.finalTitle = this.product.title;
+    console.log(this.product);
+    if (this.product.selectedTitle['amount'])
+      this.titleAmount = this.product.selectedTitle['amount'];
+    if (this.product.selectedTitle['location'])
+      this.titleLocation = this.product.selectedTitle['location'];
+    if (this.product.selectedTitle['productName'])
+      this.titleProductName = this.product.selectedTitle['productName'];
+    if (this.product.selectedTitle['unitNumber'])
+      this.titleUnitNumber = this.product.selectedTitle['unitNumber'];
+    if (this.product.selectedTitle['XForY'])
+      this.titleXForY = this.product.selectedTitle['XForY'];
+    if (this.product.selectedTitle['XOFF'])
+      this.titleXOFF = this.product.selectedTitle['XOFF'];
+    if (this.product.selectedTitle['formatNumber'])
+      this.selectedFormat = this.product.selectedTitle['formatNumber'];
+    if (this.product.title) this.finalTitle = this.product.title;
   }
 
   updateProductName(event) {
