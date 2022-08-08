@@ -173,13 +173,27 @@ export class EditItemComponent implements OnInit {
       // console.log(this.datasrv.getPendingProductList()[id]);
       console.log(this.id);
       let pendingProductList = this.datasrv.getPendingProductList();
-      for (let pendingProduct of pendingProductList) {
-        // console.log(pendingProduct);
-        if (pendingProduct.id == this.id) {
-          this.pendingProduct = pendingProduct;
-          break;
+      if (!pendingProductList) {
+        let output: any;
+        this.datasrv.getProductInfo(this.id).subscribe({
+          next: (res) => {
+            output = res;
+          },
+          error: () => {
+            console.log('error getting product');
+          },
+          complete: () => {
+            this.pendingProduct = this.datasrv.createAndStoreProduct(output);
+          },
+        });
+      } else
+        for (let pendingProduct of pendingProductList) {
+          // console.log(pendingProduct);
+          if (pendingProduct.id == this.id) {
+            this.pendingProduct = pendingProduct;
+            break;
+          }
         }
-      }
       console.log(this.pendingProduct);
       this.editForm = this.fb.group({
         categories: [''],
@@ -288,6 +302,7 @@ export class EditItemComponent implements OnInit {
       this.titleProductName = this.suggestions[i][1];
     }
     this.selectedFormat = this.formats.indexOf(this.suggestions[i - 1]);
+    console.log(this.titleProductName);
     this.updateFinalString();
   }
 

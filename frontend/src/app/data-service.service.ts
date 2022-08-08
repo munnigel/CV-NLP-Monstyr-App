@@ -31,7 +31,7 @@ export class DataService implements OnInit {
   private pendingTab: number;
   private liveTab: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     //   console.log('getting');
@@ -212,6 +212,10 @@ export class DataService implements OnInit {
     return this.pendingProductList;
   }
 
+  getProductInfo(id: number) {
+    return this.http.get(`${API_URL}/posts/${id}`, this.getHttpOptions());
+  }
+
   async getEditingStatus(id: number) {
     let token = localStorage.getItem('loginToken');
     let res = await lastValueFrom(
@@ -359,6 +363,49 @@ export class DataService implements OnInit {
         continue;
       }
     }
+  }
+
+  createAndStoreProduct(res: any) {
+    try {
+      // console.log(res[i]);
+      let temp = new Product(
+        res.id,
+        res.sp_id,
+        res.pid,
+        res.status,
+        res.gen_title,
+        res.title,
+        res.gen_categories,
+        res.categories ? JSON.parse(res.categories) : undefined,
+        res.gen_start_date,
+        res.start_date,
+        res.gen_end_date,
+        res.end_date,
+        res.gen_tags,
+        res.tags ? JSON.parse(res.tags) : undefined,
+        res.gen_content,
+        res.content,
+        res.od_image,
+        res.images ? res.ocr_image : undefined,
+        res.score,
+        res.created_at,
+        res.updated_at,
+        res.od_latency,
+        res.ocr_latency,
+        res.ner_date_latency,
+        res.ner_categories_latency,
+        res.ner_title_latency
+      );
+      if (res.images)
+        temp.images = res.images
+          .replace('{', '')
+          .replace('}', '')
+          .split(',', 1);
+      return temp;
+    } catch (e) {
+      console.log(e);
+    }
+    return new Product();
   }
 
   addPost(formData: FormData) {
