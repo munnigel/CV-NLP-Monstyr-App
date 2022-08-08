@@ -79,15 +79,12 @@ body {
   padding-top: 7px;
 }
 
-
-
-
 .sub-login-header {
   font-size: 30px;
   font-weight: 500;
 }
 
-.wrapper>span {
+.wrapper > span {
   display: block;
   padding: 10px;
   /* border: 1px solid orange; */
@@ -128,7 +125,6 @@ body {
   100% {
     transform: translateY(-400%);
   }
-
 }
 
 /* .words {
@@ -176,7 +172,6 @@ body {
 }
 
 @keyframes animation {
-
   0%,
   10%,
   100% {
@@ -196,12 +191,10 @@ body {
   height: 250px;
 }
 
-
 .imgg {
   width: 150px;
   height: 150px;
 }
-
 
 .main-login-header {
   font-weight: 400;
@@ -369,14 +362,6 @@ body {
   padding: 0px 30px;
 }
 
-
-.item-page-container {
-  display: flex;
-  padding: 50px 0px;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
 .item-cont {
   display: flex;
   flex-direction: row;
@@ -519,15 +504,6 @@ body {
   margin: 10px;
 }
 
-.item-page-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 400px;
-  margin-right: 30px;
-  align-items: center;
-}
-
 .imagebtn {
   margin: 10px;
 }
@@ -535,14 +511,10 @@ body {
 .product-img {
   width: 350px;
   height: 350px;
-  border: 1px solid black;
-  border-radius: 10px;
 }
 
 .page-item-description {
   width: 350px;
-  height: 200px;
-  border: 1px solid black;
 }
 
 .text-align {
@@ -785,7 +757,7 @@ a {
 }
 
 .addAccBg {
-  background: #BABABA;
+  background: #bababa;
   height: fit-content;
 }
 
@@ -796,7 +768,7 @@ a {
 }
 
 .bgg {
-  background: #BABABA;
+  background: #bababa;
   height: 100%;
 }
 
@@ -819,6 +791,34 @@ a {
   margin-top: 100px;
 }
 
+.item-page-container {
+  display: flex;
+  padding: 50px 0px;
+  flex-direction: row;
+}
+
+.item-page-right {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item-page-left {
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .item-page-container {
+    flex-direction: column-reverse;
+  }
+}
+
 @media screen and (max-width: 1800px) {
   .button {
     padding: 0 50px;
@@ -834,7 +834,6 @@ a {
     width: 100%;
   }
 }
-
 
 @media screen and (max-width: 1080px) {
   .button {

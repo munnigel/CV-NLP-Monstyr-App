@@ -1,12 +1,9 @@
-#input-category {
-  width: 100%;
-  border-radius: 15px;
-  background-color: white;
-  border: 1px solid black;
+.edit-pending-post-main-container {
+  padding: 50px 50px;
 }
 
 .example-chip-list {
-  min-width: 1000px;
+  width: 100%;
 }
 
 .page-item-title {
@@ -16,7 +13,7 @@
 
 .dropdown {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .item-page-btn-container {
@@ -33,13 +30,9 @@
   border-radius: 15px;
 }
 
-.item-page-left {
-  padding-top: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 30px;
+.cards-container {
+  width: 100%;
+  min-width: 400px;
 }
 
 .mb-3:hover {

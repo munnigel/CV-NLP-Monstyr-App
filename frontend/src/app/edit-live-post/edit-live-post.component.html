@@ -1,18 +1,37 @@
-<h1 style="text-align: center; margin-top: 20px; "><b>Edit Live Post:</b></h1>
+<h1 style="text-align: center; margin-top: 20px"><b>Edit Live Post:</b></h1>
 
 <div class="item-page-container">
-  <div class="item-page-left2">
+  <div class="item-page-left">
     <form [formGroup]="editForm">
       <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="title-box">
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="title-box"
+        >
           <mat-label>Title</mat-label>
-          <input matInput class="titleInput" placeholder="New Title..." #titleInput [formControl]="titleCtrl" />
+          <input
+            matInput
+            class="titleInput"
+            placeholder="New Title..."
+            #titleInput
+            [formControl]="titleCtrl"
+          />
         </mat-form-field>
       </mat-card>
       <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="description-box">
+        <mat-form-field
+          class="example-chip-list"
+          appearance="fill"
+          id="description-box"
+        >
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="New Description" #descriptionInput [formControl]="descriptionCtrl"></textarea>
+          <textarea
+            matInput
+            placeholder="New Description"
+            #descriptionInput
+            [formControl]="descriptionCtrl"
+          ></textarea>
         </mat-form-field>
       </mat-card>
       <mat-card>
@@ -25,9 +44,13 @@
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input placeholder="New Tag..." [matChipInputFor]="chipList1"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTags($event)" />
+            <input
+              placeholder="New Tag..."
+              [matChipInputFor]="chipList1"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTags($event)"
+            />
           </mat-chip-list>
         </mat-form-field>
       </mat-card>
@@ -36,15 +59,22 @@
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Favorite Categories</mat-label>
           <mat-chip-list #chipList2 aria-label="Fruit selection">
-            <mat-chip *ngFor="let category of categories" (removed)="removeCategories(category)">
+            <mat-chip
+              *ngFor="let category of categories"
+              (removed)="removeCategories(category)"
+            >
               {{ category }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input placeholder="New Category..." [matChipInputFor]="chipList2"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addCategories($event)" />
+            <input
+              placeholder="New Category..."
+              [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addCategories($event)"
+            />
           </mat-chip-list>
         </mat-form-field>
       </mat-card>
@@ -52,15 +82,28 @@
         <mat-form-field appearance="fill">
           <mat-label>Enter a date range</mat-label>
           <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date" />
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date"
+            />
             <input matEndDate formControlName="end" placeholder="End date" />
           </mat-date-range-input>
           <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
 
-          <mat-error *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          <mat-error
+            *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')"
+            >Invalid start date</mat-error
+          >
+          <mat-error
+            *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+            >Invalid end date</mat-error
+          >
         </mat-form-field>
 
         <p>Selected range: {{ datePicker.value | json }}</p>
@@ -73,13 +116,28 @@
   </div>
 </div>
 <div class="item-page-btn-container">
-  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(product.id)">
+  <button
+    type="button"
+    class="btn btn-danger"
+    style="margin-right: 20px"
+    (click)="deletePost(product.id)"
+  >
     Delete Post
   </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="back-to-live1" (click)="onLive()">
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="back-to-live1"
+    (click)="onLive()"
+  >
     Back to Live Page
   </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="submit-btn" (click)="onSubmit()">
+  <button
+    type="button"
+    class="btn btn-primary item-page-btn"
+    id="submit-btn"
+    (click)="onSubmit()"
+  >
     Submit
   </button>
 </div>

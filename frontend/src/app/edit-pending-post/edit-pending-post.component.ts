@@ -39,7 +39,6 @@ export class EditItemComponent implements OnInit {
   category = '';
   promotionDate = '';
   popup;
-  editForm: UntypedFormGroup;
   error = false;
   errMsg: string;
   id: number;
@@ -195,12 +194,6 @@ export class EditItemComponent implements OnInit {
           }
         }
       console.log(this.pendingProduct);
-      this.editForm = this.fb.group({
-        categories: [''],
-        startDate: [''],
-        endDate: [''],
-        title: [''],
-      });
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
@@ -477,50 +470,39 @@ export class EditItemComponent implements OnInit {
 
   async onProcessed() {
     console.log(this.categories);
-    if (this.editForm.invalid) {
-      this.error = true;
-      this.errMsg = 'Please complete all required fields.';
-    } else {
-      this.pendingProduct.title = this.finalTitle;
-      this.pendingProduct.categories = this.categories;
-      this.pendingProduct.tags = this.tags;
-      this.pendingProduct.startDate = this.datePicker.get('start').value;
-      this.pendingProduct.endDate = this.datePicker.get('end').value;
-      this.pendingProduct.status = 'live';
-      this.datasrv.updatePost(this.pendingProduct).subscribe({
-        next: (v) => console.log(v),
-        error: (err) => {
-          console.log(err);
+    this.pendingProduct.title = this.finalTitle;
+    this.pendingProduct.categories = this.categories;
+    this.pendingProduct.tags = this.tags;
+    this.pendingProduct.startDate = this.datePicker.get('start').value;
+    this.pendingProduct.endDate = this.datePicker.get('end').value;
+    this.pendingProduct.status = 'live';
+    this.datasrv.updatePost(this.pendingProduct).subscribe({
+      next: (v) => console.log(v),
+      error: (err) => {
+        console.log(err);
+        if (err.error.errors == 'Nil JSON web token') {
+          console.log('need login');
+          this.router.navigate(['/']);
+        }
+      },
+      complete: async () => {
+        console.log('completed add');
+        try {
+          await this.datasrv.updateAllProductList();
+        } catch (err: any) {
           if (err.error.errors == 'Nil JSON web token') {
             console.log('need login');
             this.router.navigate(['/']);
           }
-        },
-        complete: async () => {
-          console.log('completed add');
-          try {
-            await this.datasrv.updateAllProductList();
-          } catch (err: any) {
-            if (err.error.errors == 'Nil JSON web token') {
-              console.log('need login');
-              this.router.navigate(['/']);
-            }
-            return;
-          }
-          this.router.navigate(['/home/processed']);
-        },
-      });
-    }
+          return;
+        }
+        this.router.navigate(['/home/processed']);
+      },
+    });
   }
 
   onPending() {
     this.router.navigate(['home/pending'], {});
-  }
-
-  makeDescription() {
-    this.editForm.patchValue({ description: 'TAGS GENERATED WAAAA' });
-    // this.description = 'DESCRIPTION GENERATED WAAAA';
-    console.log('description activated');
   }
 
   makeTitle() {
