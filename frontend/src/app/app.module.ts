@@ -44,6 +44,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 import { CookieService } from 'ngx-cookie-service';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSidenavModule
   ],
   providers: [
     FileUploadService,

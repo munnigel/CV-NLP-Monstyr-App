@@ -1,6 +1,5 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data-service.service';
 
 @Component({
@@ -11,8 +10,31 @@ import { DataService } from '../data-service.service';
 export class HomePageComponent implements OnInit {
   tabIndex: number;
   tabList: string[];
+  sideNavOpen: boolean;
+  sidePadding: boolean;
+  getScreenWidth: number;
+  getScreenHeight: number;
+  mobile: boolean;
+  opened: boolean;
+
   constructor(private router: Router, private dataSrv: DataService) {}
-  ngOnInit(): void {
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+    if (this.getScreenWidth < 900) {
+      this.mobile = true;
+      this.opened = false;
+    } else {
+      this.mobile = false;
+      this.opened = true;
+    }
+  }
+
+  ngOnInit() {
+    this.onWindowResize();
+    this.opened = !this.mobile;
     this.tabList = [
       'overview',
       'processed',
@@ -31,6 +53,9 @@ export class HomePageComponent implements OnInit {
   }
 
   async onTabClick(index: number) {
+    console.log(this.mobile);
+    if (this.mobile) this.opened = false;
+    console.log(this.opened);
     if (index == 6) {
       console.log('logout');
       localStorage.removeItem('loginToken');
@@ -66,5 +91,11 @@ export class HomePageComponent implements OnInit {
       }
     }
     this.router.navigate([`/home/${this.tabList[index]}`]);
+  }
+
+  toggleSideNav() {
+    console.log('switch');
+    this.opened = !this.opened;
+    console.log(this.opened);
   }
 }
