@@ -30,6 +30,7 @@ export class DataService implements OnInit {
   rejectedAiMl: number;
   private pendingTab: number;
   private liveTab: number;
+  private currentUser: Account;
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +44,19 @@ export class DataService implements OnInit {
     //   await this.updateAllProductList();
     //   console.log(API_URL);
     //   await this.updateOverviewData();
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
+  setCurrentUser(currentUser: Account) {
+    console.log(currentUser);
+    this.currentUser = currentUser;
+  }
+
+  getCurrentUserInfo(id: number) {
+    return this.http.get(`${API_URL}/users/${id}`, this.getHttpOptions());
   }
 
   private getHttpOptions() {
