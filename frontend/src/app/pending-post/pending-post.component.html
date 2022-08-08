@@ -34,29 +34,21 @@
   >
     <ng-container *ngFor="let product of pendingProductList; let i = index">
       <mat-card (click)="selectPost(i)" class="pending-posts-item fade">
-        <mat-card-title-group>
-          <img
-            [src]="product.images"
-            alt="img"
-            style="object-fit: contain"
-            class="pending-posts-img"
-          />
-          <div class="pending-posts-details">
-            <h3>{{ product.content }}</h3>
-          </div></mat-card-title-group
-        >
+        <div class="pending-posts-img">
+          <img [src]="product.images" alt="img" />
+        </div>
+        <div class="pending-posts-details">
+          <h3>{{ product.content }}</h3>
+        </div>
       </mat-card>
     </ng-container>
   </div>
   <div class="pending-posts-container mobile" id="pending-post-list-container">
     <ng-container *ngFor="let product of pendingProductList; let i = index">
       <mat-card (click)="selectPost(i)" class="pending-posts-item fade">
-        <img
-          [src]="product.images"
-          alt="img"
-          style="object-fit: contain"
-          class="pending-posts-img"
-        />
+        <div class="pending-posts-img">
+          <img [src]="product.images" alt="img" style="object-fit: contain" />
+        </div>
         <hr />
         <mat-card-content>
           <p>{{ product.content }}</p>

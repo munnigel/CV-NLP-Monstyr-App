@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
   getScreenHeight: number;
   mobile: boolean;
   opened: boolean;
+  sideNavMode;
 
   constructor(private router: Router, private dataSrv: DataService) {}
 
@@ -26,9 +27,11 @@ export class HomePageComponent implements OnInit {
     if (this.getScreenWidth < 900) {
       this.mobile = true;
       this.opened = false;
+      this.sideNavMode = 'over';
     } else {
       this.mobile = false;
       this.opened = true;
+      this.sideNavMode = 'side';
     }
   }
 
@@ -94,8 +97,15 @@ export class HomePageComponent implements OnInit {
   }
 
   toggleSideNav() {
-    console.log('switch');
-    this.opened = !this.opened;
-    console.log(this.opened);
+    // console.log('test');
+    if (this.mobile) {
+      console.log('switch');
+      this.opened = !this.opened;
+      console.log(this.opened);
+    }
+  }
+  toggleOutsideSideNav() {
+    console.log('test');
+    if (this.mobile) this.opened = false;
   }
 }

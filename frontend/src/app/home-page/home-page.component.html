@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side" [opened]="opened">
+  <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="opened">
     <div class="nav-bar">
       <img src="../../assets/pictures/mon.gif" alt="Cutie" class="imgg" />
       <div class="nav-bar-main-title">Monstyr x AI</div>
@@ -84,8 +84,10 @@
     </div>
   </mat-sidenav>
 
-  <mat-sidenav-content style="position: relative">
-    <router-outlet></router-outlet>
+  <mat-sidenav-content>
+    <div (click)="toggleOutsideSideNav()">
+      <router-outlet></router-outlet>
+    </div>
     <button
       mat-mini-fab
       color="primary"
