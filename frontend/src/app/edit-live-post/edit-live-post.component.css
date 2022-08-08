@@ -1,8 +1,16 @@
 .example-chip-list {
-  width: 1000px;
+  width: 100%;
 }
 
 .item-page-btn-container {
   display: flex;
   justify-content: center;
+}
+
+.edit-live-post-main-container {
+  padding: 50px 50px;
+}
+
+.description-textarea {
+  resize: none;
 }

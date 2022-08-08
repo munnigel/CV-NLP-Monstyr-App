@@ -30,15 +30,6 @@
   border-radius: 15px;
 }
 
-.cards-container {
-  width: 100%;
-  min-width: 400px;
-}
-
 .mb-3:hover {
   background: none;
-}
-
-mat-card {
-  margin: 30px 0px;
 }
