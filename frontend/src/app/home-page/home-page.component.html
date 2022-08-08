@@ -41,21 +41,17 @@
           id="developer-tools-tab"
           (click)="onTabClick(3)"
         >
-          <img class="icon" src="../../assets/pictures/Untitled design-4.png" />
-          <button class="nav-bar-btn">Developer Tools</button>
+          <img class="icon" src="../../assets/pictures/add-image.png" />
+          <button class="nav-bar-btn">Add Post</button>
           <img
             class="icon"
             *ngIf="tabIndex == 3"
             src="../../assets/pictures/Untitled design-5.png"
           />
         </div>
-        <div
-          class="tab-container"
-          id="developer-tools-tab"
-          (click)="onTabClick(4)"
-        >
-          <img class="icon" src="../../assets/pictures/add-image.png" />
-          <button class="nav-bar-btn">Add Post</button>
+        <div class="tab-container" id="settings-tab" (click)="onTabClick(4)">
+          <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
+          <button class="nav-bar-btn">Settings</button>
           <img
             class="icon"
             *ngIf="tabIndex == 4"
@@ -64,19 +60,10 @@
         </div>
         <div class="tab-container" id="settings-tab" (click)="onTabClick(5)">
           <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
-          <button class="nav-bar-btn">Settings</button>
-          <img
-            class="icon"
-            *ngIf="tabIndex == 5"
-            src="../../assets/pictures/Untitled design-5.png"
-          />
-        </div>
-        <div class="tab-container" id="settings-tab" (click)="onTabClick(6)">
-          <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
           <button class="nav-bar-btn">Log out</button>
           <img
             class="icon"
-            *ngIf="tabIndex == 6"
+            *ngIf="tabIndex == 5"
             src="../../assets/pictures/Untitled design-5.png"
           />
         </div>

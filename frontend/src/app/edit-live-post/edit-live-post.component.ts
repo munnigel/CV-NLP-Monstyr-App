@@ -10,7 +10,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { DeveloperToolsPageComponent } from '../developer-tools-page/developer-tools-page.component';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -29,7 +28,6 @@ export class EditProcessedPostComponent implements OnInit {
   error = false;
   errMsg: string;
   id: number;
-  titleCtrl = new UntypedFormControl('');
   descriptionCtrl = new UntypedFormControl('');
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -61,7 +59,6 @@ export class EditProcessedPostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private datasrv: DataService,
     private router: Router,
-    private fb: UntypedFormBuilder,
     private dialog: MatDialog
   ) {
     this.datePicker = new UntypedFormGroup({
@@ -86,7 +83,7 @@ export class EditProcessedPostComponent implements OnInit {
           },
           complete: () => {
             this.product = this.datasrv.createAndStoreProduct(output);
-            if (this.product.title) this.titleCtrl.setValue(this.product.title);
+            this.updateAllFields();
             if (this.product.content)
               this.descriptionCtrl.setValue(this.product.content);
             if (this.product.tags) this.tags = this.product.tags;
@@ -106,7 +103,7 @@ export class EditProcessedPostComponent implements OnInit {
           }
         }
       console.log(this.product);
-      if (this.product.title) this.titleCtrl.setValue(this.product.title);
+      this.updateAllFields();
       if (this.product.content)
         this.descriptionCtrl.setValue(this.product.content);
       if (this.product.tags) this.tags = this.product.tags;
@@ -116,6 +113,17 @@ export class EditProcessedPostComponent implements OnInit {
       if (this.product.endDate)
         this.datePicker.patchValue({ end: this.product.endDate });
     });
+  }
+
+  updateAllFields() {
+    this.titleAmount = this.product.selectedTitle['amount'];
+    this.titleLocation = this.product.selectedTitle['location'];
+    this.titleProductName = this.product.selectedTitle['productName'];
+    this.titleUnitNumber = this.product.selectedTitle['unitNumber'];
+    this.titleXForY = this.product.selectedTitle['XForY'];
+    this.titleXOFF = this.product.selectedTitle['XOFF'];
+    this.selectedFormat = this.product.selectedTitle['formatNumber'];
+    this.finalTitle = this.product.title;
   }
 
   updateProductName(event) {
@@ -233,7 +241,6 @@ export class EditProcessedPostComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.product.title = this.titleCtrl.value;
     this.product.content = this.descriptionCtrl.value;
     this.product.categories = this.categories;
     this.product.startDate = this.datePicker.get('start').value;

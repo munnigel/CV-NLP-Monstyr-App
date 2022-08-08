@@ -6,7 +6,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
 import { LivePostPageComponent } from './live-post/live-post.component';
-import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
@@ -25,13 +24,7 @@ const routes: Routes = [
       { path: 'overview', component: OverviewPageComponent },
       { path: 'pending', component: PendingPostPageComponent },
       { path: 'processed', component: LivePostPageComponent },
-      {
-        path: 'developertools',
-        component: DeveloperToolsPageComponent,
-      },
       { path: 'addpost', component: AddPostComponent },
-      { path: 'developertools/live/:id', redirectTo: 'developertools' },
-      { path: 'developertools/pending/:id', redirectTo: 'developertools' },
       { path: 'settings', component: SettingsPageComponent },
     ],
   },

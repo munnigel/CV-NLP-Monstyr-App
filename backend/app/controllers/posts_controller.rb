@@ -538,6 +538,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen, :meta_date_gen, :meta_title_gen)
+      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :selected_title,:gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen, :meta_date_gen, :meta_title_gen)
     end
 end

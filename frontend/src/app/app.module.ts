@@ -12,7 +12,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
 import { LivePostPageComponent } from './live-post/live-post.component';
-import { DeveloperToolsPageComponent } from './developer-tools-page/developer-tools-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,7 +43,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 import { CookieService } from 'ngx-cookie-service';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -55,10 +54,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     OverviewPageComponent,
     PendingPostPageComponent,
     LivePostPageComponent,
-    DeveloperToolsPageComponent,
     SettingsPageComponent,
     OverviewDashboardComponent,
-    // CardComponent,
     DashboardCardComponent,
     LatencyBarComponent,
     AccuracyLineComponent,
@@ -93,7 +90,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   providers: [
     FileUploadService,

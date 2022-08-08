@@ -254,8 +254,11 @@ export class EditItemComponent implements OnInit {
     if (this.selectedFormat == 0) {
       this.finalTitle = 'New! ' + this.titleProductName;
     } else if (this.selectedFormat == 1) {
-      this.finalTitle =
-        'New Outlet! ' + this.titleLocation + ', ' + this.titleUnitNumber;
+      if (!this.titleUnitNumber)
+        this.finalTitle = 'New Outlet! ' + this.titleLocation;
+      else
+        this.finalTitle =
+          'New Outlet! ' + this.titleLocation + ', ' + this.titleUnitNumber;
     } else if (this.selectedFormat == 2) {
       this.finalTitle = this.titleXOFF + ' ' + this.titleProductName;
     } else if (this.selectedFormat == 3) {
@@ -470,12 +473,22 @@ export class EditItemComponent implements OnInit {
 
   async onProcessed() {
     console.log(this.categories);
+    this.pendingProduct.selectedTitle = {
+      productName: this.titleProductName,
+      amount: this.titleAmount,
+      XForY: this.titleXForY,
+      XOFF: this.titleXOFF,
+      unitNumber: this.titleUnitNumber,
+      location: this.titleLocation,
+      formatNumber: this.selectedFormat,
+    };
     this.pendingProduct.title = this.finalTitle;
     this.pendingProduct.categories = this.categories;
     this.pendingProduct.tags = this.tags;
     this.pendingProduct.startDate = this.datePicker.get('start').value;
     this.pendingProduct.endDate = this.datePicker.get('end').value;
     this.pendingProduct.status = 'live';
+    console.log(this.pendingProduct);
     this.datasrv.updatePost(this.pendingProduct).subscribe({
       next: (v) => console.log(v),
       error: (err) => {
@@ -578,6 +591,7 @@ export class EditItemComponent implements OnInit {
     }
 
     if (temp != null) {
+      this.categories = [];
       for (let i = 0; i < 5; i++) {
         this.categories.push(temp[i][0]);
       }

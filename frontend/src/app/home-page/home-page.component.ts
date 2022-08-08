@@ -42,7 +42,6 @@ export class HomePageComponent implements OnInit {
       'overview',
       'processed',
       'pending',
-      'developertools',
       'addpost',
       'settings',
       'Logout',
@@ -59,7 +58,7 @@ export class HomePageComponent implements OnInit {
     console.log(this.mobile);
     if (this.mobile) this.opened = false;
     console.log(this.opened);
-    if (index == 6) {
+    if (index == 5) {
       console.log('logout');
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);

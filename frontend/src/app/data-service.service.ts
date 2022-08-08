@@ -331,6 +331,7 @@ export class DataService implements OnInit {
           res[i].pid,
           res[i].status,
           res[i].gen_title,
+          res[i].selected_title ? JSON.parse(res[i].selected_title) : undefined,
           res[i].title,
           res[i].gen_categories,
           res[i].categories ? JSON.parse(res[i].categories) : undefined,
@@ -374,6 +375,7 @@ export class DataService implements OnInit {
         res.pid,
         res.status,
         res.gen_title,
+        res.selected_title ? JSON.parse(res.selected_title) : undefined,
         res.title,
         res.gen_categories,
         res.categories ? JSON.parse(res.categories) : undefined,
@@ -424,7 +426,8 @@ export class DataService implements OnInit {
   updatePost(product: Product): Observable<Product> {
     console.log(product);
     console.log('update');
-    console.log(product.categories);
+    console.log(product.selectedTitle);
+    console.log(JSON.stringify(product.selectedTitle));
     var formData = new FormData();
     if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
     if (product.pid) formData.append('pid', product.pid.toString());
@@ -432,6 +435,8 @@ export class DataService implements OnInit {
     if (product.title) formData.append('title', product.title);
     if (product.genTitle)
       formData.append('gen_title', JSON.stringify(product.genTitle));
+    if (product.selectedTitle)
+      formData.append('selected_title', JSON.stringify(product.selectedTitle));
     if (product.categories)
       formData.append('categories', JSON.stringify(product.categories));
     if (product.genCategories)
