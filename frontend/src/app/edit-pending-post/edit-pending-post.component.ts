@@ -23,9 +23,6 @@ import { fromEvent, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatInput } from '@angular/material/input';
-import { minBy } from 'cypress/types/lodash';
-import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-edit-item',
@@ -171,29 +168,19 @@ export class EditItemComponent implements OnInit {
       this.id = params['id'];
       // console.log(this.datasrv.getPendingProductList()[id]);
       console.log(this.id);
-      let pendingProductList = this.datasrv.getPendingProductList();
-      if (!pendingProductList) {
-        let output: any;
-        this.datasrv.getProductInfo(this.id).subscribe({
-          next: (res) => {
-            output = res;
-          },
-          error: () => {
-            console.log('error getting product');
-          },
-          complete: () => {
-            this.pendingProduct = this.datasrv.createAndStoreProduct(output);
-          },
-        });
-      } else
-        for (let pendingProduct of pendingProductList) {
-          // console.log(pendingProduct);
-          if (pendingProduct.id == this.id) {
-            this.pendingProduct = pendingProduct;
-            break;
-          }
-        }
-      console.log(this.pendingProduct);
+      let output: any;
+      this.datasrv.getProductInfo(this.id).subscribe({
+        next: (res) => {
+          output = res;
+        },
+        error: () => {
+          console.log('error getting product');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.pendingProduct = this.datasrv.createAndStoreProduct(output);
+        },
+      });
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
@@ -500,15 +487,6 @@ export class EditItemComponent implements OnInit {
       },
       complete: async () => {
         console.log('completed add');
-        try {
-          await this.datasrv.updateAllProductList();
-        } catch (err: any) {
-          if (err.error.errors == 'Nil JSON web token') {
-            console.log('need login');
-            this.router.navigate(['/']);
-          }
-          return;
-        }
         this.router.navigate(['/home/processed']);
       },
     });
@@ -664,7 +642,6 @@ export class EditItemComponent implements OnInit {
           },
           complete: async () => {
             console.log('post deleted');
-            await this.datasrv.updateAllProductList();
             this.router.navigate(['/home/pending']);
           },
         });

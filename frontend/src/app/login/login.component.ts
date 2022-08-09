@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CallTracker } from 'assert';
 import { CookieService } from 'ngx-cookie-service';
+import { Account } from '../account.model';
 import { DataService } from '../data-service.service';
 import { Product } from '../product.model';
 
@@ -17,12 +19,15 @@ export class LoginComponent implements OnInit {
   pendingProductList: Product[] = [];
   postForm: FormGroup;
 
+
   constructor(
     private router: Router,
     private titleService: Title,
     private dataSrv: DataService,
     private fb: FormBuilder
-  ) {}
+  ) { }
+
+
 
   async ngOnInit() {
     this.titleService.setTitle('Login');
@@ -30,19 +35,20 @@ export class LoginComponent implements OnInit {
       email: [''],
       password: [''],
     });
-    try {
-      console.log('try auto login');
-      await this.dataSrv.updateAllProductList();
-      await this.dataSrv.updateOverviewData();
-      this.router.navigate(['/home'], {});
-    } catch (err: any) {
-      // console.log(err);
-      if (err.error)
-        if (err.error.errors == 'Nil JSON web token') {
-          console.log('need login');
-        }
-    }
+    this.dataSrv.getNoOfLivePosts().subscribe({
+      next: () => {},
+      error: () => {
+        console.log('needs login');
+      },
+      complete: () => {
+        this.router.navigate(['/home']);
+      },
+    });
   }
+
+
+
+
 
   async onLogin() {
     let regex = new RegExp('[a-z0-9]+@[mymail]+.[sutd]+.[edu]+.[sg]');
@@ -66,6 +72,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     let token = '';
+    let id: number;
     var formData: any = new FormData();
     formData.append('email', this.postForm.get('email').value);
     formData.append('password', this.postForm.get('password').value);
@@ -76,15 +83,31 @@ export class LoginComponent implements OnInit {
         console.log(token);
         localStorage.setItem('loginToken', token);
         console.log('set token');
+        id = data['id'];
       },
       error: (err) => {
         if (err.error.error == 'unauthorized')
           alert('Please check login details. Wrong email/password');
       },
-      complete: async () => {
-        await this.dataSrv.updateAllProductList();
-        await this.dataSrv.updateOverviewData();
-        this.router.navigate(['/home']);
+      complete: () => {
+        let currentUser: Account;
+        this.dataSrv.getCurrentUserInfo(id).subscribe({
+          next: (res) => {
+            currentUser = new Account(
+              res['name'],
+              res['username'],
+              res['email'],
+              res['password_digest'],
+              res['account_type'],
+              res['profile_pic']
+            );
+          },
+          error: () => {},
+          complete: () => {
+            this.dataSrv.setCurrentUser(currentUser);
+            this.router.navigate(['/home']);
+          },
+        });
       },
     });
     // console.log('getting');

@@ -30,6 +30,7 @@ export class DataService implements OnInit {
   rejectedAiMl: number;
   private pendingTab: number;
   private liveTab: number;
+  private currentUser: Account;
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +44,19 @@ export class DataService implements OnInit {
     //   await this.updateAllProductList();
     //   console.log(API_URL);
     //   await this.updateOverviewData();
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
+  setCurrentUser(currentUser: Account) {
+    console.log(currentUser);
+    this.currentUser = currentUser;
+  }
+
+  getCurrentUserInfo(id: number) {
+    return this.http.get(`${API_URL}/users/${id}`, this.getHttpOptions());
   }
 
   private getHttpOptions() {
@@ -63,18 +77,6 @@ export class DataService implements OnInit {
     };
   }
 
-  async renderMainPage() {
-    console.log('getting');
-    this.productList = [];
-    this.liveProductList = [];
-    this.pendingProductList = [];
-    this.setPendingTab(1);
-    this.setLiveTab(1);
-    await this.updateAllProductList();
-    console.log(API_URL);
-    await this.updateOverviewData();
-  }
-
   setPendingTab(i: number) {
     this.pendingTab = i;
   }
@@ -89,51 +91,43 @@ export class DataService implements OnInit {
     return this.liveTab;
   }
 
-  async nextPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab < (await this.getNoOfPendingPosts()) / 15) {
-      this.pendingTab++;
-    }
+  getNoOfPendingPosts() {
+    return this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions());
   }
 
-  prevPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab > 1) {
-      this.pendingTab--;
-    }
+  getNoOfLivePosts() {
+    return this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions());
   }
 
-  async getNoOfPendingPosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions())
+  getODlatency() {
+    return this.http.get(`${API_URL}/odlatency`, this.getHttpOptions());
+  }
+
+  getOCRlatency() {
+    return this.http.get(`${API_URL}/ocrlatency`, this.getHttpOptions());
+  }
+
+  getNERDateLatency() {
+    return this.http.get(`${API_URL}/nerdatelatency`, this.getHttpOptions());
+  }
+
+  getNERCategoriesLatency() {
+    return this.http.get(
+      `${API_URL}/nercategorieslatency`,
+      this.getHttpOptions()
     );
-
-    console.log(res);
-    return res.noofpendingposts;
   }
 
-  async nextLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab < (await this.getNoOfLivePosts()) / 15) {
-      this.liveTab++;
-    }
+  getNERTitleLatency() {
+    return this.http.get(`${API_URL}/nertitlelatency`, this.getHttpOptions());
   }
 
-  prevLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab > 1) {
-      this.liveTab--;
-    }
+  getacceptedAiML() {
+    return this.http.get(`${API_URL}/acceptedaiml`, this.getHttpOptions());
   }
 
-  async getNoOfLivePosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions())
-    );
-    console.log(res);
-    return res.noofliveposts;
+  getrejectedAiML() {
+    return this.http.get(`${API_URL}/rejectedaiml`, this.getHttpOptions());
   }
 
   async updateOverviewData() {
@@ -244,82 +238,21 @@ export class DataService implements OnInit {
     return res['cats_dict'];
   }
 
-  async updateAllLiveProductList() {
-    this.liveProductList = [];
-    let token = localStorage.getItem('loginToken');
-    let res2: any = await lastValueFrom(
-      this.http.get(
-        `${API_URL}/posts/live/${this.liveTab}`,
-        this.getHttpOptions()
-      )
+  getAllLiveProductList() {
+    return this.http.get(
+      `${API_URL}/posts/live/${this.pendingTab}`,
+      this.getHttpOptions()
     );
-    console.log(this.getHttpOptions());
-    console.log(this.liveTab);
-    console.log('live products');
-    console.log(res2);
-    if (res2) {
-      this.createAndStoreProductList(this.liveProductList, res2);
-    }
   }
 
-  async updateAllPendingProductList() {
-    this.pendingProductList = [];
-    let token = localStorage.getItem('loginToken');
-    console.log(this.getHttpOptions());
-    let res3: any = await lastValueFrom(
-      this.http.get(
-        `${API_URL}/posts/pending/${this.pendingTab}`,
-        this.getHttpOptions()
-      )
+  getAllPendingProductList() {
+    return this.http.get(
+      `${API_URL}/posts/pending/${this.pendingTab}`,
+      this.getHttpOptions()
     );
-    console.log(this.pendingTab);
-    console.log('pending products');
-    console.log(res3);
-    this.createAndStoreProductList(this.pendingProductList, res3);
-    console.log(this.pendingProductList);
   }
 
-  async updateAllProductList() {
-    console.log('getToken');
-    console.log(localStorage.getItem('loginToken'));
-    this.productList = [];
-    this.pendingProductList = [];
-    this.liveProductList = [];
-    let token = localStorage.getItem('loginToken');
-    let res1: any = await lastValueFrom(
-      this.http.get(`${API_URL}/allpostsjson`, this.getHttpOptions())
-    );
-    console.log('all products');
-    console.log(res1);
-    console.log(this.productList);
-    this.createAndStoreProductList(this.productList, res1);
-    console.log(this.productList);
-    console.log(this.liveTab);
-    let res2: any = await lastValueFrom(
-      this.http.get(
-        `${API_URL}/posts/live/${this.liveTab}`,
-        this.getHttpOptions()
-      )
-    );
-    // console.log('live products');
-    console.log(res2);
-    if (res2) {
-      this.createAndStoreProductList(this.liveProductList, res2);
-    }
-    // console.log(this.liveProductList);
-    let res3: any = await lastValueFrom(
-      this.http.get(
-        `${API_URL}/posts/pending/${this.pendingTab}`,
-        this.getHttpOptions()
-      )
-    );
-    // console.log('pending products');
-    // console.log(res3);
-    this.createAndStoreProductList(this.pendingProductList, res3);
-    console.log(this.pendingProductList);
-  }
-
-  private createAndStoreProductList(list: Product[], res: any) {
+  createAndStoreProductList(list: Product[], res: any) {
     // console.log(list);
     // console.log(res);
     for (let i = 0; i < res.length; i++) {

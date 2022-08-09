@@ -3,7 +3,6 @@ import { DataService } from '../data-service.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Product } from '../product.model';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-pending-post-page',
@@ -11,9 +10,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./pending-post.component.css'],
 })
 export class PendingPostPageComponent implements OnInit {
-  tabIndex: number;
-  showItem: boolean;
   pendingProductList: Product[];
+  currentPage: number;
+  maxPage: number;
   constructor(
     private dataSrv: DataService,
     private router: Router,
@@ -21,43 +20,67 @@ export class PendingPostPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tabIndex = 2;
-    this.showItem = false;
-    this.pendingProductList = this.dataSrv.getPendingProductList();
-    if (!this.pendingProductList) {
-      this.router.navigate(['/']);
-      return;
-    }
-    console.log(this.pendingProductList[0]);
-    console.log(this.pendingProductList);
+    this.dataSrv.getAllPendingProductList().subscribe({
+      next: (res) => {
+        this.pendingProductList = [];
+        this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
+      },
+      error: () => {
+        console.log('error getting pending product');
+        this.router.navigate(['/']);
+      },
+      complete: () => {
+        this.currentPage = 1;
+        this.dataSrv.getNoOfPendingPosts().subscribe({
+          next: (res: any) => {
+            let temp = res.noofpendingposts;
+            this.maxPage = Math.ceil(temp / 15);
+          },
+          error: () => {},
+          complete: () => {
+            console.log('get max page');
+            console.log(this.maxPage);
+          },
+        });
+      },
+    });
     this.titleService.setTitle('pending-posts');
   }
 
   async nextPage() {
-    try {
-      this.dataSrv.nextPendingTab();
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem('loginToken');
-      this.router.navigate(['/']);
-      return;
+    if (this.currentPage < this.maxPage) {
+      this.dataSrv.setPendingTab(this.currentPage + 1);
+      this.dataSrv.getAllPendingProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
+        },
+        error: () => {
+          console.log('error getting pending products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage += 1;
+        },
+      });
     }
-    await this.dataSrv.updateAllProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
   }
 
   async prevPage() {
-    this.dataSrv.prevPendingTab();
-    await this.dataSrv.updateAllProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
-  }
-
-  onTabClick(index: number) {
-    this.tabIndex = index;
-  }
-
-  onItemClick() {
-    this.showItem = true;
+    if (this.currentPage > 1) {
+      this.dataSrv.setPendingTab(this.currentPage - 1);
+      this.dataSrv.getAllPendingProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
+        },
+        error: () => {
+          console.log('error getting pending products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage -= 1;
+        },
+      });
+    }
   }
 
   onFilter(index: number) {}

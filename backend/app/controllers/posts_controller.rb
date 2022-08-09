@@ -552,6 +552,124 @@ class PostsController < ApplicationController
     render json: @post.to_json
   end
 
+  # posts search feature
+  def search
+
+    @search_ids_repeated = {}
+    @search_results = []
+    @search_terms = params[:search].downcase.split
+
+    # search by title, store ids in search_ids_repeated hash
+    @posts = Post.where("title is not null")
+    @posts.each do |titledpost|
+      @search_terms.each do |term|
+        if titledpost.title.downcase.include? term
+          if @search_ids_repeated[titledpost.id]
+            @search_ids_repeated[titledpost.id] += 1
+          else
+            @search_ids_repeated[titledpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by tags, store ids in search_ids_repeated hash
+    @posts = Post.where("tags is not null")
+    @posts.each do |taggedpost|
+      @search_terms.each do |terms|
+        if taggedpost.tags.downcase.include? terms
+          if @search_ids_repeated[taggedpost.id]
+            @search_ids_repeated[taggedpost.id] += 1
+          else
+            @search_ids_repeated[taggedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by categories, store ids in search_ids_repeated hash
+    @posts = Post.where("categories is not null")
+    @posts.each do |categorizedpost|
+      @search_terms.each do |terms|
+        if categorizedpost.categories.downcase.include? terms
+          if @search_ids_repeated[categorizedpost.id]
+            @search_ids_repeated[categorizedpost.id] += 1
+          else
+            @search_ids_repeated[categorizedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by content, store ids in search_ids_repeated hash
+    @posts = Post.where("content is not null")
+    @posts.each do |contentedpost|
+      @search_terms.each do |terms|
+        if contentedpost.content.downcase.include? terms
+          if @search_ids_repeated[contentedpost.id]
+            @search_ids_repeated[contentedpost.id] += 1
+          else
+            @search_ids_repeated[contentedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by dates (start and/or end), store ids in search_ids_repeated hash
+    @posts = Post.where("start_date is not null")
+    @posts.each do |startdatepost|
+      @search_terms.each do |terms|
+        if startdatepost.start_date.to_s.downcase.include? terms
+          if @search_ids_repeated[startdatepost.id]
+            @search_ids_repeated[startdatepost.id] += 1
+          else
+            @search_ids_repeated[startdatepost.id] = 1
+          end
+        end
+      end
+    end
+
+    @posts = Post.where("end_date is not null")
+    @posts.each do |enddatepost|
+      @search_terms.each do |terms|
+        if enddatepost.title.downcase.include? terms
+          if @search_ids_repeated[enddatepost.id]
+            @search_ids_repeated[enddatepost.id] += 1
+          else
+            @search_ids_repeated[enddatepost.id] = 1
+          end
+        end
+      end
+    end
+
+    # generate search_ids_processed, a sorted array of unique ids from search_ids_repeated,
+    # with more occurences of a particular id pushing the id higher up in the array
+    @search_ids_processed = []
+    @search_ids_sorted = @search_ids_repeated.sort_by(&:last).reverse
+    @search_ids_sorted.each do |id|
+      @search_ids_processed.append(id[0])
+    end
+
+    # gather data of found ids from db
+    # @search_results = @search_ids_repeated
+    @search_ids_processed.each do |result|
+      # @search_results.append(result)
+      @search_results.append(Post.where("id = #{result.to_s}"))
+    end
+
+    # @search_results = @search_ids_sorted
+
+    # render json response of search results
+    if @search_results == []
+      render json: { results: "no results" }
+    else
+      respond_to do |format|
+        format.json {render json: @search_results}
+      end
+    end
+
+  end
+
   private
   def clean_emoji(str='')
 		str=str.force_encoding('utf-8').encode
@@ -579,6 +697,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :selected_title,:gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen, :meta_date_gen, :meta_title_gen)
+      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :selected_title,
+                    :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date,
+                    :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images,
+                    :content, :score, :od_latency, :ocr_latency, :ner_date_latency,
+                    :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen,
+                    :meta_date_gen, :meta_title_gen, :search)
     end
 end

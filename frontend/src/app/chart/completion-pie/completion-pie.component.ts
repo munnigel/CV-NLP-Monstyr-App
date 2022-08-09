@@ -11,21 +11,40 @@ export class CompletionPieComponent implements OnInit {
   constructor(private dataSrv: DataService) {}
   completionPie: Chart;
   ngOnInit(): void {
-    if (!this.completionPie) console.log(this.dataSrv.livePercentage);
-    console.log(this.dataSrv.pendingPercentage);
-    this.completionPie = new Chart('completion-pie', {
-      type: 'doughnut',
-      data: {
-        labels: ['Live', 'Pending'],
-        datasets: [
-          {
-            label: 'Completion of Posts',
-            backgroundColor: ['#228B22', '#AFE1AF'],
-            data: [this.dataSrv.livePercentage, this.dataSrv.pendingPercentage],
-          },
-        ],
+    let livePercentage;
+    let pendingPercentage;
+    this.dataSrv.getNoOfLivePosts().subscribe({
+      next: (res) => {
+        livePercentage = res['noofliveposts'];
       },
-      options: { responsive: false },
+      error: () => {},
+      complete: () => {
+        this.dataSrv.getNoOfPendingPosts().subscribe({
+          next: (res2) => {
+            pendingPercentage = res2['noofpendingposts'];
+          },
+          error: () => {},
+          complete: () => {
+            this.completionPie = new Chart('completion-pie', {
+              type: 'doughnut',
+              data: {
+                labels: ['Live', 'Pending'],
+                datasets: [
+                  {
+                    label: 'Completion of Posts',
+                    backgroundColor: ['#228B22', '#AFE1AF'],
+                    data: [
+                      this.dataSrv.livePercentage,
+                      this.dataSrv.pendingPercentage,
+                    ],
+                  },
+                ],
+              },
+              options: { responsive: false },
+            });
+          },
+        });
+      },
     });
   }
 }

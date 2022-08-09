@@ -33,3 +33,58 @@
 .mb-3:hover {
   background: none;
 }
+
+.edit-pending-page-btn {
+  font-size: 15px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.edit-pending-page-btn:last-child {
+  margin-right: 0px;
+}
+
+#delete-post {
+  background-color: rgb(244, 67, 54, 0.5);
+  color: black;
+}
+
+.item-page-btn {
+  width: 160px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.item-page-btn:first-child {
+  margin-right: 50px;
+}
+
+.item-page-btn:last-child {
+  margin-right: 0px;
+}
+
+#submit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .item-page-btn-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  .item-page-btn {
+    margin-right: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .item-page-btn:first-child {
+    margin-right: 0px;
+  }
+
+  .item-page-btn:last-child {
+    margin-bottom: 0px;
+  }
+}

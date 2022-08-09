@@ -70,48 +70,45 @@ export class EditProcessedPostComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
-      // console.log(this.datasrv.getPendingProductList()[id]);
-      let productList = this.datasrv.getLiveProductList();
-      if (!productList) {
-        let output: any;
-        this.datasrv.getProductInfo(this.id).subscribe({
-          next: (res) => {
-            output = res;
-          },
-          error: () => {
-            console.log('error getting product');
-          },
-          complete: () => {
-            this.product = this.datasrv.createAndStoreProduct(output);
-            this.updateAllFields();
-            if (this.product.content)
-              this.descriptionCtrl.setValue(this.product.content);
-            if (this.product.tags) this.tags = this.product.tags;
-            if (this.product.categories)
-              this.categories = this.product.categories;
-            if (this.product.startDate)
-              this.datePicker.patchValue({ start: this.product.startDate });
-            if (this.product.endDate)
-              this.datePicker.patchValue({ end: this.product.endDate });
-          },
-        });
-      } else
-        for (let product of productList) {
-          if (product.id == this.id) {
-            this.product = product;
-            break;
-          }
-        }
-      console.log(this.product);
-      this.updateAllFields();
-      if (this.product.content)
-        this.descriptionCtrl.setValue(this.product.content);
-      if (this.product.tags) this.tags = this.product.tags;
-      if (this.product.categories) this.categories = this.product.categories;
-      if (this.product.startDate)
-        this.datePicker.patchValue({ start: this.product.startDate });
-      if (this.product.endDate)
-        this.datePicker.patchValue({ end: this.product.endDate });
+      let output: any;
+      this.datasrv.getProductInfo(this.id).subscribe({
+        next: (res) => {
+          output = res;
+        },
+        error: () => {
+          console.log('error getting product');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.product = this.datasrv.createAndStoreProduct(output);
+          this.updateAllFields();
+          if (this.product.content)
+            this.descriptionCtrl.setValue(this.product.content);
+          if (this.product.tags) this.tags = this.product.tags;
+          if (this.product.categories)
+            this.categories = this.product.categories;
+          if (this.product.startDate)
+            this.datePicker.patchValue({ start: this.product.startDate });
+          if (this.product.endDate)
+            this.datePicker.patchValue({ end: this.product.endDate });
+        },
+      });
+    });
+  }
+
+  setToPending() {
+    let newProduct = new Product();
+    newProduct.id = this.product.id;
+    newProduct.status = 'pending';
+    this.datasrv.updatePost(newProduct).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: () => {},
+      complete: () => {
+        console.log('post set to pending');
+        this.router.navigate(['/pending']);
+      },
     });
   }
 
@@ -249,6 +246,16 @@ export class EditProcessedPostComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.product.title = this.finalTitle;
+    this.product.selectedTitle = {
+      productName: this.titleProductName,
+      amount: this.titleAmount,
+      XForY: this.titleXForY,
+      XOFF: this.titleXOFF,
+      unitNumber: this.titleUnitNumber,
+      location: this.titleLocation,
+      formatNumber: this.selectedFormat,
+    };
     this.product.content = this.descriptionCtrl.value;
     this.product.categories = this.categories;
     this.product.startDate = this.datePicker.get('start').value;
@@ -264,15 +271,6 @@ export class EditProcessedPostComponent implements OnInit {
         }
       },
       complete: () => {
-        try {
-          this.datasrv.updateAllProductList();
-        } catch (err: any) {
-          if (err.error.errors == 'Nil JSON web token') {
-            console.log('need login');
-            this.router.navigate(['/']);
-          }
-          return;
-        }
         this.router.navigate(['home/processed'], {});
       },
     });
@@ -296,15 +294,6 @@ export class EditProcessedPostComponent implements OnInit {
           },
           complete: async () => {
             console.log('post deleted');
-            try {
-              await this.datasrv.updateAllProductList();
-            } catch (err: any) {
-              if (err.error.errors == 'Nil JSON web token') {
-                console.log('need login');
-                this.router.navigate(['/']);
-              }
-              return;
-            }
             this.router.navigate(['/home/processed']);
           },
         });

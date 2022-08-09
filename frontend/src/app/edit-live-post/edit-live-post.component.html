@@ -299,7 +299,11 @@
             >
           </mat-form-field>
 
-          <p>Selected range: {{ datePicker.value | json }}</p>
+          <p>
+            Selected range:
+            {{ datePicker.get("start").value | date: "longDate" }} to
+            {{ datePicker.get("end").value | date: "longDate" }}
+          </p>
         </mat-card>
       </div>
     </div>
@@ -313,19 +317,27 @@
   <div class="item-page-btn-container">
     <button
       type="button"
-      class="btn btn-danger"
-      style="margin-right: 20px"
-      (click)="deletePost(product.id)"
-    >
-      Delete Post
-    </button>
-    <button
-      type="button"
       class="btn btn-primary item-page-btn"
       id="back-to-live1"
       (click)="onLive()"
     >
-      Back to Live Page
+      <strong>Back to Live Page</strong>
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger item-page-btn"
+      (click)="deletePost(product.id)"
+    >
+      <strong>Delete Post</strong>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="set-to-pending"
+      (click)="setToPending()"
+    >
+      <strong>Set post to pending</strong>
     </button>
     <button
       type="button"
@@ -333,7 +345,7 @@
       id="submit-btn"
       (click)="onSubmit()"
     >
-      Submit
+      <strong>Update</strong>
     </button>
   </div>
 </div>
