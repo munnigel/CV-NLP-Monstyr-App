@@ -132,7 +132,7 @@ body {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .mb-3 {
@@ -201,20 +201,53 @@ body {
   padding-top: 30px;
 }
 
-.login-form {
-  margin-top: 30px;
-  padding-right: 150px;
-}
 
 .formInput {
-  display: grid;
-  grid-template-columns: 100px 200px;
-  padding: 10px;
+  position: relative;
+  margin: 30px;
 }
 
+.fi {
+  position: relative;
+  margin: 10px;
+}
+
+.cna {
+  margin: 30px auto;
+  color: rgb(211, 205, 207);
+}
+
+
 .form-control {
-  font-weight: 200;
-  background-color: #e7e7e7;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+  color: #fff;
+  background-color: transparent;
+  outline: 2px solid #fff;
+}
+
+.input-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(10px, 10px);
+  transition: transform .25s;
+}
+
+.form-control:focus+.input-label,
+.form-control:valid+.input-label {
+  transform: translate(10px, -14px) scale(.9);
+  color: #fff;
+  font-weight: 500;
+  padding-inline: 5px;
+  background-color: rgba(209, 197, 252, 0.3);
+}
+
+.form-control:is(:focus, :valid) {
+  background-color: rgba(209, 197, 252, 0.3);
+  outline-color: #d1c5fc;
 }
 
 .form-control-name {
@@ -232,11 +265,17 @@ body {
   margin-top: 10px;
 }
 
+.formGroup label {
+  margin-right: 20px;
+}
+
 .selRole {
-  background-color: #e7e7e7;
+  background-color: transparent;
   font-weight: 200;
   font-size: larger;
   padding: 5px;
+  border: 2px solid #fff;
+  border-radius: 4px;
 }
 
 .btn-primary {
@@ -683,15 +722,90 @@ a {
 }
 
 .addAccBg {
-  background: #bababa;
-  height: fit-content;
+  height: 100%;
+  background-image: url(./assets/pictures/bgg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  padding: 50px;
+
 }
 
 .groupForm {
   width: 30%;
   margin: auto;
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.gf {
+  width: 50%;
+  margin: 50px auto;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #8d8d8d;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+  backdrop-filter: blur(9.8px);
+}
+
+.title span {
+  --total: calc(var(--duration) + var(--delay));
+  position: relative;
+  display: block;
+  color: transparent;
+  overflow: hidden;
+  font-size: xx-large;
+  font-weight: bold;
+  animation: revealText 1s var(--total) forwards;
+}
+
+.title span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(to right, #e0c4fd, #8fc6fd);
+  animation: rollIn var(--duration) var(--delay) forwards, rollOut var(--duration) var(--total) forwards;
+}
+
+@keyframes revealText {
+  to {
+    color: #fff;
+  }
+}
+
+@keyframes rollIn {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rollOut {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(105%);
+  }
+}
+
 
 .bgg {
   background: #bababa;
@@ -706,8 +820,20 @@ a {
   padding-left: 80px;
 }
 
-.forms label {
-  margin-top: 10px;
+.pp {
+  margin-top: 20px;
+}
+
+.fc {
+  width: fit-content;
+  height: max-content;
+  margin-left: 20px;
+}
+
+.fl {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .buttons {
