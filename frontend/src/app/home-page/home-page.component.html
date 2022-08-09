@@ -1,81 +1,87 @@
-<div class="nv-bar">
-  <div class="nav-bar">
-    <img src="../../assets/pictures/mon.gif" alt="Cutie" class="imgg" />
-    <div class="nav-bar-main-title">Monstyr x AI</div>
-    <div class="nav-bar-sub-title">AI-Powered Workflows</div>
-    <div class="tabs-container">
-      <div class="tab-container" id="overview-tab" (click)="onTabClick(0)">
-        <img class="icon" src="../../assets/pictures/Untitled design-6.png" />
-        <button class="nav-bar-btn">Overview</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 0"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div class="tab-container" id="live-posts-tab" (click)="onTabClick(1)">
-        <img class="icon" src="../../assets/pictures/Untitled design-7.png" />
-        <button class="nav-bar-btn">Live Posts</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 1"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div class="tab-container" id="pending-posts-tab" (click)="onTabClick(2)">
-        <img class="icon" src="../../assets/pictures/Untitled design-9.png" />
-        <button class="nav-bar-btn">Pending Posts</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 2"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div
-        class="tab-container"
-        id="developer-tools-tab"
-        (click)="onTabClick(3)"
-      >
-        <img class="icon" src="../../assets/pictures/Untitled design-4.png" />
-        <button class="nav-bar-btn">Developer Tools</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 3"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div
-        class="tab-container"
-        id="developer-tools-tab"
-        (click)="onTabClick(4)"
-      >
-        <img class="icon" src="../../assets/pictures/add-image.png" />
-        <button class="nav-bar-btn">Add Post</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 4"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div class="tab-container" id="settings-tab" (click)="onTabClick(5)">
-        <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
-        <button class="nav-bar-btn">Settings</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 5"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
-      </div>
-      <div class="tab-container" id="settings-tab" (click)="onTabClick(6)">
-        <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
-        <button class="nav-bar-btn">Log out</button>
-        <img
-          class="icon"
-          *ngIf="tabIndex == 6"
-          src="../../assets/pictures/Untitled design-5.png"
-        />
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="opened">
+    <div class="nav-bar">
+      <img src="../../assets/pictures/mon.gif" alt="Cutie" class="imgg" />
+      <div class="nav-bar-main-title">Monstyr x AI</div>
+      <div class="nav-bar-sub-title">AI-Powered Workflows</div>
+      <div class="tabs-container">
+        <div class="tab-container" id="overview-tab" (click)="onTabClick(0)">
+          <img class="icon" src="../../assets/pictures/Untitled design-6.png" />
+          <button class="nav-bar-btn">Overview</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 0"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
+        <div class="tab-container" id="live-posts-tab" (click)="onTabClick(1)">
+          <img class="icon" src="../../assets/pictures/Untitled design-7.png" />
+          <button class="nav-bar-btn">Live Posts</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 1"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
+        <div
+          class="tab-container"
+          id="pending-posts-tab"
+          (click)="onTabClick(2)"
+        >
+          <img class="icon" src="../../assets/pictures/Untitled design-9.png" />
+          <button class="nav-bar-btn">Pending Posts</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 2"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
+        <div
+          class="tab-container"
+          id="developer-tools-tab"
+          (click)="onTabClick(3)"
+        >
+          <img class="icon" src="../../assets/pictures/add-image.png" />
+          <button class="nav-bar-btn">Add Post</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 3"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
+        <div class="tab-container" id="settings-tab" (click)="onTabClick(4)">
+          <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
+          <button class="nav-bar-btn">Settings</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 4"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
+        <div class="tab-container" id="settings-tab" (click)="onTabClick(5)">
+          <img class="icon" src="../../assets/pictures/Untitled design-8.png" />
+          <button class="nav-bar-btn">Log out</button>
+          <img
+            class="icon"
+            *ngIf="tabIndex == 5"
+            src="../../assets/pictures/Untitled design-5.png"
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <router-outlet></router-outlet>
-</div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div (click)="toggleOutsideSideNav()">
+      <router-outlet></router-outlet>
+    </div>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="toggle-side-nav-btn hidden"
+      (click)="toggleSideNav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-sidenav-content>
+</mat-sidenav-container>

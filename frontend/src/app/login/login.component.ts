@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CallTracker } from 'assert';
 import { CookieService } from 'ngx-cookie-service';
+import { Account } from '../account.model';
 import { DataService } from '../data-service.service';
 import { Product } from '../product.model';
 
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     let token = '';
+    let id: number;
     var formData: any = new FormData();
     formData.append('email', this.postForm.get('email').value);
     formData.append('password', this.postForm.get('password').value);
@@ -84,15 +86,33 @@ export class LoginComponent implements OnInit {
         console.log(token);
         localStorage.setItem('loginToken', token);
         console.log('set token');
+        id = data['id'];
       },
       error: (err) => {
         if (err.error.error == 'unauthorized')
           alert('Please check login details. Wrong email/password');
       },
-      complete: async () => {
-        await this.dataSrv.updateAllProductList();
-        await this.dataSrv.updateOverviewData();
-        this.router.navigate(['/home']);
+      complete: () => {
+        let currentUser: Account;
+        this.dataSrv.getCurrentUserInfo(id).subscribe({
+          next: (res) => {
+            currentUser = new Account(
+              res['name'],
+              res['username'],
+              res['email'],
+              res['password_digest'],
+              res['account_type'],
+              res['profile_pic']
+            );
+          },
+          error: () => {},
+          complete: async () => {
+            this.dataSrv.setCurrentUser(currentUser);
+            await this.dataSrv.updateAllProductList();
+            await this.dataSrv.updateOverviewData();
+            this.router.navigate(['/home']);
+          },
+        });
       },
     });
     // console.log('getting');

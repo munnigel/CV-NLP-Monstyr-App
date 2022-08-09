@@ -1,6 +1,5 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data-service.service';
 
 @Component({
@@ -11,13 +10,38 @@ import { DataService } from '../data-service.service';
 export class HomePageComponent implements OnInit {
   tabIndex: number;
   tabList: string[];
+  sideNavOpen: boolean;
+  sidePadding: boolean;
+  getScreenWidth: number;
+  getScreenHeight: number;
+  mobile: boolean;
+  opened: boolean;
+  sideNavMode;
+
   constructor(private router: Router, private dataSrv: DataService) {}
-  ngOnInit(): void {
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+    if (this.getScreenWidth < 900) {
+      this.mobile = true;
+      this.opened = false;
+      this.sideNavMode = 'over';
+    } else {
+      this.mobile = false;
+      this.opened = true;
+      this.sideNavMode = 'side';
+    }
+  }
+
+  ngOnInit() {
+    this.onWindowResize();
+    this.opened = !this.mobile;
     this.tabList = [
       'overview',
       'processed',
       'pending',
-      'developertools',
       'addpost',
       'settings',
       'Logout',
@@ -31,7 +55,10 @@ export class HomePageComponent implements OnInit {
   }
 
   async onTabClick(index: number) {
-    if (index == 6) {
+    console.log(this.mobile);
+    if (this.mobile) this.opened = false;
+    console.log(this.opened);
+    if (index == 5) {
       console.log('logout');
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
@@ -66,5 +93,18 @@ export class HomePageComponent implements OnInit {
       }
     }
     this.router.navigate([`/home/${this.tabList[index]}`]);
+  }
+
+  toggleSideNav() {
+    // console.log('test');
+    if (this.mobile) {
+      console.log('switch');
+      this.opened = !this.opened;
+      console.log(this.opened);
+    }
+  }
+  toggleOutsideSideNav() {
+    // console.log('test');
+    if (this.mobile) this.opened = false;
   }
 }

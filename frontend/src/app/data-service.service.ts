@@ -30,8 +30,9 @@ export class DataService implements OnInit {
   rejectedAiMl: number;
   private pendingTab: number;
   private liveTab: number;
+  private currentUser: Account;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     //   console.log('getting');
@@ -43,6 +44,19 @@ export class DataService implements OnInit {
     //   await this.updateAllProductList();
     //   console.log(API_URL);
     //   await this.updateOverviewData();
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
+  setCurrentUser(currentUser: Account) {
+    console.log(currentUser);
+    this.currentUser = currentUser;
+  }
+
+  getCurrentUserInfo(id: number) {
+    return this.http.get(`${API_URL}/users/${id}`, this.getHttpOptions());
   }
 
   private getHttpOptions() {
@@ -89,51 +103,12 @@ export class DataService implements OnInit {
     return this.liveTab;
   }
 
-  async nextPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab < (await this.getNoOfPendingPosts()) / 15) {
-      this.pendingTab++;
-    }
+  getNoOfPendingPosts() {
+    return this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions());
   }
 
-  prevPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab > 1) {
-      this.pendingTab--;
-    }
-  }
-
-  async getNoOfPendingPosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions())
-    );
-
-    console.log(res);
-    return res.noofpendingposts;
-  }
-
-  async nextLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab < (await this.getNoOfLivePosts()) / 15) {
-      this.liveTab++;
-    }
-  }
-
-  prevLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab > 1) {
-      this.liveTab--;
-    }
-  }
-
-  async getNoOfLivePosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions())
-    );
-    console.log(res);
-    return res.noofliveposts;
+  getNoOfLivePosts() {
+    return this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions());
   }
 
   async updateOverviewData() {
@@ -210,6 +185,10 @@ export class DataService implements OnInit {
 
   getPendingProductList() {
     return this.pendingProductList;
+  }
+
+  getProductInfo(id: number) {
+    return this.http.get(`${API_URL}/posts/${id}`, this.getHttpOptions());
   }
 
   async getEditingStatus(id: number) {
@@ -327,6 +306,7 @@ export class DataService implements OnInit {
           res[i].pid,
           res[i].status,
           res[i].gen_title,
+          res[i].selected_title ? JSON.parse(res[i].selected_title) : undefined,
           res[i].title,
           res[i].gen_categories,
           res[i].categories ? JSON.parse(res[i].categories) : undefined,
@@ -361,6 +341,50 @@ export class DataService implements OnInit {
     }
   }
 
+  createAndStoreProduct(res: any) {
+    try {
+      // console.log(res[i]);
+      let temp = new Product(
+        res.id,
+        res.sp_id,
+        res.pid,
+        res.status,
+        res.gen_title,
+        res.selected_title ? JSON.parse(res.selected_title) : undefined,
+        res.title,
+        res.gen_categories,
+        res.categories ? JSON.parse(res.categories) : undefined,
+        res.gen_start_date,
+        res.start_date,
+        res.gen_end_date,
+        res.end_date,
+        res.gen_tags,
+        res.tags ? JSON.parse(res.tags) : undefined,
+        res.gen_content,
+        res.content,
+        res.od_image,
+        res.images ? res.ocr_image : undefined,
+        res.score,
+        res.created_at,
+        res.updated_at,
+        res.od_latency,
+        res.ocr_latency,
+        res.ner_date_latency,
+        res.ner_categories_latency,
+        res.ner_title_latency
+      );
+      if (res.images)
+        temp.images = res.images
+          .replace('{', '')
+          .replace('}', '')
+          .split(',', 1);
+      return temp;
+    } catch (e) {
+      console.log(e);
+    }
+    return new Product();
+  }
+
   addPost(formData: FormData) {
     let token = localStorage.getItem('loginToken');
     return this.http.post(`${API_URL}/posts`, formData, this.getHttpOptions());
@@ -377,7 +401,8 @@ export class DataService implements OnInit {
   updatePost(product: Product): Observable<Product> {
     console.log(product);
     console.log('update');
-    console.log(product.categories);
+    console.log(product.selectedTitle);
+    console.log(JSON.stringify(product.selectedTitle));
     var formData = new FormData();
     if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
     if (product.pid) formData.append('pid', product.pid.toString());
@@ -385,6 +410,8 @@ export class DataService implements OnInit {
     if (product.title) formData.append('title', product.title);
     if (product.genTitle)
       formData.append('gen_title', JSON.stringify(product.genTitle));
+    if (product.selectedTitle)
+      formData.append('selected_title', JSON.stringify(product.selectedTitle));
     if (product.categories)
       formData.append('categories', JSON.stringify(product.categories));
     if (product.genCategories)

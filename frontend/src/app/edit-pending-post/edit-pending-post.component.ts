@@ -23,9 +23,6 @@ import { fromEvent, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatInput } from '@angular/material/input';
-import { minBy } from 'cypress/types/lodash';
-import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-edit-item',
@@ -39,7 +36,6 @@ export class EditItemComponent implements OnInit {
   category = '';
   promotionDate = '';
   popup;
-  editForm: UntypedFormGroup;
   error = false;
   errMsg: string;
   id: number;
@@ -173,20 +169,28 @@ export class EditItemComponent implements OnInit {
       // console.log(this.datasrv.getPendingProductList()[id]);
       console.log(this.id);
       let pendingProductList = this.datasrv.getPendingProductList();
-      for (let pendingProduct of pendingProductList) {
-        // console.log(pendingProduct);
-        if (pendingProduct.id == this.id) {
-          this.pendingProduct = pendingProduct;
-          break;
+      if (!pendingProductList) {
+        let output: any;
+        this.datasrv.getProductInfo(this.id).subscribe({
+          next: (res) => {
+            output = res;
+          },
+          error: () => {
+            console.log('error getting product');
+          },
+          complete: () => {
+            this.pendingProduct = this.datasrv.createAndStoreProduct(output);
+          },
+        });
+      } else
+        for (let pendingProduct of pendingProductList) {
+          // console.log(pendingProduct);
+          if (pendingProduct.id == this.id) {
+            this.pendingProduct = pendingProduct;
+            break;
+          }
         }
-      }
       console.log(this.pendingProduct);
-      this.editForm = this.fb.group({
-        categories: [''],
-        startDate: [''],
-        endDate: [''],
-        title: [''],
-      });
     });
 
     // console.log(this.datasrv.getPendingProductList()[0]);
@@ -247,8 +251,11 @@ export class EditItemComponent implements OnInit {
     if (this.selectedFormat == 0) {
       this.finalTitle = 'New! ' + this.titleProductName;
     } else if (this.selectedFormat == 1) {
-      this.finalTitle =
-        'New Outlet! ' + this.titleLocation + ', ' + this.titleUnitNumber;
+      if (!this.titleUnitNumber)
+        this.finalTitle = 'New Outlet! ' + this.titleLocation;
+      else
+        this.finalTitle =
+          'New Outlet! ' + this.titleLocation + ', ' + this.titleUnitNumber;
     } else if (this.selectedFormat == 2) {
       this.finalTitle = this.titleXOFF + ' ' + this.titleProductName;
     } else if (this.selectedFormat == 3) {
@@ -288,6 +295,7 @@ export class EditItemComponent implements OnInit {
       this.titleProductName = this.suggestions[i][1];
     }
     this.selectedFormat = this.formats.indexOf(this.suggestions[i - 1]);
+    console.log(this.titleProductName);
     this.updateFinalString();
   }
 
@@ -462,50 +470,49 @@ export class EditItemComponent implements OnInit {
 
   async onProcessed() {
     console.log(this.categories);
-    if (this.editForm.invalid) {
-      this.error = true;
-      this.errMsg = 'Please complete all required fields.';
-    } else {
-      this.pendingProduct.title = this.finalTitle;
-      this.pendingProduct.categories = this.categories;
-      this.pendingProduct.tags = this.tags;
-      this.pendingProduct.startDate = this.datePicker.get('start').value;
-      this.pendingProduct.endDate = this.datePicker.get('end').value;
-      this.pendingProduct.status = 'live';
-      this.datasrv.updatePost(this.pendingProduct).subscribe({
-        next: (v) => console.log(v),
-        error: (err) => {
-          console.log(err);
+    this.pendingProduct.selectedTitle = {
+      productName: this.titleProductName,
+      amount: this.titleAmount,
+      XForY: this.titleXForY,
+      XOFF: this.titleXOFF,
+      unitNumber: this.titleUnitNumber,
+      location: this.titleLocation,
+      formatNumber: this.selectedFormat,
+    };
+    this.pendingProduct.title = this.finalTitle;
+    this.pendingProduct.categories = this.categories;
+    this.pendingProduct.tags = this.tags;
+    this.pendingProduct.startDate = this.datePicker.get('start').value;
+    this.pendingProduct.endDate = this.datePicker.get('end').value;
+    this.pendingProduct.status = 'live';
+    console.log(this.pendingProduct);
+    this.datasrv.updatePost(this.pendingProduct).subscribe({
+      next: (v) => console.log(v),
+      error: (err) => {
+        console.log(err);
+        if (err.error.errors == 'Nil JSON web token') {
+          console.log('need login');
+          this.router.navigate(['/']);
+        }
+      },
+      complete: async () => {
+        console.log('completed add');
+        try {
+          await this.datasrv.updateAllProductList();
+        } catch (err: any) {
           if (err.error.errors == 'Nil JSON web token') {
             console.log('need login');
             this.router.navigate(['/']);
           }
-        },
-        complete: async () => {
-          console.log('completed add');
-          try {
-            await this.datasrv.updateAllProductList();
-          } catch (err: any) {
-            if (err.error.errors == 'Nil JSON web token') {
-              console.log('need login');
-              this.router.navigate(['/']);
-            }
-            return;
-          }
-          this.router.navigate(['/home/processed']);
-        },
-      });
-    }
+          return;
+        }
+        this.router.navigate(['/home/processed']);
+      },
+    });
   }
 
   onPending() {
     this.router.navigate(['home/pending'], {});
-  }
-
-  makeDescription() {
-    this.editForm.patchValue({ description: 'TAGS GENERATED WAAAA' });
-    // this.description = 'DESCRIPTION GENERATED WAAAA';
-    console.log('description activated');
   }
 
   makeTitle() {
@@ -581,6 +588,7 @@ export class EditItemComponent implements OnInit {
     }
 
     if (temp != null) {
+      this.categories = [];
       for (let i = 0; i < 5; i++) {
         this.categories.push(temp[i][0]);
       }

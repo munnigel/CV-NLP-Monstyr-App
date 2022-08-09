@@ -1,32 +1,60 @@
-<div class="header-row carousel-fade">
-  <div class="page-header">Pending Posts</div>
-  <!-- <div class="search-bar">
+<div class="pending-post-main-container">
+  <div class="header-row carousel-fade">
+    <div class="page-header">Pending Posts</div>
+    <!-- <div class="search-bar">
     <textarea class="search-input" rows="1"></textarea>
     <button class="search-btn">F</button>
   </div> -->
-  <div class="button">
-    <button mat-stroked-button color="primary" class="special-btn2" style='margin: 5px;' (click)="prevPage()"
-      type="button">Previous
-      Page</button>
-    <button mat-stroked-button color="primary" class='special-btn2' style='margin: 5px;' (click)="nextPage()"
-      type="button">Next
-      Page</button>
-  </div>
-</div>
-<div class="pending-posts-container main-item-container" id="pending-post-list-container">
-  <ng-container *ngFor="let product of pendingProductList; let i = index">
-    <div (click)="selectPost(i)" class="pending-posts-item fade">
-      <div class="pending-posts-img">
-        <img [src]="product.images" alt="img" style="
-            object-fit: contain;
-            width: 99%;
-            height: 99%;
-            border-radius: 10px;
-          " />
-      </div>
-      <div class="pending-posts-details">
-        <h3>{{ product.content }}</h3>
-      </div>
+    <div class="button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="special-btn2"
+        style="margin: 5px"
+        (click)="prevPage()"
+        type="button"
+      >
+        Previous Page
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="special-btn2"
+        style="margin: 5px"
+        (click)="nextPage()"
+        type="button"
+      >
+        Next Page
+      </button>
     </div>
-  </ng-container>
+    <div>Showing page {{ currentPage }} of {{ maxPage }}</div>
+  </div>
+  <div
+    class="pending-posts-container not-mobile"
+    id="pending-post-list-container"
+  >
+    <ng-container *ngFor="let product of pendingProductList; let i = index">
+      <mat-card (click)="selectPost(i)" class="pending-posts-item fade">
+        <div class="pending-posts-img">
+          <img [src]="product.images" alt="img" />
+        </div>
+        <div class="pending-posts-details">
+          <h3>{{ product.content }}</h3>
+        </div>
+      </mat-card>
+    </ng-container>
+  </div>
+  <div class="pending-posts-container mobile" id="pending-post-list-container">
+    <ng-container *ngFor="let product of pendingProductList; let i = index">
+      <mat-card (click)="selectPost(i)" class="pending-posts-item fade">
+        <div class="pending-posts-img">
+          <img [src]="product.images" alt="img" style="object-fit: contain" />
+        </div>
+        <hr />
+        <mat-card-content>
+          <p>{{ product.content }}</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
 </div>

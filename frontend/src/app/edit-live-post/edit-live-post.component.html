@@ -1,85 +1,347 @@
-<h1 style="text-align: center; margin-top: 20px; "><b>Edit Live Post:</b></h1>
+<div class="edit-live-post-main-container">
+  <h1 style="text-align: center; margin-top: 20px"><b>Edit Live Post:</b></h1>
 
-<div class="item-page-container">
-  <div class="item-page-left2">
-    <form [formGroup]="editForm">
-      <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="title-box">
-          <mat-label>Title</mat-label>
-          <input matInput class="titleInput" placeholder="New Title..." #titleInput [formControl]="titleCtrl" />
-        </mat-form-field>
-      </mat-card>
-      <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill" id="description-box">
-          <mat-label>Description</mat-label>
-          <textarea matInput placeholder="New Description" #descriptionInput [formControl]="descriptionCtrl"></textarea>
-        </mat-form-field>
-      </mat-card>
-      <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill">
-          <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList1 aria-label="Tag selection">
-            <mat-chip *ngFor="let tag of tags" (removed)="removeTags(tag)">
-              {{ tag }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input placeholder="New Tag..." [matChipInputFor]="chipList1"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTags($event)" />
-          </mat-chip-list>
-        </mat-form-field>
-      </mat-card>
+  <div class="item-page-container">
+    <div class="item-page-left">
+      <div class="cards-container">
+        <mat-card>
+          <mat-card-title>Title</mat-card-title>
+          <ng-container *ngIf="selectedFormat == 0">
+            <span>New!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 1">
+            <span>New Outlet!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Location</mat-label>
+              <input
+                matInput
+                placeholder="Location"
+                [value]="titleLocation"
+                (keyup)="updateLocation($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Unit Number</mat-label>
+              <input
+                matInput
+                placeholder="Unit Number"
+                [value]="titleUnitNumber"
+                (keyup)="updateUnitNumber($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 2">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 3">
+            <span>Up to</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 4">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X-for-Y</mat-label>
+              <input
+                matInput
+                placeholder="X-for-Y"
+                [value]="titleXForY"
+                (keyup)="updateXForY($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 5">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                placeholder="Amount"
+                [value]="titleAmount"
+                (keyup)="updateAmount($event)"
+              />
+            </mat-form-field>
+            <span>for</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 6">
+            <span>Free</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <hr />
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="formatDropDown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Format
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ng-container *ngFor="let format of formats; let i = index">
+                <li (click)="selectFormat(i)">
+                  <a class="dropdown-item">{{ format.join(" ") }}</a>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
 
-      <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill">
-          <mat-label>Favorite Categories</mat-label>
-          <mat-chip-list #chipList2 aria-label="Fruit selection">
-            <mat-chip *ngFor="let category of categories" (removed)="removeCategories(category)">
-              {{ category }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input placeholder="New Category..." [matChipInputFor]="chipList2"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addCategories($event)" />
-          </mat-chip-list>
-        </mat-form-field>
-      </mat-card>
-      <mat-card>
-        <mat-form-field appearance="fill">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date" />
-            <input matEndDate formControlName="end" placeholder="End date" />
-          </mat-date-range-input>
-          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
+          <br />
+          <mat-label>Final String: {{ finalTitle }}</mat-label>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Description</mat-card-title>
+          <hr />
+          <mat-form-field
+            class="example-chip-list"
+            appearance="fill"
+            id="description-box"
+          >
+            <mat-label>Description</mat-label>
+            <textarea
+              class="description-textarea"
+              rows="5"
+              matInput
+              placeholder="New Description"
+              #descriptionInput
+              [formControl]="descriptionCtrl"
+            ></textarea>
+          </mat-form-field>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Title</mat-card-title>
+          <hr />
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList1 aria-label="Tag selection">
+              <mat-chip *ngFor="let tag of tags" (removed)="removeTags(tag)">
+                {{ tag }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                placeholder="New Tag..."
+                [matChipInputFor]="chipList1"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addTags($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+        </mat-card>
 
-          <mat-error *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
-        </mat-form-field>
+        <mat-card>
+          <mat-card-title>Categories</mat-card-title>
+          <hr />
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-chip-list #chipList2 aria-label="Fruit selection">
+              <mat-chip
+                *ngFor="let category of categories"
+                (removed)="removeCategories(category)"
+              >
+                {{ category }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                placeholder="New Category..."
+                [matChipInputFor]="chipList2"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addCategories($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Promotional Period</mat-card-title>
+          <hr />
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input
+              [formGroup]="datePicker"
+              [rangePicker]="picker"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Start date"
+              />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
 
-        <p>Selected range: {{ datePicker.value | json }}</p>
-      </mat-card>
-    </form>
+            <mat-error
+              *ngIf="
+                datePicker.controls['start'].hasError('matStartDateInvalid')
+              "
+              >Invalid start date</mat-error
+            >
+            <mat-error
+              *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+              >Invalid end date</mat-error
+            >
+          </mat-form-field>
+
+          <p>Selected range: {{ datePicker.value | json }}</p>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="item-page-right">
+      <mat-card
+        ><img [src]="product.images" alt="IMAGE" class="product-img"
+      /></mat-card>
+    </div>
   </div>
+  <div class="item-page-btn-container">
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="back-to-live1"
+      (click)="onLive()"
+    >
+      Back to Live Page
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger item-page-btn"
+      (click)="deletePost(product.id)"
+    >
+      Delete Post
+    </button>
 
-  <div class="item-page-right">
-    <img [src]="product.images" alt="IMAGE" class="product-img" />
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="set-to-pending"
+      (click)="setToPending()"
+    >
+      Set post to pending
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="submit-btn"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
   </div>
-</div>
-<div class="item-page-btn-container">
-  <button type="button" class="btn btn-danger" style="margin-right: 20px" (click)="deletePost(product.id)">
-    Delete Post
-  </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="back-to-live1" (click)="onLive()">
-    Back to Live Page
-  </button>
-  <button type="button" class="btn btn-primary item-page-btn" id="submit-btn" (click)="onSubmit()">
-    Submit
-  </button>
 </div>

@@ -5,6 +5,7 @@ export class Product {
     public pid?: number,
     public status?: string,
     public genTitle?: string[],
+    public selectedTitle?: object,
     public title?: string,
     public genCategories?: string[],
     public categories?: string[],

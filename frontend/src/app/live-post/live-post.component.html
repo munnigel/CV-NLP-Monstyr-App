@@ -1,63 +1,76 @@
+<div class="live-post-main-container">
 <div class="page-header">Live Posts</div>
-<!-- <div class="search-bar">
-    <textarea class="search-input" rows="1"></textarea>
-    <button class="search-btn">F</button>
-  </div> -->
-
+<div style="text-align: center">
+  <mat-form-field appearance="fill">
+    <mat-label>Search posts by title</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchTerm"
+      placeholder="Search posts by title"
+      (keyup.enter)="filterPosts(searchTerm)"
+    />
+    <mat-icon
+      class="search-icon"
+      color="primary"
+      matPrefix
+      (click)="filterPosts(searchTerm)"
+      >search</mat-icon
+    >
+  </mat-form-field>
+</div>
 <div class="button">
-  <button mat-stroked-button color="primary" class="special-btn2" (click)="prevPage()" type="button"
-    style='margin: 5px;'>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="special-btn2"
+    (click)="prevPage()"
+    type="button"
+    style="margin: 5px"
+  >
     Previous Page
   </button>
-  <button mat-stroked-button color="primary" class="special-btn2" (click)="nextPage()" type="button"
-    style='margin: 5px;'>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="special-btn2"
+    (click)="nextPage()"
+    type="button"
+    style="margin: 5px"
+  >
     Next Page
   </button>
 </div>
-
-<!-- <div class="filter-row">
-  <div class="filter-type" (click)="onFilter(1)">
-    <label class="filter-label">Title</label>
-    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
-  </div>
-  <div class="filter-type">
-    <label class="filter-label">Category</label>
-    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
-  </div>
-  <div class="filter-type">
-    <label class="filter-label">Discount</label>
-    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
-  </div>
-  <div class="filter-type">
-    <label class="filter-label">Validity Date</label>
-    <img src="../../assets/pictures/arrowhead.png" height="5px" width="auto" class="filter-sort" />
-  </div>
-</div> -->
+<div>Showing page {{ currentPage }} of {{ maxPage }}</div>
 <div class="container">
   <div class="row row-cols-4">
-    <ng-container *ngFor="let product of liveProductList; let i = index">
-      <div class="col" (click)="selectLivePost(i)">
+    <ng-container *ngFor="let product of filteredProductList; let i = index">
+      <mat-card class="col" (click)="selectLivePost(i)">
         <div class="item-container fade">
           <div class="item-img">
             <img class="live-img" [src]="product.images" alt="image" />
           </div>
+          <hr />
           <div class="item-details">
             <div class="item-title" id="title-field">
               Title: {{ product.title }}
             </div>
+            <br />
             <div class="item-description" id="description-field">
               Description: {{ product.content }}
             </div>
+            <br />
             <mat-chip-list id="category-field">
               <mat-label>Categories:</mat-label>
               <mat-chip *ngFor="let category of product.categories">{{
                 category
-                }}</mat-chip>
+              }}</mat-chip>
             </mat-chip-list>
+            <br />
             <mat-chip-list>
               <mat-label>Tags:</mat-label>
               <mat-chip *ngFor="let tag of product.tags">{{ tag }}</mat-chip>
             </mat-chip-list>
+            <br />
             <div class="item-tag">
               Promotion Start Date: {{ product.startDate }}
             </div>
@@ -66,7 +79,8 @@
             </div>
           </div>
         </div>
-      </div>
+      </mat-card>
     </ng-container>
   </div>
+</div>
 </div>

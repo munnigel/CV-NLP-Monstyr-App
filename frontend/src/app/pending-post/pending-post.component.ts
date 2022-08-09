@@ -11,9 +11,10 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./pending-post.component.css'],
 })
 export class PendingPostPageComponent implements OnInit {
-  tabIndex: number;
   showItem: boolean;
   pendingProductList: Product[];
+  currentPage: number;
+  maxPage: number;
   constructor(
     private dataSrv: DataService,
     private router: Router,
@@ -21,7 +22,6 @@ export class PendingPostPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tabIndex = 2;
     this.showItem = false;
     this.pendingProductList = this.dataSrv.getPendingProductList();
     if (!this.pendingProductList) {
@@ -31,29 +31,50 @@ export class PendingPostPageComponent implements OnInit {
     console.log(this.pendingProductList[0]);
     console.log(this.pendingProductList);
     this.titleService.setTitle('pending-posts');
+    this.currentPage = 1;
+    this.dataSrv.getNoOfPendingPosts().subscribe({
+      next: (res: any) => {
+        let temp = res.noofpendingposts;
+        this.maxPage = Math.ceil(temp / 15);
+      },
+      error: () => {},
+      complete: () => {
+        console.log('get max page');
+        console.log(this.maxPage);
+      },
+    });
   }
 
   async nextPage() {
     try {
-      this.dataSrv.nextPendingTab();
+      if (this.currentPage < this.maxPage) {
+        this.dataSrv.setPendingTab(this.currentPage + 1);
+        await this.dataSrv.updateAllProductList();
+        this.pendingProductList = this.dataSrv.getPendingProductList();
+        this.currentPage += 1;
+      }
     } catch (err) {
       console.log(err);
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
       return;
     }
-    await this.dataSrv.updateAllProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
   }
 
   async prevPage() {
-    this.dataSrv.prevPendingTab();
-    await this.dataSrv.updateAllProductList();
-    this.pendingProductList = this.dataSrv.getPendingProductList();
-  }
-
-  onTabClick(index: number) {
-    this.tabIndex = index;
+    try {
+      if (this.currentPage > 1) {
+        this.dataSrv.setPendingTab(this.currentPage - 1);
+        await this.dataSrv.updateAllProductList();
+        this.pendingProductList = this.dataSrv.getPendingProductList();
+        this.currentPage -= 1;
+      }
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem('loginToken');
+      this.router.navigate(['/']);
+      return;
+    }
   }
 
   onItemClick() {

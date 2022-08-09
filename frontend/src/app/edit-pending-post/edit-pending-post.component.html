@@ -1,468 +1,488 @@
 <!-- {{pendingProduct['title']}} -->
-
-<div class="header-row">
-  <div class="page-header">Pending post item:</div>
-</div>
-<div class="item-page-container">
-  <div class="item-page-left">
-    <form [formGroup]="editForm">
-      <mat-card>
-        <mat-card-title>Title</mat-card-title>
-        <ng-container *ngIf="selectedFormat == 0">
-          <span>New!</span>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              #titleProductName
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 1">
-          <span>New Outlet!</span>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Location</mat-label>
-            <input
-              matInput
-              placeholder="Location"
-              [value]="titleLocation"
-              (keyup)="updateLocation($event)"
-            />
-          </mat-form-field>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Unit Number</mat-label>
-            <input
-              matInput
-              placeholder="Unit Number"
-              [value]="titleUnitNumber"
-              (keyup)="updateUnitNumber($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 2">
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>X% OFF</mat-label>
-            <input
-              matInput
-              placeholder="X% OFF"
-              [value]="titleXOFF"
-              (keyup)="updateXOFF($event)"
-            />
-          </mat-form-field>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 3">
-          <span>Up to</span>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>X% OFF</mat-label>
-            <input
-              matInput
-              placeholder="X% OFF"
-              [value]="titleXOFF"
-              (keyup)="updateXOFF($event)"
-            />
-          </mat-form-field>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 4">
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>X-for-Y</mat-label>
-            <input
-              matInput
-              placeholder="X-for-Y"
-              [value]="titleXForY"
-              (keyup)="updateXForY($event)"
-            />
-          </mat-form-field>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 5">
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Amount</mat-label>
-            <input
-              matInput
-              placeholder="Amount"
-              [value]="titleAmount"
-              (keyup)="updateAmount($event)"
-            />
-          </mat-form-field>
-          <span>for</span>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <ng-container *ngIf="selectedFormat == 6">
-          <span>Free</span>
-          <mat-form-field
-            class="page-item-title"
-            appearance="fill"
-            id="title-box"
-          >
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              placeholder="Product Name"
-              [value]="titleProductName"
-              (keyup)="updateProductName($event)"
-            /> </mat-form-field
-        ></ng-container>
-        <hr />
-        <div class="dropdown">
+<div class="edit-pending-post-main-container">
+  <div class="header-row">
+    <div class="page-header">Pending post item:</div>
+  </div>
+  <div class="item-page-container">
+    <div class="item-page-left">
+      <div class="cards-container">
+        <mat-card>
+          <mat-card-title>Title</mat-card-title>
+          <ng-container *ngIf="selectedFormat == 0">
+            <span>New!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 1">
+            <span>New Outlet!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Location</mat-label>
+              <input
+                matInput
+                placeholder="Location"
+                [value]="titleLocation"
+                (keyup)="updateLocation($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Unit Number</mat-label>
+              <input
+                matInput
+                placeholder="Unit Number"
+                [value]="titleUnitNumber"
+                (keyup)="updateUnitNumber($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 2">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 3">
+            <span>Up to</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 4">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X-for-Y</mat-label>
+              <input
+                matInput
+                placeholder="X-for-Y"
+                [value]="titleXForY"
+                (keyup)="updateXForY($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 5">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                placeholder="Amount"
+                [value]="titleAmount"
+                (keyup)="updateAmount($event)"
+              />
+            </mat-form-field>
+            <span>for</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 6">
+            <span>Free</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <hr />
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="formatDropDown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Format
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ng-container *ngFor="let format of formats; let i = index">
+                <li (click)="selectFormat(i)">
+                  <a class="dropdown-item">{{ format.join(" ") }}</a>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              #suggestionDropDown
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Suggestions
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ng-container
+                *ngFor="let suggestion of suggestions; let i = index"
+              >
+                <li (click)="selectSuggestion(i)">
+                  <a
+                    class="dropdown-item"
+                    [ngClass]="{ disabled: i % 2 == 0 }"
+                    >{{ suggestion }}</a
+                  >
+                </li>
+              </ng-container>
+            </ul>
+          </div>
           <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="formatDropDown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+            mat-stroked-button
+            id="generate-titles-btn"
+            (click)="makeTitle()"
+            color="primary"
+            style="border-radius: 15px"
           >
-            Format
+            <div style="display: flex; margin: 10px 0px">
+              <span style="margin-right: 10px">Generate Title</span>
+
+              <mat-progress-spinner
+                *ngIf="genTitlesLoading"
+                class="example-margin"
+                color="primary"
+                mode="indeterminate"
+                value="50"
+                diameter="30"
+              >
+              </mat-progress-spinner>
+              <span
+                *ngIf="!genTitlesLoading && titlesGenerated"
+                class="material-symbols-outlined"
+              >
+                done
+              </span>
+            </div>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <ng-container *ngFor="let format of formats; let i = index">
-              <li (click)="selectFormat(i)">
-                <a class="dropdown-item">{{ format.join(" ") }}</a>
-              </li>
-            </ng-container>
-          </ul>
-        </div>
-        <div class="dropdown">
+          <br />
+          <mat-label>Final String: {{ finalTitle }}</mat-label>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Tags</mat-card-title>
+          <hr />
+          <mat-form-field
+            class="example-chip-list"
+            appearance="fill"
+            id="tags-box"
+          >
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList1 aria-label="Tags selection">
+              <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                {{ tag }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                class="tagInput"
+                placeholder="New Tag..."
+                #tagInput
+                [formControl]="tagCtrl"
+                [matAutocomplete]="auto1"
+                [matChipInputFor]="chipList1"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addTag($event)"
+              />
+            </mat-chip-list>
+            <mat-autocomplete
+              #auto1="matAutocomplete"
+              (optionSelected)="selectedTag($event)"
+              class="tags-options"
+            >
+              <mat-option
+                *ngFor="let tag of filteredTags | async"
+                [value]="tag"
+              >
+                {{ tag }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <br />
           <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            #suggestionDropDown
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+            mat-stroked-button
+            id="generate-tags-btn"
+            (click)="makeTag()"
+            color="primary"
+            style="border-radius: 15px"
           >
-            Suggestions
+            <div style="display: flex; margin: 10px 0px">
+              <span style="margin-right: 10px">Generate Tags</span>
+
+              <mat-progress-spinner
+                *ngIf="genTagsLoading"
+                class="example-margin"
+                color="primary"
+                mode="indeterminate"
+                value="50"
+                diameter="30"
+              >
+              </mat-progress-spinner>
+              <span
+                *ngIf="!genTagsLoading && tagsGenerated"
+                class="material-symbols-outlined"
+              >
+                done
+              </span>
+            </div>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <ng-container *ngFor="let suggestion of suggestions; let i = index">
-              <li (click)="selectSuggestion(i)">
-                <a class="dropdown-item" [ngClass]="{ disabled: i % 2 == 0 }">{{
-                  suggestion
-                }}</a>
-              </li>
-            </ng-container>
-          </ul>
-        </div>
-        <button
-          mat-stroked-button
-          id="generate-titles-btn"
-          (click)="makeTitle()"
-          color="primary"
-          style="border-radius: 15px"
-        >
-          <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate Title</span>
+        </mat-card>
 
-            <mat-progress-spinner
-              *ngIf="genTitlesLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
+        <mat-card>
+          <mat-card-title>Categories</mat-card-title>
+          <hr />
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-chip-list #chipList2 aria-label="Categories selection">
+              <mat-chip
+                *ngFor="let category of categories"
+                (removed)="removeCategory(category)"
+              >
+                {{ category }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                class="categoryInput"
+                placeholder="New Category..."
+                #categoryInput
+                [formControl]="categoryCtrl"
+                [matAutocomplete]="auto2"
+                [matChipInputFor]="chipList2"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addCategory($event)"
+              />
+            </mat-chip-list>
+            <mat-autocomplete
+              #auto2="matAutocomplete"
+              (optionSelected)="selectedCategory($event)"
             >
-            </mat-progress-spinner>
-            <span
-              *ngIf="!genTitlesLoading && titlesGenerated"
-              class="material-symbols-outlined"
-            >
-              done
-            </span>
-          </div>
-        </button>
-        <br />
-        <mat-label>Final String: {{ finalTitle }}</mat-label>
-      </mat-card>
-      <mat-card>
-        <mat-form-field
-          class="example-chip-list"
-          appearance="fill"
-          id="tags-box"
-        >
-          <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList1 aria-label="Tags selection">
-            <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
-              {{ tag }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input
-              class="tagInput"
-              placeholder="New Tag..."
-              #tagInput
-              [formControl]="tagCtrl"
-              [matAutocomplete]="auto1"
-              [matChipInputFor]="chipList1"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addTag($event)"
-            />
-          </mat-chip-list>
-          <mat-autocomplete
-            #auto1="matAutocomplete"
-            (optionSelected)="selectedTag($event)"
-            class="tags-options"
+              <mat-option
+                id="categories-options"
+                *ngFor="let category of filteredCategories | async"
+                [value]="category"
+              >
+                {{ category }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <br />
+          <button
+            mat-stroked-button
+            id="generate-categories-btn"
+            (click)="makeCategory()"
+            color="primary"
+            style="border-radius: 15px"
           >
-            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-              {{ tag }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <button
-          mat-stroked-button
-          id="generate-tags-btn"
-          (click)="makeTag()"
-          color="primary"
-          style="border-radius: 15px"
-        >
-          <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate</span>
+            <div style="display: flex; margin: 10px 0px">
+              <span style="margin-right: 10px">Generate Categories</span>
 
-            <mat-progress-spinner
-              *ngIf="genTagsLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
+              <mat-progress-spinner
+                *ngIf="genCategoriesLoading"
+                class="example-margin"
+                color="primary"
+                mode="indeterminate"
+                value="50"
+                diameter="30"
+              >
+              </mat-progress-spinner>
+              <span
+                *ngIf="!genCategoriesLoading && categoriesGenerated"
+                class="material-symbols-outlined"
+              >
+                done
+              </span>
+            </div>
+          </button>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Promotional Period</mat-card-title>
+          <hr />
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input
+              [formGroup]="datePicker"
+              [rangePicker]="picker"
             >
-            </mat-progress-spinner>
-            <span
-              *ngIf="!genTagsLoading && tagsGenerated"
-              class="material-symbols-outlined"
-            >
-              done
-            </span>
-          </div>
-        </button>
-      </mat-card>
+              <input
+                class="dateInput"
+                matStartDate
+                formControlName="start"
+                placeholder="Start date"
+              />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <mat-card>
-        <mat-form-field class="example-chip-list" appearance="fill">
-          <mat-label>Categories</mat-label>
-          <mat-chip-list #chipList2 aria-label="Categories selection">
-            <mat-chip
-              *ngFor="let category of categories"
-              (removed)="removeCategory(category)"
+            <mat-error
+              *ngIf="
+                datePicker.controls['start'].hasError('matStartDateInvalid')
+              "
+              >Invalid start date</mat-error
             >
-              {{ category }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input
-              class="categoryInput"
-              placeholder="New Category..."
-              #categoryInput
-              [formControl]="categoryCtrl"
-              [matAutocomplete]="auto2"
-              [matChipInputFor]="chipList2"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addCategory($event)"
-            />
-          </mat-chip-list>
-          <mat-autocomplete
-            #auto2="matAutocomplete"
-            (optionSelected)="selectedCategory($event)"
+            <mat-error
+              *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+              >Invalid end date</mat-error
+            >
+          </mat-form-field>
+
+          <p>Selected range: {{ datePicker.value | json }}</p>
+          <br />
+          <button
+            mat-stroked-button
+            id="generate-start-date-btn"
+            (click)="getMinOrMaxDates('min')"
+            color="primary"
+            style="border-radius: 15px"
           >
-            <mat-option
-              id="categories-options"
-              *ngFor="let category of filteredCategories | async"
-              [value]="category"
-            >
-              {{ category }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <button
-          mat-stroked-button
-          id="generate-categories-btn"
-          (click)="makeCategory()"
-          color="primary"
-          style="border-radius: 15px"
-        >
-          <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate</span>
+            <div style="display: flex; margin: 10px 0px">
+              <span style="margin-right: 10px">Generate Start Date</span>
 
-            <mat-progress-spinner
-              *ngIf="genCategoriesLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
-            >
-            </mat-progress-spinner>
-            <span
-              *ngIf="!genCategoriesLoading && categoriesGenerated"
-              class="material-symbols-outlined"
-            >
-              done
-            </span>
-          </div>
-        </button>
-      </mat-card>
-      <mat-card>
-        <mat-form-field appearance="fill">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [formGroup]="datePicker" [rangePicker]="picker">
-            <input
-              class="dateInput"
-              matStartDate
-              formControlName="start"
-              placeholder="Start date"
-            />
-            <input matEndDate formControlName="end" placeholder="End date" />
-          </mat-date-range-input>
-          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-
-          <mat-error
-            *ngIf="datePicker.controls['start'].hasError('matStartDateInvalid')"
-            >Invalid start date</mat-error
+              <mat-progress-spinner
+                *ngIf="genStartDateLoading"
+                class="example-margin"
+                color="primary"
+                mode="indeterminate"
+                value="50"
+                diameter="30"
+              >
+              </mat-progress-spinner>
+              <span
+                *ngIf="!genStartDateLoading && startDateGenerated"
+                class="material-symbols-outlined"
+              >
+                done
+              </span>
+            </div>
+          </button>
+          <button
+            mat-stroked-button
+            id="generate-end-date-btn"
+            (click)="getMinOrMaxDates('max')"
+            color="primary"
+            style="border-radius: 15px"
           >
-          <mat-error
-            *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
-            >Invalid end date</mat-error
-          >
-        </mat-form-field>
+            <div style="display: flex; margin: 10px 0px">
+              <span style="margin-right: 10px">Generate End Date</span>
 
-        <p>Selected range: {{ datePicker.value | json }}</p>
-        <button
-          mat-stroked-button
-          id="generate-start-date-btn"
-          (click)="getMinOrMaxDates('min')"
-          color="primary"
-          style="border-radius: 15px"
-        >
-          <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate Start Date</span>
+              <mat-progress-spinner
+                *ngIf="genEndDateLoading"
+                class="example-margin"
+                color="primary"
+                mode="indeterminate"
+                value="50"
+                diameter="30"
+              >
+              </mat-progress-spinner>
+              <span
+                *ngIf="!genEndDateLoading && endDateGenerated"
+                class="material-symbols-outlined"
+              >
+                done
+              </span>
+            </div>
+          </button>
+        </mat-card>
+      </div>
 
-            <mat-progress-spinner
-              *ngIf="genStartDateLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
-            >
-            </mat-progress-spinner>
-            <span
-              *ngIf="!genStartDateLoading && startDateGenerated"
-              class="material-symbols-outlined"
-            >
-              done
-            </span>
-          </div>
-        </button>
-        <button
-          mat-stroked-button
-          id="generate-end-date-btn"
-          (click)="getMinOrMaxDates('max')"
-          color="primary"
-          style="border-radius: 15px"
-        >
-          <div style="display: flex; margin: 10px 0px">
-            <span style="margin-right: 10px">Generate End Date</span>
-
-            <mat-progress-spinner
-              *ngIf="genEndDateLoading"
-              class="example-margin"
-              color="primary"
-              mode="indeterminate"
-              value="50"
-              diameter="30"
-            >
-            </mat-progress-spinner>
-            <span
-              *ngIf="!genEndDateLoading && endDateGenerated"
-              class="material-symbols-outlined"
-            >
-              done
-            </span>
-          </div>
-        </button>
-      </mat-card>
-    </form>
-
-    <!-- <div class="cv-scan">
+      <!-- <div class="cv-scan">
       <button type="button" class="special-btn2" (click)="popup = true">
         Generate CV image
       </button>
@@ -473,42 +493,41 @@
         </div>
       </div>
     </div> -->
-  </div>
+    </div>
 
-  <div class="item-page-right">
-    <img [src]="pendingProduct.images" alt="IMAGE" class="product-img" />
-    <div class="page-item-description">
-      <textarea>
-
-          {{ pendingProduct["content"] }}
-        </textarea
-      >
+    <div class="item-page-right">
+      <mat-card>
+        <img [src]="pendingProduct.images" alt="IMAGE" class="product-img" />
+        <hr />
+        <mat-card-content class="page-item-description">
+          <p>{{ pendingProduct["content"] }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-</div>
-<div class="item-page-btn-container">
-  <button
-    type="button"
-    class="btn btn-danger"
-    style="margin-right: 20px"
-    (click)="deletePost(pendingProduct.id)"
-  >
-    Delete Post
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary item-page-btn"
-    id="back-to-pending"
-    (click)="onPending()"
-  >
-    Back to Pending Page
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary item-page-btn"
-    id="go-to-live"
-    (click)="onProcessed()"
-  >
-    Submit
-  </button>
+  <div class="item-page-btn-container">
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="back-to-live1"
+      (click)="onPending()"
+    >
+      Back to Pending Page
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger item-page-btn"
+      (click)="deletePost(pendingProduct.id)"
+    >
+      Delete Post
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="submit-btn"
+      (click)="onProcessed()"
+    >
+      Submit
+    </button>
+  </div>
 </div>
