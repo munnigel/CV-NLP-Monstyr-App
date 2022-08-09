@@ -620,7 +620,7 @@ class PostsController < ApplicationController
     @search_terms = params[:search].downcase.split
 
     # search by title, store ids in search_ids_repeated hash
-    @posts = Post.where("title is not null")
+    @posts = Post.where("status = 'live'").where("title is not null")
     @posts.each do |titledpost|
       @search_terms.each do |term|
         if titledpost.title.downcase.include? term
@@ -634,7 +634,7 @@ class PostsController < ApplicationController
     end
 
     # search by tags, store ids in search_ids_repeated hash
-    @posts = Post.where("tags is not null")
+    @posts = Post.where("status = 'live'").where("tags is not null")
     @posts.each do |taggedpost|
       @search_terms.each do |terms|
         if taggedpost.tags.downcase.include? terms
@@ -648,7 +648,7 @@ class PostsController < ApplicationController
     end
 
     # search by categories, store ids in search_ids_repeated hash
-    @posts = Post.where("categories is not null")
+    @posts = Post.where("status = 'live'").where("categories is not null")
     @posts.each do |categorizedpost|
       @search_terms.each do |terms|
         if categorizedpost.categories.downcase.include? terms
@@ -662,7 +662,7 @@ class PostsController < ApplicationController
     end
 
     # search by content, store ids in search_ids_repeated hash
-    @posts = Post.where("content is not null")
+    @posts = Post.where("status = 'live'").where("content is not null")
     @posts.each do |contentedpost|
       @search_terms.each do |terms|
         if contentedpost.content.downcase.include? terms
@@ -676,7 +676,7 @@ class PostsController < ApplicationController
     end
 
     # search by dates (start and/or end), store ids in search_ids_repeated hash
-    @posts = Post.where("start_date is not null")
+    @posts = Post.where("status = 'live'").where("start_date is not null")
     @posts.each do |startdatepost|
       @search_terms.each do |terms|
         if startdatepost.start_date.to_s.downcase.include? terms
@@ -689,7 +689,7 @@ class PostsController < ApplicationController
       end
     end
 
-    @posts = Post.where("end_date is not null")
+    @posts = Post.where("status = 'live'").where("end_date is not null")
     @posts.each do |enddatepost|
       @search_terms.each do |terms|
         if enddatepost.title.downcase.include? terms
