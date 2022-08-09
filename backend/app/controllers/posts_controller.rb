@@ -482,21 +482,42 @@ class PostsController < ApplicationController
   end
 
   # sends verified categories data to BigQuery
-  def big_query_new_entry
-    rows = [
-            {
-                "content" => "Introducing Swisslineâs Formula X-02 Oxygen-Shock Activator. Delivers an extra boost of 0â and radiance to your skin, it's the go-to product to revitalise dullness and get you looking at your best! Drop by in-store at Swissline Counter, Cosmetics Department, Level 1 to check out the full collections today! #takashimayasg",
-                "categories" => "Women's"
-            },
-            {
-                "content" => "Random content decription thing.",
-                "categories" => "category_1"
-            }
-        ]
-    # results = BigQueries::BigQueryService.new.stream_data(rows)
+  def big_query_initial_dataset
+    require 'csv'
+
+    rows = []
+    csv_path = Rails.root.join('./output.csv')
+    original_classif_dataset = CSV.read(csv_path)
+    original_classif_dataset.each do |entry|
+      puts entry
+      rows.append({"content" => entry[0],
+                  "category1" => entry[1],
+                  "category2" => entry[2],
+                  "category3" => entry[3]})
+    end
+      
     results = BigQueryService.new.stream_data(rows)
 
-    render status: :ok, json: { data: results.as_json }
+    render status: :ok, json: { data: rows }
+  end
+
+
+  def big_query_bit_by_bit_upload
+
+    increment = 100
+
+    rows = []
+    csv_path = Rails.root.join('./output.csv')
+    original_classif_dataset = CSV.read(csv_path)
+
+     
+
+
+
+    
+    rows = []
+
+
   end
 
 

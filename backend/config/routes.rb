@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get '/posts/titlegen/:id', to: 'posts#titlegen'
   get '/posts/dategen/:id', to: 'posts#dategen'
   post '/auth/login', to: 'authentication#login'
-  get '/streamtobigq', to: 'posts#big_query_new_entry'
+  get '/streamtobigq', to: 'posts#big_query_initial_dataset'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
