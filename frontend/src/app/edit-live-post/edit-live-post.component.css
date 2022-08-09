@@ -21,7 +21,8 @@
 }
 
 .btn-danger {
-  border-radius: 20px;
+  background-color: #fa7474;
+  color: black;
 }
 
 .item-page-btn {
@@ -39,8 +40,8 @@
 }
 
 #submit-btn {
-  background-color: #4caf50;
-  color: white;
+  background-color: #29ff30;
+  color: black;
 }
 
 @media (max-width: 900px) {
