@@ -1,3 +1,7 @@
 .confirmation-dialog-container {
   margin: auto;
 }
+
+.dialog-btn:first-child {
+  margin-right: 10px;
+}

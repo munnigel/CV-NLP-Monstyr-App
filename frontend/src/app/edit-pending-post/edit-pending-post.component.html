@@ -508,8 +508,15 @@
   <div class="item-page-btn-container">
     <button
       type="button"
-      class="btn btn-danger"
-      style="margin-right: 20px"
+      class="btn btn-primary item-page-btn"
+      id="back-to-live1"
+      (click)="onPending()"
+    >
+      Back to Pending Page
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger item-page-btn"
       (click)="deletePost(pendingProduct.id)"
     >
       Delete Post
@@ -517,15 +524,7 @@
     <button
       type="button"
       class="btn btn-primary item-page-btn"
-      id="back-to-pending"
-      (click)="onPending()"
-    >
-      Back to Pending Page
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary item-page-btn"
-      id="go-to-live"
+      id="submit-btn"
       (click)="onProcessed()"
     >
       Submit

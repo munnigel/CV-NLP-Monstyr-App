@@ -10,10 +10,11 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./live-post.component.css'],
 })
 export class LivePostPageComponent implements OnInit {
-  tabIndex: number;
   showItem: boolean;
   liveProductList: Product[];
   searchTerm: string;
+  currentPage: number;
+  maxPage: number;
 
   filteredProductList: Product[];
   constructor(
@@ -23,7 +24,6 @@ export class LivePostPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.tabIndex = 2;
     this.showItem = false;
     this.liveProductList = this.dataSrv.getLiveProductList();
     if (!this.liveProductList) {
@@ -34,6 +34,18 @@ export class LivePostPageComponent implements OnInit {
     console.log(this.liveProductList);
     this.titleService.setTitle('live-posts');
     this.filteredProductList = this.liveProductList;
+    this.currentPage = 1;
+    this.dataSrv.getNoOfLivePosts().subscribe({
+      next: (res: any) => {
+        let temp = res.noofliveposts;
+        this.maxPage = Math.ceil(temp / 15);
+      },
+      error: () => {},
+      complete: () => {
+        console.log('get max page');
+        console.log(this.maxPage);
+      },
+    });
   }
 
   filterPosts(searchTerm: string) {
@@ -60,32 +72,34 @@ export class LivePostPageComponent implements OnInit {
 
   async nextPage() {
     try {
-      this.dataSrv.nextLiveTab();
+      if (this.currentPage < this.maxPage) {
+        this.dataSrv.setLiveTab(this.currentPage + 1);
+        await this.dataSrv.updateAllLiveProductList();
+        this.liveProductList = this.dataSrv.getLiveProductList();
+        this.currentPage += 1;
+      }
     } catch (err) {
       console.log(err);
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
       return;
     }
-    await this.dataSrv.updateAllProductList();
-    this.liveProductList = this.dataSrv.getLiveProductList();
   }
 
   async prevPage() {
     try {
-      this.dataSrv.prevLiveTab();
+      if (this.currentPage > 1) {
+        this.dataSrv.setLiveTab(this.currentPage - 1);
+        await this.dataSrv.updateAllLiveProductList();
+        this.liveProductList = this.dataSrv.getLiveProductList();
+        this.currentPage -= 1;
+      }
     } catch (err) {
       console.log(err);
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
       return;
     }
-    await this.dataSrv.updateAllProductList();
-    this.liveProductList = this.dataSrv.getLiveProductList();
-  }
-
-  onTabClick(index: number) {
-    this.tabIndex = index;
   }
 
   onItemClick() {

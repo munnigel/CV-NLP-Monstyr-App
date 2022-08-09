@@ -19,3 +19,46 @@
   min-width: 350px;
   margin: 0px 10px;
 }
+
+.btn-danger {
+  border-radius: 20px;
+}
+
+.item-page-btn {
+  width: 160px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.item-page-btn:first-child {
+  margin-right: 50px;
+}
+
+.item-page-btn:last-child {
+  margin-right: 0px;
+}
+
+#submit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .item-page-btn-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  .item-page-btn {
+    margin-right: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .item-page-btn:first-child {
+    margin-right: 0px;
+  }
+  .item-page-btn:last-child {
+    margin-bottom: 0px;
+  }
+}

@@ -1,3 +1,4 @@
+<div class="live-post-main-container">
 <div class="page-header">Live Posts</div>
 <div style="text-align: center">
   <mat-form-field appearance="fill">
@@ -39,6 +40,7 @@
     Next Page
   </button>
 </div>
+<div>Showing page {{ currentPage }} of {{ maxPage }}</div>
 <div class="container">
   <div class="row row-cols-4">
     <ng-container *ngFor="let product of filteredProductList; let i = index">
@@ -80,4 +82,5 @@
       </mat-card>
     </ng-container>
   </div>
+</div>
 </div>

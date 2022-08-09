@@ -23,9 +23,6 @@ import { fromEvent, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatInput } from '@angular/material/input';
-import { minBy } from 'cypress/types/lodash';
-import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-edit-item',

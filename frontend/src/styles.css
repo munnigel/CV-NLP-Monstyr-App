@@ -344,14 +344,6 @@ body {
   justify-content: space-between;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
 .popup {
   margin: 70px auto;
   padding: 20px;
@@ -477,14 +469,6 @@ body {
   display: block;
   resize: none;
   overflow: auto;
-}
-
-.item-page-btn:first-child {
-  margin-right: 20px;
-}
-
-.item-page-btn {
-  border-radius: 30px;
 }
 
 .setting-page-container {

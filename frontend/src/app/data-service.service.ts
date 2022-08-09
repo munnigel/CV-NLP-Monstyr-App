@@ -103,51 +103,12 @@ export class DataService implements OnInit {
     return this.liveTab;
   }
 
-  async nextPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab < (await this.getNoOfPendingPosts()) / 15) {
-      this.pendingTab++;
-    }
+  getNoOfPendingPosts() {
+    return this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions());
   }
 
-  prevPendingTab() {
-    console.log(this.pendingTab);
-    if (this.pendingTab > 1) {
-      this.pendingTab--;
-    }
-  }
-
-  async getNoOfPendingPosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofpendingposts`, this.getHttpOptions())
-    );
-
-    console.log(res);
-    return res.noofpendingposts;
-  }
-
-  async nextLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab < (await this.getNoOfLivePosts()) / 15) {
-      this.liveTab++;
-    }
-  }
-
-  prevLiveTab() {
-    console.log(this.liveTab);
-    if (this.liveTab > 1) {
-      this.liveTab--;
-    }
-  }
-
-  async getNoOfLivePosts() {
-    let token = localStorage.getItem('loginToken');
-    let res: any = await lastValueFrom(
-      this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions())
-    );
-    console.log(res);
-    return res.noofliveposts;
+  getNoOfLivePosts() {
+    return this.http.get(`${API_URL}/noofliveposts`, this.getHttpOptions());
   }
 
   async updateOverviewData() {
