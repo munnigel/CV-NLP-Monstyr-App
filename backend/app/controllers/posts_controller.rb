@@ -536,15 +536,18 @@ class PostsController < ApplicationController
 
     @search_ids_repeated = {}
     @search_results = []
+    @search_terms = params[:search].downcase.split
 
     # search by title, store ids in search_ids_repeated hash
     @posts = Post.where("title is not null")
     @posts.each do |titledpost|
-      if titledpost.title.downcase.include? params[:search]
-        if @search_ids_repeated[titledpost.id]
-          @search_ids_repeated[titledpost.id] += 1
-        else
-          @search_ids_repeated[titledpost.id] = 1
+      @search_terms.each do |term|
+        if titledpost.title.downcase.include? term
+          if @search_ids_repeated[titledpost.id]
+            @search_ids_repeated[titledpost.id] += 1
+          else
+            @search_ids_repeated[titledpost.id] = 1
+          end
         end
       end
     end
@@ -552,11 +555,13 @@ class PostsController < ApplicationController
     # search by tags, store ids in search_ids_repeated hash
     @posts = Post.where("tags is not null")
     @posts.each do |taggedpost|
-      if taggedpost.tags.downcase.include? params[:search]
-        if @search_ids_repeated[taggedpost.id]
-          @search_ids_repeated[taggedpost.id] += 1
-        else
-          @search_ids_repeated[taggedpost.id] = 1
+      @search_terms.each do |terms|
+        if taggedpost.tags.downcase.include? terms
+          if @search_ids_repeated[taggedpost.id]
+            @search_ids_repeated[taggedpost.id] += 1
+          else
+            @search_ids_repeated[taggedpost.id] = 1
+          end
         end
       end
     end
@@ -564,11 +569,13 @@ class PostsController < ApplicationController
     # search by categories, store ids in search_ids_repeated hash
     @posts = Post.where("categories is not null")
     @posts.each do |categorizedpost|
-      if categorizedpost.categories.downcase.include? params[:search]
-        if @search_ids_repeated[categorizedpost.id]
-          @search_ids_repeated[categorizedpost.id] += 1
-        else
-          @search_ids_repeated[categorizedpost.id] = 1
+      @search_terms.each do |terms|
+        if categorizedpost.categories.downcase.include? terms
+          if @search_ids_repeated[categorizedpost.id]
+            @search_ids_repeated[categorizedpost.id] += 1
+          else
+            @search_ids_repeated[categorizedpost.id] = 1
+          end
         end
       end
     end
@@ -576,11 +583,13 @@ class PostsController < ApplicationController
     # search by content, store ids in search_ids_repeated hash
     @posts = Post.where("content is not null")
     @posts.each do |contentedpost|
-      if contentedpost.content.downcase.include? params[:search]
-        if @search_ids_repeated[contentedpost.id]
-          @search_ids_repeated[contentedpost.id] += 1
-        else
-          @search_ids_repeated[contentedpost.id] = 1
+      @search_terms.each do |terms|
+        if contentedpost.content.downcase.include? terms
+          if @search_ids_repeated[contentedpost.id]
+            @search_ids_repeated[contentedpost.id] += 1
+          else
+            @search_ids_repeated[contentedpost.id] = 1
+          end
         end
       end
     end
@@ -588,22 +597,26 @@ class PostsController < ApplicationController
     # search by dates (start and/or end), store ids in search_ids_repeated hash
     @posts = Post.where("start_date is not null")
     @posts.each do |startdatepost|
-      if startdatepost.start_date.to_s.downcase.include? params[:search]
-        if @search_ids_repeated[startdatepost.id]
-          @search_ids_repeated[startdatepost.id] += 1
-        else
-          @search_ids_repeated[startdatepost.id] = 1
+      @search_terms.each do |terms|
+        if startdatepost.start_date.to_s.downcase.include? terms
+          if @search_ids_repeated[startdatepost.id]
+            @search_ids_repeated[startdatepost.id] += 1
+          else
+            @search_ids_repeated[startdatepost.id] = 1
+          end
         end
       end
     end
 
     @posts = Post.where("end_date is not null")
     @posts.each do |enddatepost|
-      if enddatepost.title.downcase.include? params[:search]
-        if @search_ids_repeated[enddatepost.id]
-          @search_ids_repeated[enddatepost.id] += 1
-        else
-          @search_ids_repeated[enddatepost.id] = 1
+      @search_terms.each do |terms|
+        if enddatepost.title.downcase.include? terms
+          if @search_ids_repeated[enddatepost.id]
+            @search_ids_repeated[enddatepost.id] += 1
+          else
+            @search_ids_repeated[enddatepost.id] = 1
+          end
         end
       end
     end
@@ -623,20 +636,11 @@ class PostsController < ApplicationController
       @search_results.append(Post.where("id = #{result.to_s}"))
     end
 
-
-
-    # @posts = Post.where("tags is not null")
-    # @posts.each do |taggedpost|
-    #   if taggedpost.tags.downcase.include? params[:search]
-    #     @search_results.append(taggedpost)
-    #   end
-    # end
-
-
+    # @search_results = @search_ids_sorted
 
     # render json response of search results
     if @search_results == []
-      render json: { results: "no results" }      
+      render json: { results: "no results" }
     else
       respond_to do |format|
         format.json {render json: @search_results}
