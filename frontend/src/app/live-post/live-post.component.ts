@@ -75,8 +75,9 @@ export class LivePostPageComponent implements OnInit {
     console.log('filter');
   }
 
-  async nextPage() {
+  nextPage() {
     if (this.currentPage < this.maxPage) {
+      this.liveProductList = [];
       this.dataSrv.setLiveTab(this.currentPage + 1);
       this.dataSrv.getAllLiveProductList().subscribe({
         next: (res) => {
@@ -93,8 +94,9 @@ export class LivePostPageComponent implements OnInit {
     }
   }
 
-  async prevPage() {
+  prevPage() {
     if (this.currentPage > 1) {
+      this.liveProductList = [];
       this.dataSrv.setLiveTab(this.currentPage - 1);
       this.dataSrv.getAllLiveProductList().subscribe({
         next: (res) => {

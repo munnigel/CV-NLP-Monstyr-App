@@ -63,6 +63,7 @@ export class HomePageComponent implements OnInit {
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
     }
+    this.tabIndex = index;
     this.router.navigate([`/home/${this.tabList[index]}`]);
   }
 

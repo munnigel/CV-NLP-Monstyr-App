@@ -15,13 +15,13 @@ export class AcceptancePieComponent implements OnInit {
     let rejectedAiMl;
     this.dataSrv.getacceptedAiML().subscribe({
       next: (res) => {
-        acceptedAiMl = res['acceptedAiML'];
+        acceptedAiMl = res['acceptedaiml'];
       },
       error: () => {},
       complete: () => {
         this.dataSrv.getrejectedAiML().subscribe({
           next: (res2) => {
-            rejectedAiMl = res2['rejectedAiML'];
+            rejectedAiMl = res2['rejectedaiml'];
           },
           error: () => {},
           complete: () => {

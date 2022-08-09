@@ -33,10 +33,7 @@ export class CompletionPieComponent implements OnInit {
                   {
                     label: 'Completion of Posts',
                     backgroundColor: ['#228B22', '#AFE1AF'],
-                    data: [
-                      this.dataSrv.livePercentage,
-                      this.dataSrv.pendingPercentage,
-                    ],
+                    data: [livePercentage, pendingPercentage],
                   },
                 ],
               },
