@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CallTracker } from 'assert';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data-service.service';
 import { Product } from '../product.model';
@@ -17,12 +18,15 @@ export class LoginComponent implements OnInit {
   pendingProductList: Product[] = [];
   postForm: FormGroup;
 
+
   constructor(
     private router: Router,
     private titleService: Title,
     private dataSrv: DataService,
     private fb: FormBuilder
-  ) {}
+  ) { }
+
+
 
   async ngOnInit() {
     this.titleService.setTitle('Login');
@@ -43,6 +47,10 @@ export class LoginComponent implements OnInit {
         }
     }
   }
+
+
+
+
 
   async onLogin() {
     let regex = new RegExp('[a-z0-9]+@[mymail]+.[sutd]+.[edu]+.[sg]');
