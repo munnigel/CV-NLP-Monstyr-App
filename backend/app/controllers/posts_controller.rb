@@ -527,6 +527,66 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       # format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
       # format.json { render :show, status: :ok, location: @post }
+
+      @categorylist = ["Electronics, Devices, etc",
+                      'Beauty & Health',
+                      "Women's",
+                      "Men's",
+                      "Kids'",
+                      'Groceries, etc',
+                      'Department Stores',
+                      'Home, Bath, etc',
+                      'Sports, Travel, etc',
+                      'Arts, Hobbies, Toys, etc',
+                      'Jewellery, Optical, etc',
+                      'Stationery, Gifts, etc',
+                      "Pets'",
+                      'Cars, Bikes, etc',
+                      'Others (Shop)',
+                      'Cafés, Drinks & Desserts',
+                      'Restaurants & Eateries',
+                      'Food Court & Stalls',
+                      'Baked Goods, Snacks, etc',
+                      'Alcohol, Bars & Clubs',
+                      'Food Delivery',
+                      'Others (Eat & Drink)',
+                      'Beauty & Aesthetics',
+                      'Hair & Nails',
+                      'Massage & Spa',
+                      'Others (Relax)',
+                      'Flights & Hotels',
+                      'Taxi, Rides & Parking',
+                      'Credit Cards & Fin Svcs',
+                      'Mobile, Broadband, etc',
+                      'Repair & Cleaning',
+                      'Dental & Medical',
+                      'Petrol & Auto Workshop',
+                      'Others (Travel & Svcs)',
+                      'Attractions',
+                      'Movies & Theatre',
+                      'Concerts, Shows & Events',
+                      'Gaming & Arcade',
+                      'Others (Play)']
+
+      if @post.status == 'live'
+        rows = []
+        @categories = []
+        @categorylist.each do |cat|
+          if @post.categories.include? cat
+            @categories.append(cat)
+          end
+        end
+        rows.append({"content" => @post.content,
+                    "category1" => @categories[0],
+                    "category2" => @categories[1],
+                    "category3" => @categories[2]})
+        
+        # send category data to bigQ
+        results = BigQueryService.new.stream_data(rows)
+
+        # trigger CSV generation / re-training of model
+        # moreResults = BigQueryService.new.extract_table
+      end
       render json: @post
     else
       # format.html { render :edit, status: :unprocessable_entity }
