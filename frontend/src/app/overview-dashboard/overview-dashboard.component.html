@@ -1,34 +1,47 @@
-  <!--dash.component.html-->
+<!--dash.component.html-->
 <div class="grid-container">
   <h1 class="mat-h1">Overview</h1>
-  <mat-grid-list class="mat-grid-list" cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+  <mat-grid-list
+    class="mat-grid-list"
+    cols="{{ (cardLayout | async)?.columns }}"
+    rowHeight="200px"
+  >
     <!--Mini Cards-->
     <!-- <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cardLayout | async )?.miniCard.cols"
       [rowspan]="( cardLayout | async )?.miniCard.rows">
       <app-dashboard-card title="Card {{i}}"><div>Mini Card Content Here</div></app-dashboard-card>
     </mat-grid-tile> -->
     <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+    <mat-grid-tile
+      [colspan]="(cardLayout | async)?.chart.cols"
+      [rowspan]="(cardLayout | async)?.chart.rows"
+    >
       <app-dashboard-card title="Latency of each AI model">
-          <app-latency-bar></app-latency-bar>
+        <app-latency-bar></app-latency-bar>
       </app-dashboard-card>
-   </mat-grid-tile>
-   <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+    </mat-grid-tile>
+    <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
       <app-dashboard-card title="Accuracy/Confidence over Time">
           <app-accuracy-line></app-accuracy-line>
       </app-dashboard-card>
    </mat-grid-tile> -->
-   <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
-    <app-dashboard-card title="Post Processing">
+    <mat-grid-tile
+      [colspan]="(cardLayout | async)?.chart.cols"
+      [rowspan]="(cardLayout | async)?.chart.rows"
+    >
+      <app-dashboard-card title="Post Processing">
         <app-completion-pie></app-completion-pie>
-    </app-dashboard-card>
- </mat-grid-tile>
- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
-  <app-dashboard-card title="AI Performance by Acceptance">
-      <app-acceptance-pie></app-acceptance-pie>
-  </app-dashboard-card>
-</mat-grid-tile>
-   <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
+      </app-dashboard-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+      [colspan]="(cardLayout | async)?.chart.cols"
+      [rowspan]="(cardLayout | async)?.chart.rows"
+    >
+      <app-dashboard-card title="AI Performance by Acceptance">
+        <app-acceptance-pie></app-acceptance-pie>
+      </app-dashboard-card>
+    </mat-grid-tile>
+    <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols" [rowspan]="( cardLayout | async )?.chart.rows">
       <app-dashboard-card title="Sales by Traffic Source">
           <app-sales-traffic-chart></app-sales-traffic-chart>
       </app-dashboard-card>
@@ -43,3 +56,4 @@
       <app-dashboard-card title="Card 9"><div>Table Content Here</div></app-dashboard-card>
     </mat-grid-tile> -->
   </mat-grid-list>
+</div>

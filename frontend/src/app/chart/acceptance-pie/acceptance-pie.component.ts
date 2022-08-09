@@ -37,7 +37,6 @@ export class AcceptancePieComponent implements OnInit {
                   },
                 ],
               },
-              options: { responsive: false },
             });
           },
         });

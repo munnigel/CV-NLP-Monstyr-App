@@ -1,1 +1,29 @@
-<app-overview-dashboard></app-overview-dashboard>
+<div class="overview-page-main-container">
+  <div class="page-header">Overview</div>
+  <div class="row row-cols-4">
+    <mat-card style="width: 95%; text-align: center">
+      <mat-card-title>Latency</mat-card-title>
+      <hr />
+      <div style="display: inline-block">
+        <canvas id="latency-bar" height="300px" width="300px"> </canvas>
+      </div>
+    </mat-card>
+
+    <!-- <div id="div-bar-chart">
+    <canvas id="accuracy-line" style="height: 300px; width: 600px"> </canvas>
+  </div> -->
+    <mat-card style="width: 95%; text-align: center">
+      <mat-card-title>Completion</mat-card-title>
+      <hr />
+      <div style="display: inline-block">
+        <canvas id="completion-pie"> </canvas></div
+    ></mat-card>
+    <mat-card style="width: 95%; text-align: center">
+      <mat-card-title>Acceptance</mat-card-title>
+      <hr />
+      <div style="display: inline-block">
+        <canvas id="acceptance-pie"> </canvas>
+      </div>
+    </mat-card>
+  </div>
+</div>
