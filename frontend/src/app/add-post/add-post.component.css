@@ -9,6 +9,11 @@
 
 .edit-live-post-main-container {
   padding: 50px 50px;
+  background-image: url(../../assets/pictures/bggGif.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .description-textarea {
@@ -18,6 +23,20 @@
 .page-item-title {
   min-width: 350px;
   margin: 0px 10px;
+}
+
+.page-header {
+  width: 100%;
+  padding: 25px;
+  background: url(../../assets/pictures/titleGif.gif);
+  font-size: 70px;
+  font-weight: 700;
+  height: 75px;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 20px 0 20px 0;
 }
 
 .btn-danger {
@@ -50,6 +69,7 @@
     align-items: center;
     justify-content: start;
   }
+
   .item-page-btn {
     margin-right: 0px;
     width: 100%;
@@ -59,7 +79,17 @@
   .item-page-btn:first-child {
     margin-right: 0px;
   }
+
   .item-page-btn:last-child {
     margin-bottom: 0px;
+  }
+
+  .page-header {
+    font-size: 40px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    padding: 0 40px;
   }
 }
