@@ -225,7 +225,7 @@ body {
   font: inherit;
   color: #fff;
   background-color: transparent;
-  outline: 2px solid #fff;
+  outline: 2px solid rgb(108, 88, 122);
 }
 
 .input-label {
@@ -234,6 +234,8 @@ body {
   left: 0;
   transform: translate(10px, 10px);
   transition: transform .25s;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .form-control:focus+.input-label,
@@ -242,7 +244,7 @@ body {
   color: #fff;
   font-weight: 500;
   padding-inline: 5px;
-  background-color: rgba(209, 197, 252, 0.3);
+  background-color: #aa94f7;
 }
 
 .form-control:is(:focus, :valid) {
@@ -827,7 +829,6 @@ a {
 .fc {
   width: fit-content;
   height: max-content;
-  margin-left: 20px;
 }
 
 .fl {
