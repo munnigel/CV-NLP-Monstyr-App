@@ -487,7 +487,7 @@ class PostsController < ApplicationController
 
     rows = []
     csv_path = Rails.root.join('./output.csv')
-    original_classif_dataset = CSV.read(csv_path)
+    original_classif_dataset = CSV.read(csv_path)[8001, 8102]
     original_classif_dataset.each do |entry|
       puts entry
       rows.append({"content" => entry[0],
