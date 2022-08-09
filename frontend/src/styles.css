@@ -65,6 +65,8 @@ body {
   animation: 45s para infinite linear; */
 }
 
+
+
 @keyframes para {
   100% {
     background-position: -2000px 0%, 2000px 50%, -2000px 100%;
@@ -445,10 +447,10 @@ body {
   align-content: center;
   height: fit-content;
   font-size: large;
-  font-weight: 500;
   align-self: center;
   border-radius: 10px;
   width: fit-content;
+  background-color: rgba(144, 133, 133, 0.2);
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
@@ -476,6 +478,7 @@ body {
   padding: 0px 10px;
   margin: 10px;
 }
+
 
 .page-item-date {
   resize: none;
@@ -723,16 +726,7 @@ a {
   margin-bottom: 30px;
 }
 
-.addAccBg {
-  height: 100%;
-  background-image: url(./assets/pictures/bgg.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  padding: 50px;
-
-}
+.addAccBg {}
 
 .groupForm {
   width: 30%;
@@ -810,9 +804,16 @@ a {
 
 
 .bgg {
-  background: #bababa;
-  height: 100%;
+  background-image: url(./assets/pictures/bgg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 95px;
+  scrollbar-width: none;
 }
+
+
 
 .forms {
   display: grid;
@@ -929,5 +930,14 @@ mat-card {
     display: grid;
     grid-template-columns: 1fr;
     align-self: center;
+  }
+
+  .gf {
+    padding: 5px;
+    width: 150%;
+    margin-left: -45px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 }

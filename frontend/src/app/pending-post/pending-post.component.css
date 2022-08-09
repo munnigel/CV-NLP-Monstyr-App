@@ -1,5 +1,10 @@
 .pending-post-main-container {
   padding: 50px 80px;
+  background-image: url(../../assets/pictures/bggGif.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .pending-posts-img {
@@ -16,15 +21,32 @@
   max-width: 200px;
 }
 
+.page-header {
+  width: 100%;
+  padding: 25px;
+  background: url(../../assets/pictures/titleGif.gif);
+  font-size: 70px;
+  font-weight: 800;
+  height: 95px;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 20px 0 40px 0;
+}
+
 .pending-posts-item {
   width: 100%;
   cursor: pointer;
   display: grid;
   grid-template-columns: 200px auto;
+  background-color: rgba(238, 238, 238, 0.8);
+  border-radius: 30px;
+  border: 2px solid rgb(155, 155, 155);
 }
 
 .pending-posts-item:hover {
-  box-shadow: 0 1px 10px rgb(97, 80, 80);
+  box-shadow: 0 3px 15px rgb(68, 57, 57);
 }
 
 .pending-posts-item:hover:after {
@@ -53,12 +75,15 @@
   .not-mobile {
     display: none;
   }
+
   .mobile {
     display: block;
   }
+
   .pending-post-main-container {
     padding: 50px 20px;
   }
+
   .pending-posts-img {
     width: 100%;
   }
@@ -66,5 +91,9 @@
   .pending-posts-item {
     display: flex;
     flex-direction: column;
+  }
+
+  .page-header {
+    font-size: 45px;
   }
 }
