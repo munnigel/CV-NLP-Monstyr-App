@@ -1,11 +1,5 @@
 import { COMMA, ENTER, L, P } from '@angular/cdk/keycodes';
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -13,7 +7,6 @@ import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
-  Validators,
 } from '@angular/forms';
 import { Product } from '../product.model';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
@@ -23,6 +16,7 @@ import { fromEvent, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { allCategories } from '../env';
 
 @Component({
   selector: 'app-edit-item',
@@ -70,47 +64,7 @@ export class EditItemComponent implements OnInit {
   categoryCtrl = new UntypedFormControl('');
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
-  allCategories: string[] = [
-    'Electronics,  Devices, etc',
-    'Beauty & Health',
-    "Women's",
-    "Men's",
-    "Kids'",
-    'Groceries,  etc',
-    'Department  Stores',
-    'Home,  Bath, etc',
-    'Sports,  Travel, etc',
-    'Arts, Hobbies, Toys, etc',
-    'Jewellery,  Optical, etc',
-    'Stationery, Gifts, etc',
-    "Pets'",
-    'Cars,  Bikes, etc',
-    'Others  (Shop)',
-    'Cafés, Drinks  & Desserts',
-    'Restaurants & Eateries',
-    'Food Court  & Stalls',
-    'Baked Goods, Snacks, etc',
-    'Alcohol, Bars & Clubs',
-    'Food  Delivery',
-    'Others  (Eat & Drink)',
-    'Beauty &  Aesthetics',
-    'Hair & Nails',
-    'Massage & Spa',
-    'Others  (Relax)',
-    'Flights & Hotels',
-    'Taxi, Rides  & Parking',
-    'Credit Cards  & Fin Svcs',
-    'Mobile,  Broadband, etc',
-    'Repair & Cleaning',
-    'Dental & Medical',
-    'Petrol &  Auto Workshop',
-    'Others (Travel & Svcs)',
-    'Attractions',
-    'Movies & Theatre',
-    'Concerts,  Shows & Events',
-    'Gaming & Arcade',
-    'Others  (Play)',
-  ];
+  allCategories = allCategories;
   formats = [
     ['New!', '<Product Name>'],
     ['New Outlet!', '<Location>', '<Unit Number>'],
@@ -427,7 +381,7 @@ export class EditItemComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      this.categories.push(value);
+      if (value in allCategories) this.categories.push(value);
     }
 
     // Clear the input value
@@ -458,7 +412,7 @@ export class EditItemComponent implements OnInit {
     );
   }
 
-  async onProcessed() {
+  onProcessed() {
     console.log(this.categories);
     this.pendingProduct.selectedTitle = {
       productName: this.titleProductName,
@@ -485,7 +439,7 @@ export class EditItemComponent implements OnInit {
           this.router.navigate(['/']);
         }
       },
-      complete: async () => {
+      complete: () => {
         console.log('completed add');
         this.router.navigate(['/home/processed']);
       },

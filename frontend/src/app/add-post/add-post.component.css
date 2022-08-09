@@ -1,28 +1,65 @@
-.main-container {
-    margin-top: 50px;
-    padding-left: 200px;
-    padding-right: 200px;
-    padding-bottom: 200px;
+.example-chip-list {
+  width: 100%;
 }
 
-.header {
-    font-size: 50px;
-    font-weight: 500;
-    margin: 50px 0px;
-    text-align: center;
+.item-page-btn-container {
+  display: flex;
+  justify-content: center;
 }
 
-.options-container {
-    display:flex;
-    justify-content: center;
+.edit-live-post-main-container {
+  padding: 50px 50px;
 }
 
-.clear {
-    width: 130px;
-    margin-right: 10px;
+.description-textarea {
+  resize: none;
 }
 
-.upload-field {
-    width: 130px;
-    margin-left: 10px;
+.page-item-title {
+  min-width: 350px;
+  margin: 0px 10px;
+}
+
+.btn-danger {
+  background-color: #fa7474;
+  color: black;
+}
+
+.item-page-btn {
+  width: 160px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.item-page-btn:first-child {
+  margin-right: 50px;
+}
+
+.item-page-btn:last-child {
+  margin-right: 0px;
+}
+
+#submit-btn {
+  background-color: #29ff30;
+  color: black;
+}
+
+@media (max-width: 900px) {
+  .item-page-btn-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  .item-page-btn {
+    margin-right: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .item-page-btn:first-child {
+    margin-right: 0px;
+  }
+  .item-page-btn:last-child {
+    margin-bottom: 0px;
+  }
 }

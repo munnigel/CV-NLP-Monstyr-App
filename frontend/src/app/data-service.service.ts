@@ -239,8 +239,9 @@ export class DataService implements OnInit {
   }
 
   getAllLiveProductList() {
+    console.log(this.liveTab);
     return this.http.get(
-      `${API_URL}/posts/live/${this.pendingTab}`,
+      `${API_URL}/posts/live/${this.liveTab}`,
       this.getHttpOptions()
     );
   }
@@ -343,9 +344,42 @@ export class DataService implements OnInit {
     return new Product();
   }
 
-  addPost(formData: FormData) {
+  addPost(product: Product, uploadedImage: File) {
+    var formData = new FormData();
+    if (product.sp_id) formData.append('sp_id', product.sp_id.toString());
+    if (product.pid) formData.append('pid', product.pid.toString());
+    if (product.status) formData.append('status', product.status);
+    if (product.title) formData.append('title', product.title);
+    if (product.selectedTitle)
+      formData.append('selected_title', JSON.stringify(product.selectedTitle));
+    if (product.genTitle)
+      formData.append('gen_title', JSON.stringify(product.genTitle));
+    if (product.categories)
+      formData.append('categories', JSON.stringify(product.categories));
+    if (product.genCategories)
+      formData.append('gen_categories', JSON.stringify(product.genCategories));
+    if (product.startDate)
+      formData.append('start_date', product.startDate.toString());
+    if (product.genStartDate)
+      formData.append('gen_start_date', product.genStartDate.toString());
+    if (product.endDate)
+      formData.append('end_date', product.endDate.toString());
+    if (product.genEndDate)
+      formData.append('gen_end_date', product.genEndDate.toString());
+    if (product.tags) formData.append('tags', JSON.stringify(product.tags));
+    if (product.genTags)
+      formData.append('gen_tags', JSON.stringify(product.genTags));
+    if (product.content) formData.append('content', product.content);
+    if (product.genContent) formData.append('gen_content', product.genContent);
+    if (uploadedImage)
+      formData.append('image', uploadedImage, uploadedImage.name);
     let token = localStorage.getItem('loginToken');
-    return this.http.post(`${API_URL}/posts`, formData, this.getHttpOptions());
+    console.log(this.getHttpOptions());
+    return this.http.post<Product>(
+      `${API_URL}/posts`,
+      formData,
+      this.getHttpOptions()
+    );
   }
 
   addNewAccount(formData: FormData) {

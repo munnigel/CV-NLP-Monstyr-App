@@ -4,19 +4,14 @@ import { DataService } from '../data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Product } from '../product.model';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ConfirmationDialogModel } from '../confirmation-dialog/confirmation-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { map, Observable, startWith } from 'rxjs';
+import { allCategories } from '../env';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-edit-processed-post',
@@ -55,9 +50,13 @@ export class EditProcessedPostComponent implements OnInit {
   titleUnitNumber: string;
   titleAmount: string;
 
+  categoryCtrl = new UntypedFormControl('');
+  filteredCategories: Observable<string[]>;
+  allCategories = allCategories;
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private datasrv: DataService,
+    private dataSrv: DataService,
     private router: Router,
     private dialog: MatDialog
   ) {
@@ -66,12 +65,19 @@ export class EditProcessedPostComponent implements OnInit {
       end: new UntypedFormControl(null),
     });
   }
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
   ngOnInit(): void {
+    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      startWith(null),
+      map((category: string | null) =>
+        category ? this._filterCategories(category) : this.allCategories.slice()
+      )
+    );
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       let output: any;
-      this.datasrv.getProductInfo(this.id).subscribe({
+      this.dataSrv.getProductInfo(this.id).subscribe({
         next: (res) => {
           output = res;
         },
@@ -80,7 +86,7 @@ export class EditProcessedPostComponent implements OnInit {
           this.router.navigate(['/']);
         },
         complete: () => {
-          this.product = this.datasrv.createAndStoreProduct(output);
+          this.product = this.dataSrv.createAndStoreProduct(output);
           this.updateAllFields();
           if (this.product.content)
             this.descriptionCtrl.setValue(this.product.content);
@@ -96,11 +102,25 @@ export class EditProcessedPostComponent implements OnInit {
     });
   }
 
+  selectedCategories(event: MatAutocompleteSelectedEvent): void {
+    this.categories.push(event.option.viewValue);
+    this.categoryInput.nativeElement.value = '';
+    this.categoryCtrl.setValue(null);
+  }
+
+  private _filterCategories(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allCategories.filter((category) =>
+      category.toLowerCase().includes(filterValue)
+    );
+  }
+
   setToPending() {
     let newProduct = new Product();
     newProduct.id = this.product.id;
     newProduct.status = 'pending';
-    this.datasrv.updatePost(newProduct).subscribe({
+    this.dataSrv.updatePost(newProduct).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -226,7 +246,7 @@ export class EditProcessedPostComponent implements OnInit {
 
     // Add our category
     if (value) {
-      this.categories.push(value);
+      if (value in allCategories) this.categories.push(value);
     }
 
     // Clear the input value
@@ -262,7 +282,7 @@ export class EditProcessedPostComponent implements OnInit {
     this.product.endDate = this.datePicker.get('end').value;
     console.log(this.product);
 
-    this.datasrv.updatePost(this.product).subscribe({
+    this.dataSrv.updatePost(this.product).subscribe({
       next: (v) => console.log(v),
       error: (err) => {
         if (err.error.errors == 'Nil JSON web token') {
@@ -284,7 +304,7 @@ export class EditProcessedPostComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
-        this.datasrv.deletePost(id).subscribe({
+        this.dataSrv.deletePost(id).subscribe({
           next: () => {},
           error: (err) => {
             if (err.error.errors == 'Nil JSON web token') {

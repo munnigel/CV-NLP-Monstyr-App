@@ -15,7 +15,6 @@ import { LivePostPageComponent } from './live-post/live-post.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OverviewDashboardComponent } from './overview-dashboard/overview-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -29,10 +28,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgChartsModule } from 'ng2-charts';
 // import { CardComponent } from './card/card.component';
 import { DashboardCardComponent } from './dashboard-card/dashboard-card.component';
-import { LatencyBarComponent } from './chart/latency-bar/latency-bar.component';
-import { AccuracyLineComponent } from './chart/accuracy-line/accuracy-line.component';
-import { CompletionPieComponent } from './chart/completion-pie/completion-pie.component';
-import { AcceptancePieComponent } from './chart/acceptance-pie/acceptance-pie.component';
 import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -55,12 +50,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     PendingPostPageComponent,
     LivePostPageComponent,
     SettingsPageComponent,
-    OverviewDashboardComponent,
     DashboardCardComponent,
-    LatencyBarComponent,
-    AccuracyLineComponent,
-    CompletionPieComponent,
-    AcceptancePieComponent,
     EditProcessedPostComponent,
     AddPostComponent,
     AddNewAccountComponent,

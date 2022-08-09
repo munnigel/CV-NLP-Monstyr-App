@@ -88,6 +88,8 @@ export class LivePostPageComponent implements OnInit {
           this.router.navigate(['/']);
         },
         complete: () => {
+          this.filteredProductList = this.liveProductList;
+          console.log(this.liveProductList);
           this.currentPage += 1;
         },
       });
@@ -107,6 +109,8 @@ export class LivePostPageComponent implements OnInit {
           this.router.navigate(['/']);
         },
         complete: () => {
+          this.filteredProductList = this.liveProductList;
+          console.log(this.liveProductList);
           this.currentPage -= 1;
         },
       });

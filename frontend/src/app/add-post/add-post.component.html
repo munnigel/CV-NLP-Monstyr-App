@@ -1,84 +1,371 @@
-<div class="main-container">
-  <div class="header">Add Post</div>
-  <div class="addForm">
-    <form [formGroup]="postForm">
+<div class="edit-live-post-main-container">
+  <h1 style="text-align: center; margin-top: 20px"><b>Add Post</b></h1>
 
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">sp_id</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="sp_id" />
-      </div>
+  <div class="item-page-container">
+    <div class="item-page-left">
+      <div class="cards-container">
+        <mat-card>
+          <mat-card-title>Image</mat-card-title>
+          <hr />
+          <img [src]="imageUrl" width="300px" height="auto" />
+          <input
+            type="file"
+            style="display: none"
+            (change)="onFileSelected($event)"
+            #fileUpload
+          />
 
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">pid</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="pid" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">status (pending/live)</label>
-        <select class="form-control" id="exampleFormControlInput1" formControlName="status">
-          <option>pending</option>
-          <option>live</option>
-        </select>
-      </div>
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">title</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="title" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen title</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genTitle" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">categories</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="categories" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen_categories</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genCategories" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">start date</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="startDate" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen start date</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genStartDate" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">end date</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="endDate" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen end date</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genEndDate" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">tags</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="tags" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen tags</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genTags" />
-      </div> -->
-      <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">content</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="content" />
-      </div>
-      <!-- <div class="eachForm">
-        <label for="exampleFormControlInput1" class="form-label">gen content</label>
-        <input class="form-control" id="exampleFormControlInput1" formControlName="genContent" />
-      </div> -->
-      <div class="eachForm">
-        <label for="formFile" class="form-label">Default file input</label>
-        <input class="form-control" type="file" id="formFile" (change)="uploadFile($event)" />
-      </div>
-    </form>
+          <div class="file-upload">
+            {{ fileName || "No file uploaded yet." }}
 
+            <button
+              mat-mini-fab
+              color="primary"
+              class="upload-btn"
+              (click)="fileUpload.click()"
+            >
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Status</mat-card-title>
+          <hr />
+          <mat-form-field appearance="fill">
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="status">
+              <mat-option value="pending">Pending</mat-option>
+              <mat-option value="live">Live</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Title</mat-card-title>
+          <ng-container *ngIf="selectedFormat == 0">
+            <span>New!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 1">
+            <span>New Outlet!</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Location</mat-label>
+              <input
+                matInput
+                placeholder="Location"
+                [value]="titleLocation"
+                (keyup)="updateLocation($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Unit Number</mat-label>
+              <input
+                matInput
+                placeholder="Unit Number"
+                [value]="titleUnitNumber"
+                (keyup)="updateUnitNumber($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 2">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 3">
+            <span>Up to</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X% OFF</mat-label>
+              <input
+                matInput
+                placeholder="X% OFF"
+                [value]="titleXOFF"
+                (keyup)="updateXOFF($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 4">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>X-for-Y</mat-label>
+              <input
+                matInput
+                placeholder="X-for-Y"
+                [value]="titleXForY"
+                (keyup)="updateXForY($event)"
+              />
+            </mat-form-field>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 5">
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                placeholder="Amount"
+                [value]="titleAmount"
+                (keyup)="updateAmount($event)"
+              />
+            </mat-form-field>
+            <span>for</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <ng-container *ngIf="selectedFormat == 6">
+            <span>Free</span>
+            <mat-form-field
+              class="page-item-title"
+              appearance="fill"
+              id="title-box"
+            >
+              <mat-label>Product Name</mat-label>
+              <input
+                matInput
+                placeholder="Product Name"
+                [value]="titleProductName"
+                (keyup)="updateProductName($event)"
+              /> </mat-form-field
+          ></ng-container>
+          <hr />
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="formatDropDown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Format
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ng-container *ngFor="let format of formats; let i = index">
+                <li (click)="selectFormat(i)">
+                  <a class="dropdown-item">{{ format.join(" ") }}</a>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
 
+          <br />
+          <mat-label>Final String: {{ finalTitle }}</mat-label>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Description</mat-card-title>
+          <hr />
+          <mat-form-field
+            class="example-chip-list"
+            appearance="fill"
+            id="description-box"
+          >
+            <mat-label>Description</mat-label>
+            <textarea
+              class="description-textarea"
+              rows="5"
+              matInput
+              placeholder="New Description"
+              #descriptionInput
+              [formControl]="descriptionCtrl"
+            ></textarea>
+          </mat-form-field>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Tags</mat-card-title>
+          <hr />
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList1 aria-label="Tag selection">
+              <mat-chip *ngFor="let tag of tags" (removed)="removeTags(tag)">
+                {{ tag }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                placeholder="New Tag..."
+                [matChipInputFor]="chipList1"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addTags($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Categories</mat-card-title>
+          <hr />
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-chip-list #chipList2 aria-label="Categories selection">
+              <mat-chip
+                *ngFor="let category of categories"
+                (removed)="removeCategories(category)"
+              >
+                {{ category }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                class="categoryInput"
+                placeholder="New Category..."
+                #categoryInput
+                [formControl]="categoryCtrl"
+                [matAutocomplete]="auto2"
+                [matChipInputFor]="chipList2"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addCategories($event)"
+              />
+            </mat-chip-list>
+            <mat-autocomplete
+              #auto2="matAutocomplete"
+              (optionSelected)="selectedCategories($event)"
+            >
+              <mat-option
+                id="categories-options"
+                *ngFor="let category of filteredCategories | async"
+                [value]="category"
+              >
+                {{ category }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </mat-card>
+        <mat-card>
+          <mat-card-title>Promotional Period</mat-card-title>
+          <hr />
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input
+              [formGroup]="datePicker"
+              [rangePicker]="picker"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Start date"
+              />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <mat-error
+              *ngIf="
+                datePicker.controls['start'].hasError('matStartDateInvalid')
+              "
+              >Invalid start date</mat-error
+            >
+            <mat-error
+              *ngIf="datePicker.controls['end'].hasError('matEndDateInvalid')"
+              >Invalid end date</mat-error
+            >
+          </mat-form-field>
+
+          <p>
+            Selected range:
+            {{ datePicker.get("start").value | date: "longDate" }} to
+            {{ datePicker.get("end").value | date: "longDate" }}
+          </p>
+        </mat-card>
+      </div>
+    </div>
   </div>
-  <div class="options-container">
-    <button type="button" class="btn btn-danger clear">Clear all fields</button>
-    <button type="button" class="btn btn-primary upload-field" (click)="submitForm()">
-      Upload
+  <div class="item-page-btn-container">
+    <button
+      type="button"
+      class="btn btn-primary item-page-btn"
+      id="submit-btn"
+      (click)="submitForm()"
+    >
+      <strong>Submit</strong>
     </button>
   </div>
 </div>

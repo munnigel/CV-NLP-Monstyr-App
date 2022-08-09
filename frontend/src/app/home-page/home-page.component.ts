@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('home page');
     this.onWindowResize();
     this.opened = !this.mobile;
     this.tabList = [
@@ -47,13 +48,23 @@ export class HomePageComponent implements OnInit {
       'Logout',
     ];
     if (this.router.url.includes(this.tabList[0])) this.tabIndex = 0;
-    else if (this.router.url.includes(this.tabList[1])) this.tabIndex = 1;
-    else if (this.router.url.includes(this.tabList[2])) this.tabIndex = 2;
-    else if (this.router.url.includes(this.tabList[3])) this.tabIndex = 3;
-    else if (this.router.url.includes(this.tabList[4])) this.tabIndex = 4;
-    else if (this.router.url.includes(this.tabList[5])) this.tabIndex = 5;
+    else if (this.router.url.includes(this.tabList[1])) {
+      console.log(1);
+      this.tabIndex = 1;
+    } else if (this.router.url.includes(this.tabList[2])) {
+      console.log(2);
+      this.tabIndex = 2;
+    } else if (this.router.url.includes(this.tabList[3])) {
+      console.log(3);
+      this.tabIndex = 3;
+    } else if (this.router.url.includes(this.tabList[4])) {
+      console.log(5);
+      this.tabIndex = 4;
+    } else if (this.router.url.includes(this.tabList[5])) {
+      console.log(5);
+      this.tabIndex = 5;
+    }
   }
-
   async onTabClick(index: number) {
     console.log(this.mobile);
     if (this.mobile) this.opened = false;

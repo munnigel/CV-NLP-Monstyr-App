@@ -217,7 +217,7 @@
           </mat-form-field>
         </mat-card>
         <mat-card>
-          <mat-card-title>Title</mat-card-title>
+          <mat-card-title>Tags</mat-card-title>
           <hr />
           <mat-form-field class="example-chip-list" appearance="fill">
             <mat-label>Tags</mat-label>
@@ -244,7 +244,7 @@
           <hr />
           <mat-form-field class="example-chip-list" appearance="fill">
             <mat-label>Categories</mat-label>
-            <mat-chip-list #chipList2 aria-label="Fruit selection">
+            <mat-chip-list #chipList2 aria-label="Categories selection">
               <mat-chip
                 *ngFor="let category of categories"
                 (removed)="removeCategories(category)"
@@ -255,13 +255,28 @@
                 </button>
               </mat-chip>
               <input
+                class="categoryInput"
                 placeholder="New Category..."
+                #categoryInput
+                [formControl]="categoryCtrl"
+                [matAutocomplete]="auto2"
                 [matChipInputFor]="chipList2"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="addCategories($event)"
               />
             </mat-chip-list>
+            <mat-autocomplete
+              #auto2="matAutocomplete"
+              (optionSelected)="selectedCategories($event)"
+            >
+              <mat-option
+                id="categories-options"
+                *ngFor="let category of filteredCategories | async"
+                [value]="category"
+              >
+                {{ category }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </mat-card>
         <mat-card>
