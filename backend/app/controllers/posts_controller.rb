@@ -2,6 +2,7 @@ require 'uri'
 
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_request, only: [:big_query_new_entry]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_developer, only: [:odlatency, :ocrlatency, :nerdatelatency, :nercategorieslatency, :nertitlelatency, :acceptedaiml, :rejectedaiml]
 
@@ -479,6 +480,25 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+  # sends verified categories data to BigQuery
+  def big_query_new_entry
+    rows = [
+            {
+                "content" => "Introducing Swisslineâs Formula X-02 Oxygen-Shock Activator. Delivers an extra boost of 0â and radiance to your skin, it's the go-to product to revitalise dullness and get you looking at your best! Drop by in-store at Swissline Counter, Cosmetics Department, Level 1 to check out the full collections today! #takashimayasg",
+                "categories" => "Women's"
+            },
+            {
+                "content" => "Random content decription thing.",
+                "categories" => "category_1"
+            }
+        ]
+    # results = BigQueries::BigQueryService.new.stream_data(rows)
+    results = BigQueryService.new.stream_data(rows)
+
+    render status: :ok, json: { data: results.as_json }
+  end
+
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
