@@ -90,7 +90,7 @@ And("The registered account has been verified via the confirmation link sent to 
     cy.request({
       method: 'GET',
       form: true,
-      url:'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/users/35',
+      url:'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/users/5',
       headers: {
         'Content-Type': 'text/html',  
         'Authorization': xToken,
@@ -174,7 +174,7 @@ And("The registered account has not been verified via the confirmation link sent
     cy.request({
       method: 'GET',
       form: true,
-      url:'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/users/42',
+      url:'https://rubyduckies-rails-backend-wmma3ffcjq-as.a.run.app/users/6',
       headers: {
         'Content-Type': 'text/html',  
         'Authorization': xToken,
