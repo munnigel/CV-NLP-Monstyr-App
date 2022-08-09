@@ -216,7 +216,7 @@ body {
 
 .cna {
   margin: 30px auto;
-  color: rgb(211, 205, 207);
+  color: rgb(108, 88, 122);
 }
 
 
@@ -278,7 +278,7 @@ body {
   font-weight: 200;
   font-size: larger;
   padding: 5px;
-  border: 2px solid #fff;
+  border: 2px solid rgb(108, 88, 122);
   border-radius: 4px;
 }
 
@@ -778,7 +778,7 @@ a {
 
 @keyframes revealText {
   to {
-    color: #fff;
+    color: rgb(73, 57, 84);
   }
 }
 
