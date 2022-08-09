@@ -6,6 +6,7 @@
       matInput
       [(ngModel)]="searchTerm"
       placeholder="Search posts by title"
+      (keyup.enter)="filterPosts(searchTerm)"
     />
     <mat-icon
       class="search-icon"
