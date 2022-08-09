@@ -5,11 +5,11 @@ class BigQueryService
 
     def initialize
     # You can move this one to setting instead
-    project_id = 'rubyduckies'
-    key_file = Rails.root.join('./app/rubyduckies-d1f7f1d6fbc3.json')
+    project_id = 'monstyrxai'
+    key_file = Rails.root.join('./app/monstyrxai-41a5fb651ce9.json')
     @big_q = Google::Cloud::Bigquery.new project: project_id, keyfile: key_file
-    @dataset = @big_q.dataset "rubyduckies_bigquery_dataset", skip_lookup: true
-    @table = @dataset.table "categories_table", skip_lookup: true
+    @dataset = @big_q.dataset "custom_training_data", skip_lookup: true
+    @table = @dataset.table "custom-text-classification", skip_lookup: true
     super
     end
 
@@ -19,6 +19,27 @@ class BigQueryService
 
     def datasets
     @big_q.datasets
+    end
+
+    def extract_table bucket_name = "gs://monstyrxai-bucket",
+        dataset_id  = "custom_training_data",
+        table_id    = "custom_text_classification"
+
+        bigquery = Google::Cloud::Bigquery.new
+        dataset  = bigquery.dataset dataset_id
+        table    = dataset.table    table_id
+
+        # Define a destination URI. Use a single wildcard URI if you think
+        # your exported data will be larger than the 1 GB maximum value.
+        destination_uri = "gs://#{bucket_name}/output.csv"
+
+        extract_job = table.extract_job destination_uri do |config|
+        # Location must match that of the source table.
+        config.location = "US"
+        end
+        extract_job.wait_until_done! # Waits for the job to complete
+
+        puts "Exported #{table.id} to #{destination_uri}"
     end
 
     def stream_data(rows)

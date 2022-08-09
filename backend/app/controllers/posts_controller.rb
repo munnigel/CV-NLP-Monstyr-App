@@ -482,21 +482,42 @@ class PostsController < ApplicationController
   end
 
   # sends verified categories data to BigQuery
-  def big_query_new_entry
-    rows = [
-            {
-                "content" => "Introducing Swisslineâs Formula X-02 Oxygen-Shock Activator. Delivers an extra boost of 0â and radiance to your skin, it's the go-to product to revitalise dullness and get you looking at your best! Drop by in-store at Swissline Counter, Cosmetics Department, Level 1 to check out the full collections today! #takashimayasg",
-                "categories" => "Women's"
-            },
-            {
-                "content" => "Random content decription thing.",
-                "categories" => "category_1"
-            }
-        ]
-    # results = BigQueries::BigQueryService.new.stream_data(rows)
+  def big_query_initial_dataset
+    require 'csv'
+
+    rows = []
+    csv_path = Rails.root.join('./output.csv')
+    original_classif_dataset = CSV.read(csv_path)
+    original_classif_dataset.each do |entry|
+      puts entry
+      rows.append({"content" => entry[0],
+                  "category1" => entry[1],
+                  "category2" => entry[2],
+                  "category3" => entry[3]})
+    end
+      
     results = BigQueryService.new.stream_data(rows)
 
-    render status: :ok, json: { data: results.as_json }
+    render status: :ok, json: { data: rows }
+  end
+
+
+  def big_query_bit_by_bit_upload
+
+    increment = 100
+
+    rows = []
+    csv_path = Rails.root.join('./output.csv')
+    original_classif_dataset = CSV.read(csv_path)
+
+     
+
+
+
+    
+    rows = []
+
+
   end
 
 
@@ -533,20 +554,120 @@ class PostsController < ApplicationController
 
   # posts search feature
   def search
+
+    @search_ids_repeated = {}
     @search_results = []
-    @posts = Post.where("tags is not null")
-    @posts.each do |taggedpost|
-      if taggedpost.tags.downcase.include? params[:search]
-        @search_results.append(taggedpost)
+    @search_terms = params[:search].downcase.split
+
+    # search by title, store ids in search_ids_repeated hash
+    @posts = Post.where("title is not null")
+    @posts.each do |titledpost|
+      @search_terms.each do |term|
+        if titledpost.title.downcase.include? term
+          if @search_ids_repeated[titledpost.id]
+            @search_ids_repeated[titledpost.id] += 1
+          else
+            @search_ids_repeated[titledpost.id] = 1
+          end
+        end
       end
     end
+
+    # search by tags, store ids in search_ids_repeated hash
+    @posts = Post.where("tags is not null")
+    @posts.each do |taggedpost|
+      @search_terms.each do |terms|
+        if taggedpost.tags.downcase.include? terms
+          if @search_ids_repeated[taggedpost.id]
+            @search_ids_repeated[taggedpost.id] += 1
+          else
+            @search_ids_repeated[taggedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by categories, store ids in search_ids_repeated hash
+    @posts = Post.where("categories is not null")
+    @posts.each do |categorizedpost|
+      @search_terms.each do |terms|
+        if categorizedpost.categories.downcase.include? terms
+          if @search_ids_repeated[categorizedpost.id]
+            @search_ids_repeated[categorizedpost.id] += 1
+          else
+            @search_ids_repeated[categorizedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by content, store ids in search_ids_repeated hash
+    @posts = Post.where("content is not null")
+    @posts.each do |contentedpost|
+      @search_terms.each do |terms|
+        if contentedpost.content.downcase.include? terms
+          if @search_ids_repeated[contentedpost.id]
+            @search_ids_repeated[contentedpost.id] += 1
+          else
+            @search_ids_repeated[contentedpost.id] = 1
+          end
+        end
+      end
+    end
+
+    # search by dates (start and/or end), store ids in search_ids_repeated hash
+    @posts = Post.where("start_date is not null")
+    @posts.each do |startdatepost|
+      @search_terms.each do |terms|
+        if startdatepost.start_date.to_s.downcase.include? terms
+          if @search_ids_repeated[startdatepost.id]
+            @search_ids_repeated[startdatepost.id] += 1
+          else
+            @search_ids_repeated[startdatepost.id] = 1
+          end
+        end
+      end
+    end
+
+    @posts = Post.where("end_date is not null")
+    @posts.each do |enddatepost|
+      @search_terms.each do |terms|
+        if enddatepost.title.downcase.include? terms
+          if @search_ids_repeated[enddatepost.id]
+            @search_ids_repeated[enddatepost.id] += 1
+          else
+            @search_ids_repeated[enddatepost.id] = 1
+          end
+        end
+      end
+    end
+
+    # generate search_ids_processed, a sorted array of unique ids from search_ids_repeated,
+    # with more occurences of a particular id pushing the id higher up in the array
+    @search_ids_processed = []
+    @search_ids_sorted = @search_ids_repeated.sort_by(&:last).reverse
+    @search_ids_sorted.each do |id|
+      @search_ids_processed.append(id[0])
+    end
+
+    # gather data of found ids from db
+    # @search_results = @search_ids_repeated
+    @search_ids_processed.each do |result|
+      # @search_results.append(result)
+      @search_results.append(Post.where("id = #{result.to_s}"))
+    end
+
+    # @search_results = @search_ids_sorted
+
+    # render json response of search results
     if @search_results == []
-      render json: { results: "no results" }      
+      render json: { results: "no results" }
     else
       respond_to do |format|
         format.json {render json: @search_results}
       end
     end
+
   end
 
   private

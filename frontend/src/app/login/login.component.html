@@ -5,26 +5,21 @@
   <div class="sub-login-header">
     <div class="wrapper">
 
-      <span>Analytics tools</span>
-      <span>Posts management</span>
-      <span>AI powered workflow</span>
-      <span>Content creation</span>
-      <span>Analytics tools</span>
+      <span style="--d: 0s">Analytics tools</span>
+      <span style="--d: 2s">Posts management</span>
+      <span style="--d: 4s">AI powered workflow</span>
 
     </div>
   </div>
   <form [formGroup]="postForm">
-    <div class="login-form">
-      <div class="formInput">
-        <label class="login">Email</label>
-        <input type="email" class="form-control" placeholder="Enter email here" formControlName="email"
-          id="loginEmail" />
-      </div>
-      <div class="formInput">
-        <label class="login">Password</label>
-        <input type="password" class="form-control" placeholder="Enter password here" formControlName="password"
-          id="loginPassword" />
-      </div>
+    <div class="formInput">
+      <input id='email' type="text" required class="form-control" formControlName="email" id="loginEmail" />
+      <label for="email" class="input-label">Email</label>
+    </div>
+    <div class="formInput">
+      <input id='password' type="password" required class="form-control" formControlName="password"
+        id="loginPassword" />
+      <label for='password' class="input-label">Password</label>
     </div>
   </form>
 
