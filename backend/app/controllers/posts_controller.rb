@@ -531,6 +531,24 @@ class PostsController < ApplicationController
     render json: @post.to_json
   end
 
+  # posts search feature
+  def search
+    @search_results = []
+    @posts = Post.where("tags is not null")
+    @posts.each do |taggedpost|
+      if taggedpost.tags.downcase.include? params[:search]
+        @search_results.append(taggedpost)
+      end
+    end
+    if @search_results == []
+      render json: { results: "no results" }      
+    else
+      respond_to do |format|
+        format.json {render json: @search_results}
+      end
+    end
+  end
+
   private
   def clean_emoji(str='')
 		str=str.force_encoding('utf-8').encode
@@ -558,6 +576,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :selected_title,:gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date, :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images, :content, :score, :od_latency, :ocr_latency, :ner_date_latency, :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen, :meta_date_gen, :meta_title_gen)
+      params.permit(:title, :image, :sp_id, :pid, :status, :gen_title, :selected_title,
+                    :gen_categories, :categories, :gen_start_date, :start_date, :gen_end_date,
+                    :end_date, :gen_tags, :tags, :od_image, :ocr_image, :gen_content, :images,
+                    :content, :score, :od_latency, :ocr_latency, :ner_date_latency,
+                    :ner_categories_latency, :ner_title_latency, :meta_label_detection, :meta_cat_gen,
+                    :meta_date_gen, :meta_title_gen, :search)
     end
 end

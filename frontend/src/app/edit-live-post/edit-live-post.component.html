@@ -299,7 +299,11 @@
             >
           </mat-form-field>
 
-          <p>Selected range: {{ datePicker.value | json }}</p>
+          <p>
+            Selected range:
+            {{ datePicker.get("start").value | date: "longDate" }} to
+            {{ datePicker.get("end").value | date: "longDate" }}
+          </p>
         </mat-card>
       </div>
     </div>
@@ -341,7 +345,7 @@
       id="submit-btn"
       (click)="onSubmit()"
     >
-      Submit
+      Update
     </button>
   </div>
 </div>
