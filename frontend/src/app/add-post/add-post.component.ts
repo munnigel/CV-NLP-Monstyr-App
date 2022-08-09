@@ -101,15 +101,6 @@ export class AddPostComponent implements OnInit {
         }
       },
       complete: async () => {
-        try {
-          await this.dataSrv.updateAllProductList();
-        } catch (err: any) {
-          if (err.error.errors == 'Nil JSON web token') {
-            console.log('need login');
-            this.router.navigate(['/']);
-          }
-          return;
-        }
         console.log('post added');
         alert('post added');
         this.router.navigate([`/home/overview`], {});

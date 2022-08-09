@@ -3,7 +3,6 @@ import { DataService } from '../data-service.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Product } from '../product.model';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-pending-post-page',
@@ -11,7 +10,6 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./pending-post.component.css'],
 })
 export class PendingPostPageComponent implements OnInit {
-  showItem: boolean;
   pendingProductList: Product[];
   currentPage: number;
   maxPage: number;
@@ -22,63 +20,67 @@ export class PendingPostPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.showItem = false;
-    this.pendingProductList = this.dataSrv.getPendingProductList();
-    if (!this.pendingProductList) {
-      this.router.navigate(['/']);
-      return;
-    }
-    console.log(this.pendingProductList[0]);
-    console.log(this.pendingProductList);
-    this.titleService.setTitle('pending-posts');
-    this.currentPage = 1;
-    this.dataSrv.getNoOfPendingPosts().subscribe({
-      next: (res: any) => {
-        let temp = res.noofpendingposts;
-        this.maxPage = Math.ceil(temp / 15);
+    this.dataSrv.getAllPendingProductList().subscribe({
+      next: (res) => {
+        this.pendingProductList = [];
+        this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
       },
-      error: () => {},
+      error: () => {
+        console.log('error getting pending product');
+        this.router.navigate(['/']);
+      },
       complete: () => {
-        console.log('get max page');
-        console.log(this.maxPage);
+        this.currentPage = 1;
+        this.dataSrv.getNoOfPendingPosts().subscribe({
+          next: (res: any) => {
+            let temp = res.noofpendingposts;
+            this.maxPage = Math.ceil(temp / 15);
+          },
+          error: () => {},
+          complete: () => {
+            console.log('get max page');
+            console.log(this.maxPage);
+          },
+        });
       },
     });
+    this.titleService.setTitle('pending-posts');
   }
 
   async nextPage() {
-    try {
-      if (this.currentPage < this.maxPage) {
-        this.dataSrv.setPendingTab(this.currentPage + 1);
-        await this.dataSrv.updateAllProductList();
-        this.pendingProductList = this.dataSrv.getPendingProductList();
-        this.currentPage += 1;
-      }
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem('loginToken');
-      this.router.navigate(['/']);
-      return;
+    if (this.currentPage < this.maxPage) {
+      this.dataSrv.setPendingTab(this.currentPage + 1);
+      this.dataSrv.getAllPendingProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
+        },
+        error: () => {
+          console.log('error getting pending products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage += 1;
+        },
+      });
     }
   }
 
   async prevPage() {
-    try {
-      if (this.currentPage > 1) {
-        this.dataSrv.setPendingTab(this.currentPage - 1);
-        await this.dataSrv.updateAllProductList();
-        this.pendingProductList = this.dataSrv.getPendingProductList();
-        this.currentPage -= 1;
-      }
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem('loginToken');
-      this.router.navigate(['/']);
-      return;
+    if (this.currentPage > 1) {
+      this.dataSrv.setPendingTab(this.currentPage - 1);
+      this.dataSrv.getAllPendingProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.pendingProductList, res);
+        },
+        error: () => {
+          console.log('error getting pending products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage -= 1;
+        },
+      });
     }
-  }
-
-  onItemClick() {
-    this.showItem = true;
   }
 
   onFilter(index: number) {}

@@ -23,29 +23,34 @@ export class LivePostPageComponent implements OnInit {
     private titleService: Title
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.showItem = false;
-    this.liveProductList = this.dataSrv.getLiveProductList();
-    if (!this.liveProductList) {
-      await this.dataSrv.updateAllLiveProductList();
-      this.liveProductList = this.dataSrv.getLiveProductList();
-    }
-    console.log(this.liveProductList[0]);
-    console.log(this.liveProductList);
-    this.titleService.setTitle('live-posts');
-    this.filteredProductList = this.liveProductList;
-    this.currentPage = 1;
-    this.dataSrv.getNoOfLivePosts().subscribe({
-      next: (res: any) => {
-        let temp = res.noofliveposts;
-        this.maxPage = Math.ceil(temp / 15);
+    this.dataSrv.getAllLiveProductList().subscribe({
+      next: (res) => {
+        this.liveProductList = [];
+        this.dataSrv.createAndStoreProductList(this.liveProductList, res);
       },
-      error: () => {},
+      error: () => {
+        console.log('error getting live product');
+        this.router.navigate(['/']);
+      },
       complete: () => {
-        console.log('get max page');
-        console.log(this.maxPage);
+        this.filteredProductList = this.liveProductList;
+        this.currentPage = 1;
+        this.dataSrv.getNoOfLivePosts().subscribe({
+          next: (res: any) => {
+            let temp = res.noofliveposts;
+            this.maxPage = Math.ceil(temp / 15);
+          },
+          error: () => {},
+          complete: () => {
+            console.log('get max page');
+            console.log(this.maxPage);
+          },
+        });
       },
     });
+    this.titleService.setTitle('live-posts');
   }
 
   filterPosts(searchTerm: string) {
@@ -71,34 +76,38 @@ export class LivePostPageComponent implements OnInit {
   }
 
   async nextPage() {
-    try {
-      if (this.currentPage < this.maxPage) {
-        this.dataSrv.setLiveTab(this.currentPage + 1);
-        await this.dataSrv.updateAllLiveProductList();
-        this.liveProductList = this.dataSrv.getLiveProductList();
-        this.currentPage += 1;
-      }
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem('loginToken');
-      this.router.navigate(['/']);
-      return;
+    if (this.currentPage < this.maxPage) {
+      this.dataSrv.setLiveTab(this.currentPage + 1);
+      this.dataSrv.getAllLiveProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.liveProductList, res);
+        },
+        error: () => {
+          console.log('error getting live products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage += 1;
+        },
+      });
     }
   }
 
   async prevPage() {
-    try {
-      if (this.currentPage > 1) {
-        this.dataSrv.setLiveTab(this.currentPage - 1);
-        await this.dataSrv.updateAllLiveProductList();
-        this.liveProductList = this.dataSrv.getLiveProductList();
-        this.currentPage -= 1;
-      }
-    } catch (err) {
-      console.log(err);
-      localStorage.removeItem('loginToken');
-      this.router.navigate(['/']);
-      return;
+    if (this.currentPage > 1) {
+      this.dataSrv.setLiveTab(this.currentPage - 1);
+      this.dataSrv.getAllLiveProductList().subscribe({
+        next: (res) => {
+          this.dataSrv.createAndStoreProductList(this.liveProductList, res);
+        },
+        error: () => {
+          console.log('error getting live products');
+          this.router.navigate(['/']);
+        },
+        complete: () => {
+          this.currentPage -= 1;
+        },
+      });
     }
   }
 
