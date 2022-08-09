@@ -31,18 +31,15 @@ export class LoginComponent implements OnInit {
       email: [''],
       password: [''],
     });
-    try {
-      console.log('try auto login');
-      await this.dataSrv.updateAllProductList();
-      await this.dataSrv.updateOverviewData();
-      this.router.navigate(['/home'], {});
-    } catch (err: any) {
-      // console.log(err);
-      if (err.error)
-        if (err.error.errors == 'Nil JSON web token') {
-          console.log('need login');
-        }
-    }
+    this.dataSrv.getNoOfLivePosts().subscribe({
+      next: () => {},
+      error: () => {
+        console.log('needs login');
+      },
+      complete: () => {
+        this.router.navigate(['/home']);
+      },
+    });
   }
 
   async onLogin() {
@@ -98,10 +95,8 @@ export class LoginComponent implements OnInit {
             );
           },
           error: () => {},
-          complete: async () => {
+          complete: () => {
             this.dataSrv.setCurrentUser(currentUser);
-            await this.dataSrv.updateAllProductList();
-            await this.dataSrv.updateOverviewData();
             this.router.navigate(['/home']);
           },
         });

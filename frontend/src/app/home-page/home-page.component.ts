@@ -63,35 +63,6 @@ export class HomePageComponent implements OnInit {
       localStorage.removeItem('loginToken');
       this.router.navigate(['/']);
     }
-    this.tabIndex = index;
-    if (index == 0) {
-      try {
-        await this.dataSrv.updateOverviewData();
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem('loginToken');
-        this.router.navigate(['/']);
-        return;
-      }
-    } else if (index == 1) {
-      try {
-        await this.dataSrv.updateAllLiveProductList();
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem('loginToken');
-        this.router.navigate(['/']);
-        return;
-      }
-    } else if (index == 2) {
-      try {
-        await this.dataSrv.updateAllPendingProductList();
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem('loginToken');
-        this.router.navigate(['/']);
-        return;
-      }
-    }
     this.router.navigate([`/home/${this.tabList[index]}`]);
   }
 
