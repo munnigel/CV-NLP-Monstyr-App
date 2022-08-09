@@ -1,42 +1,21 @@
 <div class="live-post-main-container">
-  <div class="page-header">Live Posts</div>
+  <h1 class="page-header">Live Posts</h1>
+
   <div style="text-align: center">
     <mat-form-field appearance="fill">
       <mat-label>Search posts by title</mat-label>
-      <input
-        matInput
-        [(ngModel)]="searchTerm"
-        placeholder="Search posts by title"
-        (keyup.enter)="filterPosts(searchTerm)"
-      />
-      <mat-icon
-        class="search-icon"
-        color="primary"
-        matPrefix
-        (click)="filterPosts(searchTerm)"
-        >search</mat-icon
-      >
+      <input matInput [(ngModel)]="searchTerm" placeholder="Search posts by title"
+        (keyup.enter)="filterPosts(searchTerm)" />
+      <mat-icon class="search-icon" color="primary" matPrefix (click)="filterPosts(searchTerm)">search</mat-icon>
     </mat-form-field>
   </div>
   <div class="button">
-    <button
-      mat-stroked-button
-      color="primary"
-      class="special-btn2"
-      (click)="prevPage()"
-      type="button"
-      style="margin: 5px"
-    >
+    <button mat-stroked-button color="primary" class="special-btn2" (click)="prevPage()" type="button"
+      style="margin: 5px">
       Previous Page
     </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      class="special-btn2"
-      (click)="nextPage()"
-      type="button"
-      style="margin: 5px"
-    >
+    <button mat-stroked-button color="primary" class="special-btn2" (click)="nextPage()" type="button"
+      style="margin: 5px">
       Next Page
     </button>
   </div>
@@ -52,22 +31,22 @@
             <hr />
             <div class="item-details">
               <div class="item-title" id="title-field">
-                Title: {{ product.title }}
+                <b>Title: </b>{{ product.title }}
               </div>
               <br />
               <div class="item-description" id="description-field">
-                Description: {{ product.content }}
+                <b>Description:</b> {{ product.content }}
               </div>
               <br />
               <mat-chip-list id="category-field">
-                <mat-label>Categories:</mat-label>
+                <mat-label><b>Categories:</b></mat-label>
                 <mat-chip *ngFor="let category of product.categories">{{
                   category
-                }}</mat-chip>
+                  }}</mat-chip>
               </mat-chip-list>
               <br />
               <mat-chip-list>
-                <mat-label>Tags:</mat-label>
+                <mat-label><b>Tags:</b></mat-label>
                 <mat-chip *ngFor="let tag of product.tags">{{ tag }}</mat-chip>
               </mat-chip-list>
               <br />

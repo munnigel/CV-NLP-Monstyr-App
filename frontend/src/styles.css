@@ -65,6 +65,8 @@ body {
   animation: 45s para infinite linear; */
 }
 
+
+
 @keyframes para {
   100% {
     background-position: -2000px 0%, 2000px 50%, -2000px 100%;
@@ -225,7 +227,7 @@ body {
   font: inherit;
   color: #fff;
   background-color: transparent;
-  outline: 2px solid #fff;
+  outline: 2px solid rgb(108, 88, 122);
 }
 
 .input-label {
@@ -234,6 +236,8 @@ body {
   left: 0;
   transform: translate(10px, 10px);
   transition: transform .25s;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .form-control:focus+.input-label,
@@ -242,7 +246,7 @@ body {
   color: #fff;
   font-weight: 500;
   padding-inline: 5px;
-  background-color: rgba(209, 197, 252, 0.3);
+  background-color: #aa94f7;
 }
 
 .form-control:is(:focus, :valid) {
@@ -443,10 +447,10 @@ body {
   align-content: center;
   height: fit-content;
   font-size: large;
-  font-weight: 500;
   align-self: center;
   border-radius: 10px;
   width: fit-content;
+  background-color: rgba(144, 133, 133, 0.2);
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
@@ -474,6 +478,7 @@ body {
   padding: 0px 10px;
   margin: 10px;
 }
+
 
 .page-item-date {
   resize: none;
@@ -721,16 +726,7 @@ a {
   margin-bottom: 30px;
 }
 
-.addAccBg {
-  height: 100%;
-  background-image: url(./assets/pictures/bgg.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  padding: 50px;
-
-}
+.addAccBg {}
 
 .groupForm {
   width: 30%;
@@ -808,9 +804,16 @@ a {
 
 
 .bgg {
-  background: #bababa;
-  height: 100%;
+  background-image: url(./assets/pictures/bgg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 95px;
+  scrollbar-width: none;
 }
+
+
 
 .forms {
   display: grid;
@@ -827,7 +830,6 @@ a {
 .fc {
   width: fit-content;
   height: max-content;
-  margin-left: 20px;
 }
 
 .fl {
@@ -928,5 +930,14 @@ mat-card {
     display: grid;
     grid-template-columns: 1fr;
     align-self: center;
+  }
+
+  .gf {
+    padding: 5px;
+    width: 150%;
+    margin-left: -45px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 }

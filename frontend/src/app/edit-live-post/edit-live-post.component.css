@@ -9,6 +9,11 @@
 
 .edit-live-post-main-container {
   padding: 50px 50px;
+  background-image: url(../../assets/pictures/bggGif.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .description-textarea {
@@ -39,6 +44,12 @@
   margin-right: 0px;
 }
 
+mat-card {
+  background-color: rgba(238, 238, 238, 0.8);
+  border-radius: 10px;
+  border: 1px solid rgb(155, 155, 155);
+}
+
 #submit-btn {
   background-color: #29ff30;
   color: black;
@@ -50,6 +61,7 @@
     align-items: center;
     justify-content: start;
   }
+
   .item-page-btn {
     margin-right: 0px;
     width: 100%;
@@ -59,6 +71,7 @@
   .item-page-btn:first-child {
     margin-right: 0px;
   }
+
   .item-page-btn:last-child {
     margin-bottom: 0px;
   }

@@ -39,6 +39,10 @@ export class LatencyBarComponent implements OnInit {
                   },
                   error: () => {},
                   complete: () => {
+                    console.log(ODLatency);
+                    console.log(NERTitleLatency);
+                    console.log(NERCategoriesLatency);
+                    console.log(NERDateLatency);
                     this.latencyBar = new Chart('latency-bar', {
                       type: 'bar',
                       data: {
@@ -53,10 +57,10 @@ export class LatencyBarComponent implements OnInit {
                             label: 'Latencies',
                             data: [
                               // this.dataSrv.OCRLatency,
-                              this.dataSrv.ODLatency,
-                              this.dataSrv.NERTitleLatency,
-                              this.dataSrv.NERCategoriesLatency,
-                              this.dataSrv.NERDateLatency,
+                              ODLatency,
+                              NERTitleLatency,
+                              NERCategoriesLatency,
+                              NERDateLatency,
                             ],
                             backgroundColor: [
                               // 'rgba(255, 99, 132, 0.5)',

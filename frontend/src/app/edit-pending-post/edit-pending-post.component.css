@@ -1,5 +1,10 @@
 .edit-pending-post-main-container {
   padding: 50px 50px;
+  background-image: url(../../assets/pictures/bggGif.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .example-chip-list {
@@ -40,6 +45,12 @@
   border-radius: 20px;
 }
 
+mat-card {
+  background-color: rgba(238, 238, 238, 0.8);
+  border-radius: 10px;
+  border: 1px solid rgb(155, 155, 155);
+}
+
 .edit-pending-page-btn:last-child {
   margin-right: 0px;
 }
@@ -74,6 +85,7 @@
     align-items: center;
     justify-content: start;
   }
+
   .item-page-btn {
     margin-right: 0px;
     width: 100%;

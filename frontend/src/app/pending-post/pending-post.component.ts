@@ -47,8 +47,9 @@ export class PendingPostPageComponent implements OnInit {
     this.titleService.setTitle('pending-posts');
   }
 
-  async nextPage() {
+  nextPage() {
     if (this.currentPage < this.maxPage) {
+      this.pendingProductList = [];
       this.dataSrv.setPendingTab(this.currentPage + 1);
       this.dataSrv.getAllPendingProductList().subscribe({
         next: (res) => {
@@ -65,8 +66,9 @@ export class PendingPostPageComponent implements OnInit {
     }
   }
 
-  async prevPage() {
+  prevPage() {
     if (this.currentPage > 1) {
+      this.pendingProductList = [];
       this.dataSrv.setPendingTab(this.currentPage - 1);
       this.dataSrv.getAllPendingProductList().subscribe({
         next: (res) => {

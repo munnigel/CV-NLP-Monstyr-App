@@ -1,0 +1,19 @@
+.overview-page-main-container {
+  padding: 50px 80px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+}
+
+mat-card-title {
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
