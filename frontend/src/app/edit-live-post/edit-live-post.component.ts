@@ -124,10 +124,10 @@ export class EditProcessedPostComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
         console.log('post set to pending');
-        this.router.navigate(['/pending']);
+        this.router.navigate(['/home/pending']);
       },
     });
   }
@@ -305,7 +305,7 @@ export class EditProcessedPostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.dataSrv.deletePost(id).subscribe({
-          next: () => {},
+          next: () => { },
           error: (err) => {
             if (err.error.errors == 'Nil JSON web token') {
               console.log('need login');

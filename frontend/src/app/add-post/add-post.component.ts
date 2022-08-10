@@ -258,7 +258,12 @@ export class AddPostComponent implements OnInit {
         }
       },
       complete: () => {
-        this.router.navigate(['home/processed'], {});
+        alert('Post added successfully');
+        if (this.status == 'live') {
+          this.status = 'processed'
+        }
+        let route = '/home/' + this.status
+        this.router.navigate([route], {});
       },
     });
   }
