@@ -9,6 +9,7 @@
         [(ngModel)]="searchTerm"
         placeholder="Search posts"
         (keyup.enter)="filterPosts(searchTerm)"
+        id="search-text-box"
       />
       <mat-icon
         class="search-icon"
@@ -46,7 +47,7 @@
   <div class="container">
     <div class="row row-cols-4">
       <ng-container *ngFor="let product of filteredProductList; let i = index">
-        <mat-card class="col" (click)="selectLivePost(i)">
+        <mat-card class="col" id="live-post-item" (click)="selectLivePost(i)">
           <div class="item-container fade">
             <div class="item-img">
               <img class="live-img" [src]="product.images" alt="image" />
