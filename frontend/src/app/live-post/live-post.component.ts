@@ -16,7 +16,9 @@ export class LivePostPageComponent implements OnInit {
   currentPage: number;
   maxPage: number;
 
-  filteredProductList: Product[];
+  filteredProductList: Product[] = [];
+
+  filterBySearch: string[] = [];
   constructor(
     private dataSrv: DataService,
     private router: Router,
@@ -56,6 +58,7 @@ export class LivePostPageComponent implements OnInit {
 
   filterPosts(searchTerm: string) {
     console.log(searchTerm);
+    this.filterBySearch.push(searchTerm);
     if (!searchTerm) {
       this.filteredProductList = this.liveProductList;
       console.log('reset');
@@ -65,12 +68,21 @@ export class LivePostPageComponent implements OnInit {
     this.dataSrv.filterposts(searchTerm).subscribe({
       next: (res) => {
         temp = res;
+        console.log(res);
       },
       error: () => {},
       complete: () => {
-        this.dataSrv.createAndStoreProductList(this.filteredProductList, temp);
+        this.filteredProductList = [];
+        if (temp[0]) {
+          this.dataSrv.createAndStoreProductList(
+            this.filteredProductList,
+            temp[0]
+          );
+        }
+        console.log(this.filteredProductList);
       },
     });
+
     // this.filteredProductList = this.liveProductList.filter((product) => {
     //   // console.log(product);
     //   // product.title.includes(searchTerm);

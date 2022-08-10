@@ -258,11 +258,11 @@ export class DataService implements OnInit {
   }
 
   createAndStoreProductList(list: Product[], res: any) {
-    // console.log(list);
-    // console.log(res);
+    console.log(list);
+    console.log(res);
     for (let i = 0; i < res.length; i++) {
       try {
-        // console.log(res[i]);
+        console.log(res[i]);
         let temp = new Product(
           res[i].id,
           res[i].sp_id,
@@ -297,8 +297,10 @@ export class DataService implements OnInit {
             .replace('{', '')
             .replace('}', '')
             .split(',', 1);
+        console.log(temp);
         list.push(temp);
       } catch (e) {
+        console.log(e);
         continue;
       }
     }

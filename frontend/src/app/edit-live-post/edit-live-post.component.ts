@@ -124,7 +124,7 @@ export class EditProcessedPostComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: () => { },
+      error: () => {},
       complete: () => {
         console.log('post set to pending');
         this.router.navigate(['/home/pending']);
@@ -134,20 +134,13 @@ export class EditProcessedPostComponent implements OnInit {
 
   updateAllFields() {
     console.log(this.product);
-    if (this.product.selectedTitle['amount'])
-      this.titleAmount = this.product.selectedTitle['amount'];
-    if (this.product.selectedTitle['location'])
-      this.titleLocation = this.product.selectedTitle['location'];
-    if (this.product.selectedTitle['productName'])
-      this.titleProductName = this.product.selectedTitle['productName'];
-    if (this.product.selectedTitle['unitNumber'])
-      this.titleUnitNumber = this.product.selectedTitle['unitNumber'];
-    if (this.product.selectedTitle['XForY'])
-      this.titleXForY = this.product.selectedTitle['XForY'];
-    if (this.product.selectedTitle['XOFF'])
-      this.titleXOFF = this.product.selectedTitle['XOFF'];
-    if (this.product.selectedTitle['formatNumber'])
-      this.selectedFormat = this.product.selectedTitle['formatNumber'];
+    this.titleAmount = this.product.selectedTitle['amount'];
+    this.titleLocation = this.product.selectedTitle['location'];
+    this.titleProductName = this.product.selectedTitle['productName'];
+    this.titleUnitNumber = this.product.selectedTitle['unitNumber'];
+    this.titleXForY = this.product.selectedTitle['XForY'];
+    this.titleXOFF = this.product.selectedTitle['XOFF'];
+    this.selectedFormat = this.product.selectedTitle['formatNumber'];
     if (this.product.title) this.finalTitle = this.product.title;
   }
 
@@ -305,7 +298,7 @@ export class EditProcessedPostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.dataSrv.deletePost(id).subscribe({
-          next: () => { },
+          next: () => {},
           error: (err) => {
             if (err.error.errors == 'Nil JSON web token') {
               console.log('need login');

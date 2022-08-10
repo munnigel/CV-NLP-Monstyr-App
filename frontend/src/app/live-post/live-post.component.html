@@ -3,19 +3,42 @@
 
   <div style="text-align: center">
     <mat-form-field appearance="fill">
-      <mat-label>Search posts by title</mat-label>
-      <input matInput [(ngModel)]="searchTerm" placeholder="Search posts by title"
-        (keyup.enter)="filterPosts(searchTerm)" />
-      <mat-icon class="search-icon" color="primary" matPrefix (click)="filterPosts(searchTerm)">search</mat-icon>
+      <mat-label>Search posts</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchTerm"
+        placeholder="Search posts"
+        (keyup.enter)="filterPosts(searchTerm)"
+      />
+      <mat-icon
+        class="search-icon"
+        color="primary"
+        matPrefix
+        (click)="filterPosts(searchTerm)"
+        >search</mat-icon
+      >
     </mat-form-field>
   </div>
+
   <div class="button">
-    <button mat-stroked-button color="primary" class="special-btn2" (click)="prevPage()" type="button"
-      style="margin: 5px">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="special-btn2"
+      (click)="prevPage()"
+      type="button"
+      style="margin: 5px"
+    >
       Previous Page
     </button>
-    <button mat-stroked-button color="primary" class="special-btn2" (click)="nextPage()" type="button"
-      style="margin: 5px">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="special-btn2"
+      (click)="nextPage()"
+      type="button"
+      style="margin: 5px"
+    >
       Next Page
     </button>
   </div>
@@ -42,7 +65,7 @@
                 <mat-label><b>Categories:</b></mat-label>
                 <mat-chip *ngFor="let category of product.categories">{{
                   category
-                  }}</mat-chip>
+                }}</mat-chip>
               </mat-chip-list>
               <br />
               <mat-chip-list>
