@@ -187,10 +187,10 @@
             >
               Format
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" id="format-btn" aria-labelledby="dropdownMenuButton1">
               <ng-container *ngFor="let format of formats; let i = index">
                 <li (click)="selectFormat(i)">
-                  <a class="dropdown-item">{{ format.join(" ") }}</a>
+                  <a class="dropdown-item" id="title-format-options">{{ format.join(" ") }}</a>
                 </li>
               </ng-container>
             </ul>
@@ -212,6 +212,7 @@
                 <li (click)="selectSuggestion(i)">
                   <a
                     class="dropdown-item"
+                    id = "title-options"
                     [ngClass]="{ disabled: i % 2 == 0 }"
                     >{{ suggestion }}</a
                   >
@@ -247,7 +248,7 @@
             </div>
           </button>
           <br />
-          <mat-label>Final String: {{ finalTitle }}</mat-label>
+          <mat-label id="final-string">Final String: {{ finalTitle }}</mat-label>
         </mat-card>
         <mat-card>
           <mat-card-title>Tags</mat-card-title>
