@@ -61,19 +61,29 @@ export class LivePostPageComponent implements OnInit {
       console.log('reset');
       return;
     }
-    this.filteredProductList = this.liveProductList.filter((product) => {
-      // console.log(product);
-      // product.title.includes(searchTerm);
-      if (product.title) {
-        // console.log(product.title);
-        // console.log(
-        //   product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        // );
-        return product.title.toLowerCase().includes(searchTerm.toLowerCase());
-      } else return false;
+    let temp;
+    this.dataSrv.filterposts(searchTerm).subscribe({
+      next: (res) => {
+        temp = res;
+      },
+      error: () => {},
+      complete: () => {
+        this.dataSrv.createAndStoreProductList(this.filteredProductList, temp);
+      },
     });
-    console.log(this.filteredProductList);
-    console.log('filter');
+    // this.filteredProductList = this.liveProductList.filter((product) => {
+    //   // console.log(product);
+    //   // product.title.includes(searchTerm);
+    //   if (product.title) {
+    //     // console.log(product.title);
+    //     // console.log(
+    //     //   product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    //     // );
+    //     return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+    //   } else return false;
+    // });
+    // console.log(this.filteredProductList);
+    // console.log('filter');
   }
 
   nextPage() {
