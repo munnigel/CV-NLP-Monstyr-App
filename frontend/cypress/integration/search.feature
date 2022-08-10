@@ -21,12 +21,6 @@ Scenario: Search for live post by categories
     And I type in a category of a live post and press enter
     Then I should be able to see posts with categories that contain those search terms
 
-Scenario: Search for live post by date
-    Given I am on the "live posts tab"
-    And I click on the search text box
-    And I type in a date of a live post and press enter
-    Then I should be able to see posts with dates that contain those search terms
-
 Scenario: Search nothing in the search bar
     Given I am on the "live posts tab"
     And I click on the search text box
