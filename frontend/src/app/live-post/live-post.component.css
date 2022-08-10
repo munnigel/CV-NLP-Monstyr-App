@@ -5,7 +5,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-
 }
 
 .header-row {
@@ -14,8 +13,6 @@
   justify-content: space-between;
   transition: width 2s, height 4s;
 }
-
-
 
 .page-header {
   width: 100%;
