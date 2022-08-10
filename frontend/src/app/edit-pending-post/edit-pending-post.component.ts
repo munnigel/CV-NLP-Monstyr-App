@@ -100,13 +100,19 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: UntypedFormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.datePicker = new UntypedFormGroup({
       start: new UntypedFormControl(null),
       end: new UntypedFormControl(null),
     });
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) =>
+        tag ? this._filterTags(tag) : this.allTags.slice()
+      )
+    );
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) =>
@@ -137,27 +143,19 @@ export class EditItemComponent implements OnInit {
           if (this.pendingProduct.categories)
             this.categories = this.pendingProduct.categories;
           console.log(this.categories);
-          if (this.pendingProduct.selectedTitle['productName'])
-            this.titleProductName =
-              this.pendingProduct.selectedTitle['productName'];
-          if (this.pendingProduct.selectedTitle['amount'])
-            this.titleAmount = this.pendingProduct.selectedTitle['amount'];
-          if (this.pendingProduct.selectedTitle['XForY'])
-            this.titleXForY = this.pendingProduct.selectedTitle['XForY'];
-          if (this.pendingProduct.selectedTitle['XOFF'])
-            this.titleXOFF = this.pendingProduct.selectedTitle['XOFF'];
-          if (this.pendingProduct.selectedTitle['productName'])
-            this.titleUnitNumber =
-              this.pendingProduct.selectedTitle['unitNumber'];
-          if (this.pendingProduct.selectedTitle['location'])
-            this.titleLocation = this.pendingProduct.selectedTitle['location'];
-          if (this.pendingProduct.selectedTitle['formatNumber'] != undefined) {
-            console.log('format');
-            this.selectedFormat =
-              this.pendingProduct.selectedTitle['formatNumber'];
-          }
+          this.titleProductName =
+            this.pendingProduct.selectedTitle['productName'];
+          this.titleAmount = this.pendingProduct.selectedTitle['amount'];
+          this.titleXForY = this.pendingProduct.selectedTitle['XForY'];
+          this.titleXOFF = this.pendingProduct.selectedTitle['XOFF'];
+          this.titleUnitNumber =
+            this.pendingProduct.selectedTitle['unitNumber'];
+          this.titleLocation = this.pendingProduct.selectedTitle['location'];
+          this.selectedFormat =
+            this.pendingProduct.selectedTitle['formatNumber'];
+
           console.log(this.selectedFormat);
-          this.tags = this.pendingProduct.tags;
+          if (this.pendingProduct.tags) this.tags = this.pendingProduct.tags;
         },
       });
     });
@@ -489,7 +487,7 @@ export class EditItemComponent implements OnInit {
         output = res['extractions'];
         result = res;
       },
-      error: () => { },
+      error: () => {},
       complete: () => {
         for (let key in output) {
           // console.log(output[key]);
@@ -525,12 +523,7 @@ export class EditItemComponent implements OnInit {
       complete: () => {
         this.genTagsLoading = false;
         this.tagsGenerated = true;
-        this.filteredTags = this.tagCtrl.valueChanges.pipe(
-          startWith(null),
-          map((tag: string | null) =>
-            tag ? this._filterTags(tag) : this.allTags.slice()
-          )
-        );
+
         this.tagInput.nativeElement.click();
       },
     });
@@ -626,7 +619,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => { },
+          next: () => {},
           error: (err) => {
             if (err.error.errors == 'Nil JSON web token') {
               console.log('need login');
