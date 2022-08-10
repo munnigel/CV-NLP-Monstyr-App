@@ -222,20 +222,18 @@ export class DataService implements OnInit {
     return this.productList;
   }
 
-  async getGenTags(id: number) {
-    let token = localStorage.getItem('loginToken');
-    let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/taggen/${id}`, this.getHttpOptions())
+  getGenTags(id: number) {
+    return this.http.get(
+      `${API_URL}/posts/taggen/${id}`,
+      this.getHttpOptions()
     );
-    return res['gen_tags'];
   }
 
-  async getGenCategories(id: number) {
-    let token = localStorage.getItem('loginToken');
-    let res = await lastValueFrom(
-      this.http.get(`${API_URL}/posts/catgen/${id}`, this.getHttpOptions())
+  getGenCategories(id: number) {
+    return this.http.get(
+      `${API_URL}/posts/catgen/${id}`,
+      this.getHttpOptions()
     );
-    return res['cats_dict'];
   }
 
   getAllLiveProductList() {

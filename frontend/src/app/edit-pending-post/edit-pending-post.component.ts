@@ -458,6 +458,7 @@ export class EditItemComponent implements OnInit {
     console.log('title activated');
     let output: any;
     let result: any;
+    console.log('start getting data');
     this.datasrv.makeTitle(this.pendingProduct.id).subscribe({
       next: (res) => {
         console.log('new title');
@@ -481,30 +482,39 @@ export class EditItemComponent implements OnInit {
         this.suggestionDropDown.nativeElement.click();
       },
     });
+    setTimeout(() => {
+      console.log('invalid title');
+      this.genTitlesLoading = false;
+    }, 5000);
   }
 
   async makeTag() {
     this.allTags = [];
     this.tagsGenerated = false;
     this.genTagsLoading = true;
-    try {
-      this.allTags = await this.datasrv.getGenTags(this.pendingProduct.id);
-    } catch (err: any) {
-      if (err.error.errors == 'Nil JSON web token') {
-        console.log('need login');
-        this.router.navigate(['/']);
-      }
-      return;
-    }
-    this.genTagsLoading = false;
-    this.tagsGenerated = true;
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) =>
-        tag ? this._filterTags(tag) : this.allTags.slice()
-      )
-    );
-    this.tagInput.nativeElement.click();
+    this.datasrv.getGenTags(this.pendingProduct.id).subscribe({
+      next: (res) => {
+        this.allTags = res['gen_tags'];
+      },
+      error: () => {
+        console.log('unable to get tags');
+      },
+      complete: () => {
+        this.genTagsLoading = false;
+        this.tagsGenerated = true;
+        this.filteredTags = this.tagCtrl.valueChanges.pipe(
+          startWith(null),
+          map((tag: string | null) =>
+            tag ? this._filterTags(tag) : this.allTags.slice()
+          )
+        );
+        this.tagInput.nativeElement.click();
+      },
+    });
+    setTimeout(() => {
+      console.log('invalid title');
+      this.genTagsLoading = false;
+    }, 5000);
   }
 
   async makeCategory() {
@@ -512,24 +522,30 @@ export class EditItemComponent implements OnInit {
     this.categoriesGenerated = false;
     this.genCategoriesLoading = true;
     let temp;
-    try {
-      temp = await this.datasrv.getGenCategories(this.pendingProduct.id);
-    } catch (err: any) {
-      if (err.error.errors == 'Nil JSON web token') {
-        console.log('need login');
-        this.router.navigate(['/']);
-      }
-      return;
-    }
-
-    if (temp != null) {
-      this.categories = [];
-      for (let i = 0; i < 5; i++) {
-        this.categories.push(temp[i][0]);
-      }
-    }
-    this.genCategoriesLoading = false;
-    this.categoriesGenerated = true;
+    this.datasrv.getGenCategories(this.pendingProduct.id).subscribe({
+      next: (res) => {
+        temp = res['cats_dict'];
+        console.log(temp);
+      },
+      error: () => {
+        console.log('unable to get categories');
+      },
+      complete: () => {
+        console.log('completed');
+        if (temp != null) {
+          this.categories = [];
+          for (let i = 0; i < 5; i++) {
+            this.categories.push(temp[i][0]);
+          }
+        }
+        if (!this.categories) this.categoriesGenerated = true;
+        this.genCategoriesLoading = false;
+      },
+    });
+    setTimeout(() => {
+      console.log('categories timeout');
+      this.genCategoriesLoading = false;
+    }, 5000);
   }
 
   async getMinOrMaxDates(minOrMax: string) {
