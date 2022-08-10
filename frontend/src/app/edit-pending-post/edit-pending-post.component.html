@@ -187,10 +187,16 @@
             >
               Format
             </button>
-            <ul class="dropdown-menu" id="format-btn" aria-labelledby="dropdownMenuButton1">
+            <ul
+              class="dropdown-menu"
+              id="format-btn"
+              aria-labelledby="dropdownMenuButton1"
+            >
               <ng-container *ngFor="let format of formats; let i = index">
                 <li (click)="selectFormat(i)">
-                  <a class="dropdown-item" id="title-format-options">{{ format.join(" ") }}</a>
+                  <a class="dropdown-item" id="title-format-options">{{
+                    format.join(" ")
+                  }}</a>
                 </li>
               </ng-container>
             </ul>
@@ -212,7 +218,7 @@
                 <li (click)="selectSuggestion(i)">
                   <a
                     class="dropdown-item"
-                    id = "title-options"
+                    id="title-options"
                     [ngClass]="{ disabled: i % 2 == 0 }"
                     >{{ suggestion }}</a
                   >
@@ -248,7 +254,9 @@
             </div>
           </button>
           <br />
-          <mat-label id="final-string">Final String: {{ finalTitle }}</mat-label>
+          <mat-label id="final-string"
+            >Final String: {{ finalTitle }}</mat-label
+          >
         </mat-card>
         <mat-card>
           <mat-card-title>Tags</mat-card-title>
@@ -328,7 +336,7 @@
             <mat-chip-list #chipList2 aria-label="Categories selection">
               <mat-chip
                 *ngFor="let category of categories"
-                (removed)="removeCategory(category)"
+                (removed)="removeCategories(category)"
               >
                 {{ category }}
                 <button matChipRemove>
@@ -343,12 +351,12 @@
                 [matAutocomplete]="auto2"
                 [matChipInputFor]="chipList2"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="addCategory($event)"
+                (matChipInputTokenEnd)="addCategories($event)"
               />
             </mat-chip-list>
             <mat-autocomplete
               #auto2="matAutocomplete"
-              (optionSelected)="selectedCategory($event)"
+              (optionSelected)="selectedCategories($event)"
             >
               <mat-option
                 id="categories-options"

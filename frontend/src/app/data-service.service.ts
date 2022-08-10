@@ -236,6 +236,12 @@ export class DataService implements OnInit {
     );
   }
 
+  filterposts(filterString: string) {
+    let formData = new FormData();
+    formData.append('search', filterString);
+    return this.http.post(`${API_URL}/search`, formData, this.getHttpOptions());
+  }
+
   getAllLiveProductList() {
     console.log(this.liveTab);
     return this.http.get(

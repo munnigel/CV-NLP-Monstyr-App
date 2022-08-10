@@ -134,7 +134,9 @@ export class EditItemComponent implements OnInit {
         },
         complete: () => {
           this.pendingProduct = this.datasrv.createAndStoreProduct(output);
-          if (this.categories) this.categories = this.pendingProduct.categories;
+          if (this.pendingProduct.categories)
+            this.categories = this.pendingProduct.categories;
+          console.log(this.categories);
           if (this.pendingProduct.selectedTitle['productName'])
             this.titleProductName =
               this.pendingProduct.selectedTitle['productName'];
@@ -399,21 +401,19 @@ export class EditItemComponent implements OnInit {
     );
   }
 
-  addCategory(event: MatChipInputEvent): void {
+  addCategories(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add our category
     if (value) {
       if (value in allCategories) this.categories.push(value);
     }
 
     // Clear the input value
     event.chipInput!.clear();
-
-    this.categoryCtrl.setValue(null);
   }
 
-  removeCategory(category: string): void {
+  removeCategories(category: string): void {
     const index = this.categories.indexOf(category);
 
     if (index >= 0) {
@@ -421,7 +421,7 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  selectedCategory(event: MatAutocompleteSelectedEvent): void {
+  selectedCategories(event: MatAutocompleteSelectedEvent): void {
     this.categories.push(event.option.viewValue);
     this.categoryInput.nativeElement.value = '';
     this.categoryCtrl.setValue(null);
@@ -541,7 +541,7 @@ export class EditItemComponent implements OnInit {
   }
 
   async makeCategory() {
-    this.allCategories = [];
+    this.categories = [];
     this.categoriesGenerated = false;
     this.genCategoriesLoading = true;
     let temp;
