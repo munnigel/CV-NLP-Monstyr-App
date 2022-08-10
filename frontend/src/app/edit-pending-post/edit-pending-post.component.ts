@@ -109,9 +109,9 @@ export class EditItemComponent implements OnInit {
     });
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
-      map((tag: string | null) =>
-        tag ? this._filterTags(tag) : this.allTags.slice()
-      )
+      map((tag: string | null) => {
+        return tag ? this._filterTags(tag) : this.allTags.slice();
+      })
     );
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
@@ -516,19 +516,27 @@ export class EditItemComponent implements OnInit {
     this.datasrv.getGenTags(this.pendingProduct.id).subscribe({
       next: (res) => {
         this.allTags = res['gen_tags'];
+        console.log(this.allTags);
       },
       error: () => {
         console.log('unable to get tags');
       },
       complete: () => {
+        this.filteredTags = this.tagCtrl.valueChanges.pipe(
+          startWith(null),
+          map((tag: string | null) => {
+            return tag ? this._filterTags(tag) : this.allTags.slice();
+          })
+        );
         this.genTagsLoading = false;
         this.tagsGenerated = true;
-
+        console.log(this.allTags);
         this.tagInput.nativeElement.click();
+        console.log('click');
       },
     });
     setTimeout(() => {
-      console.log('invalid title');
+      console.log('invalid tag');
       this.genTagsLoading = false;
     }, 5000);
   }
