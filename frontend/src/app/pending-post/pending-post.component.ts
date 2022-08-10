@@ -40,6 +40,7 @@ export class PendingPostPageComponent implements OnInit {
           complete: () => {
             console.log('get max page');
             console.log(this.maxPage);
+            if (this.maxPage == 0) this.currentPage = 0;
           },
         });
       },

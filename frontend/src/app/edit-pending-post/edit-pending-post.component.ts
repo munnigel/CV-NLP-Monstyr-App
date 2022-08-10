@@ -100,7 +100,7 @@ export class EditItemComponent implements OnInit {
     private router: Router,
     private fb: UntypedFormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.datePicker = new UntypedFormGroup({
@@ -489,7 +489,7 @@ export class EditItemComponent implements OnInit {
         output = res['extractions'];
         result = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
         for (let key in output) {
           // console.log(output[key]);
@@ -626,7 +626,7 @@ export class EditItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (dialogResult) => {
       if (dialogResult) {
         this.datasrv.deletePost(id).subscribe({
-          next: () => {},
+          next: () => { },
           error: (err) => {
             if (err.error.errors == 'Nil JSON web token') {
               console.log('need login');
