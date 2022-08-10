@@ -4,7 +4,7 @@
   <div class="item-page-container">
     <div class="item-page-left">
       <div class="cards-container">
-        <mat-card>
+        <mat-card id="title-field">
           <mat-card-title>Title</mat-card-title>
           <ng-container *ngIf="selectedFormat == 0">
             <span>New!</span>
@@ -197,7 +197,7 @@
           <br />
           <mat-label>Final String: {{ finalTitle }}</mat-label>
         </mat-card>
-        <mat-card>
+        <mat-card id="description-field">
           <mat-card-title>Description</mat-card-title>
           <hr />
           <mat-form-field
@@ -216,7 +216,7 @@
             ></textarea>
           </mat-form-field>
         </mat-card>
-        <mat-card>
+        <mat-card id="tags-field">
           <mat-card-title>Tags</mat-card-title>
           <hr />
           <mat-form-field class="example-chip-list" appearance="fill">
@@ -239,10 +239,14 @@
           </mat-form-field>
         </mat-card>
 
-        <mat-card>
+        <mat-card id="category-field">
           <mat-card-title>Categories</mat-card-title>
           <hr />
-          <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-form-field
+            class="example-chip-list"
+            appearance="fill"
+            id="category-box"
+          >
             <mat-label>Categories</mat-label>
             <mat-chip-list #chipList2 aria-label="Categories selection">
               <mat-chip
@@ -279,10 +283,10 @@
             </mat-autocomplete>
           </mat-form-field>
         </mat-card>
-        <mat-card>
+        <mat-card id="period-field">
           <mat-card-title>Promotional Period</mat-card-title>
           <hr />
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" id="period-box">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input
               [formGroup]="datePicker"

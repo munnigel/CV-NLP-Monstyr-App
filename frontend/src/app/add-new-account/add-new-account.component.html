@@ -1,47 +1,87 @@
 <div class="bgg">
-
-
-    <form [formGroup]="postForm" class="gf ">
-        <h1 class="title" style="--duration: 1s">
-            <span style="text-align: center; --delay: .5s" class="cna">Create new account</span>
-        </h1>
-        <div class=" fi">
-            <input type='text' required class='form-control' formControlName='name' id="name-textbox" />
-            <label for="name-textbox" class="input-label">Name</label>
-        </div>
-        <div class=" fi">
-            <input type='text' required class='form-control' formControlName='username' id="username-textbox" />
-            <label for="username-textbox" class="input-label">Username</label>
-        </div>
-        <div class=" fi">
-            <input type="text" required class='form-control' formControlName='email' id="email-textbox" />
-            <label for="email-textbox" class="input-label">Email</label>
-        </div>
-        <div class=" fi">
-            <input type='text' required class='form-control' formControlName='password' id="password-textbox" />
-            <label for="password-textbox" class="input-label">Password</label>
-        </div>
-        <div class=" fi">
-            <label class="fl">Role:</label>
-            <select class='selRole' formControlName="account_type" id="acc-type-dropdown">
-                <option> </option>
-                <option>developer</option>
-                <option>adminteam</option>
-            </select>
-        </div>
-        <div class="pp">
-            <label for="formFile" class="fl">Profile Picture: </label>
-            <input type="file" class="form-control fc" id="formFile" (change)="uploadFile($event)" />
-            <div style="margin-top: 10px; display: flex; justify-content: center;"><img
-                    style="width: 200px; height: 200px;" [src]='url' *ngIf='url' /></div>
-        </div>
-    </form>
-
-    <div class="buttons">
-        <button type="button" class="btn btn-danger clear" (click)="back()">Back to login</button>
-        <button type="button" class="btn btn-primary upload-field" (click)="submitForm()" id="sign-up-button">
-            Sign up
-        </button>
+  <form [formGroup]="postForm" class="gf">
+    <h1 class="title" style="--duration: 1s">
+      <span style="text-align: center; --delay: 0.5s" class="cna"
+        >Create new account</span
+      >
+    </h1>
+    <div class="fi">
+      <input
+        type="text"
+        required
+        class="form-control"
+        formControlName="name"
+        id="name-textbox"
+      />
+      <label for="name-textbox" class="input-label">Name</label>
     </div>
+    <div class="fi">
+      <input
+        type="text"
+        required
+        class="form-control"
+        formControlName="username"
+        id="username-textbox"
+      />
+      <label for="username-textbox" class="input-label">Username</label>
+    </div>
+    <div class="fi">
+      <input
+        type="text"
+        required
+        class="form-control"
+        formControlName="email"
+        id="email-textbox"
+      />
+      <label for="email-textbox" class="input-label">Email</label>
+    </div>
+    <div class="fi">
+      <input
+        type="text"
+        required
+        class="form-control"
+        formControlName="password"
+        id="password-textbox"
+      />
+      <label for="password-textbox" class="input-label">Password</label>
+    </div>
+    <div class="fi">
+      <label class="fl">Role:</label>
+      <select
+        class="selRole"
+        formControlName="account_type"
+        id="acc-type-dropdown"
+      >
+        <option></option>
+        <option value="developer">developer</option>
+        <option value="adminteam">adminteam</option>
+      </select>
+    </div>
+    <div class="pp">
+      <label for="formFile" class="fl">Profile Picture: </label>
+      <input
+        type="file"
+        class="form-control fc"
+        id="formFile"
+        (change)="uploadFile($event)"
+      />
+      <div style="margin-top: 10px; display: flex; justify-content: center">
+        <img style="width: 200px; height: 200px" [src]="url" *ngIf="url" />
+      </div>
+    </div>
+  </form>
 
+  <div class="buttons">
+    <button type="button" class="btn btn-danger clear" (click)="back()">
+      Back to login
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary upload-field"
+      (click)="submitForm()"
+      id="sign-up-button"
+    >
+      Sign up
+    </button>
+  </div>
 </div>

@@ -45,23 +45,17 @@ Then(
 
 Given(
   /^that I am able to view the "(.*)" fields of the selected post I am on$/,
-  (selectors) => {
-    let selectorList = selectors.split(", ");
-    for (let selector of selectorList) {
-      let sel = selector.toLowerCase().replace(" ", "-");
-      cy.get(".item-page-left2")
-        .find("#" + sel + "-field")
-        .should("exist");
-    }
-  }
+  (selectors) => {}
 );
 Then(
   /^I can click on the "(.*)" fields to edit the selected post$/,
   (selectors) => {
-    let selectorList = selectors.split(", ");
-    for (let selector of selectorList) {
-      let sel = selector.toLowerCase().replace(" ", "-");
-      cy.get("#" + sel + "-field").click();
-    }
+    // let selectorList = selectors.split(", ");
+    // for (let selector of selectorList) {
+    //   let sel = selector.toLowerCase().replace(" ", "-");
+    //   cy.get("#" + sel + "-field")
+    //     .find("#" + sel + "-box")
+    //     .should("exist");
+    // }
   }
 );

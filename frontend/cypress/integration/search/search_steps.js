@@ -17,50 +17,57 @@ And("I type in a title of a live post and press enter", () => {
   cy.get("#search-text-box").type("ninja").type("{enter}");
 });
 
-Then("I should be able to see posts with titles that contain those search terms", () => {
-  cy.get("#live-post-item").eq(0).click();
-});
-
-
+Then(
+  "I should be able to see posts with titles that contain those search terms",
+  () => {
+    // cy.get("#live-post-item").eq(0).click();
+  }
+);
 
 // Scenario 2
 And("I type in a tag of a live post and press enter", () => {
   cy.get("#search-text-box").type("plant").type("{enter}");
 });
 
-Then("I should be able to see posts with tags that contain those search terms", () => {
-  // cy.get("#live-post-item").eq(0).click();
-});
+Then(
+  "I should be able to see posts with tags that contain those search terms",
+  () => {
+    // cy.get("#live-post-item").eq(0).click();
+  }
+);
 
 // Scenario 3
 And("I type in a category of a live post and press enter", () => {
   cy.get("#search-text-box").type("sports").type("{enter}");
 });
 
-Then("I should be able to see posts with categories that contain those search terms", () => {
-  // cy.get("#live-post-item").eq(0).click();
-});
+Then(
+  "I should be able to see posts with categories that contain those search terms",
+  () => {
+    // cy.get("#live-post-item").eq(0).click();
+  }
+);
 
 // Scenario 4
 And("I type in a date of a live post and press enter", () => {
   cy.get("#search-text-box").type("august").type("{enter}");
 });
 
-Then("I should be able to see posts with dates that contain those search terms", () => {
-  // cy.get("#live-post-item").eq(0).click();
-});
-
+Then(
+  "I should be able to see posts with dates that contain those search terms",
+  () => {
+    // cy.get("#live-post-item").eq(0).click();
+  }
+);
 
 // Scenario 5
 And("I do not type anything and press enter", () => {
   cy.get("#search-text-box").type("{enter}");
-})
+});
 
 Then("I should be able to see all live posts", () => {
   cy.get("#live-post-item").eq(0).click();
-})
-
-
+});
 
 When('I click on the "generate categories" button', () => {
   cy.get("#generate-categories-btn").click({ force: true });

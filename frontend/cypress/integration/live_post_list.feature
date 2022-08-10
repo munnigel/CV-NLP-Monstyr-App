@@ -13,9 +13,9 @@ Scenario: Navigating to Live Post tab
 Scenario: Navigating to specific entry of Live Post
     Given that I click on the "Live Posts" tab
     When I click on one of the "Live" post
-    Then I should be able to see the "Title, Description, Category, Start Date, End Date" fields of the selected post
+    Then I should be able to see the "Title, Description, Category, Period" fields of the selected post
 
 Scenario: Edit chosen entry of Live Post
-    Given that I am able to view the "Title, Description, Category, Start Date, End Date" fields of the selected post I am on
-    Then I can click on the "Title, Description, Category, Start Date, End Date" fields to edit the selected post
+    Given that I am able to view the "Title, Description, Category, Period" fields of the selected post I am on
+    Then I can click on the "Title, Description, Category, Period" fields to edit the selected post
     

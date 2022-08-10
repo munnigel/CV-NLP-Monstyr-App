@@ -20,11 +20,6 @@
   resize: none;
 }
 
-.page-item-title {
-  min-width: 350px;
-  margin: 0px 10px;
-}
-
 .btn-danger {
   background-color: #fa7474;
   color: black;

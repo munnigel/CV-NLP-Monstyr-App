@@ -35,10 +35,10 @@ When('I click on one of the "Pending" post', () => {
 Then(
   'I should be able to see the "Title, Tag, Category, Start Date, End Date" fields of the selected post',
   () => {
-    cy.get(".page-item-title").should("exist");
-    cy.get(".page-item-description").should("exist");
-    cy.get(".titleInput").should("be.visible");
-    cy.get(".tagInput").should("be.visible");
+    cy.get("#pending-product-title").should("exist");
+    cy.get("#pending-product-tags").should("exist");
+    cy.get("#pending-product-categories").should("be.visible");
+    cy.get("#pending-product-period").should("be.visible");
   }
 );
 
@@ -67,10 +67,10 @@ Given(
   'that I am able to view the "Title, Tag, Category, Start Date, End Date" fields of the selected Pending post I am on',
   () => {
     cy.get(".pending-posts-item").first().click();
-    cy.get(".page-item-title").should("exist");
-    cy.get(".page-item-description").should("exist");
-    cy.get(".categoryInput").should("be.visible");
-    cy.get(".dateInput").should("be.visible");
+    cy.get("#pending-product-title").should("exist");
+    cy.get("#pending-product-tags").should("exist");
+    cy.get("#pending-product-categories").should("be.visible");
+    cy.get("#pending-product-period").should("be.visible");
   }
 );
 
@@ -101,7 +101,7 @@ Then(
     // cy.get(".col").eq(0).click();   //click first
     // cy.url().should("include", "editLive");
 
-    cy.get(".item-details").should("be.visible");
+    cy.get(".item-details").should("exist");
   }
 );
 

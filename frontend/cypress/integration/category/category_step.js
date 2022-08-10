@@ -81,7 +81,7 @@ When('I click on the "enter categories" text area', () => {
   cy.get(".categoryInput").click({ force: true });
 });
 When('I type a new category and press the "enter" key', () => {
-  cy.get(".categoryInput").type("new category").type("{enter}");
+  cy.get("#categories-options").first().click();
 });
 Then(
   'the category should be inserted into the "enter categories" text area',

@@ -6,7 +6,7 @@
   <div class="item-page-container">
     <div class="item-page-left">
       <div class="cards-container">
-        <mat-card>
+        <mat-card id="pending-product-title">
           <mat-card-title>Title</mat-card-title>
           <ng-container *ngIf="selectedFormat == 0">
             <span>New!</span>
@@ -258,7 +258,7 @@
             >Final String: {{ finalTitle }}</mat-label
           >
         </mat-card>
-        <mat-card>
+        <mat-card id="pending-product-tags">
           <mat-card-title>Tags</mat-card-title>
           <hr />
           <mat-form-field
@@ -328,7 +328,7 @@
           </button>
         </mat-card>
 
-        <mat-card>
+        <mat-card id="pending-product-categories">
           <mat-card-title>Categories</mat-card-title>
           <hr />
           <mat-form-field class="example-chip-list" appearance="fill">
@@ -337,6 +337,7 @@
               <mat-chip
                 *ngFor="let category of categories"
                 (removed)="removeCategories(category)"
+                class="mat-chip-ripple"
               >
                 {{ category }}
                 <button matChipRemove>
@@ -396,7 +397,7 @@
             </div>
           </button>
         </mat-card>
-        <mat-card>
+        <mat-card id="pending-product-period">
           <mat-card-title>Promotional Period</mat-card-title>
           <hr />
           <mat-form-field appearance="fill">
@@ -522,7 +523,7 @@
     <button
       type="button"
       class="btn btn-primary item-page-btn"
-      id="back-to-live1"
+      id="back-to-pending"
       (click)="onPending()"
     >
       Back to Pending Page

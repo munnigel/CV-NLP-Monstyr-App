@@ -70,7 +70,7 @@ Given('I am on "Edit Item Page" for a particular pending post', () => {
 });
 
 When('I click the "submit" button', () => {
-  cy.get("#go-to-live").click({ force: true });
+  cy.get("#submit-btn").click({ force: true });
 });
 
 Then("the accepted tags should be added to the post", () => {
