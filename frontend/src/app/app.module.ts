@@ -12,7 +12,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
 import { LivePostPageComponent } from './live-post/live-post.component';
-import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { FileUploadService } from './file-upload.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -49,7 +48,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     OverviewPageComponent,
     PendingPostPageComponent,
     LivePostPageComponent,
-    SettingsPageComponent,
     DashboardCardComponent,
     EditProcessedPostComponent,
     AddPostComponent,

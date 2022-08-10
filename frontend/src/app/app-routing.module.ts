@@ -6,7 +6,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
 import { LivePostPageComponent } from './live-post/live-post.component';
-import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
       { path: 'pending', component: PendingPostPageComponent },
       { path: 'processed', component: LivePostPageComponent },
       { path: 'addpost', component: AddPostComponent },
-      { path: 'settings', component: SettingsPageComponent },
     ],
   },
   { path: '**', redirectTo: 'login' },

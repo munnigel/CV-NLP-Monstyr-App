@@ -39,14 +39,7 @@ export class HomePageComponent implements OnInit {
     console.log('home page');
     this.onWindowResize();
     this.opened = !this.mobile;
-    this.tabList = [
-      'overview',
-      'processed',
-      'pending',
-      'addpost',
-      'settings',
-      'Logout',
-    ];
+    this.tabList = ['overview', 'processed', 'pending', 'addpost', 'Logout'];
     if (this.router.url.includes(this.tabList[0])) this.tabIndex = 0;
     else if (this.router.url.includes(this.tabList[1])) {
       console.log(1);
@@ -60,9 +53,6 @@ export class HomePageComponent implements OnInit {
     } else if (this.router.url.includes(this.tabList[4])) {
       console.log(5);
       this.tabIndex = 4;
-    } else if (this.router.url.includes(this.tabList[5])) {
-      console.log(5);
-      this.tabIndex = 5;
     }
   }
   async onTabClick(index: number) {

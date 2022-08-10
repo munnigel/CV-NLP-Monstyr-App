@@ -17,6 +17,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { allCategories } from '../env';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-edit-item',
@@ -133,12 +134,34 @@ export class EditItemComponent implements OnInit {
         },
         complete: () => {
           this.pendingProduct = this.datasrv.createAndStoreProduct(output);
+          if (this.categories) this.categories = this.pendingProduct.categories;
+          if (this.pendingProduct.selectedTitle['productName'])
+            this.titleProductName =
+              this.pendingProduct.selectedTitle['productName'];
+          if (this.pendingProduct.selectedTitle['amount'])
+            this.titleAmount = this.pendingProduct.selectedTitle['amount'];
+          if (this.pendingProduct.selectedTitle['XForY'])
+            this.titleXForY = this.pendingProduct.selectedTitle['XForY'];
+          if (this.pendingProduct.selectedTitle['XOFF'])
+            this.titleXOFF = this.pendingProduct.selectedTitle['XOFF'];
+          if (this.pendingProduct.selectedTitle['productName'])
+            this.titleUnitNumber =
+              this.pendingProduct.selectedTitle['unitNumber'];
+          if (this.pendingProduct.selectedTitle['location'])
+            this.titleLocation = this.pendingProduct.selectedTitle['location'];
+          if (this.pendingProduct.selectedTitle['formatNumber'] != undefined) {
+            console.log('format');
+            this.selectedFormat =
+              this.pendingProduct.selectedTitle['formatNumber'];
+          }
+          console.log(this.selectedFormat);
+          this.tags = this.pendingProduct.tags;
         },
       });
     });
-
-    // console.log(this.datasrv.getPendingProductList()[0]);
   }
+
+  // console.log(this.datasrv.getPendingProductList()[0]);
 
   updateProductName(event) {
     // console.log(event.target.value);
