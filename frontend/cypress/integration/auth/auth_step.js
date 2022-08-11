@@ -124,12 +124,10 @@ When(/^I click on the "Sign In" button$/, () => {
 
 Then("I should be able to access the live posts page", () => {
   cy.visit("http://localhost:4200/home/processed");
-  // cy.get('#live-posts-tab').click({ force: true });
 });
 
 And("I should be able to access the pending posts page", () => {
   cy.visit("http://localhost:4200/home/pending");
-  // cy.get('#pending-posts-tab').click();
 });
 
 // Scenario: Logging in with a registered and verified email account and incorrect password
@@ -139,12 +137,10 @@ And("I fill in a wrong password for that account", () => {
 
 Then("I should not be able to access the live posts page", () => {
   cy.visit("http://localhost:4200/home/processed");
-  // cy.get('#live-posts-tab').click({ force: true });
 });
 
 And("I should not be able to access the pending posts page", () => {
   cy.visit("http://localhost:4200/home/pending");
-  // cy.get('#pending-posts-tab').click();
 });
 
 // Scenario: Logging in with a registered but unverified email account

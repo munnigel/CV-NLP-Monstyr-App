@@ -258,11 +258,13 @@ export class DataService implements OnInit {
   }
 
   createAndStoreProductList(list: Product[], res: any) {
-    console.log(list);
+    // console.log(list);
     console.log(res);
     for (let i = 0; i < res.length; i++) {
       try {
         console.log(res[i]);
+        console.log(res[i].selected_title);
+        // console.log(JSON.parse(res[i].selected_title));
         let temp = new Product(
           res[i].id,
           res[i].sp_id,

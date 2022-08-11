@@ -1,0 +1,78 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.Fuzz some stuff": 1,
+      "vusers.created": 1,
+      "http.requests": 1,
+      "http.codes.200": 1,
+      "http.responses": 1,
+      "plugins.expect.ok": 1,
+      "plugins.expect.ok.statusCode": 1,
+      "vusers.failed": 0,
+      "vusers.completed": 1
+    },
+    "rates": {
+      "http.request_rate": 1
+    },
+    "firstCounterAt": 1660232505863,
+    "firstHistogramAt": 1660232505933,
+    "lastCounterAt": 1660232505938,
+    "lastHistogramAt": 1660232505938,
+    "firstMetricAt": 1660232505863,
+    "lastMetricAt": 1660232505938,
+    "period": 1660232500000,
+    "summaries": {
+      "http.response_time": {
+        "min": 36,
+        "max": 36,
+        "count": 1,
+        "p50": 36.2,
+        "median": 36.2,
+        "p75": 36.2,
+        "p90": 36.2,
+        "p95": 36.2,
+        "p99": 36.2,
+        "p999": 36.2
+      },
+      "vusers.session_length": {
+        "min": 75.2,
+        "max": 75.2,
+        "count": 1,
+        "p50": 76,
+        "median": 76,
+        "p75": 76,
+        "p90": 76,
+        "p95": 76,
+        "p99": 76,
+        "p999": 76
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 36,
+        "max": 36,
+        "count": 1,
+        "p50": 36.2,
+        "median": 36.2,
+        "p75": 36.2,
+        "p90": 36.2,
+        "p95": 36.2,
+        "p99": 36.2,
+        "p999": 36.2
+      },
+      "vusers.session_length": {
+        "min": 75.2,
+        "max": 75.2,
+        "count": 1,
+        "p50": 76,
+        "median": 76,
+        "p75": 76,
+        "p90": 76,
+        "p95": 76,
+        "p99": 76,
+        "p999": 76
+      }
+    }
+  },
+  "intermediate": []
+}

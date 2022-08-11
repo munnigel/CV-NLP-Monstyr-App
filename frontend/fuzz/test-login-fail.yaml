@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalCount: 10
+  plugins:
+    fuzzer: {}
+    expect: {}
+  payload:
+    path: "test-login-fail.csv"
+    fields:
+      - "email"
+      - "password"
+    order: sequence
+    skipHeader: true
+before:
+  flow:
+    - log: "Check login fail"
+scenarios:
+  - name: "Login failure check"
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: "token"
+          expect:
+            - statusCode: 401

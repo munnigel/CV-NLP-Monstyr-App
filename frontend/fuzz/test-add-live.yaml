@@ -1,0 +1,65 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 5
+      arrivalCount: 5
+  plugins:
+    fuzzer: {}
+    expect: {}
+  payload:
+    path: "randomwords.csv"
+    fields:
+      - "word"
+    skipHeader: true
+before:
+  flow:
+    - log: "Test add live post"
+    - log: "Get auth token"
+    - post:
+        url: "/auth/login"
+        json:
+          email: "nigel_mun@mymail.sutd.edu.sg"
+          password: "123123"
+        capture:
+          - json: $.token
+            as: token
+          - json: $.username
+            as: username
+          - json: $.id
+            as: id
+scenarios:
+  - name: "Add live post Check"
+    flow:
+      - post:
+          url: "/posts"
+          headers:
+            Authorization: "{{ token }}"
+            Accept: "*/*"
+          json:
+            selected_title: '{
+              "productName": "{{ $randomString() }}",
+              "amount": "{{ $randomString() }}",
+              "XForY":"{{ $randomString() }}", "XOFF":"{{ $randomString() }}",
+              "unitNumber":"{{ $randomString() }}",
+              "location":"{{ $randomString() }}",
+              "formatNumber":0
+              }'
+            content: "{{ $randomString() }}"
+            status: "live"
+          capture:
+            - json: "$.id"
+              as: "new_id"
+          expect:
+            - statusCode: 200
+      - log: "log post details"
+      - get:
+          url: "/posts/{{ new_id }}"
+          headers:
+            Authorization: "{{ token }}"
+            Accept: "*/*"
+          capture:
+            - json: "$.selected_title"
+              as: "title"
+            - json: "$.status"
+              as: "status"
+      - log: "id: {{ new_id }}, status: {{ status }}, get title: {{ title }}"

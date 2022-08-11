@@ -1,0 +1,44 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalCount: 10
+  plugins:
+    fuzzer: {}
+    expect: {}
+  payload:
+    path: "test-login-pass.csv"
+    fields:
+      - "email"
+      - "password"
+    skipHeader: true
+before:
+  flow:
+    - log: "Check login success"
+scenarios:
+  - name: "Login success check"
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: "token"
+          expect:
+            - statusCode: 200
+      - log: "Log details"
+      - get:
+          url: "/users"
+          headers:
+            Authorization: "{{ token }}"
+            Accept: "*/*"
+          capture:
+            - json: "$[0].username"
+              as: "username"
+            - json: "$[0].email"
+              as: "email"
+            - json: "$[0].account_type"
+              as: "role"
+      - log: "Username: {{ username }}, Email: {{ email }}, Role: {{ role }}"
