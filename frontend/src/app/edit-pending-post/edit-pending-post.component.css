@@ -30,6 +30,11 @@
   border-radius: 15px;
 }
 
+.page-item-title {
+  min-width: 350px;
+  margin: 0px 10px;
+}
+
 .mb-3:hover {
   background: none;
 }
@@ -93,5 +98,9 @@ mat-card {
 
   .item-page-btn:last-child {
     margin-bottom: 0px;
+  }
+
+  .page-item-title {
+    margin: 0px;
   }
 }

@@ -45,6 +45,11 @@ mat-card {
   border: 1px solid rgb(155, 155, 155);
 }
 
+.page-item-title {
+  min-width: 350px;
+  margin: 0px 10px;
+}
+
 #submit-btn {
   background-color: #29ff30;
   color: black;
@@ -69,5 +74,9 @@ mat-card {
 
   .item-page-btn:last-child {
     margin-bottom: 0px;
+  }
+
+  .page-item-title {
+    margin: 0px;
   }
 }
