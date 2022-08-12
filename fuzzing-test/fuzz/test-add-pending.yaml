@@ -6,14 +6,9 @@ config:
   plugins:
     fuzzer: {}
     expect: {}
-  payload:
-    path: "randomwords.csv"
-    fields:
-      - "word"
-    skipHeader: true
 before:
   flow:
-    - log: "Test add live post"
+    - log: "Test add pending post"
     - log: "Get auth token"
     - post:
         url: "/auth/login"
@@ -28,7 +23,7 @@ before:
           - json: $.id
             as: id
 scenarios:
-  - name: "Add live post Check"
+  - name: "Add pending post check"
     flow:
       - post:
           url: "/posts"
@@ -45,7 +40,7 @@ scenarios:
               "formatNumber":0
               }'
             content: "{{ $randomString() }}"
-            status: "live"
+            status: "pending"
           capture:
             - json: "$.id"
               as: "new_id"

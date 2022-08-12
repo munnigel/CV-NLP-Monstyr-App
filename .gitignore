@@ -12,3 +12,4 @@ backend/log/development.log
 # ignore cucumber reports generated
 frontend/cypress/cucumber-json/*
 frontend/reports/*
+
