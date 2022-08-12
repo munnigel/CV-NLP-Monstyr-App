@@ -9,7 +9,6 @@ import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { AI_URL, API_URL } from '../app/env';
 import { Product } from './product.model';
 import { Account } from './account.model';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 .live-post-main-container {
-  padding: 50px 80px;
+  padding: 50px 40px;
   background-image: url(../../assets/pictures/bggGif.gif);
   background-size: cover;
   background-repeat: no-repeat;
@@ -43,9 +43,7 @@
 }
 
 .col {
-  width: 95%;
-  padding: 6px;
-  margin: 10px;
+  width: 100%;
   background-color: rgb(238, 238, 238);
   border-radius: 15px;
   border: 2px solid rgb(155, 155, 155);

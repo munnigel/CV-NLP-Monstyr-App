@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
-import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data-service.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class OverviewPageComponent implements OnInit {
   constructor(
     private titleService: Title,
     private dataSrv: DataService,
-    private router: Router
   ) {}
   acceptancePie: Chart;
   completionPie: Chart;

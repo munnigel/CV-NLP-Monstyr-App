@@ -12,7 +12,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PendingPostPageComponent } from './pending-post/pending-post.component';
 import { LivePostPageComponent } from './live-post/live-post.component';
-import { FileUploadService } from './file-upload.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -36,7 +35,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
-import { CookieService } from 'ngx-cookie-service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
@@ -81,8 +79,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSidenavModule,
   ],
   providers: [
-    FileUploadService,
-    CookieService,
     {
       provide: APP_INITIALIZER,
       useFactory: initDataService,

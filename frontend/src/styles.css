@@ -65,8 +65,6 @@ body {
   animation: 45s para infinite linear; */
 }
 
-
-
 @keyframes para {
   100% {
     background-position: -2000px 0%, 2000px 50%, -2000px 100%;
@@ -86,7 +84,7 @@ body {
   font-weight: 500;
 }
 
-.wrapper>span {
+.wrapper > span {
   margin: 0 auto;
   width: max-content;
   position: absolute;
@@ -99,8 +97,6 @@ body {
   font-weight: bold;
   animation: rotateWords 6s var(--d) linear infinite;
 }
-
-
 
 @keyframes rotateWords {
   7% {
@@ -121,7 +117,6 @@ body {
     opacity: 0;
     transform: translateY(90px) rotate(10deg);
   }
-
 }
 
 /* .words {
@@ -172,7 +167,6 @@ body {
 }
 
 @keyframes animation {
-
   0%,
   10%,
   100% {
@@ -203,7 +197,6 @@ body {
   padding-top: 30px;
 }
 
-
 .formInput {
   position: relative;
   margin: 30px;
@@ -218,7 +211,6 @@ body {
   margin: 30px auto;
   color: rgb(108, 88, 122);
 }
-
 
 .form-control {
   padding: 10px;
@@ -235,14 +227,14 @@ body {
   top: 0;
   left: 0;
   transform: translate(10px, 10px);
-  transition: transform .25s;
+  transition: transform 0.25s;
   font-size: 14px;
   font-weight: bold;
 }
 
-.form-control:focus+.input-label,
-.form-control:valid+.input-label {
-  transform: translate(10px, -14px) scale(.9);
+.form-control:focus + .input-label,
+.form-control:valid + .input-label {
+  transform: translate(10px, -14px) scale(0.9);
   color: #fff;
   font-weight: 500;
   padding-inline: 5px;
@@ -384,6 +376,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between;
+  grid-gap: 10px;
+  width: 90%;
 }
 
 .popup {
@@ -479,7 +473,6 @@ body {
   margin: 10px;
 }
 
-
 .page-item-date {
   resize: none;
   height: 30px;
@@ -527,8 +520,6 @@ body {
   border-radius: 25px;
   border: 1px solid black;
 }
-
-
 
 .setting-page-field {
   margin-top: 30px;
@@ -724,8 +715,6 @@ a {
   margin-bottom: 30px;
 }
 
-.addAccBg {}
-
 .groupForm {
   width: 30%;
   margin: auto;
@@ -762,7 +751,7 @@ a {
 }
 
 .title span::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -771,7 +760,8 @@ a {
   transform: scaleX(0);
   transform-origin: left;
   background: linear-gradient(to right, #e0c4fd, #8fc6fd);
-  animation: rollIn var(--duration) var(--delay) forwards, rollOut var(--duration) var(--total) forwards;
+  animation: rollIn var(--duration) var(--delay) forwards,
+    rollOut var(--duration) var(--total) forwards;
 }
 
 @keyframes revealText {
@@ -800,7 +790,6 @@ a {
   }
 }
 
-
 .bgg {
   background-image: url(./assets/pictures/bgg.jpg);
   background-size: cover;
@@ -810,8 +799,6 @@ a {
   padding: 95px;
   scrollbar-width: none;
 }
-
-
 
 .forms {
   display: grid;
@@ -889,6 +876,7 @@ mat-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
+    min-width: 70%;
   }
 
   .col {
