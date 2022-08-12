@@ -1,65 +1,49 @@
 # MonstyrApp
 
+## How to run the app
+
+Ensure node.js is installed
+
+In the frontend folder,
+
+```
+npm install
+
+ng serve
+
+(If error: ng command not found)
+npm install -g @angular/cli@latest
+```
+
 ## Frontend
 
-Flow of Frontend:
+- Every component has their own `component.ts`, `component.spec.ts`, `component.html`, `component.css`
 
-```
-frontend
-│ app.module.ts                 # All additional modules, components, services are declared here
-│
-│ app-routing.module.ts         # All the routes and which component to direct to are declared here
-│
-│ data-service.service.ts       # All of HTTP request URLs and global variables are housed here
-│
-│ env.ts                        # URL of APIs are declared here (Can be changed depending on local or deployed versions)
-│
-│ product.model.ts              # Model to store products
-│
-│ account.model.ts              # Model to store user accounts
-│
-└───login
-│   │ login.component.css       # Style sheet for login.component.html
-│   │ login.component.html      # Rendered when login component is created
-│   │ login.component.spec.ts   # Used to write RSPEC tests
-│   │ login.component.ts        # Created when the specific route is called as declared in app-routing.module.ts
-│
-└───overview-page
-│
-└───home-page
-│
-└───live-post
-│
-└───edit-live-post
-│
-└───pending-post
-│
-└───edit-pending-post
-│
-└───add-post
-│
-└───settings
-│
-└───add-new-account
-│
-│ file021.txt
-│ file022.txt
-```
+- `spec.ts` files can be used for unit testing
+
+- Start up of the app first looks at app.module.ts where it will render
+- index.html which will look for selector called `<app-root>` which can be found in `app.component.ts`
+
+- Common css declarations can be found in `styles.css`, otherwise will be declared in each component's `component.css` file
+
+- The app will the route to respective components by looking at the routes declared in `app-routing.module.ts`
+
+Structure:
 
 ```
 📦src
  ┣ 📂app
- ┃ ┣ 📂add-new-account
- ┃ ┣ 📂add-post
- ┃ ┣ 📂confirmation-dialog
+ ┃ ┣ 📂add-new-account                          # Route: /add
+ ┃ ┣ 📂add-post                                 # Route: /home/addpost
+ ┃ ┣ 📂confirmation-dialog                      # Only used when showing confirmation dialog when deleting posts
  ┃ ┣ 📂dashboard-card
- ┃ ┣ 📂edit-live-post
- ┃ ┣ 📂edit-pending-post
- ┃ ┣ 📂home-page
- ┃ ┣ 📂live-post
- ┃ ┣ 📂login
- ┃ ┣ 📂overview-page
- ┃ ┣ 📂pending-post
+ ┃ ┣ 📂edit-live-post                           # Route: /editLive/:id
+ ┃ ┣ 📂edit-pending-post                        # Route: /edit/:id
+ ┃ ┣ 📂home-page                                # Route: /home (only used to add side nav bar)
+ ┃ ┣ 📂live-post                                # Route: /home/processed
+ ┃ ┣ 📂login                                    # Route: /login
+ ┃ ┣ 📂overview-page                            # Route: /home/overview
+ ┃ ┣ 📂pending-post                             # Route: /home/pending
  ┃ ┃ ┣ 📜login.component.css                    # Style sheet for login.component.html
  ┃ ┃ ┣ 📜login.component.html                   # Rendered when login component is created
  ┃ ┃ ┣ 📜login.component.spec.ts                # Used to write RSPEC tests
@@ -77,4 +61,10 @@ frontend
  ┃ ┣ 📜env.ts                                   # URL of APIs are declared here (Can be changed depending on local or deployed versions)
  ┃ ┣ 📜product.model.spec.ts
  ┃ ┗ 📜product.model.ts                         # Model to store products
+ ┣ 📜favicon.ico
+ ┣ 📜index.html
+ ┣ 📜main.ts
+ ┣ 📜polyfills.ts
+ ┣ 📜styles.css
+ ┗ 📜test.ts
 ```
