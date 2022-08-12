@@ -25,7 +25,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgChartsModule } from 'ng2-charts';
 // import { CardComponent } from './card/card.component';
-import { DashboardCardComponent } from './dashboard-card/dashboard-card.component';
 import { EditProcessedPostComponent } from './edit-live-post/edit-live-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -46,7 +45,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     OverviewPageComponent,
     PendingPostPageComponent,
     LivePostPageComponent,
-    DashboardCardComponent,
     EditProcessedPostComponent,
     AddPostComponent,
     AddNewAccountComponent,
