@@ -1,31 +1,80 @@
 # MonstyrApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+## Frontend
 
-## Development server
+Flow of Frontend:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+frontend
+│ app.module.ts                 # All additional modules, components, services are declared here
+│
+│ app-routing.module.ts         # All the routes and which component to direct to are declared here
+│
+│ data-service.service.ts       # All of HTTP request URLs and global variables are housed here
+│
+│ env.ts                        # URL of APIs are declared here (Can be changed depending on local or deployed versions)
+│
+│ product.model.ts              # Model to store products
+│
+│ account.model.ts              # Model to store user accounts
+│
+└───login
+│   │ login.component.css       # Style sheet for login.component.html
+│   │ login.component.html      # Rendered when login component is created
+│   │ login.component.spec.ts   # Used to write RSPEC tests
+│   │ login.component.ts        # Created when the specific route is called as declared in app-routing.module.ts
+│
+└───overview-page
+│
+└───home-page
+│
+└───live-post
+│
+└───edit-live-post
+│
+└───pending-post
+│
+└───edit-pending-post
+│
+└───add-post
+│
+└───settings
+│
+└───add-new-account
+│
+│ file021.txt
+│ file022.txt
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## Installing Cypress and integrating Cucumber
-
-https://dev.to/wescopeland/cypress-super-patterns-how-to-elevate-the-quality-of-your-test-suite-1lcf
+```
+📦src
+ ┣ 📂app
+ ┃ ┣ 📂add-new-account
+ ┃ ┣ 📂add-post
+ ┃ ┣ 📂confirmation-dialog
+ ┃ ┣ 📂dashboard-card
+ ┃ ┣ 📂edit-live-post
+ ┃ ┣ 📂edit-pending-post
+ ┃ ┣ 📂home-page
+ ┃ ┣ 📂live-post
+ ┃ ┣ 📂login
+ ┃ ┣ 📂overview-page
+ ┃ ┣ 📂pending-post
+ ┃ ┃ ┣ 📜login.component.css                    # Style sheet for login.component.html
+ ┃ ┃ ┣ 📜login.component.html                   # Rendered when login component is created
+ ┃ ┃ ┣ 📜login.component.spec.ts                # Used to write RSPEC tests
+ ┃ ┃ ┗ 📜login.component.ts                     # Created when the specific route is called as
+ ┃ ┣ 📜account.model.spec.ts
+ ┃ ┣ 📜account.model.ts                         # Model to store user accounts
+ ┃ ┣ 📜app-routing.module.ts                    # All the routes and which component to direct to are declared here
+ ┃ ┣ 📜app.component.css
+ ┃ ┣ 📜app.component.html
+ ┃ ┣ 📜app.component.spec.ts
+ ┃ ┣ 📜app.component.ts
+ ┃ ┣ 📜app.module.ts                            # All additional modules, components, services are declared here
+ ┃ ┣ 📜data-service.service.spec.ts
+ ┃ ┣ 📜data-service.service.ts                  # All of HTTP request URLs and global variables are housed here
+ ┃ ┣ 📜env.ts                                   # URL of APIs are declared here (Can be changed depending on local or deployed versions)
+ ┃ ┣ 📜product.model.spec.ts
+ ┃ ┗ 📜product.model.ts                         # Model to store products
+```
