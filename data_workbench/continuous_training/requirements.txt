@@ -1,0 +1,6 @@
+# Function dependencies, for example:
+# package>=version
+
+google-cloud-bigquery==2.34.4
+google-cloud-bigquery-storage==2.14.0
+kfp==1.8.13
