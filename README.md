@@ -109,8 +109,14 @@ Click on `.feature` files to run test cases
 
 [cucumber_steps](cucumber_steps.md)
 
-# Deploying AI 
+# Deploying AI
 
-### using 
-step 1 : ensure Maven is installed 
+### using
 
+Ensure Maven is installed
+
+To run server:
+
+```
+mvn spring-boot:run
+```
