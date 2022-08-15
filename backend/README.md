@@ -2,7 +2,7 @@
 
 ## Ruby version
 * Ruby 2.7.6
-* Rails 7.0.2
+* Rails 7.0.3
 
 ## Configuration
 

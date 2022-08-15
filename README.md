@@ -69,7 +69,7 @@ While in the backend folder,
 
 ```
 $ cd backend
-$ cd rails s
+$ rails s
 ```
 
 # Procedures to run Angular app
