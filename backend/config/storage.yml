@@ -11,10 +11,10 @@ local:
 google:
   service: GCS
   # project: <%= ENV["GOOGLE_PROJECT_ID"] %>
-  project: rubyduckies
+  project: # enter Google project name
   # credentials: <%= Rails.application.credentials.gcskey.as_json %>
   credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].to_json %>
   # bucket: <%= ENV["STORAGE_BUCKET_NAME"] %>
   # bucket: rubyduckies-rubyduckies_cloudstorage
-  bucket: rubyduckies_cloudstorage
+  bucket: # enter bucket name
 # [END cloudrun_rails_storage]

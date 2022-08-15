@@ -51,10 +51,10 @@ Rails.application.configure do
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => "teamrubyduckies@gmail.com",
-    :password             => "krpjzbzpwqqodqnd",
+    :address              => "smtp.gmail.com", # configure email server
+    :port                 => 587, # configure email server
+    :user_name            => "teamrubyduckies@gmail.com", # replace email
+    :password             => "", # email password
     :authentication       => "plain",
     :enable_starttls_auto => true
   }

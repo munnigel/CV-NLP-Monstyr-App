@@ -49,17 +49,17 @@ steps:
 
 # SUBSTITUTIONS
 substitutions:
-  _REGION: asia-southeast1
-  _SERVICE_NAME: rubyduckies-rails-backend
-  _INSTANCE_NAME: rubyduckies-cloudsql
-  _SECRET_NAME: rubyduckies-rails-backend-secret
+  _REGION: asia-southeast1 # change to appropriate region
+  _SERVICE_NAME: monstyr-rails-backend # change to appropriate service name
+  _INSTANCE_NAME: monstyr-cloudsql # change to appropriate instance name
+  _SECRET_NAME: rails-backend-secret # change to appropriate secret name
 
 
 
 # GOOGLE SECRET MANAGER
 availableSecrets:
   secretManager:
-  - versionName: projects/820616993981/secrets/${_SECRET_NAME}/versions/latest
+  - versionName: projects/820616993981/secrets/${_SECRET_NAME}/versions/latest # change to appropriate versionName
     env: "RAILS_KEY"
 
 

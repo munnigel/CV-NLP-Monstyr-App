@@ -5,8 +5,8 @@ class BigQueryService
 
     def initialize
     # You can move this one to setting instead
-    project_id = 'monstyrxai'
-    key_file = Rails.root.join('./app/monstyrxai-41a5fb651ce9.json')
+    project_id = '' # insert BigQuery project id
+    key_file = Rails.root.join('./app/keyfile.json') # change keyfile.json to appropriate keyfile for Google service account
     @big_q = Google::Cloud::Bigquery.new project: project_id, keyfile: key_file
     @dataset = @big_q.dataset "custom_training_data", skip_lookup: true
     @table = @dataset.table "custom-text-classification", skip_lookup: true
@@ -21,7 +21,7 @@ class BigQueryService
     @big_q.datasets
     end
 
-    def extract_table bucket_name = "gs://monstyrxai-bucket",
+    def extract_table bucket_name = "gs://monstyrxai-bucket", # change to appropriate bucket
         dataset_id  = "custom_training_data",
         table_id    = "custom_text_classification"
 

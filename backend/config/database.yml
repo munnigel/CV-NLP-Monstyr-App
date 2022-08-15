@@ -85,12 +85,12 @@ test:
 # [START cloudrun_rails_database]
 production:
   <<: *default
-  database: "rubyduckies-db"
+  database: "" # insert db name
   # database: <%= ENV["PRODUCTION_DB_NAME"] %>
-  username: "rubyduckies-db-user"
+  username: "" # insert db username
   # username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
-  password: "pWRKURGJedrIdygSwdbYHdbZeIdrvOcuLXuWEVrHcWtEsIkdeA"
+  password: "" # insert db password
   # password: <%= Rails.application.credentials.gcp[:db_password] %>
-  host: "34.126.133.1"
+  host: "" # insert db endpoint IP
   # host: "<%= ENV.fetch("DB_SOCKET_DIR") { '/cloudsql' } %>/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>"
 # [END cloudrun_rails_database]

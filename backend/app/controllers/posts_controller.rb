@@ -74,7 +74,7 @@ class PostsController < ApplicationController
         # render json: {'body': @body}
 
         # Send POST request
-        @API_KEY = 'AIzaSyCEzKnbVT6d4vS6AkNi8JTmn5URLSxJ-AY'
+        @API_KEY = # insert api key here
         @API_URL = "https://vision.googleapis.com/v1/images:annotate?key=#{@API_KEY}"
         # render json: {'API_URL': @API_URL}
 
@@ -160,7 +160,7 @@ class PostsController < ApplicationController
       scope = 'https://www.googleapis.com/auth/cloud-platform'
 
       authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-        json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
+        json_key_io: File.open('keyfile.json'), # replace with json key file generated on GCP for a particular service account
         scope: scope)
 
       @ACCESS_TOKEN = authorizer.fetch_access_token!
@@ -168,17 +168,11 @@ class PostsController < ApplicationController
       @ACCESS_TOKEN = @ACCESS_TOKEN.gsub('.',' ')
       @ACCESS_TOKEN = @ACCESS_TOKEN.strip
       @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
-
-      # render json: {'access-token': @ACCESS_TOKEN}
       
       # Send POST request
-      # @ACCESS_TOKEN ="ya29.A0AVA9y1v4xyzukyT5rC5SL0yZGMWX9b29nRd5hDL-efB1psqU5coX8eCSeNa_GRgT2sdB1Gq7qUKY66jD5yBx_mpjbkwg36dZOwfnQWI7rfmno3RQp9ezfbm4rHRBWuzLueU3yVoejoy750luEX5xiH1XoLULkZWURItXMbNJLLSXNnXc7iK60qA5ds8Zg8wfoaK-W17SIGr930u7qXMxofJvoRFeVQUDpCrtshIi-Kndm8-Ajvr6WCUMkLmitU4FEVoPigYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4cWRfc1I0VEptSVhQVkNXWVBodkg1Zw0269"
-      # @ACCESS_TOKEN = "ya29.c.b0AXv0zTPB-QblbK1DcDb1AnhPbgovuw13SQGaE8LqZt3dNVi3eogtUA42RVxYJ323pymiWVePPoFOOmgF-CJtZXdPMSSD9iAs8Z6ZDEnsnMasLbFP_OwfsjP-NRLmohhLKk-tWwP0zIylLr82bdfG7X1Va2s9osabBdzl6InFUztwhvjdP8cIl2aCchK6kzl_Y7eNVUdbvWzaAExVMR7Es09L8lAGlSw"
-      @ENDPOINT_ID="3168906860459720704"
-      @PROJECT_ID="276757795685"
-      @API_KEY2 = 'AIzaSyCxv0PN2L6VdD3Z3zZ98SGp_Rm1YoviYso'
+      @ENDPOINT_ID= "" # insert Google Vertex AI endpoint id
+      @PROJECT_ID= "" # insert Google Vertex AI project id
       @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
-      # render json: {'API_URL': @API_URL2}
 
       uri = URI.parse(@API_URL2)
       https = Net::HTTP.new(uri.host, uri.port)
@@ -189,7 +183,6 @@ class PostsController < ApplicationController
       response = https.request(request, @body.to_json)
 
       # Receive and process result
-      # render json: {'response body': response.body}
       result = JSON.parse(response.body)
       @post.meta_cat_gen = result.to_s
       # render json: {'result': result}
@@ -198,13 +191,6 @@ class PostsController < ApplicationController
       @cats_dict = @disp_names.zip(@confs)
       @cats_dict = @cats_dict.sort_by(&:last).reverse
       @post.gen_categories = @cats_dict.to_s
-      # @cats_dict = @cats_dict[0..9]
-      # cats = tags['labelAnnotations']
-      # processed_tags = []
-      # tags.each { |x| processed_tags.append(x['description']) }
-      # render json: {'disp_names': @disp_names, 'confs': @confs}    
-      # Return tags to frontend as json
-      # render json: {'gen_categories': processed_categories}
 
       # End timer for query latency calculations
       @ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -286,7 +272,7 @@ class PostsController < ApplicationController
       scope = 'https://www.googleapis.com/auth/cloud-platform'
 
       authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-        json_key_io: File.open('./monstyrxai-41a5fb651ce9.json'),
+        json_key_io: File.open('keyfile.json'), # replace with json key file generated on GCP for a particular service account
         scope: scope)
 
       @ACCESS_TOKEN = authorizer.fetch_access_token!
@@ -296,8 +282,8 @@ class PostsController < ApplicationController
       @ACCESS_TOKEN = @ACCESS_TOKEN.gsub(' ','.')
 
       # Send POST request to Vertex AI custom NER endpoint
-      @ENDPOINT_ID="5085469976882577408"
-      @PROJECT_ID="monstyrxai"
+      @ENDPOINT_ID="" # insert Google Vertex AI endpoint id
+      @PROJECT_ID="" # insert Google Vertex AI project id
       @API_URL2 = "https://us-central1-aiplatform.googleapis.com/ui/projects/#{@PROJECT_ID}/locations/us-central1/endpoints/#{@ENDPOINT_ID}:predict"
       
       uri = URI.parse(@API_URL2)
