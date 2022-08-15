@@ -120,3 +120,11 @@ To run server:
 ```
 mvn spring-boot:run
 ```
+
+
+# Continuous Training
+
+Code can be found in data_workbench/continuous_training
+
+1. Create cloud function using source code in ```cloud-function.py```
+2. Create pipeline using Vertex AI Workbench using notebook in ```continuous-training-pipeline.py```
