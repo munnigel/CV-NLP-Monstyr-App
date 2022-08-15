@@ -45,3 +45,17 @@ Storage
 ```
 gcloud builds submit
 ```
+
+## Running Locally
+Running the backend locally for the first time, with Ruby 2.7.6 installed, navigate to the /backend directory and run:
+```
+bundle install
+rails db:create
+rails db:migrate
+rails db:seed
+rails s
+```
+For subsequent runs, navigate to the /backend directory and run:
+```
+rails s
+```
